@@ -5,6 +5,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ["Roboto", "sans-serif"],
+        hand: ["Caveat Brush", "sans-serif"],
       },
       animation: {
         "fade-image": "fadeInOut 9s infinite;",

@@ -18,7 +18,7 @@ export const CustomLink = ({
 
   const modifiers: Record<CustomLinkModifier, string> = {
     primary: "bg-red-500",
-    logo: "",
+    logo: "inline-block",
   };
 
   const className = twMerge(base, modifiers[modifier]);
