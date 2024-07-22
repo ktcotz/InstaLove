@@ -22,7 +22,7 @@ const Image = ({ path, delay, alt }: ImageProps) => {
 export const AnimatedImages = () => {
   return (
     <div
-      className="w-[465px] h-[635px] bg-no-repeat bg-cover place-self-end relative"
+      className="w-[465px] h-[635px] bg-no-repeat bg-cover place-self-end relative animate-fade-left"
       style={{
         backgroundImage: `url("./images/home-phones.png")`,
       }}

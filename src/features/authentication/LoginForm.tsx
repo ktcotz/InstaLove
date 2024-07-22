@@ -1,3 +1,5 @@
 export const LoginForm = () => {
-  return <div>LOGIN FORM</div>;
+  return (
+    <div className="animate-fade-bottom lg:animate-fade-right">LOGIN FORM</div>
+  );
 };
