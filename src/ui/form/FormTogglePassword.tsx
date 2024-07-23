@@ -9,9 +9,9 @@ export const FormTogglePassword = () => {
   return (
     <button aria-label={label} type="button" onClick={() => togglePassword()}>
       {isPasswordShow ? (
-        <BiHide className="text-2xl" />
+        <BiHide className="text-2xl" aria-label="Show password" />
       ) : (
-        <BiShow className="text-2xl" />
+        <BiShow className="text-2xl" aria-label="Hide password" />
       )}
     </button>
   );
