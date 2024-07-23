@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import { Link, LinkProps } from "react-router-dom";
 import twMerge from "clsx";
 
-type CustomLinkModifier = "primary" | "logo";
+type CustomLinkModifier = "primary" | "logo" | "text" | "link" | "small-text";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -19,6 +19,9 @@ export const CustomLink = ({
   const modifiers: Record<CustomLinkModifier, string> = {
     primary: "bg-red-500",
     logo: "inline-block",
+    text: "text-stone-600 flex items-center justify-center gap-2 hover:text-blue-600 transition",
+    link: "text-blue-600 hover:text-blue-700 transition",
+    ["small-text"]: "text-sm text-stone-800",
   };
 
   const className = twMerge(base, modifiers[modifier]);

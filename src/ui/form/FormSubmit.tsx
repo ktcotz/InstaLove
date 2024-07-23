@@ -6,5 +6,9 @@ type FormSubmitProps = {
 };
 
 export const FormSubmit = ({ children }: FormSubmitProps) => {
-  return <Button type="submit">{children}</Button>;
+  return (
+    <Button type="submit" modifier="submit">
+      {children}
+    </Button>
+  );
 };

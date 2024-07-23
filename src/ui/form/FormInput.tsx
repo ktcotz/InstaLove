@@ -8,7 +8,7 @@ export const FormInput = forwardRef<
     <input
       {...rest}
       ref={ref}
-      className="peer w-full rounded-md border border-stone-300 p-3 pr-12 text-stone-950 transition-all "
+      className="peer w-full rounded-md border border-stone-300 pl-4 pt-5 pb-2 pr-12 text-stone-950 transition-all "
     />
   );
 });

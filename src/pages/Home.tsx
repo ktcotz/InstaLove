@@ -1,6 +1,8 @@
 import { LoginForm } from "../features/authentication/LoginForm";
+import { GlobalRoutes } from "../typing/routes";
 import { AnimatedImages } from "../ui/AnimatedImages";
 import { Container } from "../ui/Container";
+import { CustomLink } from "../ui/CustomLink";
 import { Logo } from "../ui/Logo";
 import { Wrapper } from "../ui/Wrapper";
 import { useMediaQuery } from "usehooks-ts";
@@ -10,15 +12,25 @@ export const Home = () => {
 
   return (
     <main className="min-h-screen bg-stone-100 flex items-center justify-center">
-      <Wrapper>
+      <Wrapper modifier="home">
         <div className="grid place-items-center lg:grid-cols-2 lg:gap-8">
           {isTablet && <AnimatedImages />}
-          <Container>
-            <div className="mb-12">
-              <Logo />
+          <div className="animate-fade-bottom lg:animate-fade-right w-full lg:w-4/5">
+            <Container>
+              <div className="mb-12">
+                <Logo />
+              </div>
+              <LoginForm />
+            </Container>
+            <div className="p-4 border border-stone-300 text-center mt-4">
+              <p className="text-stone-600 font-semibold">
+                Nie masz konta?{" "}
+                <CustomLink to={GlobalRoutes.Home} modifier="link">
+                  Zarejestruj się
+                </CustomLink>
+              </p>
             </div>
-            <LoginForm />
-          </Container>
+          </div>
         </div>
       </Wrapper>
     </main>

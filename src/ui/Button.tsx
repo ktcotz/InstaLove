@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import twMerge from "clsx";
 
-type ButtonType = "primary";
+type ButtonType = "primary" | "submit";
 
 type ButtonProps = {
   children: ReactNode;
@@ -18,6 +18,8 @@ export const Button = ({
   const modifierObject: Record<ButtonType, string> = {
     primary:
       " rounded-sm bg-secondary text-slate-950 p-3 md:p-4 hover:bg-red-500 transition md:px-8 focus:outline-none focus:ring focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-primary",
+    submit:
+      "py-3 bg-blue-600 border rounded-md text-stone-50 transition-all hover:bg-stone-100 hover:text-blue-700 hover:border-stone-300",
   };
 
   const className = twMerge(base, modifier && modifierObject[modifier]);
