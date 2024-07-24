@@ -17,6 +17,15 @@
     "password-min-length": "Password must be more than 6 characters.",
     "password-not-match": "Passwords don't match."
   },
+  "supabase": {
+    "rate-limiting": "To much request. Try again later.",
+    "user-already-registered": "User with provided email is already registered.",
+    "no-expected": "Unexpected error, try again later!",
+    "invalid-user-credentials": "Invalid user credentials!",
+    "not-confirmed": "You haven't confirmed your account, check your email.",
+    "forgot-toast": "Check your mailbox and follow the steps!",
+    "same-password": "Old password are the same like new password."
+  },
   "images": {
     "home": "Home screen of InstaLove",
     "chat": "Chat",

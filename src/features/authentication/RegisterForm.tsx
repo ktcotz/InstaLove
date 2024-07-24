@@ -12,20 +12,33 @@ import {
 } from "./schema/RegisterFormSchema";
 import { useTranslation } from "react-i18next";
 import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
+import { useRegister } from "./mutations/useRegister";
+import { Loader } from "../../ui/Loader";
 
 export const RegisterForm = () => {
   const {
     handleSubmit,
     formState: { errors },
     register,
+    reset,
   } = useForm<RegisterSchema>({
     resolver: zodResolver(RegisterFormSchema),
   });
+
+  const { signup, isRegistering, signupError } = useRegister();
+
   const { t } = useTranslation();
   const { isPasswordShow } = useFormContext();
 
-  const submitHandler = () => {
-    console.log("submit");
+  const submitHandler = ({ email, password }: RegisterSchema) => {
+    signup(
+      { email, password },
+      {
+        onSuccess: () => {
+          reset();
+        },
+      }
+    );
   };
 
   return (
@@ -85,7 +98,14 @@ export const RegisterForm = () => {
             </Form.Error>
           )}
         </Form.Item>
-        <Form.Submit>{t("form.register-submit")}</Form.Submit>
+        <Form.Submit>
+          {isRegistering ? <Loader /> : t("form.register-submit")}
+        </Form.Submit>
+        {signupError && (
+          <div className="text-center">
+            <Form.Error>{t(signupError.generateError())}</Form.Error>
+          </div>
+        )}
       </Form>
       <div className="mb-8">
         <Divider text={t("utils.divider")} />

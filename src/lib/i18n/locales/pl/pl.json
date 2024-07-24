@@ -17,6 +17,15 @@
     "password-min-length": "Hasło musi miec minimum 6 znaków.",
     "password-not-match": "Hasła nie pasują."
   },
+  "supabase": {
+    "rate-limiting": "Za duża ilość zapytań. Spróbuj ponownie później.",
+    "user-already-registered": "Użytkownik z takim emailem istnieje już w naszej bazie.",
+    "no-expected": "Niespodziewany error, spróbuj ponownie za chwilę!",
+    "invalid-user-credentials": "Niepoprawne dane logowania!",
+    "not-confirmed": "Nie potwierdziłeś konta, zajrzyj na pocztę.",
+    "forgot-toast": "Sprawdź skrzynkę pocztową i podążaj za krokami!",
+    "same-password": "Hasło które wprowadzasz jest aktualnym hasłem."
+  },
   "images": {
     "home": "Strona główna InstaLove",
     "chat": "Konwersacja w aplikacji InstaLove",

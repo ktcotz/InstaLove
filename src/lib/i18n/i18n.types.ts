@@ -17,3 +17,7 @@ type RootTranslationsMessages<T> = T[keyof T];
 export type ZodI18NHandler = RootTranslationsMessages<
   RootTranslationsKey<"validation.", "validation">
 >;
+
+export type SupabaseI18NHandler = RootTranslationsMessages<
+  RootTranslationsKey<"supabase.", "supabase">
+>;
