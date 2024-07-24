@@ -105,7 +105,7 @@ export const LoginForm = () => {
           {t("links.login-by-github")}
         </Button>
         <Divider />
-        <CustomLink to={GlobalRoutes.Home} modifier="small-text">
+        <CustomLink to={GlobalRoutes.ForgotPassword} modifier="small-text">
           {t("links.forgot-password")}
         </CustomLink>
       </div>

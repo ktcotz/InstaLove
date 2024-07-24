@@ -7,7 +7,7 @@ import { Wrapper } from "../ui/Wrapper";
 export const HomeNavigation = () => {
   const { t } = useTranslation();
   return (
-    <header className="mb-20">
+    <header className="mb-20 animate-[fadeFromTop_1s]">
       <nav className="bg-stone-100 py-4 border-b border-stone-300">
         <Wrapper>
           <div className="flex items-center justify-between flex-wrap gap-4">

@@ -14,7 +14,7 @@ export default {
         "fade-bottom": "fadeFromBottom 1s ease-in-out",
       },
       keyframes: {
-        formErrorFade: {
+        fadeFromTop: {
           "0%": { opacity: 0, transform: "translateY(-1rem)" },
           "100%": {
             opacity: 1,

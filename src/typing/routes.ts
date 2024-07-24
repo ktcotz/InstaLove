@@ -3,4 +3,6 @@ export enum GlobalRoutes {
   Login = "/login",
   Register = "/register",
   Dashboard = "/dashboard",
+  ForgotPassword = "/forgot-password",
+  ResetPassword = "/reset-password",
 }

@@ -38,7 +38,9 @@
     "password-label": "Hasło",
     "confirm-password-label": "Potwierdź hasło",
     "login-submit": "Zaloguj się",
-    "register-submit": "Zarejestruj się"
+    "register-submit": "Zarejestruj się",
+    "forgot-password": "Przypomnij hasło",
+    "reset-password": "Zresetuj hasło"
   },
   "utils": {
     "divider": "Lub",

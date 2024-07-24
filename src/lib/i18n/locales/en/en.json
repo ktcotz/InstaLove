@@ -38,7 +38,9 @@
     "password-label": "Password",
     "confirm-password-label": "Confirm password",
     "login-submit": "Login",
-    "register-submit": "Register"
+    "register-submit": "Register",
+    "forgot-password": "Remind password",
+    "reset-password": "Reset password"
   },
   "utils": {
     "divider": "Or",
