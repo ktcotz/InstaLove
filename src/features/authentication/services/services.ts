@@ -24,3 +24,19 @@ export const registerWithPassword = async ({
 
   return data;
 };
+
+export const loginUser = async ({ email, password }: UserCredentials) => {
+  const { data, error } = await supabase.auth.signInWithPassword({
+    email,
+    password,
+  });
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+      code: error.status,
+    });
+  }
+
+  return data;
+};

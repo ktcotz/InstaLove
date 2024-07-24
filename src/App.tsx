@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { FormContextProvider } from "./ui/form/context/FormContext";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
+import { Dashboard } from "./pages/Dashboard";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         <Register />
       </FormContextProvider>
     ),
+  },
+  {
+    path: GlobalRoutes.Dashboard,
+    element: <Dashboard />,
   },
 ]);
 

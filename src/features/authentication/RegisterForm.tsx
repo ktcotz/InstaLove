@@ -1,9 +1,5 @@
-import { GlobalRoutes } from "../../typing/routes";
-import { CustomLink } from "../../ui/CustomLink";
-import { Divider } from "../../ui/Divider";
 import { useFormContext } from "../../ui/form/context/useFormContext";
 import { Form } from "../../ui/form/Form";
-import { FaGithub } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -107,14 +103,6 @@ export const RegisterForm = () => {
           </div>
         )}
       </Form>
-      <div className="mb-8">
-        <Divider text={t("utils.divider")} />
-      </div>
-
-      <CustomLink to={GlobalRoutes.Home} modifier="text">
-        <FaGithub className="fill-blue-600 text-lg" aria-label="GitHub" />
-        {t("links.register-by-github")}
-      </CustomLink>
     </div>
   );
 };

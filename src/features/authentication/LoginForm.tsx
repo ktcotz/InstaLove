@@ -9,20 +9,31 @@ import { LoginFormSchema, LoginSchema } from "./schema/LoginFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
+import { useLogin } from "./mutations/useLogin";
+import { Loader } from "../../ui/Loader";
 
 export const LoginForm = () => {
   const {
     handleSubmit,
     formState: { errors },
     register,
+    reset,
   } = useForm<LoginSchema>({
     resolver: zodResolver(LoginFormSchema),
   });
   const { t } = useTranslation();
+  const { login, isLogin, loginError } = useLogin();
   const { isPasswordShow } = useFormContext();
 
-  const submitHandler = () => {
-    console.log("submit");
+  const submitHandler = ({ email, password }: LoginSchema) => {
+    login(
+      { email, password },
+      {
+        onSuccess: () => {
+          reset();
+        },
+      }
+    );
   };
 
   return (
@@ -64,7 +75,14 @@ export const LoginForm = () => {
             </Form.Error>
           )}
         </Form.Item>
-        <Form.Submit>{t("form.login-submit")}</Form.Submit>
+        <Form.Submit>
+          {isLogin ? <Loader /> : t("form.login-submit")}
+        </Form.Submit>
+        {loginError && (
+          <div className="text-center">
+            <Form.Error>{t(loginError.generateError())}</Form.Error>
+          </div>
+        )}
       </Form>
       <div className="mb-8">
         <Divider text={t("utils.divider")} />
