@@ -40,3 +40,19 @@ export const loginUser = async ({ email, password }: UserCredentials) => {
 
   return data;
 };
+
+export const loginUserByGithub = async () => {
+  const { error } = await supabase.auth.signInWithOAuth({
+    provider: "github",
+    options: {
+      redirectTo: "http://localhost:5173/dashboard",
+    },
+  });
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+      code: error.status,
+    });
+  }
+};

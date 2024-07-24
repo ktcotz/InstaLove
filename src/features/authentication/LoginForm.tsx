@@ -11,6 +11,8 @@ import { useTranslation } from "react-i18next";
 import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
 import { useLogin } from "./mutations/useLogin";
 import { Loader } from "../../ui/Loader";
+import { Button } from "../../ui/Button";
+import { useLoginByGithub } from "./mutations/useLoginByGithub";
 
 export const LoginForm = () => {
   const {
@@ -23,6 +25,7 @@ export const LoginForm = () => {
   });
   const { t } = useTranslation();
   const { login, isLogin, loginError } = useLogin();
+  const { loginByGithub, loginProviderError } = useLoginByGithub();
   const { isPasswordShow } = useFormContext();
 
   const submitHandler = ({ email, password }: LoginSchema) => {
@@ -34,6 +37,10 @@ export const LoginForm = () => {
         },
       }
     );
+  };
+
+  const handleGithubLogin = () => {
+    loginByGithub();
   };
 
   return (
@@ -83,15 +90,20 @@ export const LoginForm = () => {
             <Form.Error>{t(loginError.generateError())}</Form.Error>
           </div>
         )}
+        {loginProviderError && (
+          <div className="text-center">
+            <Form.Error>{t(loginProviderError.generateError())}</Form.Error>
+          </div>
+        )}
       </Form>
       <div className="mb-8">
         <Divider text={t("utils.divider")} />
       </div>
       <div className="flex flex-col items-center justify-center gap-4 mb-8">
-        <CustomLink to={GlobalRoutes.Home} modifier="text">
+        <Button modifier="text" onClick={handleGithubLogin}>
           <FaGithub className="fill-blue-600 text-lg" aria-label="GitHub" />
           {t("links.login-by-github")}
-        </CustomLink>
+        </Button>
         <Divider />
         <CustomLink to={GlobalRoutes.Home} modifier="small-text">
           {t("links.forgot-password")}
