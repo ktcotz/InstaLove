@@ -14,7 +14,7 @@ export const Wrapper = ({ children, modifier = "primary" }: WrapperProps) => {
   const modifiers: Record<WrapperType, string> = {
     primary: "max-w-6xl",
     home: "max-w-xl lg:max-w-6xl",
-    form: "max-w-[550px]",
+    form: "max-w-lg",
   };
 
   const className = twMerge(base, modifiers[modifier]);

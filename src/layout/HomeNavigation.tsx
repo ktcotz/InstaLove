@@ -1,9 +1,11 @@
+import { useTranslation } from "react-i18next";
 import { GlobalRoutes } from "../typing/routes";
 import { CustomLink } from "../ui/CustomLink";
 import { Logo } from "../ui/Logo";
 import { Wrapper } from "../ui/Wrapper";
 
 export const HomeNavigation = () => {
+  const { t } = useTranslation();
   return (
     <header className="mb-20">
       <nav className="bg-stone-100 py-4 border-b border-stone-300">
@@ -11,9 +13,11 @@ export const HomeNavigation = () => {
           <div className="flex items-center justify-between flex-wrap gap-4">
             <Logo modifier="small-logo" />
             <div className="flex items-center gap-6">
-              <CustomLink to={GlobalRoutes.Home}>Zaloguj się</CustomLink>
-              <CustomLink to={GlobalRoutes.Home} modifier="text">
-                Zarejestruj się
+              <CustomLink to={GlobalRoutes.Login}>
+                {t("links.login")}
+              </CustomLink>
+              <CustomLink to={GlobalRoutes.Register} modifier="text">
+                {t("links.register")}
               </CustomLink>
             </div>
           </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { LoginForm } from "../features/authentication/LoginForm";
 import { HomeNavigation } from "../layout/HomeNavigation";
 import { GlobalRoutes } from "../typing/routes";
@@ -10,6 +11,7 @@ import { useMediaQuery } from "usehooks-ts";
 
 export const Home = () => {
   const isTablet = useMediaQuery("(min-width:1024px)");
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-stone-100 pb-20">
@@ -28,9 +30,9 @@ export const Home = () => {
               </Container>
               <div className="p-4 border border-stone-300 text-center mt-4">
                 <p className="text-stone-600 font-semibold">
-                  Nie masz konta?{" "}
+                  {t("home.no-account")}{" "}
                   <CustomLink to={GlobalRoutes.Home} modifier="link">
-                    Zarejestruj się
+                    {t("links.register")}
                   </CustomLink>
                 </p>
               </div>

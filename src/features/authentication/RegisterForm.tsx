@@ -10,6 +10,8 @@ import {
   RegisterFormSchema,
   RegisterSchema,
 } from "./schema/RegisterFormSchema";
+import { useTranslation } from "react-i18next";
+import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
 
 export const RegisterForm = () => {
   const {
@@ -19,6 +21,7 @@ export const RegisterForm = () => {
   } = useForm<RegisterSchema>({
     resolver: zodResolver(RegisterFormSchema),
   });
+  const { t } = useTranslation();
   const { isPasswordShow } = useFormContext();
 
   const submitHandler = () => {
@@ -38,9 +41,11 @@ export const RegisterForm = () => {
               isError={errors?.email?.message}
               {...register("email")}
             />
-            <Form.Label id="email">Email address</Form.Label>
+            <Form.Label id="email">{t("form.email-label")}</Form.Label>
           </Form.InputContainer>
-          {errors?.email && <Form.Error>{errors.email.message}</Form.Error>}
+          {errors?.email && (
+            <Form.Error>{t(errors.email.message as ZodI18NHandler)}</Form.Error>
+          )}
         </Form.Item>
         <Form.Item>
           <Form.InputContainer>
@@ -51,13 +56,15 @@ export const RegisterForm = () => {
               isError={errors?.password?.message}
               {...register("password")}
             />
-            <Form.Label id="password">Hasło</Form.Label>
+            <Form.Label id="password">{t("form.password-label")}</Form.Label>
             <Form.Icons>
               <Form.TogglePassword />
             </Form.Icons>
           </Form.InputContainer>
           {errors?.password && (
-            <Form.Error>{errors.password.message}</Form.Error>
+            <Form.Error>
+              {t(errors.password.message as ZodI18NHandler)}
+            </Form.Error>
           )}
         </Form.Item>
         <Form.Item>
@@ -68,21 +75,25 @@ export const RegisterForm = () => {
               required
               {...register("confirmPassword")}
             />
-            <Form.Label id="confirmPassword">Confirm Password</Form.Label>
+            <Form.Label id="confirmPassword">
+              {t("form.confirm-password-label")}
+            </Form.Label>
           </Form.InputContainer>
           {errors?.confirmPassword && (
-            <Form.Error>{errors.confirmPassword.message}</Form.Error>
+            <Form.Error>
+              {t(errors.confirmPassword.message as ZodI18NHandler)}
+            </Form.Error>
           )}
         </Form.Item>
-        <Form.Submit>Zarejestruj się</Form.Submit>
+        <Form.Submit>{t("form.register-submit")}</Form.Submit>
       </Form>
       <div className="mb-8">
-        <Divider text="Lub" />
+        <Divider text={t("utils.divider")} />
       </div>
 
       <CustomLink to={GlobalRoutes.Home} modifier="text">
         <FaGithub className="fill-blue-600 text-lg" aria-label="GitHub" />
-        Zarejestruj się przez GitHub
+        {t("links.register-by-github")}
       </CustomLink>
     </div>
   );

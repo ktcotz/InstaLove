@@ -1,5 +1,38 @@
 {
-  "hello": {
-    "h": "COSIEk"
+  "home": {
+    "no-account": "Nie masz konta?",
+    "have-account": " Masz konto?"
+  },
+  "links": {
+    "register": "Zarejestruj się",
+    "login": "Zaloguj się",
+    "register-by-github": "Zarejestruj się przez GitHub",
+    "login-by-github": "Zaloguj się przez GitHub",
+    "forgot-password": "Nie pamiętasz hasła?"
+  },
+  "validation": {
+    "email-required": "Adres e-mail jest wymagany!",
+    "email-invalid": "Adres e-mail jest niepoprawny, zmień go!",
+    "password-required": "Hasło jest wymagane!",
+    "password-min-length": "Hasło musi miec minimum 6 znaków.",
+    "password-not-match": "Hasła nie pasują."
+  },
+  "images": {
+    "home": "Strona główna InstaLove",
+    "chat": "Konwersacja w aplikacji InstaLove",
+    "profile": "Indywidualny profil w InstaLove"
+  },
+  "form": {
+    "hide-password-label": "Schowaj hasło",
+    "show-password-label": "Pokaż hasło",
+    "email-label": "Adres e-mail",
+    "password-label": "Hasło",
+    "confirm-password-label": "Potwierdź hasło",
+    "login-submit": "Zaloguj się",
+    "register-submit": "Zarejestruj się"
+  },
+  "utils": {
+    "divider": "Lub",
+    "home-text": "Zaloguj się i korzystaj z pełni InstaLove za darmo."
   }
 }

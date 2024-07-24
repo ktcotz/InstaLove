@@ -1,5 +1,38 @@
 {
-  "hello": {
-    "h": "ASD"
+  "home": {
+    "no-account": "You don't have an account?",
+    "have-account": "Have already account?"
+  },
+  "links": {
+    "register": "Register",
+    "login": "Login",
+    "register-by-github": "Register by GitHub",
+    "login-by-github": "Login by GitHub",
+    "forgot-password": "Forgot password?"
+  },
+  "validation": {
+    "email-required": "Email is required!",
+    "email-invalid": "Email is invalid, correct!",
+    "password-required": "Password is required!",
+    "password-min-length": "Password must be more than 6 characters.",
+    "password-not-match": "Passwords don't match."
+  },
+  "images": {
+    "home": "Home screen of InstaLove",
+    "chat": "Chat",
+    "profile": "Individual profile on InstaLove"
+  },
+  "form": {
+    "hide-password-label": "Hide password",
+    "show-password-label": "Show password",
+    "email-label": "Email address",
+    "password-label": "Password",
+    "confirm-password-label": "Confirm password",
+    "login-submit": "Login",
+    "register-submit": "Register"
+  },
+  "utils": {
+    "divider": "Or",
+    "home-text": "Log in and enjoy full InstaLove for free."
   }
 }

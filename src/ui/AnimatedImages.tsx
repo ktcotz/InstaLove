@@ -1,3 +1,5 @@
+import { useTranslation } from "react-i18next";
+
 type ImageProps = {
   path: string;
   delay: string;
@@ -20,6 +22,7 @@ const Image = ({ path, delay, alt }: ImageProps) => {
 };
 
 export const AnimatedImages = () => {
+  const { t } = useTranslation();
   return (
     <div
       className="w-[465px] h-[635px] bg-no-repeat bg-cover place-self-end relative animate-fade-left"
@@ -27,16 +30,16 @@ export const AnimatedImages = () => {
         backgroundImage: `url("./images/home-phones.png")`,
       }}
     >
+      <Image path="./images/screenshot1.png" delay="0" alt={t("images.home")} />
       <Image
-        path="./images/screenshot1.png"
-        delay="0"
-        alt="Home screen of InstaLove"
+        path="./images/screenshot2.png"
+        delay="3s"
+        alt={t("images.chat")}
       />
-      <Image path="./images/screenshot2.png" delay="3s" alt="Chat" />
       <Image
         path="./images/screenshot3.png"
         delay="6s"
-        alt="Individual profile on InstaLove"
+        alt={t("images.profile")}
       />
     </div>
   );

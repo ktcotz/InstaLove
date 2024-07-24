@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { LoginForm } from "../features/authentication/LoginForm";
 import { HomeNavigation } from "../layout/HomeNavigation";
 import { GlobalRoutes } from "../typing/routes";
@@ -7,6 +8,7 @@ import { Logo } from "../ui/Logo";
 import { Wrapper } from "../ui/Wrapper";
 
 export const Login = () => {
+  const { t } = useTranslation();
   return (
     <div className="min-h-screen bg-stone-100 pb-20">
       <HomeNavigation />
@@ -21,9 +23,9 @@ export const Login = () => {
             </Container>
             <div className="p-4 border border-stone-300 text-center mt-4">
               <p className="text-stone-600 font-semibold">
-                Nie masz konta?{" "}
-                <CustomLink to={GlobalRoutes.Home} modifier="link">
-                  Zarejestruj się
+                {t("home.no-account")}{" "}
+                <CustomLink to={GlobalRoutes.Register} modifier="link">
+                  {t("links.register")}
                 </CustomLink>
               </p>
             </div>

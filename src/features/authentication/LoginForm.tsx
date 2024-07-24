@@ -7,6 +7,8 @@ import { FaGithub } from "react-icons/fa6";
 import { useForm } from "react-hook-form";
 import { LoginFormSchema, LoginSchema } from "./schema/LoginFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useTranslation } from "react-i18next";
+import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
 
 export const LoginForm = () => {
   const {
@@ -16,6 +18,7 @@ export const LoginForm = () => {
   } = useForm<LoginSchema>({
     resolver: zodResolver(LoginFormSchema),
   });
+  const { t } = useTranslation();
   const { isPasswordShow } = useFormContext();
 
   const submitHandler = () => {
@@ -35,9 +38,11 @@ export const LoginForm = () => {
               isError={errors?.email?.message}
               {...register("email")}
             />
-            <Form.Label id="email">Email address</Form.Label>
+            <Form.Label id="email">{t("form.email-label")}</Form.Label>
           </Form.InputContainer>
-          {errors?.email && <Form.Error>{errors.email.message}</Form.Error>}
+          {errors?.email && (
+            <Form.Error>{t(errors.email.message as ZodI18NHandler)}</Form.Error>
+          )}
         </Form.Item>
         <Form.Item>
           <Form.InputContainer>
@@ -48,32 +53,34 @@ export const LoginForm = () => {
               isError={errors?.password?.message}
               {...register("password")}
             />
-            <Form.Label id="password">Hasło</Form.Label>
+            <Form.Label id="password">{t("form.password-label")}</Form.Label>
             <Form.Icons>
               <Form.TogglePassword />
             </Form.Icons>
           </Form.InputContainer>
           {errors?.password && (
-            <Form.Error>{errors.password.message}</Form.Error>
+            <Form.Error>
+              {t(errors.password.message as ZodI18NHandler)}
+            </Form.Error>
           )}
         </Form.Item>
-        <Form.Submit>Zaloguj się</Form.Submit>
+        <Form.Submit>{t("form.login-submit")}</Form.Submit>
       </Form>
       <div className="mb-8">
-        <Divider text="Lub" />
+        <Divider text={t("utils.divider")} />
       </div>
       <div className="flex flex-col items-center justify-center gap-4 mb-8">
         <CustomLink to={GlobalRoutes.Home} modifier="text">
           <FaGithub className="fill-blue-600 text-lg" aria-label="GitHub" />
-          Zaloguj się przez GitHub
+          {t("links.login-by-github")}
         </CustomLink>
         <Divider />
         <CustomLink to={GlobalRoutes.Home} modifier="small-text">
-          Nie pamiętasz hasła?
+          {t("links.forgot-password")}
         </CustomLink>
       </div>
       <p className="text-sm text-center text-stone-600 font-medium">
-        Zaloguj się i korzystaj z pełni InstaLove za darmo.
+        {t("utils.home-text")}
       </p>
     </div>
   );
