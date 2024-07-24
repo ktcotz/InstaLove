@@ -1,4 +1,5 @@
 import { LoginForm } from "../features/authentication/LoginForm";
+import { HomeNavigation } from "../layout/HomeNavigation";
 import { GlobalRoutes } from "../typing/routes";
 import { AnimatedImages } from "../ui/AnimatedImages";
 import { Container } from "../ui/Container";
@@ -11,28 +12,33 @@ export const Home = () => {
   const isTablet = useMediaQuery("(min-width:1024px)");
 
   return (
-    <main className="min-h-screen bg-stone-100 flex items-center justify-center">
-      <Wrapper modifier="home">
-        <div className="grid place-items-center lg:grid-cols-2 lg:gap-8">
-          {isTablet && <AnimatedImages />}
-          <div className="animate-fade-bottom lg:animate-fade-right w-full lg:w-4/5">
-            <Container>
-              <div className="mb-12">
-                <Logo />
+    <div className="min-h-screen bg-stone-100 pb-20">
+      <header className="mb-20">
+        <HomeNavigation />
+      </header>
+      <main className="flex items-center justify-center">
+        <Wrapper modifier="home">
+          <div className="grid place-items-center lg:grid-cols-2 lg:gap-8">
+            {isTablet && <AnimatedImages />}
+            <div className="animate-fade-bottom lg:animate-fade-right w-full lg:w-4/5">
+              <Container>
+                <div className="mb-12">
+                  <Logo />
+                </div>
+                <LoginForm />
+              </Container>
+              <div className="p-4 border border-stone-300 text-center mt-4">
+                <p className="text-stone-600 font-semibold">
+                  Nie masz konta?{" "}
+                  <CustomLink to={GlobalRoutes.Home} modifier="link">
+                    Zarejestruj się
+                  </CustomLink>
+                </p>
               </div>
-              <LoginForm />
-            </Container>
-            <div className="p-4 border border-stone-300 text-center mt-4">
-              <p className="text-stone-600 font-semibold">
-                Nie masz konta?{" "}
-                <CustomLink to={GlobalRoutes.Home} modifier="link">
-                  Zarejestruj się
-                </CustomLink>
-              </p>
             </div>
           </div>
-        </div>
-      </Wrapper>
-    </main>
+        </Wrapper>
+      </main>
+    </div>
   );
 };

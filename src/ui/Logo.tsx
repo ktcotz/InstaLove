@@ -1,10 +1,18 @@
 import { GlobalRoutes } from "../typing/routes";
-import { CustomLink } from "./CustomLink";
+import { CustomLink, CustomLinkModifier } from "./CustomLink";
 
-export const Logo = () => {
+type LogoProps = {
+  modifier?: CustomLinkModifier;
+};
+
+export const Logo = ({ modifier }: LogoProps) => {
   return (
-    <h1 className="font-hand text-4xl lg:text-7xl text-stone-900">
-      <CustomLink modifier="logo" to={GlobalRoutes.Home}>
+    <h1
+      className={`font-hand ${
+        modifier ? "text-xl lg:text-2xl" : "text-4xl lg:text-7xl"
+      }  text-stone-900`}
+    >
+      <CustomLink modifier={modifier || "logo"} to={GlobalRoutes.Home}>
         InstaLove
       </CustomLink>
     </h1>

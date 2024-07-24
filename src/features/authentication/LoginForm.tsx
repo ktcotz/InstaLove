@@ -67,6 +67,7 @@ export const LoginForm = () => {
           <FaGithub className="fill-blue-600 text-lg" aria-label="GitHub" />
           Zaloguj się przez GitHub
         </CustomLink>
+        <Divider />
         <CustomLink to={GlobalRoutes.Home} modifier="small-text">
           Nie pamiętasz hasła?
         </CustomLink>

@@ -1,5 +1,9 @@
-Do zrobienia dnia 22.07.2024
+Do zrobienia dnia 23.07.2024
 
-Home page:
+Działanie strony home, logowanie.
+Zrobienie poszczególnych stron Logowania i Rejestracji (same formularze).
+Dodanie błędów i18n i zod.
 
-\_ I18n.
+Opcjonalnie:
+
+Praca z supabase na temat authentication.
