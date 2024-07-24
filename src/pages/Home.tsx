@@ -13,9 +13,8 @@ export const Home = () => {
 
   return (
     <div className="min-h-screen bg-stone-100 pb-20">
-      <header className="mb-20">
-        <HomeNavigation />
-      </header>
+      <HomeNavigation />
+
       <main className="flex items-center justify-center">
         <Wrapper modifier="home">
           <div className="grid place-items-center lg:grid-cols-2 lg:gap-8">
