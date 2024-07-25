@@ -15,7 +15,9 @@
     "email-invalid": "Email is invalid, correct!",
     "password-required": "Password is required!",
     "password-min-length": "Password must be more than 6 characters.",
-    "password-not-match": "Passwords don't match."
+    "password-not-match": "Passwords don't match.",
+    "username-required": "Username is required!",
+    "username-min-length": "Username must be more than 3 characters."
   },
   "supabase": {
     "rate-limiting": "To much request. Try again later.",
@@ -40,7 +42,8 @@
     "login-submit": "Login",
     "register-submit": "Register",
     "forgot-password": "Remind password",
-    "reset-password": "Reset password"
+    "reset-password": "Reset password",
+    "nickname-label": "Username"
   },
   "utils": {
     "divider": "Or",

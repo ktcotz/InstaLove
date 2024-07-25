@@ -15,7 +15,9 @@
     "email-invalid": "Adres e-mail jest niepoprawny, zmień go!",
     "password-required": "Hasło jest wymagane!",
     "password-min-length": "Hasło musi miec minimum 6 znaków.",
-    "password-not-match": "Hasła nie pasują."
+    "password-not-match": "Hasła nie pasują.",
+    "username-required": "Nazwa użytkownika jest wymagana!",
+    "username-min-length": "Nazwa użytkownika musi mieć minimum 3 znaki."
   },
   "supabase": {
     "rate-limiting": "Za duża ilość zapytań. Spróbuj ponownie później.",
@@ -40,7 +42,8 @@
     "login-submit": "Zaloguj się",
     "register-submit": "Zarejestruj się",
     "forgot-password": "Przypomnij hasło",
-    "reset-password": "Zresetuj hasło"
+    "reset-password": "Zresetuj hasło",
+    "nickname-label": "Nazwa użytkownika"
   },
   "utils": {
     "divider": "Lub",

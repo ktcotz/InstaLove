@@ -26,9 +26,9 @@ export const RegisterForm = () => {
   const { t } = useTranslation();
   const { isPasswordShow } = useFormContext();
 
-  const submitHandler = ({ email, password }: RegisterSchema) => {
+  const submitHandler = ({ email, password, nickname }: RegisterSchema) => {
     signup(
-      { email, password },
+      { email, password, nickname },
       {
         onSuccess: () => {
           reset();
@@ -54,6 +54,23 @@ export const RegisterForm = () => {
           </Form.InputContainer>
           {errors?.email && (
             <Form.Error>{t(errors.email.message as ZodI18NHandler)}</Form.Error>
+          )}
+        </Form.Item>
+        <Form.Item>
+          <Form.InputContainer>
+            <Form.Input
+              id="nickname"
+              required
+              type="text"
+              isError={errors?.nickname?.message}
+              {...register("nickname")}
+            />
+            <Form.Label id="nickname">{t("form.nickname-label")}</Form.Label>
+          </Form.InputContainer>
+          {errors?.nickname && (
+            <Form.Error>
+              {t(errors.nickname.message as ZodI18NHandler)}
+            </Form.Error>
           )}
         </Form.Item>
         <Form.Item>

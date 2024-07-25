@@ -7,13 +7,23 @@ type UserCredentials = {
   password: string;
 };
 
+type UserExtraData = {
+  nickname: string;
+};
+
 export const registerWithPassword = async ({
   email,
   password,
-}: UserCredentials) => {
+  nickname,
+}: UserCredentials & UserExtraData) => {
   const { data, error } = await supabase.auth.signUp({
     email,
     password,
+    options: {
+      data: {
+        username: nickname,
+      },
+    },
   });
 
   if (error) {

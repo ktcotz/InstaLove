@@ -31,7 +31,7 @@ export const Home = () => {
               <div className="p-4 border border-stone-300 text-center mt-4">
                 <p className="text-stone-600 font-semibold">
                   {t("home.no-account")}{" "}
-                  <CustomLink to={GlobalRoutes.Home} modifier="link">
+                  <CustomLink to={GlobalRoutes.Register} modifier="link">
                     {t("links.register")}
                   </CustomLink>
                 </p>

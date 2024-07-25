@@ -6,6 +6,9 @@ export const RegisterFormSchema = z
       .string({ required_error: "validation.email-required" })
       .min(1, "validation.email-required")
       .email("validation.email-invalid"),
+    nickname: z
+      .string({ required_error: "validation.username-required" })
+      .min(3, "validation.username-min-length"),
     password: z
       .string({ required_error: "validation.password-required" })
       .min(6, "validation.password-min-length"),
