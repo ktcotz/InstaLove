@@ -23,14 +23,14 @@ type DashboardNavigationItemProps = {
 };
 
 const icons: Record<NavigationRoutes, JSX.Element> = {
-  home: <FaHome />,
-  search: <FaSearch />,
-  explore: <MdExplore />,
-  stories: <BiSolidMoviePlay />,
-  messages: <BiSolidMessageSquareDetail />,
-  notifications: <FaHeart />,
-  create: <MdAddBox />,
-  profile: <FaUser />,
+  home: <FaHome aria-label="Strona główna" />,
+  search: <FaSearch aria-label="Wyszukiwanie" />,
+  explore: <MdExplore aria-label="Explorowanie" />,
+  stories: <BiSolidMoviePlay aria-label="Reels" />,
+  messages: <BiSolidMessageSquareDetail aria-label="Wiadomości" />,
+  notifications: <FaHeart aria-label="Powiadomienia" />,
+  create: <MdAddBox aria-label="Stwórz post" />,
+  profile: <FaUser aria-label="Profil" />,
 };
 
 export const DashboardNavigationItem = ({
