@@ -20,6 +20,45 @@ export const dashboardNavigationData: Data[] = [
   },
   {
     id: 2,
+    title: "navigation.explore",
+    icon: "explore",
+    to: GlobalRoutes.DashboardExplore,
+  },
+  {
+    id: 3,
+    title: "navigation.stories",
+    icon: "stories",
+    to: GlobalRoutes.DashboardReels,
+  },
+  {
+    id: 4,
+    title: "navigation.messages",
+    icon: "messages",
+    to: GlobalRoutes.DashboardMessages,
+  },
+  {
+    id: 5,
+    title: "navigation.create",
+    icon: "create",
+    to: GlobalRoutes.ForgotPassword,
+  },
+  {
+    id: 6,
+    title: "navigation.profile",
+    icon: "profile",
+    to: GlobalRoutes.DashboardProfile,
+  },
+] as const;
+
+export const mobileDashboardNavigationData: Data[] = [
+  {
+    id: 1,
+    title: "navigation.home",
+    icon: "home",
+    to: GlobalRoutes.Dashboard,
+  },
+  {
+    id: 2,
     title: "navigation.search",
     icon: "search",
     openComponent: "search",

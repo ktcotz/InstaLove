@@ -1,11 +1,15 @@
+import { useMediaQuery } from "usehooks-ts";
 import { GlobalRoutes } from "../typing/routes";
 import { CustomLink, CustomLinkModifier } from "./CustomLink";
+import { FaInstagram } from "react-icons/fa";
 
 type LogoProps = {
   modifier?: CustomLinkModifier;
 };
 
 export const Logo = ({ modifier }: LogoProps) => {
+  const matches = useMediaQuery("(max-width:1024px)");
+
   return (
     <h1
       className={`font-hand ${
@@ -13,7 +17,7 @@ export const Logo = ({ modifier }: LogoProps) => {
       }  text-stone-900`}
     >
       <CustomLink modifier={modifier || "logo"} to={GlobalRoutes.Home}>
-        InstaLove
+        {matches && modifier === "small-logo" ? <FaInstagram /> : "InstaLove"}
       </CustomLink>
     </h1>
   );

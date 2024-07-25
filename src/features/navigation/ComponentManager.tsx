@@ -14,7 +14,7 @@ export const ComponentManager = () => {
   };
 
   return (
-    <div className="fixed top-0 left-60 h-full z-0 w-[300px] animate-fade-left">
+    <div className="fixed top-0 left-20 lg:left-60 h-full z-0 w-[300px] animate-fade-left">
       {manageComponent[component]}
     </div>
   );

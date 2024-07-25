@@ -10,6 +10,7 @@ import { resources } from "../../lib/i18n/i18n";
 import { Button } from "../../ui/Button";
 import { useNavigationContext } from "./context/useNavigationContext";
 import { NavigationComponent } from "./context/NavigationContext";
+import { useMediaQuery } from "usehooks-ts";
 
 export type NavigationRoutes =
   keyof (typeof resources)["pl"]["translation"]["navigation"];
@@ -38,26 +39,37 @@ export const DashboardNavigationItem = ({
   to,
   openComponent,
 }: DashboardNavigationItemProps) => {
+  const matches = useMediaQuery("(min-width:1024px)");
   const { t } = useTranslation();
   const { toggleOpen, component } = useNavigationContext();
   return (
     <li>
       {openComponent && (
         <Button modifier="navigation" onClick={() => toggleOpen(openComponent)}>
-          <span className="text-2xl group-hover:scale-105 transition-all">
+          <span className="text-xl sm:text-2xl  group-hover:scale-105 transition-all">
             {icons[icon]}
           </span>
-          <span className={component === openComponent ? "font-semibold" : ""}>
-            {t(title)}
-          </span>
+          {matches ? (
+            <span
+              className={component === openComponent ? "font-semibold" : ""}
+            >
+              {t(title)}
+            </span>
+          ) : null}
         </Button>
       )}
       {to && (
         <CustomLink modifier="navigation" to={to} type="active-link">
-          <span className="text-2xl group-hover:scale-105 transition-all">
+          <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">
             {icons[icon]}
           </span>
-          <span>{t(title)}</span>
+          {matches ? (
+            <span
+              className={component === openComponent ? "font-semibold" : ""}
+            >
+              {t(title)}
+            </span>
+          ) : null}
         </CustomLink>
       )}
     </li>
