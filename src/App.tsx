@@ -8,6 +8,7 @@ import { Dashboard } from "./pages/Dashboard";
 import { ForgotPassword } from "./pages/ForgoPassword";
 import { Toaster } from "react-hot-toast";
 import { ResetPassword } from "./pages/ResetPassword";
+import { ProtectedRoute } from "./ui/ProtectedRoute";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,11 @@ const router = createBrowserRouter([
   },
   {
     path: GlobalRoutes.Dashboard,
-    element: <Dashboard />,
+    element: (
+      <ProtectedRoute>
+        <Dashboard />
+      </ProtectedRoute>
+    ),
   },
 ]);
 

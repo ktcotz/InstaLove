@@ -101,3 +101,18 @@ export const updatePassword = async ({
 
   return data;
 };
+
+export const getUser = async () => {
+  const { data, error } = await supabase.auth.getSession();
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+      code: error.status,
+    });
+  }
+
+  const user = data.session?.user;
+
+  return user;
+};
