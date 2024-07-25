@@ -39,7 +39,7 @@ export const DashboardNavigationItem = ({
   openComponent,
 }: DashboardNavigationItemProps) => {
   const { t } = useTranslation();
-  const { toggleOpen } = useNavigationContext();
+  const { toggleOpen, component } = useNavigationContext();
   return (
     <li>
       {openComponent && (
@@ -47,7 +47,9 @@ export const DashboardNavigationItem = ({
           <span className="text-2xl group-hover:scale-105 transition-all">
             {icons[icon]}
           </span>
-          <span>{t(title)}</span>
+          <span className={component === openComponent ? "font-semibold" : ""}>
+            {t(title)}
+          </span>
         </Button>
       )}
       {to && (

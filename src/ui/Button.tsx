@@ -13,7 +13,7 @@ export const Button = ({
   modifier = "primary",
   ...rest
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const base = "font-semibold";
+  const base = "inline-block";
 
   const modifierObject: Record<ButtonType, string> = {
     primary:

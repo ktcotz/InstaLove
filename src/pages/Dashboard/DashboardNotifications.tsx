@@ -1,5 +1,7 @@
 export const DashboardNotifications = () => {
   return (
-    <div className="absolute top-0 left-0 z-20 bg-red-500">Notifications</div>
+    <div className="bg-stone-50 border-r border-stone-300 h-full">
+      Notifications
+    </div>
   );
 };

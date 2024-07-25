@@ -13,5 +13,9 @@ export const ComponentManager = () => {
     notifications: <DashboardNotifications />,
   };
 
-  return manageComponent[component];
+  return (
+    <div className="fixed top-0 left-60 h-full z-0 w-[300px] animate-fade-left">
+      {manageComponent[component]}
+    </div>
+  );
 };

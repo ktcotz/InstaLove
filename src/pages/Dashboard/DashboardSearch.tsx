@@ -1,3 +1,5 @@
 export const DashboardSearch = () => {
-  return <div className="absolute top-0 left-0 z-20 bg-red-500">Search</div>;
+  return (
+    <div className="bg-stone-50 border-r border-stone-300 h-full">Search</div>
+  );
 };
