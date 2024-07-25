@@ -9,6 +9,10 @@ import { ForgotPassword } from "./pages/ForgoPassword";
 import { Toaster } from "react-hot-toast";
 import { ResetPassword } from "./pages/ResetPassword";
 import { ProtectedRoute } from "./ui/ProtectedRoute";
+import { DashboardExplore } from "./pages/Dashboard/DashboardExplore";
+import { DashboardMessages } from "./pages/Dashboard/DashboardMessages";
+import { DashboardProfile } from "./pages/Dashboard/DashboardProfile";
+import { DashboardReels } from "./pages/Dashboard/DashboardReels";
 
 const router = createBrowserRouter([
   {
@@ -58,6 +62,24 @@ const router = createBrowserRouter([
         <Dashboard />
       </ProtectedRoute>
     ),
+    children: [
+      {
+        path: GlobalRoutes.DashboardExplore,
+        element: <DashboardExplore />,
+      },
+      {
+        path: GlobalRoutes.DashboardMessages,
+        element: <DashboardMessages />,
+      },
+      {
+        path: GlobalRoutes.DashboardProfile,
+        element: <DashboardProfile />,
+      },
+      {
+        path: GlobalRoutes.DashboardReels,
+        element: <DashboardReels />,
+      },
+    ],
   },
 ]);
 

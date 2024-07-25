@@ -21,3 +21,7 @@ export type ZodI18NHandler = RootTranslationsMessages<
 export type SupabaseI18NHandler = RootTranslationsMessages<
   RootTranslationsKey<"supabase.", "supabase">
 >;
+
+export type NavigationI18NHandler = RootTranslationsMessages<
+  RootTranslationsKey<"navigation.", "navigation">
+>;

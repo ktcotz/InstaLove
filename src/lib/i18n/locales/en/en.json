@@ -48,5 +48,15 @@
   "utils": {
     "divider": "Or",
     "home-text": "Log in and enjoy full InstaLove for free."
+  },
+  "navigation": {
+    "home": "Home",
+    "search": "Search",
+    "explore": "Explore",
+    "stories": "Reels",
+    "messages": "Messages",
+    "notifications": "Notifications",
+    "create": "Create",
+    "profile": "Profile"
   }
 }

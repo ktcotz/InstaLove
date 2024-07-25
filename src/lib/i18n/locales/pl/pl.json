@@ -48,5 +48,15 @@
   "utils": {
     "divider": "Lub",
     "home-text": "Zaloguj się i korzystaj z pełni InstaLove za darmo."
+  },
+  "navigation": {
+    "home": "Strona główna",
+    "search": "Szukaj",
+    "explore": "Eksploruj",
+    "stories": "Rolki",
+    "messages": "Wiadomości",
+    "notifications": "Powiadomienia",
+    "create": "Utwórz",
+    "profile": "Profil"
   }
 }
