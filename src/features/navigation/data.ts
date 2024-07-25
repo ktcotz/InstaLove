@@ -1,5 +1,6 @@
 import { NavigationI18NHandler } from "../../lib/i18n/i18n.types";
 import { GlobalRoutes } from "../../typing/routes";
+import { NavigationComponent } from "./context/NavigationContext";
 import { NavigationRoutes } from "./DashboardNavigationItem";
 
 type Data = {
@@ -7,6 +8,7 @@ type Data = {
   title: NavigationI18NHandler;
   icon: NavigationRoutes;
   to?: GlobalRoutes;
+  openComponent?: NavigationComponent;
 };
 
 export const dashboardNavigationData: Data[] = [
@@ -20,7 +22,7 @@ export const dashboardNavigationData: Data[] = [
     id: 2,
     title: "navigation.search",
     icon: "search",
-    to: GlobalRoutes.ForgotPassword,
+    openComponent: "search",
   },
   {
     id: 3,
@@ -44,7 +46,7 @@ export const dashboardNavigationData: Data[] = [
     id: 6,
     title: "navigation.notifications",
     icon: "notifications",
-    to: GlobalRoutes.ResetPassword,
+    openComponent: "notifications",
   },
   {
     id: 7,

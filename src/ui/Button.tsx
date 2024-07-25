@@ -1,7 +1,7 @@
 import { ButtonHTMLAttributes, ReactNode } from "react";
 import twMerge from "clsx";
 
-type ButtonType = "primary" | "submit" | "text";
+type ButtonType = "primary" | "submit" | "text" | "navigation";
 
 type ButtonProps = {
   children: ReactNode;
@@ -13,7 +13,7 @@ export const Button = ({
   modifier = "primary",
   ...rest
 }: ButtonProps & ButtonHTMLAttributes<HTMLButtonElement>) => {
-  const base = "font-semibold flex items-center justify-center";
+  const base = "font-semibold";
 
   const modifierObject: Record<ButtonType, string> = {
     primary:
@@ -21,6 +21,8 @@ export const Button = ({
     submit:
       "py-3 bg-blue-600 border rounded-md text-stone-50 transition-all hover:bg-stone-100 hover:text-blue-700 hover:border-stone-300",
     text: "text-stone-600 flex items-center justify-center gap-2 hover:text-blue-600 transition",
+    navigation:
+      "flex items-center gap-4 p-3 hover:bg-stone-200 transition group w-full",
   };
 
   const className = twMerge(base, modifier && modifierObject[modifier]);

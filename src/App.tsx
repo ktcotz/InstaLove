@@ -13,6 +13,7 @@ import { DashboardExplore } from "./pages/Dashboard/DashboardExplore";
 import { DashboardMessages } from "./pages/Dashboard/DashboardMessages";
 import { DashboardProfile } from "./pages/Dashboard/DashboardProfile";
 import { DashboardReels } from "./pages/Dashboard/DashboardReels";
+import { NavigationContextProvider } from "./features/navigation/context/NavigationContext";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +60,9 @@ const router = createBrowserRouter([
     path: GlobalRoutes.Dashboard,
     element: (
       <ProtectedRoute>
-        <Dashboard />
+        <NavigationContextProvider>
+          <Dashboard />
+        </NavigationContextProvider>
       </ProtectedRoute>
     ),
     children: [
