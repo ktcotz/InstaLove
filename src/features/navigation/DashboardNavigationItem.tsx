@@ -11,6 +11,7 @@ import { Button } from "../../ui/Button";
 import { useNavigationContext } from "./context/useNavigationContext";
 import { NavigationComponent } from "./context/NavigationContext";
 import { useMediaQuery } from "usehooks-ts";
+import { Tooltip } from "react-tooltip";
 
 export type NavigationRoutes =
   keyof (typeof resources)["pl"]["translation"]["navigation"];
@@ -40,12 +41,19 @@ export const DashboardNavigationItem = ({
   openComponent,
 }: DashboardNavigationItemProps) => {
   const matches = useMediaQuery("(min-width:1024px)");
+  const mobileMatches = useMediaQuery("(max-width:768px)");
   const { t } = useTranslation();
   const { toggleOpen, component } = useNavigationContext();
+
   return (
     <li>
       {openComponent && (
-        <Button modifier="navigation" onClick={() => toggleOpen(openComponent)}>
+        <Button
+          modifier="navigation"
+          onClick={() => toggleOpen(openComponent)}
+          data-tooltip-id={`button-${title}`}
+          data-tooltip-place={mobileMatches ? "top" : "right"}
+        >
           <span className="text-xl sm:text-2xl  group-hover:scale-105 transition-all">
             {icons[icon]}
           </span>
@@ -55,11 +63,19 @@ export const DashboardNavigationItem = ({
             >
               {t(title)}
             </span>
-          ) : null}
+          ) : (
+            <Tooltip id={`button-${title}`}>{t(title)}</Tooltip>
+          )}
         </Button>
       )}
       {to && (
-        <CustomLink modifier="navigation" to={to} type="active-link">
+        <CustomLink
+          modifier="navigation"
+          to={to}
+          type="active-link"
+          data-tooltip-id={`link-${title}`}
+          data-tooltip-place={mobileMatches ? "top" : "right"}
+        >
           <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">
             {icons[icon]}
           </span>
@@ -69,7 +85,9 @@ export const DashboardNavigationItem = ({
             >
               {t(title)}
             </span>
-          ) : null}
+          ) : (
+            <Tooltip id={`link-${title}`}>{t(title)}</Tooltip>
+          )}
         </CustomLink>
       )}
     </li>
