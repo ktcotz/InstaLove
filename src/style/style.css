@@ -55,3 +55,33 @@
   font-weight: 900;
   src: url("../fonts/roboto-v30-latin-900.woff2") format("woff2"); /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
+
+/* Custom swiper styling */
+
+.swiper-button-prev {
+  --swiper-navigation-sides-offset: 1.6rem;
+  background-color: #eee;
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+}
+
+.swiper-button-prev::after {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #000;
+}
+
+.swiper-button-next {
+  --swiper-navigation-sides-offset: 1.6rem;
+  background-color: #eee;
+  height: 1.8rem;
+  width: 1.8rem;
+  border-radius: 50%;
+}
+
+.swiper-button-next::after {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #000;
+}

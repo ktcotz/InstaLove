@@ -3,7 +3,11 @@ import { Button } from "../../ui/Button";
 export const Storie = () => {
   return (
     <div className="flex flex-col items-center gap-2">
-      <Button aria-label="Open storie" modifier="storie">
+      <Button
+        aria-label="Open storie"
+        modifier="storie"
+        onClick={() => console.log("HI!")}
+      >
         <img
           src="https://picsum.photos/56/56"
           alt=""
