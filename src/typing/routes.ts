@@ -4,6 +4,7 @@ export enum GlobalRoutes {
   Register = "/register",
   Dashboard = "/dashboard",
   DashboardExplore = "/dashboard/explore",
+  DashboardHome = "",
   DashboardProfile = "/dashboard/profile",
   DashboardMessages = "/dashboard/messages",
   DashboardReels = "/dashboard/reels",

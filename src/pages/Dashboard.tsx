@@ -9,8 +9,10 @@ export const Dashboard = () => {
         <DashboardNavigation />
         <ComponentManager />
       </aside>
-      <main className="relative top-0 min-h-screen px-4 md:pl-20 lg:pl-60 bg-green-800">
-        <Outlet />
+      <main className="relative top-0 min-h-screen md:pl-20 lg:pl-60 bg-stone-50">
+        <div className="px-4 py-12">
+          <Outlet />
+        </div>
       </main>
     </div>
   );

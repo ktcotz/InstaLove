@@ -1,6 +1,8 @@
-Do zrobienia dnia 25.07.2024
+Do zrobienia dnia 26/27/28.07.2024
 
-1. Responywsność.
-2. Accesibility.
+Stories + swipper
+Strona główna + wyświetlanie postu
+Responsvitiy.
+Accesibility.
 
 Opcjonalnie : Rozpoczęcie pracy nad profilem.
