@@ -6,7 +6,10 @@ export const Storie = () => {
     <div className="flex flex-col items-center gap-2">
       <Modal>
         <Modal.Content>
-          <h1>HI eldorado!</h1>
+          <div className="bg-red-600">
+            <h1>Hi eldorado</h1>
+            <p>Cosiek</p>
+          </div>
         </Modal.Content>
         <Modal.Open>
           <Button aria-label="Open storie" modifier="storie">

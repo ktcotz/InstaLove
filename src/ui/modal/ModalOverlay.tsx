@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { useModal } from "./ModalContext/useModal";
 import { createPortal } from "react-dom";
 
 type ModalOverlayProps = {
@@ -7,13 +6,8 @@ type ModalOverlayProps = {
 };
 
 export const ModalOverlay = ({ children }: ModalOverlayProps) => {
-  const { close } = useModal();
-
   return createPortal(
-    <div
-      className="fixed top-0 left-0 h-full w-full z-50 bg-stone-50/95 backdrop-blur-sm"
-      onClick={close}
-    >
+    <div className="fixed top-0 left-0 h-full w-full z-50 bg-stone-50/95 backdrop-blur-sm p-8">
       {children}
     </div>,
     document.querySelector("#modal")!
