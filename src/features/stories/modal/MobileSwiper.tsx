@@ -18,7 +18,7 @@ export const MobileSwiper = () => {
         },
       }}
       modules={[EffectCreative]}
-      className="mySwiper"
+      className="mobile-swiper"
     >
       {Array.from({ length: 15 }).map((_, id) => {
         return (

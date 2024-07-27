@@ -10,7 +10,8 @@ export const ModalStories = () => {
   return (
     <div
       className={`flex items-center gap-6 ${
-        !isLaptop && "relative max-w-[600px] h-[600px] mx-auto"
+        !isLaptop &&
+        "relative w-full h-full md:max-w-[600px] md:h-[600px] mx-auto"
       }`}
     >
       {isLaptop ? (

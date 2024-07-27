@@ -96,10 +96,6 @@
   transition: 500ms;
 }
 
-.mobile-swipper {
-  position: absolute;
-  top: 0;
-  left: 0;
+.mobile-swiper {
   height: 100%;
-  width: 100%;
 }

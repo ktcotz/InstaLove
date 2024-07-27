@@ -2,7 +2,6 @@ import { ReactNode, useRef } from "react";
 import { ModalOverlay } from "./ModalOverlay";
 import { useModal } from "./ModalContext/useModal";
 import { Modal } from "./Modal";
-import { Wrapper } from "../Wrapper";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
 type ModalContentProps = {
@@ -25,7 +24,7 @@ export const ModalContent = ({ children }: ModalContentProps) => {
   return (
     <ModalOverlay>
       <Modal.Close />
-      <div className="py-12" ref={ref}>
+      <div className="py-0 md:py-12 grow" ref={ref}>
         {children}
       </div>
     </ModalOverlay>

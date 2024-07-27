@@ -13,13 +13,17 @@ export const DesktopSwiper = ({
   return (
     <Swiper
       className="modal-stories"
-      slidesPerView={5}
+      slidesPerView={3}
       centeredSlides={true}
       initialSlide={initialSlide}
       slideToClickedSlide={true}
       noSwiping={true}
       autoHeight={true}
-      allowTouchMove={false}
+      breakpoints={{
+        1300: {
+          slidesPerView: 4,
+        },
+      }}
       onSlideChange={(ev) => {
         changeSlide(ev.clickedIndex);
       }}
