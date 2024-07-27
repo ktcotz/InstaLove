@@ -15,6 +15,7 @@ import { DashboardProfile } from "./pages/Dashboard/DashboardProfile";
 import { DashboardReels } from "./pages/Dashboard/DashboardReels";
 import { NavigationContextProvider } from "./features/navigation/context/NavigationContext";
 import { DashboardHome } from "./pages/Dashboard/DashboardHome";
+import { Modal } from "./ui/modal/Modal";
 
 const router = createBrowserRouter([
   {

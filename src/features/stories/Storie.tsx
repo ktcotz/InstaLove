@@ -1,20 +1,24 @@
 import { Button } from "../../ui/Button";
+import { Modal } from "../../ui/modal/Modal";
 
 export const Storie = () => {
   return (
     <div className="flex flex-col items-center gap-2">
-      <Button
-        aria-label="Open storie"
-        modifier="storie"
-        onClick={() => console.log("HI!")}
-      >
-        <img
-          src="https://picsum.photos/56/56"
-          alt=""
-          className="rounded-full"
-        />
-      </Button>
-      <p className="text-xs text-stone-900">sibusiso10_</p>
+      <Modal>
+        <Modal.Content>
+          <h1>HI eldorado!</h1>
+        </Modal.Content>
+        <Modal.Open>
+          <Button aria-label="Open storie" modifier="storie">
+            <img
+              src="https://picsum.photos/56/56"
+              alt=""
+              className="rounded-full"
+            />
+          </Button>
+        </Modal.Open>
+        <p className="text-xs text-stone-900">sibusiso10_</p>
+      </Modal>
     </div>
   );
 };
