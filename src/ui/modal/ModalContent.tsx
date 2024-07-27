@@ -25,11 +25,9 @@ export const ModalContent = ({ children }: ModalContentProps) => {
   return (
     <ModalOverlay>
       <Modal.Close />
-      <Wrapper>
-        <div className="py-12" ref={ref}>
-          {children}
-        </div>
-      </Wrapper>
+      <div className="py-12" ref={ref}>
+        {children}
+      </div>
     </ModalOverlay>
   );
 };

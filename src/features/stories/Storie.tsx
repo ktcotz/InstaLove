@@ -1,15 +1,13 @@
 import { Button } from "../../ui/Button";
 import { Modal } from "../../ui/modal/Modal";
+import { ModalStories } from "./modal/ModalStories";
 
 export const Storie = () => {
   return (
     <div className="flex flex-col items-center gap-2">
       <Modal>
         <Modal.Content>
-          <div className="bg-red-600">
-            <h1>Hi eldorado</h1>
-            <p>Cosiek</p>
-          </div>
+          <ModalStories />
         </Modal.Content>
         <Modal.Open>
           <Button aria-label="Open storie" modifier="storie">

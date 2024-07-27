@@ -85,3 +85,21 @@
   font-weight: 700;
   color: #000;
 }
+
+.modal-stories .swiper-wrapper {
+  gap: 2rem;
+  align-items: center;
+}
+
+.modal-stories .modal-active {
+  width: 500px !important;
+  transition: 500ms;
+}
+
+.mobile-swipper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
