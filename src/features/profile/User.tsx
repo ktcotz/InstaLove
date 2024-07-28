@@ -16,7 +16,7 @@ export const User = () => {
     <div className="flex items-center gap-2 justify-between self-stretch">
       <div className="flex items-center gap-4">
         <CustomLink
-          to={`/profile/${user.user_metadata?.user_name}`}
+          to={`/dashboard/${user.user_metadata?.user_name}`}
           modifier="avatar"
         >
           <img
@@ -29,7 +29,7 @@ export const User = () => {
         </CustomLink>
         <div className="flex flex-col">
           <CustomLink
-            to={`/profile/${user.user_metadata?.user_name}`}
+            to={`/dashboard/${user.user_metadata?.user_name}`}
             modifier="avatar-name"
           >
             {user.user_metadata?.user_name}

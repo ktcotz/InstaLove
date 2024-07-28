@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
 import { HoverProfile } from "./HoverProfile";
+import { Profile } from "./schema/ProfilesSchema";
 
-export const ProposedProfile = () => {
+export const ProposedProfile = ({ avatar_url, user_name }: Profile) => {
   const [isHover, setIsHover] = useState(false);
 
   const hover = () => setIsHover(true);
@@ -16,19 +17,25 @@ export const ProposedProfile = () => {
     >
       <div className="flex items-center gap-4">
         <CustomLink
-          to={`/profile/`}
+          to={`/dashboard/${user_name}`}
           modifier="avatar"
           onMouseEnter={() => hover()}
         >
-          <img width={48} height={48} className="rounded-full" />
+          <img
+            width={48}
+            height={48}
+            className="rounded-full"
+            src={avatar_url}
+            alt={user_name}
+          />
         </CustomLink>
         <div className="flex flex-col">
           <CustomLink
-            to={``}
+            to={`/dashboard/${user_name}`}
             modifier="avatar-name"
             onMouseEnter={() => hover()}
           >
-            patrasoo
+            {user_name}
           </CustomLink>
           <p className="text-sm text-stone-500">Propozycje dla Ciebie</p>
         </div>

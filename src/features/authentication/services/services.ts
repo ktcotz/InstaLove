@@ -9,6 +9,11 @@ type UserCredentials = {
 
 type UserExtraData = {
   nickname: string;
+  avatar_url?: string;
+};
+
+type UserID = {
+  user_id?: string;
 };
 
 export const registerWithPassword = async ({
@@ -31,10 +36,53 @@ export const registerWithPassword = async ({
     },
   });
 
+  addUser({ nickname, user_id: data.user?.id });
+
   if (error) {
     throw new CustomError({
       message: error.message,
       code: error.status,
+    });
+  }
+
+  return data;
+};
+
+const addUser = async ({
+  nickname,
+  user_id,
+  avatar_url,
+}: UserExtraData & UserID) => {
+  if (!user_id) return;
+
+  const { data: users } = await supabase
+    .from("users")
+    .select("*")
+    .eq("user_id", user_id);
+
+  if (users!.length > 0) return;
+
+  const { data: invalidUsers } = await supabase
+    .from("users")
+    .select("*")
+    .eq("user_name", nickname);
+
+  const { data, error } = await supabase
+    .from("users")
+    .insert([
+      {
+        user_name: invalidUsers!.length > 0 ? `${nickname}-github` : nickname,
+        user_id,
+        avatar_url: avatar_url
+          ? avatar_url
+          : "https://ofekoesnmxxjzvhfwopy.supabase.co/storage/v1/object/sign/avatars/public/user.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL3B1YmxpYy91c2VyLnBuZyIsImlhdCI6MTcyMjE1NzEyNywiZXhwIjoxNzUzNjkzMTI3fQ.KJW11PWPaAQzQONBtn3u2jaAUCnnkUhMrwdnawewrlQ&t=2024-07-28T08%3A58%3A46.693Z",
+      },
+    ])
+    .select();
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
     });
   }
 
@@ -55,22 +103,6 @@ export const loginUser = async ({ email, password }: UserCredentials) => {
   }
 
   return data;
-};
-
-export const loginUserByGithub = async () => {
-  const { error } = await supabase.auth.signInWithOAuth({
-    provider: "github",
-    options: {
-      redirectTo: "http://localhost:5173/dashboard",
-    },
-  });
-
-  if (error) {
-    throw new CustomError({
-      message: error.message,
-      code: error.status,
-    });
-  }
 };
 
 export const forgotPassword = async ({

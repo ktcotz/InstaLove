@@ -88,6 +88,7 @@ export const DashboardNavigationItem = ({
               width={24}
               height={24}
               alt={`${user.user_metadata?.user_name}`}
+              className="rounded-full"
             />
           ) : (
             <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">
