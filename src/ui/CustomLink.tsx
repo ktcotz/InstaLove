@@ -13,7 +13,8 @@ export type CustomLinkModifier =
   | "small-text"
   | "navigation"
   | "avatar"
-  | "avatar-name";
+  | "avatar-name"
+  | "all-profiles";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -41,6 +42,8 @@ export const CustomLink = ({
       "flex items-center gap-4 p-3 hover:bg-stone-200 transition group",
     avatar: "w-12 h-12 rounded-full border-2 border-stone-300",
     ["avatar-name"]: "text-base text-stone-950 font-medium",
+    ["all-profiles"]:
+      "text-stone-900 hover:text-stone-950 text-sm  font-bold transition",
   };
 
   const className = twMerge(base, modifiers[modifier]);

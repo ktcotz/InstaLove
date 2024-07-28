@@ -7,7 +7,9 @@ type ButtonType =
   | "text"
   | "navigation"
   | "storie"
-  | "close";
+  | "close"
+  | "link"
+  | "add-user";
 
 type ButtonProps = {
   children: ReactNode;
@@ -32,6 +34,9 @@ export const Button = ({
     storie:
       "w-14 h-14 rounded-full flex items-center justify-center  overflow-hidden border border-blue-400 p-[2px]",
     close: "group",
+    link: "text-blue-600 hover:text-blue-700 transition text-sm font-bold",
+    ["add-user"]:
+      "bg-blue-600 text-stone-50 rounded-md p-2 w-full flex items-center justify-center gap-1",
   };
 
   const className = twMerge(base, modifier && modifierObject[modifier]);

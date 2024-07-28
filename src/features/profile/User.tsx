@@ -12,8 +12,6 @@ export const User = () => {
 
   if (!user) return null;
 
-  console.log(user);
-
   return (
     <div className="flex items-center gap-2 justify-between self-stretch">
       <div className="flex items-center gap-4">
