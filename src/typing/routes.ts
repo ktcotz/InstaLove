@@ -5,7 +5,7 @@ export enum GlobalRoutes {
   Dashboard = "/dashboard",
   DashboardExplore = "/dashboard/explore",
   DashboardHome = "",
-  DashboardProfile = "/dashboard/profile",
+  DashboardProfile = "/dashboard/:profile",
   DashboardMessages = "/dashboard/messages",
   DashboardReels = "/dashboard/reels",
   ForgotPassword = "/forgot-password",
