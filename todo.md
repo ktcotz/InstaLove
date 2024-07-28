@@ -1,9 +1,5 @@
 Do zrobienia dnia 26/27/28.07.2024
 
-Modal z całą obsługą.
+Praca nad profilem w Home.
 
-Stories modal.
-
-Accesibility.
-
-Opcjonalnie : Rozpoczęcie pracy nad profilem.
+Osobny route profil, z edytowanie profilu.

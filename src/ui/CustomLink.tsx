@@ -11,7 +11,9 @@ export type CustomLinkModifier =
   | "text"
   | "link"
   | "small-text"
-  | "navigation";
+  | "navigation"
+  | "avatar"
+  | "avatar-name";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -25,11 +27,11 @@ export const CustomLink = ({
   type = "link",
   ...rest
 }: CustomLinkProps & LinkProps) => {
-  const base = "rounded-sm font-base";
+  const base = "font-base";
 
   const modifiers: Record<CustomLinkModifier, string> = {
     primary:
-      "bg-blue-600 px-3 py-1 sm:px-4 sm:py-2 hover:bg-blue-700 transition text-stone-50",
+      "rounded-sm flex items-center justify-center bg-blue-600 px-3 py-1 sm:px-4 sm:py-2 hover:bg-blue-700 transition text-stone-50",
     logo: "inline-block",
     text: "text-stone-600 flex items-center justify-center gap-2 hover:text-blue-600 transition",
     link: "text-blue-600 hover:text-blue-700 transition",
@@ -37,6 +39,8 @@ export const CustomLink = ({
     ["small-logo"]: "text-2xl",
     navigation:
       "flex items-center gap-4 p-3 hover:bg-stone-200 transition group",
+    avatar: "w-12 h-12 rounded-full border-2 border-stone-300",
+    ["avatar-name"]: "text-base text-stone-950 font-medium",
   };
 
   const className = twMerge(base, modifiers[modifier]);
