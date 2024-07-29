@@ -41,19 +41,24 @@ export const CreatePostDescription = ({
         <h2 className="font-medium text-sm">{user?.user_metadata.user_name}</h2>
       </div>
       <div className="relative">
+        <label htmlFor="description" className="sr-only">
+          Opis postu
+        </label>
         <textarea
           placeholder="Dodaj opis..."
           className="w-full overflow-scroll px-2 pt-2 pb-8 resize-none"
           rows={isMobile ? 5 : 10}
           value={description}
           onChange={handleChange}
+          id="description"
         ></textarea>
         <div className="absolute bottom-0 left-0 w-full h-8 px-2 flex items-center border-b border-stone-300 justify-between bg-stone-50">
           <Button
             modifier="close"
             onClick={() => setShowEmotes((prev) => !prev)}
+            aria-label="Emoji picker"
           >
-            <MdOutlineInsertEmoticon className="text-xl" />
+            <MdOutlineInsertEmoticon className="text-xl" aria-label="Emoji" />
           </Button>
           {showEmotes && (
             <EmojiPicker

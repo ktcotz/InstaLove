@@ -1,10 +1,10 @@
 import { useQuery } from "@tanstack/react-query";
-import { getPosts } from "../services/services";
+import { getProposedPosts } from "../services/services";
 
-export const useGetPosts = (user_id?: string) => {
+export const useProposedPosts = (user_id?: string) => {
   const { data, isLoading } = useQuery({
     queryKey: ["posts", user_id],
-    queryFn: () => getPosts({ user_id }),
+    queryFn: () => getProposedPosts({ user_id }),
     enabled: !!user_id,
   });
 

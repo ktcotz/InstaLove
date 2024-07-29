@@ -69,21 +69,28 @@ export const ProfileDetails = () => {
           </p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-1">
-          {posts?.map((post) => {
-            return (
-              <div
-                key={post.id}
-                className="relative aspect-square bg-cover bg-center"
-                style={{
-                  backgroundImage: `url(${post.post_url})`,
-                }}
-              >
-                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-stone-950/20">
-                  asd
+          {posts!.length > 0 ? (
+            posts?.map((post) => {
+              return (
+                <div
+                  key={post.id}
+                  className="relative aspect-square bg-cover bg-center"
+                  style={{
+                    backgroundImage: `url(${post.post_url})`,
+                  }}
+                >
+                  <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-stone-950/20">
+                    asd
+                  </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <p className=" text-stone-600 col-start-1 -col-end-1">
+              No posts were found for your account. Create and publish them to
+              see them in this section.
+            </p>
+          )}
         </div>
       </div>
     </div>

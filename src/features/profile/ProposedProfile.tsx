@@ -41,7 +41,7 @@ export const ProposedProfile = ({ avatar_url, user_name }: Profile) => {
         </div>
       </div>
       <Button modifier="link">Obserwuj</Button>
-      {isHover && <HoverProfile />}
+      {isHover && <HoverProfile user_name={user_name} />}
     </div>
   );
 };

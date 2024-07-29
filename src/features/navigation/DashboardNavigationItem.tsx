@@ -43,11 +43,49 @@ export const DashboardNavigationItem = ({
   to,
   openComponent,
 }: DashboardNavigationItemProps) => {
-  const matches = useMediaQuery("(min-width:1024px)");
   const mobileMatches = useMediaQuery("(max-width:768px)");
+  const matches = useMediaQuery("(min-width:1024px)");
   const { t } = useTranslation();
   const { toggleOpen, component } = useNavigationContext();
   const { user } = useUser();
+
+  if (to) {
+    return (
+      <CustomLink
+        modifier="navigation"
+        to={
+          to === GlobalRoutes.DashboardProfile
+            ? `${user?.user_metadata.user_name}`
+            : to
+        }
+        type="active-link"
+        data-tooltip-id={`link-${title}`}
+        data-tooltip-place={mobileMatches ? "top" : "right"}
+      >
+        {to === GlobalRoutes.DashboardProfile && user ? (
+          <img
+            src={`${user.user_metadata?.avatar_url}`}
+            width={24}
+            height={24}
+            alt={`${user.user_metadata?.user_name}`}
+            className="rounded-full"
+          />
+        ) : (
+          <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">
+            {icons[icon]}
+          </span>
+        )}
+
+        {matches ? (
+          <span className={component === openComponent ? "font-semibold" : ""}>
+            {t(title)}
+          </span>
+        ) : (
+          <Tooltip id={`link-${title}`}>{t(title)}</Tooltip>
+        )}
+      </CustomLink>
+    );
+  }
 
   return (
     <li>
@@ -105,43 +143,6 @@ export const DashboardNavigationItem = ({
             </Button>
           )}
         </Modal>
-      )}
-      {to && (
-        <CustomLink
-          modifier="navigation"
-          to={
-            to === GlobalRoutes.DashboardProfile
-              ? `${user?.user_metadata.user_name}`
-              : to
-          }
-          type="active-link"
-          data-tooltip-id={`link-${title}`}
-          data-tooltip-place={mobileMatches ? "top" : "right"}
-        >
-          {to === GlobalRoutes.DashboardProfile && user ? (
-            <img
-              src={`${user.user_metadata?.avatar_url}`}
-              width={24}
-              height={24}
-              alt={`${user.user_metadata?.user_name}`}
-              className="rounded-full"
-            />
-          ) : (
-            <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">
-              {icons[icon]}
-            </span>
-          )}
-
-          {matches ? (
-            <span
-              className={component === openComponent ? "font-semibold" : ""}
-            >
-              {t(title)}
-            </span>
-          ) : (
-            <Tooltip id={`link-${title}`}>{t(title)}</Tooltip>
-          )}
-        </CustomLink>
       )}
     </li>
   );

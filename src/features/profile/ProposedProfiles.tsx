@@ -8,7 +8,12 @@ export const ProposedProfiles = () => {
   const { user } = useUser();
   const { data, isLoading } = useProfiles((user as User).id);
 
-  if (isLoading) return <Loader />;
+  if (isLoading)
+    return (
+      <div className="py-4">
+        <Loader />
+      </div>
+    );
 
   if (!data) {
     return (

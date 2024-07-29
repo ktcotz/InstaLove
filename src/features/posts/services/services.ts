@@ -73,3 +73,19 @@ export const getPosts = async ({ user_id }: UserID) => {
 
   return posts;
 };
+
+export const getProposedPosts = async ({ user_id }: UserID) => {
+  const { data: posts, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("user_id", user_id)
+    .range(0, 2);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return posts;
+};
