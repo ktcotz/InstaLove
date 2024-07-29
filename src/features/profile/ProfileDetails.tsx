@@ -72,6 +72,7 @@ export const ProfileDetails = () => {
           {posts?.map((post) => {
             return (
               <div
+                key={post.id}
                 className="relative aspect-square bg-cover bg-center"
                 style={{
                   backgroundImage: `url(${post.post_url})`,

@@ -23,6 +23,8 @@ export const createPost = async ({
     .from(user_id)
     .upload(`posts/${imageName}`, post_image);
 
+  console.log(storageError);
+
   const { data: signedUrl } = await supabase.storage
     .from(user_id)
     .createSignedUrl(`posts/${imageName}`, 365 * 24 * 60 * 60);
