@@ -13,6 +13,8 @@ import { NavigationComponent } from "./context/NavigationContext";
 import { useMediaQuery } from "usehooks-ts";
 import { Tooltip } from "react-tooltip";
 import { useUser } from "../authentication/queries/useUser";
+import { Modal } from "../../ui/modal/Modal";
+import { CreatePost } from "../posts/CreatePost";
 
 export type NavigationRoutes =
   keyof (typeof resources)["pl"]["translation"]["navigation"];
@@ -50,25 +52,59 @@ export const DashboardNavigationItem = ({
   return (
     <li>
       {openComponent && (
-        <Button
-          modifier="navigation"
-          onClick={() => toggleOpen(openComponent)}
-          data-tooltip-id={`button-${title}`}
-          data-tooltip-place={mobileMatches ? "top" : "right"}
-        >
-          <span className="text-xl sm:text-2xl  group-hover:scale-105 transition-all">
-            {icons[icon]}
-          </span>
-          {matches ? (
-            <span
-              className={component === openComponent ? "font-semibold" : ""}
-            >
-              {t(title)}
-            </span>
-          ) : (
-            <Tooltip id={`button-${title}`}>{t(title)}</Tooltip>
+        <Modal>
+          {title === "navigation.create" && (
+            <>
+              <Modal.Content>
+                <CreatePost />
+              </Modal.Content>
+              <Modal.Open>
+                <Button
+                  modifier="navigation"
+                  onClick={() => toggleOpen(openComponent)}
+                  data-tooltip-id={`button-${title}`}
+                  data-tooltip-place={mobileMatches ? "top" : "right"}
+                >
+                  <span className="text-xl sm:text-2xl  group-hover:scale-105 transition-all">
+                    {icons[icon]}
+                  </span>
+                  {matches ? (
+                    <span
+                      className={
+                        component === openComponent ? "font-semibold" : ""
+                      }
+                    >
+                      {t(title)}
+                    </span>
+                  ) : (
+                    <Tooltip id={`button-${title}`}>{t(title)}</Tooltip>
+                  )}
+                </Button>
+              </Modal.Open>
+            </>
           )}
-        </Button>
+          {title !== "navigation.create" && (
+            <Button
+              modifier="navigation"
+              onClick={() => toggleOpen(openComponent)}
+              data-tooltip-id={`button-${title}`}
+              data-tooltip-place={mobileMatches ? "top" : "right"}
+            >
+              <span className="text-xl sm:text-2xl  group-hover:scale-105 transition-all">
+                {icons[icon]}
+              </span>
+              {matches ? (
+                <span
+                  className={component === openComponent ? "font-semibold" : ""}
+                >
+                  {t(title)}
+                </span>
+              ) : (
+                <Tooltip id={`button-${title}`}>{t(title)}</Tooltip>
+              )}
+            </Button>
+          )}
+        </Modal>
       )}
       {to && (
         <CustomLink

@@ -99,3 +99,7 @@
 .mobile-swiper {
   height: 100%;
 }
+
+.epr-main {
+  --epr-emoji-padding: -5px !important;
+}

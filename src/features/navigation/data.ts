@@ -40,7 +40,7 @@ export const dashboardNavigationData: Data[] = [
     id: 5,
     title: "navigation.create",
     icon: "create",
-    to: GlobalRoutes.ForgotPassword,
+    openComponent: "search",
   },
   {
     id: 6,
@@ -91,7 +91,7 @@ export const mobileDashboardNavigationData: Data[] = [
     id: 7,
     title: "navigation.create",
     icon: "create",
-    to: GlobalRoutes.ForgotPassword,
+    openComponent: "search",
   },
   {
     id: 8,
