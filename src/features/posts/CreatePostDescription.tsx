@@ -5,21 +5,28 @@ import EmojiPicker from "emoji-picker-react";
 import { Button } from "../../ui/Button";
 import { useMediaQuery } from "usehooks-ts";
 
-export const CreatePostDescription = () => {
+export const MAX_LENGTH = 300;
+
+type CreatePostDescriptionProps = {
+  description: string;
+  changeDescription: (description: string) => void;
+  handleChange: (ev: ChangeEvent<HTMLTextAreaElement>) => void;
+  options: { comments: boolean; likes: boolean };
+  changeOptions: (ev: ChangeEvent<HTMLInputElement>) => void;
+};
+
+export const CreatePostDescription = ({
+  description,
+  handleChange,
+  changeDescription,
+  options,
+  changeOptions,
+}: CreatePostDescriptionProps) => {
   const isMobile = useMediaQuery("(max-width:768px)");
   const { user } = useUser();
   const [showEmotes, setShowEmotes] = useState(false);
-  const [description, setDescription] = useState("");
-
-  const MAX_LENGTH = 300;
 
   if (!user) return null;
-
-  const handleChange = (ev: ChangeEvent<HTMLTextAreaElement>) => {
-    const newText = ev.target.value;
-
-    setDescription(newText.slice(0, MAX_LENGTH));
-  };
 
   return (
     <div className="col-start-1 col-end-3 md:col-start-auto md:col-end-auto md:border-r border-stone-300 p-4 text-left">
@@ -56,7 +63,7 @@ export const CreatePostDescription = () => {
               skinTonesDisabled={true}
               onEmojiClick={({ emoji }) => {
                 if (description.length >= MAX_LENGTH) return;
-                setDescription((prev) => prev + emoji);
+                changeDescription(emoji);
               }}
             />
           )}
@@ -69,17 +76,26 @@ export const CreatePostDescription = () => {
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
-            name="comment"
-            id="comment"
+            name="comments"
+            id="comments"
             className="w-4 h-4"
+            defaultChecked={options.comments}
+            onChange={changeOptions}
           />
-          <label htmlFor="comment" className="text-sm text-stone-600">
+          <label htmlFor="comments" className="text-sm text-stone-600">
             Wyłącz komentowanie
           </label>
         </div>
         <div className="flex items-center gap-2">
-          <input type="checkbox" name="like" id="like" className="w-4 h-4" />
-          <label htmlFor="like" className="text-sm text-stone-600">
+          <input
+            type="checkbox"
+            name="likes"
+            id="likes"
+            className="w-4 h-4"
+            defaultChecked={options.likes}
+            onChange={changeOptions}
+          />
+          <label htmlFor="likes" className="text-sm text-stone-600">
             Ukryj liczby polubień
           </label>
         </div>

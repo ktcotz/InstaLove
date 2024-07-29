@@ -2,17 +2,49 @@ import { Button } from "../../ui/Button";
 import { Wrapper } from "../../ui/Wrapper";
 import { FaRegImages } from "react-icons/fa6";
 import { useDropzone } from "react-dropzone";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
-import { CreatePostDescription } from "./CreatePostDescription";
+import { CreatePostDescription, MAX_LENGTH } from "./CreatePostDescription";
+import { useCreatePost } from "./mutations/useCreatePost";
+import { useUser } from "../authentication/queries/useUser";
+import { useNavigate } from "react-router";
+import { Loader } from "../../ui/Loader";
+import { useModal } from "../../ui/modal/ModalContext/useModal";
 
 export const CreatePost = () => {
+  const navigate = useNavigate();
+  const { create, isCreating } = useCreatePost();
+  const { user } = useUser();
   const [file, setFile] = useState<{ drop: File | null; type: string }>({
     drop: null,
     type: "",
   });
   const [preview, setPreview] = useState<string | null>(null);
   const [showDescription, setShowDescription] = useState(false);
+  const [description, setDescription] = useState("");
+  const [options, setOptions] = useState({
+    comments: false,
+    likes: false,
+  });
+
+  const { close } = useModal();
+
+  const handleOptionsChange = (ev: ChangeEvent<HTMLInputElement>) => {
+    setOptions((prev) => ({
+      ...prev,
+      [ev.target.name]: ev.target.checked,
+    }));
+  };
+
+  const handleChange = (ev: ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = ev.target.value;
+
+    setDescription(newText.slice(0, MAX_LENGTH));
+  };
+
+  const changeDescription = (value: string) => {
+    setDescription((prev) => prev + value);
+  };
 
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
@@ -40,6 +72,26 @@ export const CreatePost = () => {
     },
   });
 
+  const addPost = () => {
+    if (!user || !file.drop) return;
+
+    create(
+      {
+        description,
+        disableComment: options.comments,
+        disableLike: options.likes,
+        post_image: file.drop,
+        user_id: user.id,
+      },
+      {
+        onSuccess: () => {
+          close();
+          navigate(`/dashboard/${user.user_metadata.user_name}`);
+        },
+      }
+    );
+  };
+
   return (
     <Wrapper modifier="create">
       <div className="text-center shadow-xl rounded-md bg-stone-50">
@@ -66,13 +118,16 @@ export const CreatePost = () => {
             </Button>
           )}
 
-          {showDescription && (
-            <Button modifier="text">
-              {file.type.includes("image")
-                ? "Udostępnij"
-                : "Udostępnij jako rolkę"}
-            </Button>
-          )}
+          {showDescription &&
+            (isCreating ? (
+              <Loader />
+            ) : (
+              <Button modifier="text" onClick={() => addPost()}>
+                {file.type.includes("image")
+                  ? "Udostępnij"
+                  : "Udostępnij jako rolkę"}
+              </Button>
+            ))}
         </div>
         <div className="grid md:grid-cols-3">
           <div
@@ -120,7 +175,15 @@ export const CreatePost = () => {
               )}
             </div>
           </div>
-          {showDescription && <CreatePostDescription />}
+          {showDescription && (
+            <CreatePostDescription
+              description={description}
+              handleChange={handleChange}
+              changeDescription={changeDescription}
+              options={options}
+              changeOptions={handleOptionsChange}
+            />
+          )}
         </div>
       </div>
     </Wrapper>

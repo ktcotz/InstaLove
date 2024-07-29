@@ -5,17 +5,24 @@ import { useProfile } from "./queries/useProfile";
 import { useProfileParams } from "./queries/useProfileParams";
 import { Loader } from "../../ui/Loader";
 import { useUser } from "../authentication/queries/useUser";
+import { useGetPosts } from "../posts/queries/useGetPosts";
+import { User } from "@supabase/supabase-js";
 
 export const ProfileDetails = () => {
   const { profile } = useProfileParams();
   const { user: currentUser } = useUser();
   const { data: user, isLoading } = useProfile(profile);
+  const { data: posts, isLoading: isPostsLoading } = useGetPosts(
+    (currentUser as User).id
+  );
 
   const { getRootProps, getInputProps } = useDropzone();
 
-  if (isLoading) return <Loader />;
+  if (isLoading || isPostsLoading) return <Loader />;
 
   if (!user) return null;
+
+  console.log(posts);
 
   return (
     <div className="flex flex-col lg:flex-row gap-16 2xl:gap-32">
@@ -62,35 +69,20 @@ export const ProfileDetails = () => {
           </p>
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-1">
-          <div className="relative">
-            <img
-              src="https://picsum.photos/310/310"
-              alt=""
-              width={310}
-              height={310}
-            />
-            <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-stone-950/20">
-              asd
-            </div>
-          </div>
-          <img
-            src="https://picsum.photos/310/310"
-            alt=""
-            width={310}
-            height={310}
-          />
-          <img
-            src="https://picsum.photos/310/310"
-            alt=""
-            width={310}
-            height={310}
-          />
-          <img
-            src="https://picsum.photos/310/310"
-            alt=""
-            width={310}
-            height={310}
-          />
+          {posts?.map((post) => {
+            return (
+              <div
+                className="relative aspect-square bg-cover bg-center"
+                style={{
+                  backgroundImage: `url(${post.post_url})`,
+                }}
+              >
+                <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-stone-950/20">
+                  asd
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

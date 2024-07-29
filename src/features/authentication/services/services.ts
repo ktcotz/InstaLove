@@ -12,7 +12,7 @@ type UserExtraData = {
   avatar_url?: string;
 };
 
-type UserID = {
+export type UserID = {
   user_id?: string;
 };
 
@@ -49,6 +49,7 @@ export const registerWithPassword = async ({
   });
 
   addUser({ nickname, user_id: data.user?.id });
+  createUserBucket({ user_id: data.user?.id });
 
   if (error) {
     throw new CustomError({
@@ -58,6 +59,18 @@ export const registerWithPassword = async ({
   }
 
   return data;
+};
+
+const createUserBucket = async ({ user_id }: UserID) => {
+  if (!user_id) return;
+
+  const { error } = await supabase.storage.createBucket(user_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
 };
 
 const addUser = async ({
