@@ -34,6 +34,11 @@ export class CustomError extends Error {
 
   private userDataManageError() {
     const isPasswordError = this.message.includes("password");
+    const isUsernameTaken = this.message.includes("Username");
+
+    if (isUsernameTaken) {
+      return "supabase.username-taken";
+    }
 
     if (isPasswordError) {
       return "supabase.same-password" as const;

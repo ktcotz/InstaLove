@@ -21,6 +21,18 @@ export const registerWithPassword = async ({
   password,
   nickname,
 }: UserCredentials & UserExtraData) => {
+  const { data: users } = await supabase
+    .from("users")
+    .select("*")
+    .eq("user_name", nickname);
+
+  if (users!.length > 0) {
+    throw new CustomError({
+      message: "Username is taken.",
+      code: 422,
+    });
+  }
+
   const { data, error } = await supabase.auth.signUp({
     email,
     password,

@@ -26,7 +26,8 @@
     "invalid-user-credentials": "Niepoprawne dane logowania!",
     "not-confirmed": "Nie potwierdziłeś konta, zajrzyj na pocztę.",
     "forgot-toast": "Sprawdź skrzynkę pocztową i podążaj za krokami!",
-    "same-password": "Hasło które wprowadzasz jest aktualnym hasłem."
+    "same-password": "Hasło które wprowadzasz jest aktualnym hasłem.",
+    "username-taken": "Jest już użytkownik z taką nazwą."
   },
   "images": {
     "home": "Strona główna InstaLove",

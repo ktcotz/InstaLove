@@ -26,7 +26,8 @@
     "invalid-user-credentials": "Invalid user credentials!",
     "not-confirmed": "You haven't confirmed your account, check your email.",
     "forgot-toast": "Check your mailbox and follow the steps!",
-    "same-password": "Old password are the same like new password."
+    "same-password": "Old password are the same like new password.",
+    "username-taken": "There is already a user with that name."
   },
   "images": {
     "home": "Home screen of InstaLove",
