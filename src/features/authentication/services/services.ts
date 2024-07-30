@@ -39,9 +39,8 @@ export const registerWithPassword = async ({
     options: {
       data: {
         user_name: nickname,
-        firstName: "",
-        lastName: "",
         fullName: "",
+        type: "public",
         avatar_url:
           "https://ofekoesnmxxjzvhfwopy.supabase.co/storage/v1/object/sign/avatars/public/user.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL3B1YmxpYy91c2VyLnBuZyIsImlhdCI6MTcyMjE1NzEyNywiZXhwIjoxNzUzNjkzMTI3fQ.KJW11PWPaAQzQONBtn3u2jaAUCnnkUhMrwdnawewrlQ&t=2024-07-28T08%3A58%3A46.693Z",
       },

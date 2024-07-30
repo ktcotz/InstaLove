@@ -7,7 +7,7 @@ type CurrentUserID = {
 };
 
 type ProfileName = {
-  user_name: string;
+  user_name?: string;
 };
 
 export const getProfiles = async ({ id }: CurrentUserID) => {

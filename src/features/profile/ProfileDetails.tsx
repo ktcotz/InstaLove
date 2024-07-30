@@ -19,7 +19,12 @@ export const ProfileDetails = () => {
 
   const { getRootProps, getInputProps } = useDropzone();
 
-  if (isLoading || isPostsLoading) return <Loader />;
+  if (isLoading || isPostsLoading)
+    return (
+      <div className="p-4">
+        <Loader />
+      </div>
+    );
 
   if (!user) return null;
 
