@@ -1,6 +1,10 @@
 import { Home } from "./pages/Home";
 import { GlobalRoutes } from "./typing/routes";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  Navigate,
+  RouterProvider,
+} from "react-router-dom";
 import { FormContextProvider } from "./ui/form/context/FormContext";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
@@ -15,6 +19,10 @@ import { DashboardProfile } from "./pages/Dashboard/DashboardProfile";
 import { DashboardReels } from "./pages/Dashboard/DashboardReels";
 import { NavigationContextProvider } from "./features/navigation/context/NavigationContext";
 import { DashboardHome } from "./pages/Dashboard/DashboardHome";
+import { DashboardProfileEdit } from "./pages/Dashboard/DashboardProfileEdit";
+import { Posts } from "./pages/Dashboard/Profile/Posts";
+import { Reels } from "./pages/Dashboard/Profile/Reels";
+import { Bookmarks } from "./pages/Dashboard/Profile/Bookmarks";
 
 const router = createBrowserRouter([
   {
@@ -82,6 +90,28 @@ const router = createBrowserRouter([
       {
         path: GlobalRoutes.DashboardProfile,
         element: <DashboardProfile />,
+        children: [
+          {
+            path: "",
+            element: <Navigate to={GlobalRoutes.ProfilePosts} />,
+          },
+          {
+            path: GlobalRoutes.ProfilePosts,
+            element: <Posts />,
+          },
+          {
+            path: GlobalRoutes.ProfileReels,
+            element: <Reels />,
+          },
+          {
+            path: GlobalRoutes.ProfileBookmarks,
+            element: <Bookmarks />,
+          },
+        ],
+      },
+      {
+        path: GlobalRoutes.DashboardProfileEdit,
+        element: <DashboardProfileEdit />,
       },
       {
         path: GlobalRoutes.DashboardReels,

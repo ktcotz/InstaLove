@@ -1,6 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
+import { PostsSchema } from "../schema/PostsSchema";
 
 type SupabasePost = {
   post_image: File;
@@ -22,8 +23,6 @@ export const createPost = async ({
   const { error: storageError } = await supabase.storage
     .from(user_id)
     .upload(`posts/${imageName}`, post_image);
-
-  console.log(storageError);
 
   const { data: signedUrl } = await supabase.storage
     .from(user_id)
@@ -60,9 +59,13 @@ export const createPost = async ({
 };
 
 export const getPosts = async ({ user_id }: UserID) => {
-  const { data: posts, error } = await supabase
+  const {
+    data: posts,
+    error,
+    count,
+  } = await supabase
     .from("posts")
-    .select("*")
+    .select("*", { count: "exact" })
     .eq("user_id", user_id);
 
   if (error) {
@@ -71,21 +74,7 @@ export const getPosts = async ({ user_id }: UserID) => {
     });
   }
 
-  return posts;
-};
+  const parsed = PostsSchema.parse(posts);
 
-export const getProposedPosts = async ({ user_id }: UserID) => {
-  const { data: posts, error } = await supabase
-    .from("posts")
-    .select("*")
-    .eq("user_id", user_id)
-    .range(0, 2);
-
-  if (error) {
-    throw new CustomError({
-      message: error.message,
-    });
-  }
-
-  return posts;
+  return { data: parsed, count };
 };

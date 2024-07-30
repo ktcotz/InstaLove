@@ -1,3 +1,4 @@
 Na dzień 29.07.2024.
 
-Proposed profiles, pobieranie prawdziwych danych.
+Praca z edycją profilu.
+Ustawianie imienia i nazwiska, bio i zmiana avataru.

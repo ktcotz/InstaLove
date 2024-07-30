@@ -58,6 +58,7 @@ export const DashboardNavigationItem = ({
             ? `${user?.user_metadata.user_name}`
             : to
         }
+        activeClass="bg-stone-200 font-semibold"
         type="active-link"
         data-tooltip-id={`link-${title}`}
         data-tooltip-place={mobileMatches ? "top" : "right"}

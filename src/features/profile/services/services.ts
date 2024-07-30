@@ -16,8 +16,6 @@ export const getProfiles = async ({ id }: CurrentUserID) => {
     .select("*")
     .neq("user_id", id);
 
-  console.log(users);
-
   if (error) {
     throw new CustomError({
       message: error.message,

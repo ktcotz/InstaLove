@@ -3,7 +3,7 @@ import { CustomLink } from "../../ui/CustomLink";
 import { Loader } from "../../ui/Loader";
 import { HiUserAdd } from "react-icons/hi";
 import { useProfile } from "./queries/useProfile";
-import { useProposedPosts } from "../posts/queries/useProposedPosts";
+import { useGetPosts } from "../posts/queries/useGetPosts";
 
 type HoverProfileProps = {
   user_name: string;
@@ -12,19 +12,19 @@ type HoverProfileProps = {
 export const HoverProfile = ({ user_name }: HoverProfileProps) => {
   const { data: user, isLoading } = useProfile(user_name);
 
-  const { data: posts, isLoading: isPostsLoading } = useProposedPosts(
-    user?.user_id
-  );
+  const { data: posts, isLoading: isPostsLoading } = useGetPosts(user?.user_id);
+
+  const loading = isLoading || isPostsLoading;
 
   if (!user) return null;
 
   return (
     <div className="absolute bottom-0 -left-8 2xl:left-0 translate-y-full p-6 bg-stone-50 z-50 shadow-lg">
-      {isLoading && <Loader />}
-      {!isLoading && (
+      {loading && <Loader />}
+      {!loading && (
         <>
           <div className="flex items-center gap-4 mb-6">
-            <CustomLink to={`/profile/${user.user_name}`} modifier="avatar">
+            <CustomLink to={`/dashboard/${user.user_name}`} modifier="avatar">
               <img
                 src={`${user.avatar_url}`}
                 alt={user.user_name}
@@ -35,7 +35,7 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
             </CustomLink>
             <div className="flex flex-col">
               <CustomLink
-                to={`/profile/${user.user_name}`}
+                to={`/dashboard/${user.user_name}`}
                 modifier="avatar-name"
               >
                 {user.user_name}
@@ -45,7 +45,7 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
           </div>
           <div className="flex items-center gap-6 mb-4">
             <div className="text-center p-2 2xl:p-4">
-              <p className="font-semibold">{posts!.length}</p>
+              <p className="font-semibold">{posts?.count}</p>
               <h2 className="text-sm text-stone-600">posty</h2>
             </div>
             <div className="text-center p-2 2xl:p-4">
@@ -60,7 +60,7 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
           <div className="flex items-center justify-center gap-1 mb-4">
             {isPostsLoading && <Loader />}
             {!isPostsLoading &&
-              posts?.map((post) => {
+              posts?.data.slice(0, 3).map((post) => {
                 return (
                   <img
                     key={post.id}
@@ -70,7 +70,7 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
                   />
                 );
               })}
-            {!isPostsLoading && posts!.length === 0 && (
+            {!isPostsLoading && posts?.data.length === 0 && (
               <p className="text-stone-600 text-center">
                 Użytkownik nie ma postów do wyświetlenia
               </p>

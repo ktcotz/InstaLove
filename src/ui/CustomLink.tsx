@@ -14,18 +14,21 @@ export type CustomLinkModifier =
   | "navigation"
   | "avatar"
   | "avatar-name"
-  | "all-profiles";
+  | "all-profiles"
+  | "profile-details";
 
 type CustomLinkProps = {
   children: ReactNode;
   type?: "link" | "active-link";
   modifier?: CustomLinkModifier;
+  activeClass?: string;
 };
 
 export const CustomLink = ({
   children,
   modifier = "primary",
   type = "link",
+  activeClass,
   ...rest
 }: CustomLinkProps & LinkProps) => {
   const base = "font-base";
@@ -44,6 +47,8 @@ export const CustomLink = ({
     ["avatar-name"]: "text-base text-stone-950 font-medium",
     ["all-profiles"]:
       "text-stone-900 hover:text-stone-950 text-sm  font-bold transition",
+    ["profile-details"]:
+      "text-stone-950 p-6 flex items-center justify-center gap-2",
   };
 
   const className = twMerge(base, modifiers[modifier]);
@@ -56,11 +61,7 @@ export const CustomLink = ({
     <NavLink
       {...rest}
       className={({ isActive }) =>
-        `${
-          isActive
-            ? twMerge(className, "bg-stone-200 font-semibold")
-            : className
-        }`
+        `${isActive ? twMerge(className, activeClass) : className}`
       }
     >
       {children}
