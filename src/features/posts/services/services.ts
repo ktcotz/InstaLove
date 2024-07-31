@@ -1,7 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
-import { PostsSchema } from "../schema/PostsSchema";
+import { PostsReelsSchema, PostsSchema } from "../schema/PostsSchema";
 
 type SupabasePost = {
   post_image: File;
@@ -9,6 +9,8 @@ type SupabasePost = {
   disableLike: boolean;
   description: string;
   user_id: string;
+  video_url?: string;
+  type: "posts" | "reels";
 };
 
 export const createPost = async ({
@@ -17,16 +19,19 @@ export const createPost = async ({
   description,
   user_id,
   post_image,
+  type,
 }: SupabasePost) => {
-  const imageName = `post-${post_image.name}`;
+  const imageName = `${type}-${post_image.name}`;
 
   const { error: storageError } = await supabase.storage
     .from(user_id)
-    .upload(`posts/${imageName}`, post_image);
+    .upload(`${type}/${imageName}`, post_image);
+
+  console.log(storageError);
 
   const { data: signedUrl } = await supabase.storage
     .from(user_id)
-    .createSignedUrl(`posts/${imageName}`, 365 * 24 * 60 * 60);
+    .createSignedUrl(`${type}/${imageName}`, 365 * 24 * 60 * 60);
 
   if (!signedUrl) return;
 
@@ -36,17 +41,26 @@ export const createPost = async ({
     });
   }
 
+  const addObject =
+    type === "posts"
+      ? {
+          user_id,
+          disableComment,
+          disableLike,
+          description,
+          post_url: signedUrl.signedUrl,
+        }
+      : {
+          user_id,
+          disableComment,
+          disableLike,
+          description,
+          video_url: signedUrl.signedUrl,
+        };
+
   const { data, error } = await supabase
-    .from("posts")
-    .insert([
-      {
-        user_id,
-        disableComment,
-        disableLike,
-        description,
-        post_url: signedUrl.signedUrl,
-      },
-    ])
+    .from(type)
+    .insert([addObject])
     .select();
 
   if (error) {
@@ -77,4 +91,21 @@ export const getPosts = async ({ user_id }: UserID) => {
   const parsed = PostsSchema.parse(posts);
 
   return { data: parsed, count };
+};
+
+export const getReels = async ({ user_id }: UserID) => {
+  const { data: reels, error } = await supabase
+    .from("reels")
+    .select("*")
+    .eq("user_id", user_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const parsed = PostsReelsSchema.parse(reels);
+
+  return parsed;
 };

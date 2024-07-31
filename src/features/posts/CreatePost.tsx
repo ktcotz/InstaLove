@@ -82,6 +82,7 @@ export const CreatePost = () => {
         disableLike: options.likes,
         post_image: file.drop,
         user_id: user.id,
+        type: file.type === "video/mp4" ? "reels" : "posts",
       },
       {
         onSuccess: () => {

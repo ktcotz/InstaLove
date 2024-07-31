@@ -65,12 +65,15 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
                 {!isPostsLoading &&
                   posts?.data.slice(0, 3).map((post) => {
                     return (
-                      <img
-                        key={post.id}
-                        src={post.post_url}
-                        alt={post.description}
-                        className="w-full aspect-square"
-                      />
+                      <CustomLink to="post" modifier="logo">
+                        <div
+                          className="w-full aspect-square bg-center bg-cover"
+                          key={post.id}
+                          style={{ backgroundImage: `url(${post.post_url})` }}
+                        >
+                          &nbsp;
+                        </div>
+                      </CustomLink>
                     );
                   })}
                 {!isPostsLoading && posts?.data.length === 0 && (

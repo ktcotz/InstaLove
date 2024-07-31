@@ -58,7 +58,7 @@ export const ProfileDetails = () => {
             </div>
             <div className="py-4">
               <p className="max-w-prose text-wrap text break-words">
-                BioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBioBio
+                {user.biogram}
               </p>
             </div>
           </div>

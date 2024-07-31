@@ -1,4 +1,6 @@
-Na dzień 30.07.2024.
+Na kolejne dni do piątku.
 
-Praca z edycją profilu.
-Ustawianie imienia i nazwiska, bio i zmiana avataru.
+1. Dodanie możliwości dodawania avatarów!
+2. Theme changer (Light|Dark)!
+3. Dodawanie rolek!
+4. Posty powinny być wyświetlane w osobnym roucie!!

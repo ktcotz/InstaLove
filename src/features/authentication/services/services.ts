@@ -97,6 +97,8 @@ const addUser = async ({
       {
         user_name: invalidUsers!.length > 0 ? `${nickname}-github` : nickname,
         user_id,
+        fullName: "",
+        biogram: "",
         avatar_url: avatar_url
           ? avatar_url
           : "https://ofekoesnmxxjzvhfwopy.supabase.co/storage/v1/object/sign/avatars/public/user.png?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1cmwiOiJhdmF0YXJzL3B1YmxpYy91c2VyLnBuZyIsImlhdCI6MTcyMjE1NzEyNywiZXhwIjoxNzUzNjkzMTI3fQ.KJW11PWPaAQzQONBtn3u2jaAUCnnkUhMrwdnawewrlQ&t=2024-07-28T08%3A58%3A46.693Z",

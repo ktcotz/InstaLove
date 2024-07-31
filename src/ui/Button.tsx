@@ -32,7 +32,7 @@ export const Button = ({
     navigation:
       "flex items-center gap-4 p-3 hover:bg-stone-200 transition group w-full",
     storie:
-      "w-14 h-14 rounded-full flex items-center justify-center  overflow-hidden border border-blue-400 p-[2px]",
+      "w-14 h-14 rounded-full flex items-center justify-center  overflow-hidden border-2 border-blue-400 p-[2px]",
     close: "group",
     link: "text-blue-600 hover:text-blue-700 transition text-sm font-bold",
     ["add-user"]:

@@ -11,6 +11,7 @@ export const useCreatePost = () => {
 
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["posts"] });
+      queryClient.invalidateQueries({ queryKey: ["reels"] });
     },
 
     onError: (err: CustomError) => {
