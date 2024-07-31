@@ -1,6 +1,5 @@
 import { supabase } from "../../../../lib/supabase/supabase";
 import { CustomError } from "../../../../utils/CustomErrors";
-import { UserID } from "../../../authentication/services/services";
 
 export type UpdateUserData = {
   biogram?: string;
@@ -8,14 +7,18 @@ export type UpdateUserData = {
   type?: "public" | "private";
 };
 
+type UserName = {
+  user_name: string;
+};
+
 export const updateUserData = async ({
-  user_id,
+  user_name,
   ...updatedData
-}: UpdateUserData & UserID) => {
-  const { error } = await supabase
+}: UpdateUserData & UserName) => {
+  const { data, error } = await supabase
     .from("users")
     .update(updatedData)
-    .eq("user_id", user_id)
+    .eq("user_name", user_name)
     .select();
 
   if (error) {
@@ -23,4 +26,6 @@ export const updateUserData = async ({
       message: error.message,
     });
   }
+
+  return data;
 };

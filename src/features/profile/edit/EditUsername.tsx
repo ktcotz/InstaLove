@@ -5,12 +5,14 @@ import {
   EditUsernameT,
 } from "../schema/EditUsernameSchema";
 import { useForm } from "react-hook-form";
+import { useUpdateUserData } from "./mutations/useUpdateUserData";
 
 type EditUsernameProps = {
   fullName: string;
+  user_name: string;
 };
 
-export const EditUsername = ({ fullName }: EditUsernameProps) => {
+export const EditUsername = ({ fullName, user_name }: EditUsernameProps) => {
   const { handleSubmit, register } = useForm<EditUsernameT>({
     resolver: zodResolver(EditUsernameSchema),
     defaultValues: {
@@ -18,8 +20,10 @@ export const EditUsername = ({ fullName }: EditUsernameProps) => {
     },
   });
 
+  const { update } = useUpdateUserData(user_name);
+
   const submitHandler = ({ fullName }: EditUsernameT) => {
-    console.log(fullName);
+    update({ fullName });
   };
 
   return (

@@ -27,7 +27,7 @@ export const Posts = () => {
       );
     })
   ) : (
-    <p className=" text-stone-600 col-start-1 -col-end-1">
+    <p className=" text-stone-600 col-start-1 -col-end-1 text-center">
       No posts were found for your account. Create and publish them to see them
       in this section.
     </p>

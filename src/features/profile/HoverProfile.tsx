@@ -4,6 +4,7 @@ import { Loader } from "../../ui/Loader";
 import { HiUserAdd } from "react-icons/hi";
 import { useProfile } from "./queries/useProfile";
 import { useGetPosts } from "../posts/queries/useGetPosts";
+import { PrivateProfile } from "./PrivateProfile";
 
 type HoverProfileProps = {
   user_name: string;
@@ -57,23 +58,31 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
               <h2 className="text-sm text-stone-600">obserwowani</h2>
             </div>
           </div>
-          <div className="flex items-center justify-center gap-1 mb-4">
-            {isPostsLoading && <Loader />}
-            {!isPostsLoading &&
-              posts?.data.slice(0, 3).map((post) => {
-                return (
-                  <img
-                    key={post.id}
-                    src={post.post_url}
-                    alt={post.description}
-                    className="w-full aspect-square"
-                  />
-                );
-              })}
-            {!isPostsLoading && posts?.data.length === 0 && (
-              <p className="text-stone-600 text-center">
-                Użytkownik nie ma postów do wyświetlenia
-              </p>
+          <div className="grid grid-cols-3 gap-1 mb-4">
+            {user.type === "public" ? (
+              <>
+                {isPostsLoading && <Loader />}
+                {!isPostsLoading &&
+                  posts?.data.slice(0, 3).map((post) => {
+                    return (
+                      <img
+                        key={post.id}
+                        src={post.post_url}
+                        alt={post.description}
+                        className="w-full aspect-square"
+                      />
+                    );
+                  })}
+                {!isPostsLoading && posts?.data.length === 0 && (
+                  <p className="text-stone-600 text-center col-start-1 -col-end-1">
+                    Użytkownik nie ma postów do wyświetlenia
+                  </p>
+                )}
+              </>
+            ) : (
+              <div className="col-start-1 -col-end-1">
+                <PrivateProfile />
+              </div>
             )}
           </div>
           <Button modifier="add-user">

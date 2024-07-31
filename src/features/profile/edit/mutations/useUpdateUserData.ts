@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UpdateUserData, updateUserData } from "../services/services";
 
-export const useUpdateUserData = (user_id: string) => {
+export const useUpdateUserData = (user_name: string) => {
   const queryClient = useQueryClient();
 
   const {
@@ -9,10 +9,11 @@ export const useUpdateUserData = (user_id: string) => {
     isPending: isUpdating,
     error: updateError,
   } = useMutation({
-    mutationFn: (data: UpdateUserData) => updateUserData({ user_id, ...data }),
+    mutationFn: (data: UpdateUserData) =>
+      updateUserData({ user_name, ...data }),
 
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["user"] });
+      queryClient.invalidateQueries({ queryKey: ["profile", user_name] });
     },
   });
 

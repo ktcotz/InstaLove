@@ -1,5 +1,3 @@
-import { useDropzone } from "react-dropzone";
-import { FaCamera } from "react-icons/fa6";
 import { CustomLink } from "../../ui/CustomLink";
 import { useProfile } from "./queries/useProfile";
 import { useProfileParams } from "./queries/useProfileParams";
@@ -9,6 +7,8 @@ import { useGetPosts } from "../posts/queries/useGetPosts";
 import { Wrapper } from "../../ui/Wrapper";
 import { CiBookmark, CiViewBoard, CiVideoOn } from "react-icons/ci";
 import { Outlet } from "react-router";
+import { Avatar } from "./avatar/Avatar";
+import { PrivateProfile } from "./PrivateProfile";
 
 export const ProfileDetails = () => {
   const { profile } = useProfileParams();
@@ -16,8 +16,6 @@ export const ProfileDetails = () => {
   const { data: user, isLoading } = useProfile(profile);
 
   const { data: posts, isLoading: isPostsLoading } = useGetPosts(user?.user_id);
-
-  const { getRootProps, getInputProps } = useDropzone();
 
   if (isLoading || isPostsLoading)
     return (
@@ -32,21 +30,7 @@ export const ProfileDetails = () => {
     <>
       <Wrapper modifier="details">
         <div className="flex flex-col lg:flex-row gap-16 2xl:gap-32">
-          <div {...getRootProps({ className: "dropzone" })}>
-            <input {...getInputProps()} />
-            <div className="relative rounded-full flex items-center justify-center lg:items-start lg:justify-start">
-              <img
-                src={user?.avatar_url}
-                alt={user?.user_name}
-                width={178}
-                height={178}
-                className="rounded-full"
-              />
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[178px] h-[178px] lg:w-full lg:h-full flex items-center justify-center bg-stone-500/70 rounded-full cursor-pointer">
-                <FaCamera className="text-5xl" aria-label="Add avatar" />
-              </div>
-            </div>
-          </div>
+          <Avatar size={178} overlay={true} />
           <div className="flex flex-col gap-12 grow">
             <div className="flex items-center gap-3 justify-between">
               <p className="text-xl font-medium">{user?.user_name}</p>
@@ -82,7 +66,7 @@ export const ProfileDetails = () => {
       </Wrapper>
 
       <Wrapper>
-        <div className="flex items-center justify-center gap-12 border-t border-x-stone-300">
+        <div className="flex items-center justify-center gap-12 border-t border-x-stone-300 ">
           <CustomLink
             to="posts"
             modifier="profile-details"
@@ -113,8 +97,14 @@ export const ProfileDetails = () => {
             </CustomLink>
           )}
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
-          <Outlet />
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pb-32">
+          {user.type === "public" ? (
+            <Outlet />
+          ) : (
+            <div className="col-start-1 -col-end-1 sm:col-start-2 sm:col-end-3 mt-7">
+              <PrivateProfile />
+            </div>
+          )}
         </div>
       </Wrapper>
     </>

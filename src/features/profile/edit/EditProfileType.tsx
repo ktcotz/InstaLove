@@ -4,11 +4,11 @@ import { ChangeEvent } from "react";
 
 type EditProfileTypeProps = {
   type: "public" | "private";
-  id: string;
+  user_name: string;
 };
 
-export const EditProfileType = ({ type, id }: EditProfileTypeProps) => {
-  const { update } = useUpdateUserData(id);
+export const EditProfileType = ({ type, user_name }: EditProfileTypeProps) => {
+  const { update } = useUpdateUserData(user_name);
 
   const handleChange = (ev: ChangeEvent<HTMLSelectElement>) => {
     const type = ev.target.value;

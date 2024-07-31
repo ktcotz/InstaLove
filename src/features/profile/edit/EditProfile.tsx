@@ -1,4 +1,3 @@
-import { useDropzone } from "react-dropzone";
 import { useUser } from "../../authentication/queries/useUser";
 import { Button } from "../../../ui/Button";
 import { LanguageSwitcher } from "../../../ui/LanguageSwitcher";
@@ -8,14 +7,13 @@ import { EditBiogram } from "./EditBiogram";
 import { EditProfileType } from "./EditProfileType";
 import { useProfile } from "../queries/useProfile";
 import { Loader } from "../../../ui/Loader";
+import { Avatar } from "../avatar/Avatar";
 
 export const EditProfile = () => {
   const { user } = useUser();
   const { data: current, isLoading } = useProfile(
     user?.user_metadata.user_name
   );
-
-  const { getRootProps, getInputProps } = useDropzone();
 
   if (isLoading) return <Loader />;
 
@@ -28,23 +26,10 @@ export const EditProfile = () => {
       </h1>
       <div className="bg-stone-200 rounded-lg p-4 max-w-xl flex flex-col sm:flex-row items-center gap-6 mb-6">
         <div className="flex items-center gap-4">
-          <div {...getRootProps({ className: "dropzone" })}>
-            <input {...getInputProps()} />
-            <div className="relative rounded-full flex items-center justify-center lg:items-start lg:justify-start">
-              <img
-                src={current.avatar_url}
-                alt={current.user_name}
-                width={64}
-                height={64}
-                className="rounded-full"
-              />
-            </div>
-          </div>
+          <Avatar size={64} />
           <div className="flex flex-col gap-1">
             <h2 className="font-semibold ">{current?.user_name}</h2>
-            <p className="text-sm text-stone-700">
-              {user?.user_metadata.fullName}
-            </p>
+            <p className="text-sm text-stone-700">{current.fullName}</p>
           </div>
         </div>
         <div className="my-4 sm:my-0 sm:ml-auto">
@@ -52,13 +37,16 @@ export const EditProfile = () => {
         </div>
       </div>
       <div className="mb-6 max-w-fit">
-        <EditProfileType type={current.type} id={current.user_id} />
+        <EditProfileType type={current.type} user_name={current.user_name} />
       </div>
       <div className="mb-6 max-w-xl">
-        <EditBiogram biogram={current.biogram} />
+        <EditBiogram biogram={current.biogram} user_name={current.user_name} />
       </div>
       <div className="mb-12 max-w-xl">
-        <EditUsername fullName={current.fullName} />
+        <EditUsername
+          fullName={current.fullName}
+          user_name={current.user_name}
+        />
       </div>
 
       <div>
