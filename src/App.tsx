@@ -23,6 +23,7 @@ import { DashboardProfileEdit } from "./pages/Dashboard/DashboardProfileEdit";
 import { Posts } from "./pages/Dashboard/Profile/Posts";
 import { Reels } from "./pages/Dashboard/Profile/Reels";
 import { Bookmarks } from "./pages/Dashboard/Profile/Bookmarks";
+import { DashboardIndividualPost } from "./pages/Dashboard/DashboardIndividualPost";
 
 const router = createBrowserRouter([
   {
@@ -108,6 +109,10 @@ const router = createBrowserRouter([
             element: <Bookmarks />,
           },
         ],
+      },
+      {
+        path: GlobalRoutes.DashboardIndividualPost,
+        element: <DashboardIndividualPost />,
       },
       {
         path: GlobalRoutes.DashboardProfileEdit,

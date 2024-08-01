@@ -1,6 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { GlobalRoutes } from "../../../typing/routes";
 import { CustomError } from "../../../utils/CustomErrors";
+import { ProfileSchema } from "../../profile/schema/ProfilesSchema";
 
 type UserCredentials = {
   email: string;
@@ -178,6 +179,23 @@ export const getUser = async () => {
   const user = data.session?.user;
 
   return user;
+};
+
+export const getUserByID = async ({ user_id }: UserID) => {
+  const { data: user, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("user_id", user_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const parsed = ProfileSchema.parse(user[0]);
+
+  return parsed;
 };
 
 export const signout = async () => {

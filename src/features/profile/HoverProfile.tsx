@@ -65,7 +65,10 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
                 {!isPostsLoading &&
                   posts?.data.slice(0, 3).map((post) => {
                     return (
-                      <CustomLink to="post" modifier="logo">
+                      <CustomLink
+                        to={`/dashboard/${user_name}/post/${post.id}`}
+                        modifier="logo"
+                      >
                         <div
                           className="w-full aspect-square bg-center bg-cover"
                           key={post.id}

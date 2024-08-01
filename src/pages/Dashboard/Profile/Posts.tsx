@@ -1,7 +1,9 @@
+import { IndividualModalPost } from "../../../features/posts/IndividualModalPost";
 import { useGetPosts } from "../../../features/posts/queries/useGetPosts";
 import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
 import { Loader } from "../../../ui/Loader";
+import { Modal } from "../../../ui/modal/Modal";
 
 export const Posts = () => {
   const { profile } = useProfileParams();
@@ -13,17 +15,24 @@ export const Posts = () => {
   return posts!.data.length > 0 ? (
     posts?.data.map((post) => {
       return (
-        <div
-          key={post.id}
-          className="relative aspect-square bg-cover bg-center"
-          style={{
-            backgroundImage: `url(${post.post_url})`,
-          }}
-        >
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-stone-950/20">
-            asd
-          </div>
-        </div>
+        <Modal>
+          <Modal.Open>
+            <div
+              key={post.id}
+              className="relative aspect-square bg-cover bg-center cursor-pointer"
+              style={{
+                backgroundImage: `url(${post.post_url})`,
+              }}
+            >
+              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-stone-950/20">
+                asd
+              </div>
+            </div>
+          </Modal.Open>
+          <Modal.Content>
+            <IndividualModalPost post={post}/>
+          </Modal.Content>
+        </Modal>
       );
     })
   ) : (
