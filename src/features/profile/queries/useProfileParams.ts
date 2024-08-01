@@ -6,7 +6,7 @@ export const useProfileParams = () => {
 
   const parsed = z
     .object({
-      profile: z.string(),
+      profile: z.string().optional(),
     })
     .parse({ profile });
 

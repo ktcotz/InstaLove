@@ -66,7 +66,7 @@ export const ProfileDetails = () => {
       </Wrapper>
 
       <Wrapper>
-        <div className="flex items-center justify-center gap-12 border-t border-x-stone-300 ">
+        <div className="flex items-center justify-center flex-col sm:flex-row gap-2 sm:gap-12 border-y sm:border-b-0 border-x-stone-300 ">
           <CustomLink
             to="posts"
             modifier="profile-details"
@@ -97,7 +97,7 @@ export const ProfileDetails = () => {
             </CustomLink>
           )}
         </div>
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 pb-32">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 py-8 pb-32">
           {user.type === "public" ? (
             <Outlet />
           ) : (

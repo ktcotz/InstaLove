@@ -25,7 +25,9 @@ export const createPost = async ({
 
   const { error: storageError } = await supabase.storage
     .from(user_id)
-    .upload(`${type}/${imageName}`, post_image);
+    .upload(`${type}/${imageName}`, post_image, {
+      upsert: true,
+    });
 
   console.log(storageError);
 

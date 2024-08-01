@@ -33,7 +33,9 @@ export const EditProfile = () => {
           </div>
         </div>
         <div className="my-4 sm:my-0 sm:ml-auto">
-          <Button modifier="submit">Zmień zdjęcie</Button>
+          <Button modifier="submit">
+            Zmień zdjęcie przez kliknięcie na avatara
+          </Button>
         </div>
       </div>
       <div className="mb-6 max-w-fit">

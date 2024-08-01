@@ -1,7 +1,13 @@
 import { ReactNode } from "react";
 import twMerge from "clsx";
 
-type WrapperType = "primary" | "home" | "form" | "details" | "create";
+type WrapperType =
+  | "primary"
+  | "home"
+  | "form"
+  | "details"
+  | "create"
+  | "avatar";
 
 type WrapperProps = {
   children: ReactNode;
@@ -17,6 +23,7 @@ export const Wrapper = ({ children, modifier = "primary" }: WrapperProps) => {
     form: "max-w-lg",
     details: "max-w-4xl",
     create: "max-w-[400px] md:max-w-4xl",
+    avatar: "max-w-[350px]",
   };
 
   const className = twMerge(base, modifiers[modifier]);

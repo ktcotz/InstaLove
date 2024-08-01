@@ -25,9 +25,9 @@ export const Button = ({
 
   const modifierObject: Record<ButtonType, string> = {
     primary:
-      " rounded-sm bg-secondary text-slate-950 p-3 md:p-4 hover:bg-red-500 transition md:px-8 focus:outline-none focus:ring focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-primary",
+      "w-full flex items-center justify-center bg-red-600 rounded-md  bg-secondary text-slate-50 py-3 hover:bg-red-500 transition md:px-8 focus:outline-none focus:ring focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-primary",
     submit:
-      "flex items-center justify-center py-3 bg-blue-600 border rounded-md text-stone-50 transition-all hover:bg-stone-100 hover:text-blue-700 hover:border-stone-300 px-4",
+      " flex items-center justify-center py-3 bg-blue-600 border rounded-md text-stone-50 transition-all hover:bg-stone-100 hover:text-blue-700 hover:border-stone-300 px-4",
     text: "text-stone-600 flex items-center justify-center gap-2 hover:text-blue-600 transition",
     navigation:
       "flex items-center gap-4 p-3 hover:bg-stone-200 transition group w-full",

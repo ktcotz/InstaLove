@@ -15,6 +15,7 @@ import { Tooltip } from "react-tooltip";
 import { useUser } from "../authentication/queries/useUser";
 import { Modal } from "../../ui/modal/Modal";
 import { CreatePost } from "../posts/CreatePost";
+import { useProfile } from "../profile/queries/useProfile";
 
 export type NavigationRoutes =
   keyof (typeof resources)["pl"]["translation"]["navigation"];
@@ -48,6 +49,9 @@ export const DashboardNavigationItem = ({
   const { t } = useTranslation();
   const { toggleOpen, component } = useNavigationContext();
   const { user } = useUser();
+  const { data: currentUser } = useProfile(user!.user_metadata.user_name);
+
+  if (!currentUser) return;
 
   if (to) {
     return (
@@ -55,7 +59,7 @@ export const DashboardNavigationItem = ({
         modifier="navigation"
         to={
           to === GlobalRoutes.DashboardProfile
-            ? `${user?.user_metadata.user_name}`
+            ? `${currentUser!.user_name}`
             : to
         }
         activeClass="bg-stone-200 font-semibold"
@@ -65,11 +69,11 @@ export const DashboardNavigationItem = ({
       >
         {to === GlobalRoutes.DashboardProfile && user ? (
           <img
-            src={`${user.user_metadata?.avatar_url}`}
-            width={24}
-            height={24}
-            alt={`${user.user_metadata?.user_name}`}
-            className="rounded-full"
+            src={`${currentUser!.avatar_url}`}
+            width={32}
+            height={32}
+            alt={`${currentUser!.user_name}`}
+            className="rounded-full w-[32px] h-[32px]"
           />
         ) : (
           <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">
