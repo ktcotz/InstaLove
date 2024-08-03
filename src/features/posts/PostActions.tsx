@@ -3,7 +3,12 @@ import { FaRegHeart, FaRegComment, FaRegBookmark } from "react-icons/fa";
 import { CustomLink } from "../../ui/CustomLink";
 import { AddComment } from "./AddComment";
 
-export const PostActions = () => {
+type PostActionsProps = {
+  user_id: string;
+  post_id: number;
+};
+
+export const PostActions = ({ user_id, post_id }: PostActionsProps) => {
   return (
     <div className="absolute bottom-0 left-0 w-full p-4 shadow-lg border-t border-stone-300 bg-stone-100">
       <div className="flex items-center gap-6 mb-3">
@@ -35,8 +40,8 @@ export const PostActions = () => {
           i 61 innych użytkowników
         </p>
       </div>
-      <p className="text-xs text-stone-700">18 marca</p>
-      <AddComment />
+      <p className="text-xs text-stone-700 mb-3">18 marca</p>
+      <AddComment user_id={user_id} post_id={post_id} />
     </div>
   );
 };

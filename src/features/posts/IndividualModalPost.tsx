@@ -5,6 +5,7 @@ import { useUserByID } from "../authentication/queries/useUserByID";
 import { Comment } from "./Comment";
 import { PostActions } from "./PostActions";
 import { Post } from "./schema/PostsSchema";
+import { useGetComments } from "./queries/useGetComments";
 
 type IndividualModalPostProps = {
   post: Post;
@@ -12,6 +13,11 @@ type IndividualModalPostProps = {
 
 export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
   const { user, isLoading } = useUserByID(post.user_id);
+  const { data, isLoading: isCommentsLoading } = useGetComments(
+    post.id,
+    user?.user_id
+  );
+
 
   if (!isLoading && !user) return null;
 
@@ -38,21 +44,23 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
             </h2>
           </div>
           <>
-            <div className="flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-[170px]">
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-              <Comment />
-
-              <div className="py-6 flex items-center justify-center bg-red-500">
-                <Button modifier="close">
-                  <FaRegChessQueen />
-                </Button>
-              </div>
+            <div className="flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-[200px]">
+              {user && post.description && (
+                <Comment user_id={user.user_id} comment={post.description} />
+              )}
+              {!isCommentsLoading &&
+                data?.comments?.map((comment) => (
+                  <Comment key={comment.id} {...comment} />
+                ))}
+              {data?.count && data?.count > 10 ? (
+                <div className="py-6 flex items-center justify-center bg-red-500">
+                  <Button modifier="close">
+                    <FaRegChessQueen />
+                  </Button>
+                </div>
+              ) : null}
             </div>
-            <PostActions />
+            {user && <PostActions user_id={user.user_id} post_id={post.id} />}
           </>
         </div>
       </div>

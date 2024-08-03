@@ -83,7 +83,7 @@ export const LoginForm = () => {
           </div>
         )}
       </Form>
-      <div className="mb-8">
+      <div className="my-8">
         <Divider text={t("utils.divider")} />
       </div>
       <div className="flex flex-col items-center justify-center gap-4 mb-8">

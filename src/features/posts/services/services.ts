@@ -1,6 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
+import { Comment, CommentsSchema } from "../schema/CommentSchema";
 import { PostsReelsSchema, PostsSchema } from "../schema/PostsSchema";
 
 type SupabasePost = {
@@ -108,6 +109,49 @@ export const getReels = async ({ user_id }: UserID) => {
   }
 
   const parsed = PostsReelsSchema.parse(reels);
+
+  return parsed;
+};
+
+export const addCommentToPost = async (data: Comment) => {
+  const { data: comment, error } = await supabase
+    .from("comments")
+    .insert([data])
+    .select();
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return comment;
+};
+
+export const getComments = async ({
+  user_id,
+  post_id,
+}: UserID & { post_id: number }) => {
+  const {
+    data: comments,
+    count,
+    error,
+  } = await supabase
+    .from("comments")
+    .select("*", { count: "exact" })
+    .eq("user_id", user_id)
+    .eq("post_id", post_id)
+    .order("created_at", { ascending: false });
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  console.log(count);
+
+  const parsed = CommentsSchema.parse({ count, comments });
 
   return parsed;
 };
