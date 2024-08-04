@@ -6,7 +6,7 @@ import { Loader } from "../../ui/Loader";
 
 export const ProposedProfiles = () => {
   const { user } = useUser();
-  const { data, isLoading } = useProfiles((user as User).id);
+  const { data, isLoading } = useProfiles({ id: (user as User).id, limit: 5 });
 
   if (isLoading)
     return (

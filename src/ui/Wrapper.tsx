@@ -8,7 +8,7 @@ type WrapperType =
   | "details"
   | "create"
   | "avatar"
-  | "likes";
+  | "submodal";
 
 type WrapperProps = {
   children: ReactNode;
@@ -25,7 +25,7 @@ export const Wrapper = ({ children, modifier = "primary" }: WrapperProps) => {
     details: "max-w-4xl",
     create: "max-w-[400px] md:max-w-4xl",
     avatar: "max-w-[350px]",
-    likes: "max-w-[500px]",
+    submodal: "max-w-[500px]",
   };
 
   const className = twMerge(base, modifiers[modifier]);

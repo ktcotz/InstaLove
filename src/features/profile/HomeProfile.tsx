@@ -1,5 +1,6 @@
-import { GlobalRoutes } from "../../typing/routes";
-import { CustomLink } from "../../ui/CustomLink";
+import { Button } from "../../ui/Button";
+import { Modal } from "../../ui/modal/Modal";
+import { AllProposedProfiles } from "./AllProposedProfiles";
 import { ProposedProfiles } from "./ProposedProfiles";
 import { User } from "./User";
 
@@ -11,9 +12,14 @@ export const HomeProfile = () => {
         <h2 className="text-stone-600 font-medium text-sm">
           Propozycje dla Ciebie
         </h2>
-        <CustomLink to={GlobalRoutes.DashboardExplore} modifier="all-profiles">
-          Zobacz wszystkich
-        </CustomLink>
+        <Modal>
+          <Modal.Open>
+            <Button modifier="all-profiles">Zobacz wszystkich</Button>
+          </Modal.Open>
+          <Modal.Content>
+            <AllProposedProfiles />
+          </Modal.Content>
+        </Modal>
       </div>
       <ProposedProfiles />
     </div>

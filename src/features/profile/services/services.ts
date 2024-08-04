@@ -10,11 +10,15 @@ type ProfileName = {
   user_name?: string;
 };
 
-export const getProfiles = async ({ id }: CurrentUserID) => {
-  const { data: users, error } = await supabase
-    .from("users")
-    .select("*")
-    .neq("user_id", id);
+export const getProfiles = async ({
+  id,
+  limit,
+}: CurrentUserID & { limit?: number }) => {
+  const query = limit
+    ? supabase.from("users").select("*").neq("user_id", id).limit(limit)
+    : supabase.from("users").select("*").neq("user_id", id);
+
+  const { data: users, error } = await query;
 
   if (error) {
     throw new CustomError({
