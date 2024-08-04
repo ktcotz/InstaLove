@@ -8,30 +8,39 @@ import { PrivateProfile } from "./PrivateProfile";
 
 type HoverProfileProps = {
   user_name: string;
+  showPosts?: boolean;
 };
 
-export const HoverProfile = ({ user_name }: HoverProfileProps) => {
+export const HoverProfile = ({
+  user_name,
+  showPosts = true,
+}: HoverProfileProps) => {
   const { data: user, isLoading } = useProfile(user_name);
 
-  const { data: posts, isLoading: isPostsLoading } = useGetPosts(user?.user_id);
+  const { data: posts, isLoading: isPostsLoading } = useGetPosts(
+    user?.user_id,
+    showPosts
+  );
 
   const loading = isLoading || isPostsLoading;
 
   if (!user) return null;
 
   return (
-    <div className="absolute bottom-0 -left-8 2xl:left-0 translate-y-full p-6 bg-stone-50 z-50 shadow-lg">
+    <div
+      className={`absolute bottom-0 -left-8 2xl:left-0 translate-y-full p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg`}
+    >
       {loading && <Loader />}
       {!loading && (
         <>
-          <div className="flex items-center gap-4 mb-6">
+          <div className="flex items-center gap-4 mb-2">
             <CustomLink to={`/dashboard/${user.user_name}`} modifier="avatar">
               <img
                 src={`${user.avatar_url}`}
                 alt={user.user_name}
                 width={48}
                 height={48}
-                className="rounded-full"
+                className="rounded-full w-12 h-12"
               />
             </CustomLink>
             <div className="flex flex-col">
@@ -44,7 +53,7 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
               <p className="text-sm text-stone-500">Kamil Naskręt</p>
             </div>
           </div>
-          <div className="flex items-center gap-6 mb-4">
+          <div className="flex items-center gap-6 mb-2">
             <div className="text-center p-2 2xl:p-4">
               <p className="font-semibold">{posts?.count}</p>
               <h2 className="text-sm text-stone-600">posty</h2>
@@ -58,39 +67,41 @@ export const HoverProfile = ({ user_name }: HoverProfileProps) => {
               <h2 className="text-sm text-stone-600">obserwowani</h2>
             </div>
           </div>
-          <div className="grid grid-cols-3 gap-1 mb-4">
-            {user.type === "public" ? (
-              <>
-                {isPostsLoading && <Loader />}
-                {!isPostsLoading &&
-                  posts?.data.slice(0, 3).map((post) => {
-                    return (
-                      <CustomLink
-                        to={`/dashboard/${user_name}/post/${post.id}`}
-                        modifier="logo"
-                      >
-                        <div
-                          className="w-full aspect-square bg-center bg-cover"
-                          key={post.id}
-                          style={{ backgroundImage: `url(${post.post_url})` }}
+          {showPosts ? (
+            <div className="grid grid-cols-3 gap-1 mb-4">
+              {user.type === "public" ? (
+                <>
+                  {isPostsLoading && <Loader />}
+                  {!isPostsLoading &&
+                    posts?.data.slice(0, 3).map((post) => {
+                      return (
+                        <CustomLink
+                          to={`/dashboard/${user_name}/post/${post.id}`}
+                          modifier="logo"
                         >
-                          &nbsp;
-                        </div>
-                      </CustomLink>
-                    );
-                  })}
-                {!isPostsLoading && posts?.data.length === 0 && (
-                  <p className="text-stone-600 text-center col-start-1 -col-end-1">
-                    Użytkownik nie ma postów do wyświetlenia
-                  </p>
-                )}
-              </>
-            ) : (
-              <div className="col-start-1 -col-end-1">
-                <PrivateProfile />
-              </div>
-            )}
-          </div>
+                          <div
+                            className="w-full aspect-square bg-center bg-cover"
+                            key={post.id}
+                            style={{ backgroundImage: `url(${post.post_url})` }}
+                          >
+                            &nbsp;
+                          </div>
+                        </CustomLink>
+                      );
+                    })}
+                  {!isPostsLoading && posts?.data.length === 0 && (
+                    <p className="text-stone-600 text-center col-start-1 -col-end-1">
+                      Użytkownik nie ma postów do wyświetlenia
+                    </p>
+                  )}
+                </>
+              ) : (
+                <div className="col-start-1 -col-end-1">
+                  <PrivateProfile />
+                </div>
+              )}
+            </div>
+          ) : null}
           <Button modifier="add-user">
             <HiUserAdd />
             Obserwuj

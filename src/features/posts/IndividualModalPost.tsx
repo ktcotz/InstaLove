@@ -12,14 +12,13 @@ type IndividualModalPostProps = {
 };
 
 export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
-  const { user, isLoading } = useUserByID(post.user_id);
+  const { user } = useUserByID(post.user_id);
   const { data, isLoading: isCommentsLoading } = useGetComments(
     post.id,
     user?.user_id
   );
 
-
-  if (!isLoading && !user) return null;
+  if (!user) return null;
 
   return (
     <Wrapper>
@@ -33,19 +32,19 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
         <div className="row-start-2 -row-end-1 col-start-4 -col-end-1 flex flex-col relative h-full sm:row-start-auto sm:row-end-auto">
           <div className="flex items-center gap-3 border-b border-stone-300 py-5 px-4">
             <img
-              src={user?.avatar_url}
-              alt={user?.fullName}
+              src={user.avatar_url}
+              alt={user.fullName}
               width={40}
               height={40}
               className="rounded-full w-10 h-10"
             />
             <h2 className="font-semibold text-sm text-stone-900">
-              {user?.user_name}
+              {user.user_name}
             </h2>
           </div>
           <>
             <div className="flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-[200px]">
-              {user && post.description && (
+              {post.description && (
                 <Comment user_id={user.user_id} comment={post.description} />
               )}
               {!isCommentsLoading &&
@@ -60,7 +59,8 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
                 </div>
               ) : null}
             </div>
-            {user && <PostActions user_id={user.user_id} post_id={post.id} />}
+
+            <PostActions user_id={user.user_id} post_id={post.id} />
           </>
         </div>
       </div>

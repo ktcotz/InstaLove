@@ -1,14 +1,11 @@
-import { useState } from "react";
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
+import { useHover } from "./hooks/useHover";
 import { HoverProfile } from "./HoverProfile";
 import { Profile } from "./schema/ProfilesSchema";
 
 export const ProposedProfile = ({ avatar_url, user_name }: Profile) => {
-  const [isHover, setIsHover] = useState(false);
-
-  const hover = () => setIsHover(true);
-  const unhover = () => setIsHover(false);
+  const { isHover, hover, unhover } = useHover();
 
   return (
     <div
@@ -24,7 +21,7 @@ export const ProposedProfile = ({ avatar_url, user_name }: Profile) => {
           <img
             width={48}
             height={48}
-            className="rounded-full"
+            className="rounded-full w-12 h-12"
             src={avatar_url}
             alt={user_name}
           />
