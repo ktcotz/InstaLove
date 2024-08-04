@@ -128,10 +128,7 @@ export const addCommentToPost = async (data: Comment) => {
   return comment;
 };
 
-export const getComments = async ({
-  user_id,
-  post_id,
-}: UserID & { post_id: number }) => {
+export const getComments = async ({ post_id }: { post_id: number }) => {
   const {
     data: comments,
     count,
@@ -139,7 +136,6 @@ export const getComments = async ({
   } = await supabase
     .from("comments")
     .select("*", { count: "exact" })
-    .eq("user_id", user_id)
     .eq("post_id", post_id)
     .order("created_at", { ascending: false });
 
@@ -148,8 +144,6 @@ export const getComments = async ({
       message: error.message,
     });
   }
-
-  console.log(count);
 
   const parsed = CommentsSchema.parse({ count, comments });
 

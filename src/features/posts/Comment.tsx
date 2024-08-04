@@ -28,7 +28,7 @@ export const Comment = ({ comment, user_id, created_at }: CommentProps) => {
 
   return (
     <div className="relative grid grid-cols-[24px_1fr_auto] gap-2">
-      <CustomLink to="" modifier="post-avatar">
+      <CustomLink to={`/dashboard/${user.user_name}`} modifier="post-avatar">
         <img
           src={user.avatar_url}
           alt=""
@@ -41,7 +41,7 @@ export const Comment = ({ comment, user_id, created_at }: CommentProps) => {
       </CustomLink>
       <p className="text-sm mb-3">
         <CustomLink
-          to=""
+          to={`/dashboard/${user.user_name}`}
           modifier="post-user"
           onMouseEnter={() => hover()}
           onMouseLeave={() => unhover()}

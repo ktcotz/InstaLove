@@ -3,9 +3,8 @@ import { getUserByID } from "../services/services";
 
 export const useUserByID = (user_id: string) => {
   const { data: user, isLoading } = useQuery({
-    queryKey: ["userID"],
+    queryKey: ["userID",user_id],
     queryFn: () => getUserByID({ user_id }),
-    enabled: !!user_id,
   });
 
   return { user, isLoading } as const;

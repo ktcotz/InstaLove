@@ -6,19 +6,18 @@ import { Comment } from "./Comment";
 import { PostActions } from "./PostActions";
 import { Post } from "./schema/PostsSchema";
 import { useGetComments } from "./queries/useGetComments";
+import { useUser } from "../authentication/queries/useUser";
 
 type IndividualModalPostProps = {
   post: Post;
 };
 
 export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
+  const { user: currentUser } = useUser();
   const { user } = useUserByID(post.user_id);
-  const { data, isLoading: isCommentsLoading } = useGetComments(
-    post.id,
-    user?.user_id
-  );
+  const { data, isLoading: isCommentsLoading } = useGetComments(post.id);
 
-  if (!user) return null;
+  if (!user || !currentUser) return null;
 
   return (
     <Wrapper>

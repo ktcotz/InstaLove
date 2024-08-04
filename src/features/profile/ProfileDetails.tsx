@@ -44,7 +44,7 @@ export const ProfileDetails = () => {
               <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
                 Posty
                 <strong className="font-medium text-stone-950">
-                  {posts?.count}
+                  {posts?.count ?? 0}
                 </strong>
               </p>
               <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">

@@ -8,17 +8,19 @@ import { Modal } from "../../../ui/modal/Modal";
 export const Posts = () => {
   const { profile } = useProfileParams();
   const { data: user, isLoading } = useProfile(profile);
-  const { data: posts, isLoading: isPostsLoading } = useGetPosts(user?.user_id);
+  const { data: posts, isLoading: isPostsLoading } = useGetPosts(
+    user?.user_id,
+    true
+  );
 
   if (isLoading || isPostsLoading) return <Loader />;
 
   return posts!.data.length > 0 ? (
     posts?.data.map((post) => {
       return (
-        <Modal>
+        <Modal key={post.id}>
           <Modal.Open>
             <div
-              key={post.id}
               className="relative aspect-square bg-cover bg-center cursor-pointer"
               style={{
                 backgroundImage: `url(${post.post_url})`,
@@ -30,7 +32,7 @@ export const Posts = () => {
             </div>
           </Modal.Open>
           <Modal.Content>
-            <IndividualModalPost post={post}/>
+            <IndividualModalPost post={post} />
           </Modal.Content>
         </Modal>
       );
