@@ -2,6 +2,8 @@ import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
 import { Modal } from "../../ui/modal/Modal";
 import { useUserByID } from "../authentication/queries/useUserByID";
+import { useHover } from "../profile/hooks/useHover";
+import { HoverProfile } from "../profile/HoverProfile";
 import { Likes } from "./Likes";
 import { Likes as LikesSchema } from "./schema/LikeSchema";
 
@@ -12,11 +14,12 @@ type PostLikesProps = {
 
 export const PostLikes = ({ likes, count }: PostLikesProps) => {
   const { user } = useUserByID(likes[0].user_id);
+  const { hover, unhover, isHover } = useHover();
 
   if (!user) return null;
 
   return (
-    <div className="flex items-center gap-2 mb-3">
+    <div className="relative flex items-center gap-2 mb-3">
       <img
         src={user.avatar_url}
         alt=""
@@ -27,7 +30,12 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
       <div className="flex items-center gap-2">
         <p className="text-sm">
           <span className="mr-1">Lubią to</span>
-          <CustomLink to={`/dashboard/${user.user_name}`} modifier="post-user">
+          <CustomLink
+            to={`/dashboard/${user.user_name}`}
+            modifier="post-user"
+            onMouseEnter={() => hover()}
+            onMouseLeave={() => unhover()}
+          >
             {user.user_name}
           </CustomLink>
         </p>
@@ -45,6 +53,7 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
           </p>
         )}
       </div>
+      {isHover && <HoverProfile user_name={user.user_name} position="top" />}
     </div>
   );
 };

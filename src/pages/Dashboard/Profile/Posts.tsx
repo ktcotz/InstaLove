@@ -1,4 +1,5 @@
 import { IndividualModalPost } from "../../../features/posts/IndividualModalPost";
+import { Post } from "../../../features/posts/Post";
 import { useGetPosts } from "../../../features/posts/queries/useGetPosts";
 import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
@@ -20,15 +21,8 @@ export const Posts = () => {
       return (
         <Modal key={post.id}>
           <Modal.Open>
-            <div
-              className="relative aspect-square bg-cover bg-center cursor-pointer"
-              style={{
-                backgroundImage: `url(${post.post_url})`,
-              }}
-            >
-              <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-stone-950/20">
-                asd
-              </div>
+            <div>
+              <Post {...post} />
             </div>
           </Modal.Open>
           <Modal.Content>

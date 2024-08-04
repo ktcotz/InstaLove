@@ -3,6 +3,10 @@ import { Form } from "../../ui/form/Form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateComment, CreateCommentSchema } from "./schema/CommentSchema";
 import { useAddComment } from "./mutations/useAddComment";
+import { useState } from "react";
+import { Button } from "../../ui/Button";
+import { MdOutlineInsertEmoticon } from "react-icons/md";
+import EmojiPicker from "emoji-picker-react";
 
 type AddCommentProps = {
   user_id: string;
@@ -11,8 +15,9 @@ type AddCommentProps = {
 
 export const AddComment = ({ user_id, post_id }: AddCommentProps) => {
   const { addComment } = useAddComment(post_id);
+  const [showEmotes, setShowEmotes] = useState(false);
 
-  const { register, handleSubmit, reset } = useForm<CreateComment>({
+  const { register, handleSubmit, reset, setValue } = useForm<CreateComment>({
     resolver: zodResolver(CreateCommentSchema),
   });
 
@@ -24,24 +29,49 @@ export const AddComment = ({ user_id, post_id }: AddCommentProps) => {
       {
         onSuccess: () => {
           reset();
+          setShowEmotes(false);
         },
       }
     );
   };
 
   return (
-    <Form onSubmit={handleSubmit(submitHandler)}>
-      <Form.Item>
-        <Form.InputContainer>
-          <Form.Input
-            id="comment"
-            required
-            type="text"
-            {...register("comment")}
-          />
-          <Form.Label id="comment">Dodaj komentarz...</Form.Label>
-        </Form.InputContainer>
-      </Form.Item>
-    </Form>
+    <>
+      <div className="relative flex gap-2 bg-stone-50">
+        <Button
+          modifier="close"
+          onClick={() => setShowEmotes((prev) => !prev)}
+          aria-label="Emoji picker"
+        >
+          <MdOutlineInsertEmoticon className="text-xl" aria-label="Emoji" />
+        </Button>
+        {showEmotes && (
+          <div className="absolute top-0 left-0 -translate-y-full">
+            <EmojiPicker
+              height={400}
+              width={300}
+              searchDisabled={true}
+              skinTonesDisabled={true}
+              onEmojiClick={(emoji) => {
+                setValue("comment", emoji.emoji);
+              }}
+            />
+          </div>
+        )}
+        <Form onSubmit={handleSubmit(submitHandler)}>
+          <Form.Item>
+            <Form.InputContainer>
+              <Form.Input
+                id="comment"
+                required
+                type="text"
+                {...register("comment")}
+              />
+              <Form.Label id="comment">Dodaj komentarz...</Form.Label>
+            </Form.InputContainer>
+          </Form.Item>
+        </Form>
+      </div>
+    </>
   );
 };

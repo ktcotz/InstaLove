@@ -1,10 +1,5 @@
 import { Button } from "../../ui/Button";
-import {
-  FaRegHeart,
-  FaRegComment,
-  FaRegBookmark,
-  FaHeart,
-} from "react-icons/fa";
+import { FaRegHeart, FaRegBookmark, FaHeart } from "react-icons/fa";
 import { AddComment } from "./AddComment";
 import { Post } from "./schema/PostsSchema";
 import { useLike } from "./mutations/useLike";
@@ -41,9 +36,6 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
           ) : (
             <FaRegHeart className="text-xl" />
           )}
-        </Button>
-        <Button aria-label="Comment" modifier="close">
-          <FaRegComment className="text-xl" />
         </Button>
         <div className="ml-auto">
           <Button aria-label="Bookmark" modifier="close">

@@ -9,11 +9,13 @@ import { PrivateProfile } from "./PrivateProfile";
 type HoverProfileProps = {
   user_name: string;
   showPosts?: boolean;
+  position?: "top" | "bottom";
 };
 
 export const HoverProfile = ({
   user_name,
   showPosts = true,
+  position = "bottom",
 }: HoverProfileProps) => {
   const { data: user, isLoading } = useProfile(user_name);
 
@@ -28,7 +30,11 @@ export const HoverProfile = ({
 
   return (
     <div
-      className={`absolute bottom-0 -left-8 2xl:left-0 translate-y-full p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg`}
+      className={`absolute ${
+        position === "bottom"
+          ? "bottom-0 translate-y-full"
+          : "-top-2 -translate-y-full"
+      } left-0 p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg`}
     >
       {loading && <Loader />}
       {!loading && (
