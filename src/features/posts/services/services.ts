@@ -1,7 +1,10 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
+import { CommentLikes } from "../queries/useGetCommentLikes";
+import { PostLikes } from "../queries/useGetPostLikes";
 import { Comment, CommentsSchema } from "../schema/CommentSchema";
+import { Like, LikesSchema } from "../schema/LikeSchema";
 import { PostsReelsSchema, PostsSchema } from "../schema/PostsSchema";
 
 type SupabasePost = {
@@ -148,4 +151,77 @@ export const getComments = async ({ post_id }: { post_id: number }) => {
   const parsed = CommentsSchema.parse({ count, comments });
 
   return parsed;
+};
+
+export const manageLike = async (like: Like) => {
+  const { data: likes, error: isLike } = await supabase
+    .from("likes")
+    .select("*")
+    .eq("user_id", like.user_id)
+    .eq(
+      like.comment_id ? "comment_id" : "post_id",
+      like.comment_id ? like.comment_id : like.post_id
+    );
+
+  if (likes && likes.length > 0) {
+    return await supabase.from("likes").delete().eq("id", likes[0].id);
+  }
+
+  if (isLike) {
+    throw new CustomError({
+      message: isLike.message,
+    });
+  }
+
+  const { data, error } = await supabase.from("likes").insert([like]).select();
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return data;
+};
+
+export const getPostsLikes = async ({ post_id }: PostLikes) => {
+  const {
+    data: likes,
+    count,
+    error,
+  } = await supabase
+    .from("likes")
+    .select("*", { count: "exact" })
+    .eq("post_id", post_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const parsed = LikesSchema.parse(likes);
+
+  return { parsed, count };
+};
+
+export const getCommentsLikes = async ({ comment_id }: CommentLikes) => {
+  const {
+    data: likes,
+    count,
+    error,
+  } = await supabase
+    .from("likes")
+    .select("*", { count: "exact" })
+    .eq("comment_id", comment_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const parsed = LikesSchema.parse(likes);
+
+  return { parsed, count };
 };

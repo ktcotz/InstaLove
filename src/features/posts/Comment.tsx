@@ -1,4 +1,4 @@
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { Button } from "../../ui/Button";
 import { useUserByID } from "../authentication/queries/useUserByID";
 import { formatDistanceToNow } from "date-fns";
@@ -6,16 +6,32 @@ import { getDateFnsLocaleByActiveLanguage } from "./helpers/dateLocale";
 import { CustomLink } from "../../ui/CustomLink";
 import { useHover } from "../profile/hooks/useHover";
 import { HoverProfile } from "../profile/HoverProfile";
+import { Modal } from "../../ui/modal/Modal";
+import { Likes } from "./Likes";
+import { useLike } from "./mutations/useLike";
+import { useGetCommentLikes } from "./queries/useGetCommentLikes";
+import { useUser } from "../authentication/queries/useUser";
 
 type CommentProps = {
   comment: string;
   user_id: string;
+  id?: number;
   created_at?: string;
+  pinned?: boolean;
 };
 
-export const Comment = ({ comment, user_id, created_at }: CommentProps) => {
+export const Comment = ({
+  comment,
+  id,
+  user_id,
+  created_at,
+  pinned = false,
+}: CommentProps) => {
+  const { user: current } = useUser();
   const { user } = useUserByID(user_id);
   const { hover, unhover, isHover } = useHover();
+  const { likes, count } = useGetCommentLikes({ comment_id: id });
+  const { like } = useLike({ user_id, comment_id: id });
 
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
@@ -25,6 +41,16 @@ export const Comment = ({ comment, user_id, created_at }: CommentProps) => {
     : null;
 
   if (!user) return null;
+
+  const handleLike = () => {
+    if (!id || !current) return;
+
+    like({ user_id: current.id, comment_id: id });
+  };
+
+  const isAlreadyLike = likes?.filter(
+    (like) => like.user_id === current?.id
+  ).length;
 
   return (
     <div className="relative grid grid-cols-[24px_1fr_auto] gap-2">
@@ -50,18 +76,31 @@ export const Comment = ({ comment, user_id, created_at }: CommentProps) => {
         </CustomLink>
         <span className="ml-2"> {comment}</span>
       </p>
+      <div className="col-start-1 -col-end-1 text-xs text-stone-700 flex items-center gap-3">
+        <p>{formatedDate}</p>
+        {!pinned && count && likes && count > 0 ? (
+          <Modal>
+            <Modal.Open>
+              <Button modifier="text">{count} polubienia</Button>
+            </Modal.Open>
+            <Modal.Content>
+              <Likes likes={likes} />
+            </Modal.Content>
+          </Modal>
+        ) : null}
+        {current?.id === user.user_id ? null : <p>Odpowiedz</p>}
+      </div>
       {formatedDate && (
-        <div className="col-start-1 -col-end-1 text-xs text-stone-700 flex items-center gap-3">
-          <p>{formatedDate}</p>
-          <p>3 polubień</p>
-          <p>Odpowiedz</p>
+        <div className="col-start-3 col-end-4 row-start-1 flex items-center justify-center">
+          <Button modifier="close">
+            {isAlreadyLike && isAlreadyLike > 0 ? (
+              <FaHeart className="text-sm fill-red-600" onClick={handleLike} />
+            ) : (
+              <FaRegHeart className="text-sm" onClick={handleLike} />
+            )}
+          </Button>
         </div>
       )}
-      <div className="col-start-3 col-end-4 row-start-1 flex items-center justify-center">
-        <Button modifier="close">
-          <FaRegHeart className="text-sm" />
-        </Button>
-      </div>
       {isHover && <HoverProfile user_name={user.user_name} showPosts={false} />}
     </div>
   );

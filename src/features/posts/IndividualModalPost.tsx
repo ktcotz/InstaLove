@@ -44,7 +44,11 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
           <>
             <div className="flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-[200px]">
               {post.description && (
-                <Comment user_id={user.user_id} comment={post.description} />
+                <Comment
+                  user_id={user.user_id}
+                  comment={post.description}
+                  pinned={true}
+                />
               )}
               {!isCommentsLoading &&
                 data?.comments?.map((comment) => (
@@ -59,7 +63,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
               ) : null}
             </div>
 
-            <PostActions user_id={user.user_id} post_id={post.id} />
+            <PostActions user_id={currentUser.id} post={post} />
           </>
         </div>
       </div>
