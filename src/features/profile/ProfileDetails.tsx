@@ -52,7 +52,11 @@ export const ProfileDetails = () => {
   const handleObserve = () => {
     if (!currentUser) return;
 
-    observer({ user_id: currentUser.id, observe_id: user?.user_id });
+    observer({
+      user_id: currentUser.id,
+      observe_id: user?.user_id,
+      user_name: user?.user_name,
+    });
   };
 
   const isObserve = observation && observation.length > 0;

@@ -4,6 +4,7 @@ import { userObserver } from "../services/services";
 export type ObserveUserData = {
   user_id?: string;
   observe_id?: string;
+  user_name?: string;
 };
 
 export const useObservation = ({ observe_id, user_id }: ObserveUserData) => {
