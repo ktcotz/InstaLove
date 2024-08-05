@@ -1,11 +1,36 @@
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
+import { useUser } from "../authentication/queries/useUser";
 import { useHover } from "./hooks/useHover";
 import { HoverProfile } from "./HoverProfile";
+import { useObservation } from "./mutations/useObservation";
+import { useGetObserve } from "./queries/useGetObserve";
 import { Profile } from "./schema/ProfilesSchema";
 
-export const ProposedProfile = ({ avatar_url, user_name }: Profile) => {
+export const ProposedProfile = ({
+  avatar_url,
+  user_name,
+  user_id,
+}: Profile) => {
+  const { user: currentUser } = useUser();
   const { isHover, hover, unhover } = useHover();
+  const { observer } = useObservation({
+    user_id: currentUser!.id,
+    observe_id: user_id,
+  });
+
+  const { observation } = useGetObserve({
+    user_id: currentUser!.id,
+    observe_id: user_id,
+  });
+
+  const handleObserve = () => {
+    if (!currentUser) return;
+
+    observer({ user_id: currentUser.id, observe_id: user_id });
+  };
+
+  const isObserve = observation && observation.length > 0;
 
   return (
     <div
@@ -37,7 +62,12 @@ export const ProposedProfile = ({ avatar_url, user_name }: Profile) => {
           <p className="text-sm text-stone-500">Propozycje dla Ciebie</p>
         </div>
       </div>
-      <Button modifier="link">Obserwuj</Button>
+      <Button
+        modifier={`${isObserve ? "text" : "link"}`}
+        onClick={handleObserve}
+      >
+        {isObserve ? "Odobserwuj" : "Obserwuj"}
+      </Button>
       {isHover && <HoverProfile user_name={user_name} />}
     </div>
   );

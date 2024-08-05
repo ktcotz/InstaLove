@@ -1,4 +1,7 @@
+import { useUser } from "../features/authentication/queries/useUser";
 import { useUserByID } from "../features/authentication/queries/useUserByID";
+import { useObservation } from "../features/profile/mutations/useObservation";
+import { useGetObserve } from "../features/profile/queries/useGetObserve";
 import { Button } from "./Button";
 
 type SubModalItemProps = {
@@ -6,9 +9,26 @@ type SubModalItemProps = {
 };
 
 export const SubModalItem = ({ user_id }: SubModalItemProps) => {
+  const { user: currentUser } = useUser();
   const { user } = useUserByID(user_id);
+  const { observation } = useGetObserve({
+    user_id: currentUser?.id,
+    observe_id: user?.user_id,
+  });
+  const { observer } = useObservation({
+    user_id: currentUser?.id,
+    observe_id: user?.user_id,
+  });
 
   if (!user) return null;
+
+  const handleObserve = () => {
+    observer({ user_id: currentUser?.id, observe_id: user?.user_id });
+  };
+
+  const isObserve = observation && observation.length > 0;
+
+  console.log(observation);
 
   return (
     <div className="flex items-center gap-3">
@@ -23,9 +43,13 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
         <h2 className="font-semibold text-sm">{user.user_name}</h2>
         <p className="text-sm text-stone-600">{user.fullName}</p>
       </div>
-      <div className="ml-auto">
-        <Button modifier="submit">Obserwuj</Button>
-      </div>
+      {currentUser?.id === user?.user_id ? null : (
+        <div className="ml-auto">
+          <Button modifier="submit" onClick={handleObserve}>
+            {isObserve ? "Odobserwuj" : "Obserwuj"}
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

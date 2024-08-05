@@ -7,7 +7,6 @@ type LikesProps = {
 };
 
 export const Likes = ({ likes }: LikesProps) => {
-  console.log(likes);
   return (
     <Wrapper modifier="submodal">
       <div className="flex flex-col items-center justify-center rounded-md shadow-lg bg-stone-100">

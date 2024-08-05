@@ -9,11 +9,34 @@ import { CiBookmark, CiViewBoard, CiVideoOn } from "react-icons/ci";
 import { Outlet } from "react-router";
 import { Avatar } from "./avatar/Avatar";
 import { PrivateProfile } from "./PrivateProfile";
+import { Button } from "../../ui/Button";
+import { useGetObserve } from "./queries/useGetObserve";
+import { useObservation } from "./mutations/useObservation";
+import { Modal } from "../../ui/modal/Modal";
+import { useGetObservesByUser } from "./queries/useGetObservesByUser";
+import { ObservesByUser } from "./ObservesByUser";
+import { ObservesOnUser } from "./ObservesOnUser";
+import { useGetObservesOnUser } from "./queries/useGetObservesOnUser";
 
 export const ProfileDetails = () => {
   const { profile } = useProfileParams();
   const { user: currentUser } = useUser();
   const { data: user, isLoading } = useProfile(profile);
+
+  const { observations } = useGetObservesByUser({ user_id: user?.user_id });
+  const { observations: onUserObservations } = useGetObservesOnUser({
+    user_id: user?.user_id,
+  });
+
+  const { observation } = useGetObserve({
+    user_id: currentUser!.id,
+    observe_id: user?.user_id,
+  });
+
+  const { observer } = useObservation({
+    user_id: currentUser!.id,
+    observe_id: user?.user_id,
+  });
 
   const { data: posts, isLoading: isPostsLoading } = useGetPosts(user?.user_id);
 
@@ -25,6 +48,14 @@ export const ProfileDetails = () => {
     );
 
   if (!user) return null;
+
+  const handleObserve = () => {
+    if (!currentUser) return;
+
+    observer({ user_id: currentUser.id, observe_id: user?.user_id });
+  };
+
+  const isObserve = observation && observation.length > 0;
 
   return (
     <>
@@ -39,24 +70,51 @@ export const ProfileDetails = () => {
                   Edytuj profil
                 </CustomLink>
               )}
+              {currentUser!.id !== user!.user_id && (
+                <Button modifier="submit" onClick={handleObserve}>
+                  {isObserve ? "Odobserwuj" : "Obserwuj"}
+                </Button>
+              )}
             </div>
             <div className="flex items-center justify-between gap-3">
-              <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
+              <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-900 text-sm">
                 Posty
                 <strong className="font-medium text-stone-950">
                   {posts?.count ?? 0}
                 </strong>
               </p>
-              <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
-                <strong className="font-medium text-stone-950">291</strong>
-                obserwujących
-              </p>
-              <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
-                Obserwowani
-                <strong className="font-medium text-stone-950">664</strong>
-              </p>
+              <Modal>
+                <Modal.Open>
+                  <Button modifier="all-profiles">
+                    <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
+                      <strong className="font-medium text-stone-950 mr-2">
+                        obserwujących
+                      </strong>
+                      {onUserObservations?.length}
+                    </p>
+                  </Button>
+                </Modal.Open>
+                <Modal.Content>
+                  <ObservesOnUser user_id={user?.user_id} />
+                </Modal.Content>
+              </Modal>
+              <Modal>
+                <Modal.Open>
+                  <Button modifier="all-profiles">
+                    <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
+                      <strong className="font-medium text-stone-950 mr-2">
+                        obserwowani
+                      </strong>
+                      {observations?.length}
+                    </p>
+                  </Button>
+                </Modal.Open>
+                <Modal.Content>
+                  <ObservesByUser user_id={user?.user_id} />
+                </Modal.Content>
+              </Modal>
             </div>
-            <div className="py-4">
+            <div className="py-2">
               <p className="max-w-prose text-wrap text break-words">
                 {user.biogram}
               </p>
