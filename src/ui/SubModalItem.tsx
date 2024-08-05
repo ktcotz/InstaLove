@@ -28,8 +28,6 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
 
   const isObserve = observation && observation.length > 0;
 
-  console.log(observation);
-
   return (
     <div className="flex items-center gap-3">
       <img

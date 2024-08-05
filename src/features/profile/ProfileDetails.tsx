@@ -88,7 +88,7 @@ export const ProfileDetails = () => {
                   <Button modifier="all-profiles">
                     <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
                       <strong className="font-medium text-stone-950 mr-2">
-                        obserwujących
+                        Obserwujących
                       </strong>
                       {onUserObservations?.length}
                     </p>
@@ -103,7 +103,7 @@ export const ProfileDetails = () => {
                   <Button modifier="all-profiles">
                     <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
                       <strong className="font-medium text-stone-950 mr-2">
-                        obserwowani
+                        Obserwowani
                       </strong>
                       {observations?.length}
                     </p>

@@ -33,6 +33,12 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
     },
   });
 
+  const avatarSizes: Record<typeof size, string> = {
+    48: "w-12 h-12 rounded-full",
+    178: "w-[178px] h-[178px] rounded-full",
+    64: "w-[64px] h-[64px] rounded-full",
+  };
+
   return (
     <Modal>
       <div
@@ -47,9 +53,9 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
               alt={current?.user_name}
               width={size}
               height={size}
-              className={`rounded-full w-[${size}px] h-[${size}px]`}
+              className={avatarSizes[size]}
             />
-            {overlay && (
+            {user?.id === current?.user_id && overlay && (
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[178px] h-[178px] lg:w-full lg:h-full flex items-center justify-center bg-stone-500/70 rounded-full cursor-pointer">
                 <FaCamera className="text-5xl" aria-label="Add avatar" />
               </div>
