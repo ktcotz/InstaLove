@@ -26,7 +26,8 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
     observer({
       user_id: currentUser?.id,
       observe_id: user?.user_id,
-      user_name: user?.user_name,
+      user_name: currentUser?.user_metadata?.user_name,
+      observer_name: user?.user_name,
     });
   };
 

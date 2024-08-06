@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { Loader } from "../../ui/Loader";
+import { SearchInput } from "../../ui/SearchInput";
 import { SubModalItem } from "../../ui/SubModalItem";
 import { Wrapper } from "../../ui/Wrapper";
 import { useGetObservesOnUser } from "./queries/useGetObservesOnUser";
@@ -8,7 +10,12 @@ type ObservesOnUserProps = {
 };
 
 export const ObservesOnUser = ({ user_id }: ObservesOnUserProps) => {
-  const { observations, isLoading } = useGetObservesOnUser({ user_id });
+  const [query, setQuery] = useState("");
+  const { observations, isLoading } = useGetObservesOnUser({ user_id, query });
+
+  const handleQuery = (value: string) => {
+    setQuery(value);
+  };
 
   return (
     <Wrapper modifier="submodal">
@@ -17,6 +24,8 @@ export const ObservesOnUser = ({ user_id }: ObservesOnUserProps) => {
           <h2 className="font-semibold">Obserwujący</h2>
         </div>
         <div className="p-1 sm:p-3 w-full flex flex-col gap-3">
+          <SearchInput query={query} handleQuery={handleQuery} />
+
           {isLoading && <Loader />}
           {!isLoading && observations!.length > 0 ? (
             observations?.map((observation) => (

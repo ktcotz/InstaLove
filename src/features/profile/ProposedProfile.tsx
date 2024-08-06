@@ -27,7 +27,12 @@ export const ProposedProfile = ({
   const handleObserve = () => {
     if (!currentUser) return;
 
-    observer({ user_id: currentUser.id, observe_id: user_id, user_name });
+    observer({
+      user_id: currentUser.id,
+      observe_id: user_id,
+      user_name: currentUser?.user_metadata.user_name,
+      observer_name: user_name,
+    });
   };
 
   const isObserve = observation && observation.length > 0;

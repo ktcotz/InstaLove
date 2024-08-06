@@ -25,6 +25,7 @@ export const ObservesByUser = ({ user_id }: ObservesByUserProps) => {
         </div>
         <div className="p-1 sm:p-3 w-full flex flex-col gap-3">
           <SearchInput query={query} handleQuery={handleQuery} />
+
           {isLoading && <Loader />}
           {!isLoading && observations!.length > 0 ? (
             observations?.map((observation) => (

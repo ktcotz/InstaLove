@@ -31,7 +31,7 @@ export const getProfiles = async ({
 
   const parsed = ProfilesSchema.parse(users);
 
-  return parsed;
+  return parsed.sort(() => Math.random() - 0.5);
 };
 
 export const getProfile = async ({ user_name }: ProfileName) => {
@@ -103,11 +103,9 @@ export const getObserversByUser = async ({
         .from("observations")
         .select("*")
         .eq("user_id", user_id)
-        .like("user_name", `%${query}%`);
+        .like("observer_name", `%${query}%`);
 
   const { data: observations, error } = await supabaseQuery;
-
-  console.log(observations, query);
 
   if (error) {
     throw new CustomError({
@@ -118,11 +116,17 @@ export const getObserversByUser = async ({
   return observations;
 };
 
-export const getObserversOnUser = async ({ user_id }: UserID) => {
-  const supabaseQuery = supabase
-    .from("observations")
-    .select("*")
-    .eq("observe_id", user_id);
+export const getObserversOnUser = async ({
+  user_id,
+  query,
+}: UserID & SearchQuery) => {
+  const supabaseQuery = !query
+    ? supabase.from("observations").select("*").eq("observe_id", user_id)
+    : supabase
+        .from("observations")
+        .select("*")
+        .eq("observe_id", user_id)
+        .like("user_name", `%${query}%`);
 
   const { data: observations, error } = await supabaseQuery;
 
