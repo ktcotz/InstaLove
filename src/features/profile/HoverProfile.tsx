@@ -84,6 +84,7 @@ export const HoverProfile = ({
                         <CustomLink
                           to={`/dashboard/${user_name}/post/${post.id}`}
                           modifier="logo"
+                          key={post.id}
                         >
                           <div
                             className="w-full aspect-square bg-center bg-cover"

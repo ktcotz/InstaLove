@@ -2,14 +2,21 @@ import { FaComment, FaHeart } from "react-icons/fa";
 import { useHover } from "../profile/hooks/useHover";
 import { Post as PostSchema } from "./schema/PostsSchema";
 import { useGetPostLikes } from "./queries/useGetPostLikes";
-import { useGetComments } from "./queries/useGetComments";
 import { Loader } from "../../ui/Loader";
+import { useGetAllComments } from "./queries/useGetAllComments";
 
 export const Post = ({ post_url, id }: PostSchema) => {
   const { hover, unhover, isHover } = useHover();
 
   const { count, isLoading } = useGetPostLikes({ post_id: id });
-  const { data } = useGetComments(id);
+  const { data } = useGetAllComments(id);
+
+  const formatedLikes = count
+    ? new Intl.NumberFormat(navigator.language).format(count)
+    : 0;
+  const formatedComments = data?.count
+    ? new Intl.NumberFormat(navigator.language).format(data?.count)
+    : 0;
 
   return (
     <div
@@ -25,12 +32,12 @@ export const Post = ({ post_url, id }: PostSchema) => {
           {isLoading && <Loader />}
           <div className="flex gap-2 items-center">
             <FaHeart className="text-xl fill-stone-50" />
-            <span className="text-stone-50 font-semibold">{count ?? 0}</span>
+            <span className="text-stone-50 font-semibold">{formatedLikes}</span>
           </div>
           <div className="flex gap-2 items-center">
             <FaComment className="text-xl fill-stone-50" />
             <span className="text-stone-50 font-semibold">
-              {data?.count ?? 0}
+              {formatedComments}
             </span>
           </div>
         </div>

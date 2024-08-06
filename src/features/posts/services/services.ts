@@ -1,6 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
+import { MAX_COMMENTS_POST } from "../IndividualModalPost";
 import { CommentLikes } from "../queries/useGetCommentLikes";
 import { PostLikes } from "../queries/useGetPostLikes";
 import { Comment, CommentsSchema } from "../schema/CommentSchema";
@@ -131,7 +132,13 @@ export const addCommentToPost = async (data: Comment) => {
   return comment;
 };
 
-export const getComments = async ({ post_id }: { post_id: number }) => {
+export const getComments = async ({
+  post_id,
+  page = 0,
+}: {
+  post_id: number;
+  page?: number;
+}) => {
   const {
     data: comments,
     count,
@@ -140,7 +147,8 @@ export const getComments = async ({ post_id }: { post_id: number }) => {
     .from("comments")
     .select("*", { count: "exact" })
     .eq("post_id", post_id)
-    .order("created_at", { ascending: false });
+    .order("created_at", { ascending: false })
+    .range(page * MAX_COMMENTS_POST, (page + 1) * MAX_COMMENTS_POST - 1);
 
   if (error) {
     throw new CustomError({
