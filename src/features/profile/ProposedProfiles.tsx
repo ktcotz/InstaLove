@@ -6,7 +6,10 @@ import { Loader } from "../../ui/Loader";
 
 export const ProposedProfiles = () => {
   const { user } = useUser();
-  const { data, isLoading } = useProfiles({ id: (user as User).id, limit: 5 });
+  const { profiles, isLoading } = useProfiles({
+    id: (user as User).id,
+    limit: 5,
+  });
 
   if (isLoading)
     return (
@@ -15,7 +18,7 @@ export const ProposedProfiles = () => {
       </div>
     );
 
-  if (!data) {
+  if (!profiles?.length) {
     return (
       <div className="text-sm text-center text-stone-700">
         No proposed profiles data to show you!
@@ -25,7 +28,7 @@ export const ProposedProfiles = () => {
 
   return (
     <div className="flex flex-col gap-4 self-stretch">
-      {data?.map((profile) => (
+      {profiles?.map((profile) => (
         <ProposedProfile key={profile.id} {...profile} />
       ))}
     </div>

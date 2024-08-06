@@ -10,7 +10,8 @@ type ButtonType =
   | "close"
   | "link"
   | "add-user"
-  | "all-profiles";
+  | "all-profiles"
+  | "pagination";
 
 type ButtonProps = {
   children: ReactNode;
@@ -40,6 +41,7 @@ export const Button = ({
       "bg-blue-600 text-stone-50 rounded-md p-2 w-full flex items-center justify-center gap-1",
     ["all-profiles"]:
       "text-stone-900 hover:text-stone-950 text-sm  font-bold transition",
+    pagination: "text-stone-900",
   };
 
   const className = twMerge(base, modifier && modifierObject[modifier]);

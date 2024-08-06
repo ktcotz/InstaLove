@@ -2,6 +2,7 @@ import { supabase } from "../../../lib/supabase/supabase";
 import { SearchQuery } from "../../../ui/SearchInput";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
+import { MAX_PROPOSED_PROFILES } from "../AllProposedProfiles";
 import { ObserveUserData } from "../mutations/useObservation";
 import { ProfileSchema, ProfilesSchema } from "../schema/ProfilesSchema";
 
@@ -16,12 +17,24 @@ type ProfileName = {
 export const getProfiles = async ({
   id,
   limit,
-}: CurrentUserID & { limit?: number }) => {
-  const query = limit
-    ? supabase.from("users").select("*").neq("user_id", id).limit(limit)
-    : supabase.from("users").select("*").neq("user_id", id);
+  page,
+}: CurrentUserID & { limit?: number; page?: number }) => {
+  const limitQuery = limit
+    ? supabase
+        .from("users")
+        .select("*", { count: "exact" })
+        .neq("user_id", id)
+        .limit(limit)
+    : supabase.from("users").select("*", { count: "exact" }).neq("user_id", id);
 
-  const { data: users, error } = await query;
+  const query = page
+    ? limitQuery.range(
+        (page - 1) * MAX_PROPOSED_PROFILES,
+        page * MAX_PROPOSED_PROFILES - 1
+      )
+    : limitQuery;
+
+  const { data: users, count, error } = await query;
 
   if (error) {
     throw new CustomError({
@@ -31,7 +44,7 @@ export const getProfiles = async ({
 
   const parsed = ProfilesSchema.parse(users);
 
-  return parsed.sort(() => Math.random() - 0.5);
+  return { profiles: parsed.sort(() => Math.random() - 0.5), count };
 };
 
 export const getProfile = async ({ user_name }: ProfileName) => {

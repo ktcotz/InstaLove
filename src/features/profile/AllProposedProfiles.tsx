@@ -4,10 +4,18 @@ import { useUser } from "../authentication/queries/useUser";
 import { useProfiles } from "./queries/useProfiles";
 import { Loader } from "../../ui/Loader";
 import { SubModalItem } from "../../ui/SubModalItem";
+import { usePagination } from "../../hooks/usePagination";
+import { Pagination } from "../../ui/Pagination";
+
+export const MAX_PROPOSED_PROFILES = 5;
 
 export const AllProposedProfiles = () => {
   const { user } = useUser();
-  const { data, isLoading } = useProfiles({ id: (user as User).id });
+  const { currentPage, nextPage, previousPage } = usePagination();
+  const { profiles, count, isLoading } = useProfiles({
+    id: (user as User).id,
+    page: currentPage,
+  });
 
   return (
     <Wrapper modifier="submodal">
@@ -18,9 +26,20 @@ export const AllProposedProfiles = () => {
         <div className="p-1 sm:p-3 w-full flex flex-col gap-3">
           {isLoading && <Loader />}
           {!isLoading &&
-            data?.map((profile) => (
+            profiles?.map((profile) => (
               <SubModalItem key={profile.id} user_id={profile.user_id} />
             ))}
+
+          {count && count > MAX_PROPOSED_PROFILES && (
+            <Pagination
+              currentPage={currentPage}
+              max={Math.ceil(count / MAX_PROPOSED_PROFILES)}
+              nextPage={() =>
+                nextPage(Math.ceil(count / MAX_PROPOSED_PROFILES))
+              }
+              previousPage={previousPage}
+            />
+          )}
         </div>
       </div>
     </Wrapper>
