@@ -2,6 +2,7 @@ import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
 import { MAX_COMMENTS_POST } from "../IndividualModalPost";
+import { Bookmark } from "../mutations/useBookmark";
 import { CommentLikes } from "../queries/useGetCommentLikes";
 import { PostLikes } from "../queries/useGetPostLikes";
 import { Comment, CommentsSchema } from "../schema/CommentSchema";
@@ -232,4 +233,68 @@ export const getCommentsLikes = async ({ comment_id }: CommentLikes) => {
   const parsed = LikesSchema.parse(likes);
 
   return { parsed, count };
+};
+
+export const manageBookmark = async (bookmark: Bookmark) => {
+  const { data: bookmarks, error: isLike } = await supabase
+    .from("bookmarks")
+    .select("*")
+    .eq("user_id", bookmark.user_id)
+    .eq("post_id", bookmark.post_id);
+
+  if (bookmarks && bookmarks.length > 0) {
+    return await supabase.from("bookmarks").delete().eq("id", bookmarks[0].id);
+  }
+
+  if (isLike) {
+    throw new CustomError({
+      message: isLike.message,
+    });
+  }
+
+  const { data, error } = await supabase
+    .from("bookmarks")
+    .insert([bookmark])
+    .select();
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return data;
+};
+
+export const getBookmarks = async ({ user_id }: UserID) => {
+  const { data: bookmarks, error } = await supabase
+    .from("bookmarks")
+    .select("*,post_id(*)")
+    .eq("user_id", user_id);
+
+  console.log(bookmarks);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return bookmarks;
+};
+
+export const getBookmark = async ({ user_id, post_id }: Bookmark) => {
+  const { data: bookmarks, error } = await supabase
+    .from("bookmarks")
+    .select("*")
+    .eq("user_id", user_id)
+    .eq("post_id", post_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return bookmarks;
 };

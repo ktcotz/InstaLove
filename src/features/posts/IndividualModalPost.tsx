@@ -52,7 +52,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
           </div>
           <>
             <div
-              className={`flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-[200px]`}
+              className={`flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-[170px]`}
             >
               {post.description && (
                 <Comment

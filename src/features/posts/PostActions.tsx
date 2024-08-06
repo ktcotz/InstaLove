@@ -6,6 +6,8 @@ import { useLike } from "./mutations/useLike";
 import { useGetPostLikes } from "./queries/useGetPostLikes";
 import { PostLikes } from "./PostLikes";
 import { useUser } from "../authentication/queries/useUser";
+import { useBookmark } from "./mutations/useBookmark";
+import { useGetBookmark } from "./queries/useGetBookmark";
 
 type PostActionsProps = {
   user_id: string;
@@ -16,6 +18,15 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
   const { user: current } = useUser();
   const { like } = useLike({ post_id: post.id, user_id });
   const { likes, count } = useGetPostLikes({ post_id: post.id });
+  const { bookmarking } = useBookmark({
+    user_id: current?.id,
+    post_id: post.id,
+  });
+
+  const { bookmarks } = useGetBookmark({
+    user_id: current?.id,
+    post_id: post.id,
+  });
 
   const handleLike = () => {
     if (!current) return;
@@ -26,6 +37,14 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
   const isAlreadyLike = likes?.filter(
     (like) => like.user_id === current?.id
   ).length;
+
+  console.log(bookmarks);
+
+  const handleBookmark = () => {
+    if (!current) return;
+
+    bookmarking({ user_id: current.id, post_id: post.id });
+  };
 
   return (
     <div className="absolute bottom-0 left-0 w-full p-4 shadow-lg border-t border-stone-300 bg-stone-100">
@@ -38,8 +57,16 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
           )}
         </Button>
         <div className="ml-auto">
-          <Button aria-label="Bookmark" modifier="close">
-            <FaRegBookmark className="text-xl" />
+          <Button
+            aria-label="Bookmark"
+            modifier="close"
+            onClick={handleBookmark}
+          >
+            {bookmarks!.length > 0 ? (
+              <FaRegBookmark className="text-xl fill-yellow-500" />
+            ) : (
+              <FaRegBookmark className="text-xl" />
+            )}
           </Button>
         </div>
       </div>
