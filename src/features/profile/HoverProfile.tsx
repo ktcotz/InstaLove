@@ -5,6 +5,9 @@ import { HiUserAdd } from "react-icons/hi";
 import { useProfile } from "./queries/useProfile";
 import { useGetPosts } from "../posts/queries/useGetPosts";
 import { PrivateProfile } from "./PrivateProfile";
+import { useGetObserve } from "./queries/useGetObserve";
+import { useUser } from "../authentication/queries/useUser";
+import { useObservation } from "./mutations/useObservation";
 
 type HoverProfileProps = {
   user_name: string;
@@ -17,6 +20,7 @@ export const HoverProfile = ({
   showPosts = true,
   position = "bottom",
 }: HoverProfileProps) => {
+  const { user: currentUser } = useUser();
   const { data: user, isLoading } = useProfile(user_name);
 
   const { data: posts, isLoading: isPostsLoading } = useGetPosts(
@@ -24,9 +28,32 @@ export const HoverProfile = ({
     showPosts
   );
 
+  const { observation } = useGetObserve({
+    user_id: currentUser!.id,
+    observe_id: user?.user_id,
+  });
+
+  const { observer } = useObservation({
+    user_id: currentUser!.id,
+    observe_id: user?.user_id,
+  });
+
   const loading = isLoading || isPostsLoading;
 
   if (!user) return null;
+
+  const handleObserve = () => {
+    if (!currentUser) return;
+
+    observer({
+      user_id: currentUser.id,
+      observe_id: user?.user_id,
+      user_name: currentUser?.user_metadata.user_name,
+      observer_name: user_name,
+    });
+  };
+
+  const isObserve = observation && observation.length > 0;
 
   return (
     <div
@@ -75,7 +102,7 @@ export const HoverProfile = ({
           </div>
           {showPosts ? (
             <div className="grid grid-cols-3 gap-1 mb-4">
-              {user.type === "public" ? (
+              {user.type === "public" || isObserve ? (
                 <>
                   {isPostsLoading && <Loader />}
                   {!isPostsLoading &&
@@ -109,9 +136,9 @@ export const HoverProfile = ({
               )}
             </div>
           ) : null}
-          <Button modifier="add-user">
+          <Button modifier="add-user" onClick={handleObserve}>
             <HiUserAdd />
-            Obserwuj
+            {isObserve ? "Odobserwuj" : "Obserwuj"}
           </Button>
         </>
       )}

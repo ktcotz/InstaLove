@@ -161,7 +161,9 @@ export const ProfileDetails = () => {
           )}
         </div>
         <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 py-8 pb-32">
-          {user.type === "public" || user.user_id === currentUser?.id ? (
+          {user.type === "public" ||
+          user.user_id === currentUser?.id ||
+          isObserve ? (
             <Outlet />
           ) : (
             <div className="col-start-1 -col-end-1 sm:col-start-2 sm:col-end-3 mt-7">
