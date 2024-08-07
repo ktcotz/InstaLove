@@ -53,7 +53,10 @@ export const Comment = ({
   ).length;
 
   return (
-    <div className="relative grid grid-cols-[24px_1fr_auto] gap-2">
+    <div
+      className="relative grid grid-cols-[24px_1fr_auto] gap-2"
+      onMouseLeave={() => unhover()}
+    >
       <CustomLink to={`/dashboard/${user.user_name}`} modifier="post-avatar">
         <img
           src={user.avatar_url}
@@ -62,7 +65,6 @@ export const Comment = ({
           height={24}
           className="w-6 h-6 rounded-full"
           onMouseEnter={() => hover()}
-          onMouseLeave={() => unhover()}
         />
       </CustomLink>
       <p className="text-sm mb-3">
@@ -70,7 +72,6 @@ export const Comment = ({
           to={`/dashboard/${user.user_name}`}
           modifier="post-user"
           onMouseEnter={() => hover()}
-          onMouseLeave={() => unhover()}
         >
           {user.fullName}
         </CustomLink>

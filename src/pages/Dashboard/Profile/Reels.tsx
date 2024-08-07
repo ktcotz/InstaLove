@@ -1,7 +1,10 @@
+import { IndividualModalPost } from "../../../features/posts/IndividualModalPost";
+import { Post } from "../../../features/posts/Post";
 import { useGetReels } from "../../../features/posts/queries/useGetReels";
 import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
 import { Loader } from "../../../ui/Loader";
+import { Modal } from "../../../ui/modal/Modal";
 
 export const Reels = () => {
   const { profile } = useProfileParams();
@@ -13,14 +16,16 @@ export const Reels = () => {
   return reels!.length > 0 ? (
     reels?.map((reel) => {
       return (
-        <div key={reel.id} className="relative aspect-square">
-          <video loop muted className="h-full w-full object-cover">
-            <source src={reel.video_url} type="video/mp4" />
-          </video>
-          <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-stone-950/20">
-            asd
-          </div>
-        </div>
+        <Modal key={reel.id}>
+          <Modal.Open>
+            <div>
+              <Post {...reel} />
+            </div>
+          </Modal.Open>
+          <Modal.Content>
+            <IndividualModalPost post={reel} />
+          </Modal.Content>
+        </Modal>
       );
     })
   ) : (

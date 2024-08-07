@@ -1,1 +1,1 @@
-3. Bookmarks.
+2. Statystyki na temat oglądania, ilość obejrzeń.

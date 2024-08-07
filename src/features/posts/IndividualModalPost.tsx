@@ -4,12 +4,12 @@ import { Wrapper } from "../../ui/Wrapper";
 import { useUserByID } from "../authentication/queries/useUserByID";
 import { Comment } from "./Comment";
 import { PostActions } from "./PostActions";
-import { Post } from "./schema/PostsSchema";
+import { GeneralPost } from "./schema/PostsSchema";
 import { useGetComments } from "./queries/useGetComments";
 import { useUser } from "../authentication/queries/useUser";
 
 type IndividualModalPostProps = {
-  post: Post;
+  post: GeneralPost;
 };
 
 export const MAX_COMMENTS_POST = 12;
@@ -17,6 +17,8 @@ export const MAX_COMMENTS_POST = 12;
 export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
   const { user: currentUser } = useUser();
   const { user } = useUserByID(post.user_id);
+  console.log(post);
+
   const {
     data,
     isLoading: isCommentsLoading,
@@ -32,10 +34,18 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
     <Wrapper>
       <div className="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 bg-stone-50 rounded-md shadow-lg h-[700px] mt-3">
         <div
-          style={{ backgroundImage: `url(${post.post_url})` }}
+          style={
+            "post_url" in post
+              ? { backgroundImage: `url(${post.post_url})` }
+              : {}
+          }
           className="bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100"
         >
-          &nbsp;
+          {post.video_url && (
+            <video loop muted autoPlay className="h-full w-full object-cover">
+              <source src={post.video_url} type="video/mp4" />
+            </video>
+          )}
         </div>
         <div className="row-start-2 -row-end-1 col-start-4 -col-end-1 flex flex-col relative h-full sm:row-start-auto sm:row-end-auto">
           <div className="flex items-center gap-3 border-b border-stone-300 py-5 px-4">

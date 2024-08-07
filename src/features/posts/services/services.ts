@@ -236,12 +236,21 @@ export const getCommentsLikes = async ({ comment_id }: CommentLikes) => {
 };
 
 export const manageBookmark = async (bookmark: Bookmark) => {
-  const { data: bookmarks, error: isLike } = await supabase
-    .from("bookmarks")
-    .select("*")
-    .eq("user_id", bookmark.user_id)
-    .eq("post_id", bookmark.post_id);
+  const query =
+    bookmark.type === "post"
+      ? supabase
+          .from("bookmarks")
+          .select("*")
+          .eq("user_id", bookmark.user_id)
+          .eq("post_id", bookmark.post_id)
+      : supabase
+          .from("bookmarks")
+          .select("*")
+          .eq("user_id", bookmark.user_id)
+          .eq("reel_id", bookmark.post_id);
 
+  const { data: bookmarks, error: isLike } = await query;
+  
   if (bookmarks && bookmarks.length > 0) {
     return await supabase.from("bookmarks").delete().eq("id", bookmarks[0].id);
   }
@@ -252,10 +261,17 @@ export const manageBookmark = async (bookmark: Bookmark) => {
     });
   }
 
+  const insertBookmark =
+    bookmark.type === "post"
+      ? { user_id: bookmark.user_id, post_id: bookmark.post_id }
+      : { user_id: bookmark.user_id, reel_id: bookmark.post_id };
+
   const { data, error } = await supabase
     .from("bookmarks")
-    .insert([bookmark])
+    .insert([insertBookmark])
     .select();
+
+  console.log(error);
 
   if (error) {
     throw new CustomError({
@@ -269,7 +285,7 @@ export const manageBookmark = async (bookmark: Bookmark) => {
 export const getBookmarks = async ({ user_id }: UserID) => {
   const { data: bookmarks, error } = await supabase
     .from("bookmarks")
-    .select("*,post_id(*)")
+    .select("*,post_id(*),reel_id(*)")
     .eq("user_id", user_id);
 
   console.log(bookmarks);
@@ -283,12 +299,21 @@ export const getBookmarks = async ({ user_id }: UserID) => {
   return bookmarks;
 };
 
-export const getBookmark = async ({ user_id, post_id }: Bookmark) => {
-  const { data: bookmarks, error } = await supabase
-    .from("bookmarks")
-    .select("*")
-    .eq("user_id", user_id)
-    .eq("post_id", post_id);
+export const getBookmark = async ({ user_id, post_id, type }: Bookmark) => {
+  const query =
+    type === "post"
+      ? supabase
+          .from("bookmarks")
+          .select("*")
+          .eq("user_id", user_id)
+          .eq("post_id", post_id)
+      : supabase
+          .from("bookmarks")
+          .select("*")
+          .eq("user_id", user_id)
+          .eq("reel_id", post_id);
+
+  const { data: bookmarks, error } = await query;
 
   if (error) {
     throw new CustomError({

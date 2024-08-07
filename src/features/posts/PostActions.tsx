@@ -1,7 +1,7 @@
 import { Button } from "../../ui/Button";
 import { FaRegHeart, FaRegBookmark, FaHeart } from "react-icons/fa";
 import { AddComment } from "./AddComment";
-import { Post } from "./schema/PostsSchema";
+import { Post, Reel } from "./schema/PostsSchema";
 import { useLike } from "./mutations/useLike";
 import { useGetPostLikes } from "./queries/useGetPostLikes";
 import { PostLikes } from "./PostLikes";
@@ -11,7 +11,7 @@ import { useGetBookmark } from "./queries/useGetBookmark";
 
 type PostActionsProps = {
   user_id: string;
-  post: Post;
+  post: Post | Reel;
 };
 
 export const PostActions = ({ user_id, post }: PostActionsProps) => {
@@ -26,6 +26,7 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
   const { bookmarks } = useGetBookmark({
     user_id: current?.id,
     post_id: post.id,
+    type: "post_url" in post ? "post" : "reel",
   });
 
   const handleLike = () => {
@@ -38,12 +39,14 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
     (like) => like.user_id === current?.id
   ).length;
 
-  console.log(bookmarks);
-
   const handleBookmark = () => {
     if (!current) return;
 
-    bookmarking({ user_id: current.id, post_id: post.id });
+    bookmarking({
+      user_id: current.id,
+      post_id: post.id,
+      type: "post_url" in post ? "post" : "reel",
+    });
   };
 
   return (

@@ -1,11 +1,11 @@
 import { FaComment, FaHeart } from "react-icons/fa";
 import { useHover } from "../profile/hooks/useHover";
-import { Post as PostSchema } from "./schema/PostsSchema";
+import { GeneralPost } from "./schema/PostsSchema";
 import { useGetPostLikes } from "./queries/useGetPostLikes";
 import { Loader } from "../../ui/Loader";
 import { useGetAllComments } from "./queries/useGetAllComments";
 
-export const Post = ({ post_url, id }: PostSchema) => {
+export const Post = ({ post_url, video_url, id }: GeneralPost) => {
   const { hover, unhover, isHover } = useHover();
 
   const { count, isLoading } = useGetPostLikes({ post_id: id });
@@ -21,15 +21,31 @@ export const Post = ({ post_url, id }: PostSchema) => {
   return (
     <div
       className="relative aspect-square bg-cover bg-center cursor-pointer"
-      style={{
-        backgroundImage: `url(${post_url})`,
-      }}
+      style={
+        post_url
+          ? {
+              backgroundImage: `url(${post_url})`,
+            }
+          : {}
+      }
       onMouseEnter={() => hover()}
       onMouseLeave={() => unhover()}
     >
+      {isLoading && (
+        <div className="absolute top-1/2 left-1/2 translate-x-1/2 -translate-y-1/2">
+          <Loader />
+        </div>
+      )}
+      {video_url && (
+        <>
+          <video loop muted className="h-full w-full object-cover">
+            <source src={video_url} type="video/mp4" />
+          </video>
+          <div className="absolute bottom-4 left-4 p-4 bg-red-500">red</div>
+        </>
+      )}
       {isHover ? (
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center gap-6 bg-stone-950/60">
-          {isLoading && <Loader />}
           <div className="flex gap-2 items-center">
             <FaHeart className="text-xl fill-stone-50" />
             <span className="text-stone-50 font-semibold">{formatedLikes}</span>

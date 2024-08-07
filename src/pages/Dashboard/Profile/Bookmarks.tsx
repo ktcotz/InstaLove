@@ -18,15 +18,21 @@ export const Bookmarks = () => {
 
   return bookmarks!.length > 0 ? (
     bookmarks?.map((bookmark) => {
+      const renderBookmark = bookmark.post_id
+        ? bookmark.post_id
+        : bookmark.reel_id;
+
       return (
         <Modal key={bookmark.id}>
           <Modal.Open>
             <div>
-              <Post {...bookmark.post_id} />
+              <Post {...renderBookmark} />
             </div>
           </Modal.Open>
           <Modal.Content>
-            <IndividualModalPost post={bookmark.post_id} />
+            <IndividualModalPost
+              post={bookmark.post_id ? bookmark.post_id : bookmark.reel_id}
+            />
           </Modal.Content>
         </Modal>
       );
