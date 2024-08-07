@@ -16,6 +16,7 @@ export const PostReelsSchema = z.object({
   disableLike: z.boolean(),
   description: z.string(),
   user_id: z.string(),
+  views: z.number().optional(),
 });
 
 export const GeneralPostSchema = z.intersection(PostSchema, PostReelsSchema);

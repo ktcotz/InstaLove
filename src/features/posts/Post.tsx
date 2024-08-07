@@ -1,11 +1,11 @@
-import { FaComment, FaHeart } from "react-icons/fa";
+import { FaComment, FaHeart, FaPlay } from "react-icons/fa";
 import { useHover } from "../profile/hooks/useHover";
 import { GeneralPost } from "./schema/PostsSchema";
 import { useGetPostLikes } from "./queries/useGetPostLikes";
 import { Loader } from "../../ui/Loader";
 import { useGetAllComments } from "./queries/useGetAllComments";
 
-export const Post = ({ post_url, video_url, id }: GeneralPost) => {
+export const Post = ({ post_url, video_url, id, views }: GeneralPost) => {
   const { hover, unhover, isHover } = useHover();
 
   const { count, isLoading } = useGetPostLikes({ post_id: id });
@@ -16,6 +16,10 @@ export const Post = ({ post_url, video_url, id }: GeneralPost) => {
     : 0;
   const formatedComments = data?.count
     ? new Intl.NumberFormat(navigator.language).format(data?.count)
+    : 0;
+
+  const formatedViews = views
+    ? new Intl.NumberFormat(navigator.language).format(views)
     : 0;
 
   return (
@@ -41,7 +45,11 @@ export const Post = ({ post_url, video_url, id }: GeneralPost) => {
           <video loop muted className="h-full w-full object-cover">
             <source src={video_url} type="video/mp4" />
           </video>
-          <div className="absolute bottom-4 left-4 p-4 bg-red-500">red</div>
+          {isHover ? null : (
+            <div className="absolute bottom-4 left-4 p-4 flex items-center gap-2 text-stone-50 font-semibold">
+              <FaPlay /> <span>{formatedViews}</span>
+            </div>
+          )}
         </>
       )}
       {isHover ? (

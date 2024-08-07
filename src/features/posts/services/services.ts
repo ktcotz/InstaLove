@@ -2,6 +2,7 @@ import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
 import { MAX_COMMENTS_POST } from "../IndividualModalPost";
+import { AddViewProps } from "../mutations/useAddView";
 import { Bookmark } from "../mutations/useBookmark";
 import { CommentLikes } from "../queries/useGetCommentLikes";
 import { PostLikes } from "../queries/useGetPostLikes";
@@ -250,7 +251,7 @@ export const manageBookmark = async (bookmark: Bookmark) => {
           .eq("reel_id", bookmark.post_id);
 
   const { data: bookmarks, error: isLike } = await query;
-  
+
   if (bookmarks && bookmarks.length > 0) {
     return await supabase.from("bookmarks").delete().eq("id", bookmarks[0].id);
   }
@@ -322,4 +323,32 @@ export const getBookmark = async ({ user_id, post_id, type }: Bookmark) => {
   }
 
   return bookmarks;
+};
+
+export const addViewReel = async ({ reel_id, user_id }: AddViewProps) => {
+  const { data: reel, error } = await supabase
+    .from("reels")
+    .select("*")
+    .eq("user_id", user_id)
+    .eq("id", reel_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const { error: updatedError } = await supabase
+    .from("reels")
+    .update({ views: reel[0]!.views + 1 })
+    .eq("id", reel_id)
+    .select();
+
+  if (updatedError) {
+    throw new CustomError({
+      message: updatedError.message,
+    });
+  }
+
+  return reel;
 };

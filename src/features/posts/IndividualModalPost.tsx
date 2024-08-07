@@ -7,6 +7,8 @@ import { PostActions } from "./PostActions";
 import { GeneralPost } from "./schema/PostsSchema";
 import { useGetComments } from "./queries/useGetComments";
 import { useUser } from "../authentication/queries/useUser";
+import { useAddView } from "./mutations/useAddView";
+import { useEffect } from "react";
 
 type IndividualModalPostProps = {
   post: GeneralPost;
@@ -17,7 +19,10 @@ export const MAX_COMMENTS_POST = 12;
 export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
   const { user: currentUser } = useUser();
   const { user } = useUserByID(post.user_id);
-  console.log(post);
+  const { addView } = useAddView({
+    reel_id: post.id,
+    user_id: currentUser!.id,
+  });
 
   const {
     data,
@@ -25,6 +30,12 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
     fetchNextPage,
     hasNextPage,
   } = useGetComments(post.id);
+
+  useEffect(() => {
+    if ("video_url" in post) {
+      addView();
+    }
+  }, [addView, post]);
 
   if (!user || !currentUser) return null;
 
