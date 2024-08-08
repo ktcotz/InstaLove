@@ -1,6 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
+import { UpdateNotifications } from "../mutations/useReadNotifications";
 import { GetNotifications } from "../queries/useGetNotifications";
 import { Notification, NotificationsSchema } from "../schema/Notifcation";
 
@@ -58,4 +59,18 @@ export const getUnreadNotifications = async ({ user_id }: UserID) => {
   const parsed = NotificationsSchema.parse(notifications);
 
   return parsed;
+};
+
+export const updateReadNotifications = async ({
+  notifications,
+}: UpdateNotifications) => {
+  notifications.forEach(async (notification) => {
+    await supabase
+      .from("notifications")
+      .update({ status: "read" })
+      .eq("id", notification.id)
+      .select();
+  });
+
+  return notifications;
 };
