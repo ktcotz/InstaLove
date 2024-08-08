@@ -8,7 +8,7 @@ export const ProposedProfiles = () => {
   const { user } = useUser();
   const { profiles, isLoading } = useProfiles({
     id: (user as User).id,
-    limit: 6,
+    limit: 5,
   });
 
   if (isLoading)

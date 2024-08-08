@@ -1,5 +1,6 @@
 import { useUser } from "../features/authentication/queries/useUser";
 import { useUserByID } from "../features/authentication/queries/useUserByID";
+import { useAddNotification } from "../features/notifications/mutations/useAddNotification";
 import { useObservation } from "../features/profile/mutations/useObservation";
 import { useGetObserve } from "../features/profile/queries/useGetObserve";
 import { Button } from "./Button";
@@ -20,15 +21,31 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
     observe_id: user?.user_id,
   });
 
+  const { notify } = useAddNotification({ user_id: currentUser!.id });
+
   if (!user) return null;
 
   const handleObserve = () => {
-    observer({
-      user_id: currentUser?.id,
-      observe_id: user?.user_id,
-      user_name: currentUser?.user_metadata?.user_name,
-      observer_name: user?.user_name,
-    });
+    observer(
+      {
+        user_id: currentUser?.id,
+        observe_id: user?.user_id,
+        user_name: currentUser?.user_metadata?.user_name,
+        observer_name: user?.user_name,
+      },
+      {
+        onSuccess: () => {
+          if (isObserve) return;
+
+          notify({
+            status: "unread",
+            type: "observe",
+            user_id: user?.user_id,
+            by_user: currentUser!.id,
+          });
+        },
+      }
+    );
   };
 
   const isObserve = observation && observation.length > 0;

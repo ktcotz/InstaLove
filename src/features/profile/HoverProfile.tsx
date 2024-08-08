@@ -8,6 +8,7 @@ import { PrivateProfile } from "./PrivateProfile";
 import { useGetObserve } from "./queries/useGetObserve";
 import { useUser } from "../authentication/queries/useUser";
 import { useObservation } from "./mutations/useObservation";
+import { useAddNotification } from "../notifications/mutations/useAddNotification";
 
 type HoverProfileProps = {
   user_name: string;
@@ -38,6 +39,8 @@ export const HoverProfile = ({
     observe_id: user?.user_id,
   });
 
+  const { notify } = useAddNotification({ user_id: currentUser!.id });
+
   const loading = isLoading || isPostsLoading;
 
   if (!user) return null;
@@ -45,12 +48,26 @@ export const HoverProfile = ({
   const handleObserve = () => {
     if (!currentUser) return;
 
-    observer({
-      user_id: currentUser.id,
-      observe_id: user?.user_id,
-      user_name: currentUser?.user_metadata.user_name,
-      observer_name: user_name,
-    });
+    observer(
+      {
+        user_id: currentUser.id,
+        observe_id: user?.user_id,
+        user_name: currentUser?.user_metadata.user_name,
+        observer_name: user_name,
+      },
+      {
+        onSuccess: () => {
+          if (isObserve) return;
+
+          notify({
+            status: "unread",
+            type: "observe",
+            user_id: user.user_id,
+            by_user: currentUser.id,
+          });
+        },
+      }
+    );
   };
 
   const isObserve = observation && observation.length > 0;
@@ -136,10 +153,12 @@ export const HoverProfile = ({
               )}
             </div>
           ) : null}
-          <Button modifier="add-user" onClick={handleObserve}>
-            <HiUserAdd />
-            {isObserve ? "Odobserwuj" : "Obserwuj"}
-          </Button>
+          {currentUser?.id === user.user_id ? null : (
+            <Button modifier="add-user" onClick={handleObserve}>
+              <HiUserAdd />
+              {isObserve ? "Odobserwuj" : "Obserwuj"}
+            </Button>
+          )}
         </>
       )}
     </div>

@@ -11,6 +11,7 @@ import { Likes } from "./Likes";
 import { useLike } from "./mutations/useLike";
 import { useGetCommentLikes } from "./queries/useGetCommentLikes";
 import { useUser } from "../authentication/queries/useUser";
+import { useAddNotification } from "../notifications/mutations/useAddNotification";
 
 type CommentProps = {
   comment: string;
@@ -32,6 +33,7 @@ export const Comment = ({
   const { hover, unhover, isHover } = useHover();
   const { likes, count } = useGetCommentLikes({ comment_id: id });
   const { like } = useLike({ user_id, comment_id: id });
+  const { notify } = useAddNotification({ user_id: current!.id });
 
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
@@ -45,7 +47,22 @@ export const Comment = ({
   const handleLike = () => {
     if (!id || !current) return;
 
-    like({ user_id: current.id, comment_id: id });
+    like(
+      { user_id: current.id, comment_id: id },
+      {
+        onSuccess: () => {
+          if (isAlreadyLike) return;
+          if (current.id === user.user_id) return;
+
+          notify({
+            by_user: current.id,
+            status: "unread",
+            type: "comment",
+            user_id: user.user_id,
+          });
+        },
+      }
+    );
   };
 
   const isAlreadyLike = likes?.filter(

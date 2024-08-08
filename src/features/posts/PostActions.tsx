@@ -57,11 +57,25 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
   const handleBookmark = () => {
     if (!current) return;
 
-    bookmarking({
-      user_id: current.id,
-      post_id: post.id,
-      type: "post_url" in post ? "post" : "reel",
-    });
+    bookmarking(
+      {
+        user_id: current.id,
+        post_id: post.id,
+        type: "post_url" in post ? "post" : "reel",
+      },
+      {
+        onSuccess: () => {
+          if (bookmarks.length > 0) return;
+          if (current.id === post.user_id) return;
+          notify({
+            by_user: current.id,
+            status: "unread",
+            type: "bookmark",
+            user_id: post.user_id,
+          });
+        },
+      }
+    );
   };
 
   return (

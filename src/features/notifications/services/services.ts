@@ -28,7 +28,8 @@ export const getNotifications = async ({
     .select("*")
     .eq("user_id", user_id)
     .gte("created_at", start)
-    .lte("created_at", end);
+    .lte("created_at", end)
+    .order("created_at", { ascending: false });
 
   if (error) {
     throw new CustomError({
