@@ -41,17 +41,22 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
 
   const comments = data?.pages.flatMap((page) => page.comments);
 
-
   return (
     <Wrapper>
-      <div className="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 bg-stone-50 rounded-md shadow-lg h-[700px] mt-3">
+      <div
+        className={`grid ${
+          "video_url" in post ? "grid-rows-5" : "grid-rows-3"
+        } sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 bg-stone-50 rounded-md shadow-lg h-[800px] mt-3`}
+      >
         <div
           style={
             "post_url" in post
               ? { backgroundImage: `url(${post.post_url})` }
               : {}
           }
-          className="bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100"
+          className={`${
+            "video_url" in post ? "row-start-1 row-end-3" : ""
+          } bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100`}
         >
           {post.video_url && (
             <video loop muted autoPlay className="h-full w-full object-cover">
@@ -59,7 +64,11 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
             </video>
           )}
         </div>
-        <div className="row-start-2 -row-end-1 col-start-4 -col-end-1 flex flex-col relative h-full sm:row-start-auto sm:row-end-auto">
+        <div
+          className={`${
+            "video_url" in post ? "row-start-3" : "row-start-2"
+          } -row-end-1 col-start-4 -col-end-1 flex flex-col relative h-full sm:row-start-auto sm:row-end-auto`}
+        >
           <div className="flex items-center gap-3 border-b border-stone-300 py-5 px-4">
             <img
               src={user.avatar_url}
