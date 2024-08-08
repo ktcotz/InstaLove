@@ -19,6 +19,11 @@ export const getProfiles = async ({
   limit,
   page,
 }: CurrentUserID & { limit?: number; page?: number }) => {
+  const observations = await getObserversByUser({ user_id: id });
+  const observationsIds = observations.map(
+    (observation) => observation.observe_id
+  );
+
   const limitQuery = limit
     ? supabase
         .from("users")
@@ -30,11 +35,15 @@ export const getProfiles = async ({
   const query = page
     ? limitQuery.range(
         (page - 1) * MAX_PROPOSED_PROFILES,
-        page * MAX_PROPOSED_PROFILES - 1
+        page * MAX_PROPOSED_PROFILES
       )
     : limitQuery;
 
   const { data: users, count, error } = await query;
+
+  const filteredData = users?.filter(
+    (user) => !observationsIds.includes(user.user_id)
+  );
 
   if (error) {
     throw new CustomError({
@@ -42,7 +51,7 @@ export const getProfiles = async ({
     });
   }
 
-  const parsed = ProfilesSchema.parse(users);
+  const parsed = ProfilesSchema.parse(filteredData);
 
   return { profiles: parsed.sort(() => Math.random() - 0.5), count };
 };
