@@ -32,7 +32,7 @@ export const Button = ({
       " flex items-center justify-center py-3 bg-blue-600 border rounded-md text-stone-50 transition-all hover:bg-stone-100 hover:text-blue-700 hover:border-stone-300 px-4",
     text: "text-stone-600 flex items-center justify-center gap-2 hover:text-blue-600 transition",
     navigation:
-      "flex items-center gap-4 p-3 hover:bg-stone-200 transition group w-full",
+      "relative flex items-center gap-4 p-3 hover:bg-stone-200 transition group w-full",
     storie:
       "w-14 h-14 rounded-full flex items-center justify-center  overflow-hidden border-2 border-blue-400 p-[2px]",
     close: "group",

@@ -1,6 +1,7 @@
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
 import { useUser } from "../authentication/queries/useUser";
+import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { useHover } from "./hooks/useHover";
 import { HoverProfile } from "./HoverProfile";
 import { useObservation } from "./mutations/useObservation";
@@ -19,6 +20,8 @@ export const ProposedProfile = ({
     observe_id: user_id,
   });
 
+  const { notify } = useAddNotification({ user_id: currentUser!.id });
+
   const { observation } = useGetObserve({
     user_id: currentUser!.id,
     observe_id: user_id,
@@ -27,12 +30,26 @@ export const ProposedProfile = ({
   const handleObserve = () => {
     if (!currentUser) return;
 
-    observer({
-      user_id: currentUser.id,
-      observe_id: user_id,
-      user_name: currentUser?.user_metadata.user_name,
-      observer_name: user_name,
-    });
+    observer(
+      {
+        user_id: currentUser.id,
+        observe_id: user_id,
+        user_name: currentUser?.user_metadata.user_name,
+        observer_name: user_name,
+      },
+      {
+        onSuccess: () => {
+          if (isObserve) return;
+
+          notify({
+            status: "unread",
+            type: "observe",
+            user_id: currentUser.id,
+            by_user: user_id,
+          });
+        },
+      }
+    );
   };
 
   const isObserve = observation && observation.length > 0;

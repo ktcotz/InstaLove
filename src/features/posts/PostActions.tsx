@@ -8,6 +8,7 @@ import { PostLikes } from "./PostLikes";
 import { useUser } from "../authentication/queries/useUser";
 import { useBookmark } from "./mutations/useBookmark";
 import { useGetBookmark } from "./queries/useGetBookmark";
+import { useAddNotification } from "../notifications/mutations/useAddNotification";
 
 type PostActionsProps = {
   user_id: string;
@@ -22,6 +23,7 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
     user_id: current?.id,
     post_id: post.id,
   });
+  const { notify } = useAddNotification({ user_id: current!.id });
 
   const { bookmarks } = useGetBookmark({
     user_id: current?.id,
@@ -32,7 +34,20 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
   const handleLike = () => {
     if (!current) return;
 
-    like({ user_id: current.id, post_id: post.id });
+    like(
+      { user_id: current.id, post_id: post.id },
+      {
+        onSuccess: () => {
+          if (isAlreadyLike) return;
+          notify({
+            by_user: current.id,
+            status: "unread",
+            type: "like",
+            user_id: post.user_id,
+          });
+        },
+      }
+    );
   };
 
   const isAlreadyLike = likes?.filter(

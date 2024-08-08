@@ -41,6 +41,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
 
   const comments = data?.pages.flatMap((page) => page.comments);
 
+
   return (
     <Wrapper>
       <div className="grid grid-rows-3 sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 bg-stone-50 rounded-md shadow-lg h-[700px] mt-3">

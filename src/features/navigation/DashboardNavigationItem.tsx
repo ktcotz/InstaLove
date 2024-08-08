@@ -16,6 +16,7 @@ import { useUser } from "../authentication/queries/useUser";
 import { Modal } from "../../ui/modal/Modal";
 import { CreatePost } from "../posts/CreatePost";
 import { useProfile } from "../profile/queries/useProfile";
+import { NotificationsCounter } from "../notifications/NotificationsCounter";
 
 export type NavigationRoutes =
   keyof (typeof resources)["pl"]["translation"]["navigation"];
@@ -133,8 +134,11 @@ export const DashboardNavigationItem = ({
               data-tooltip-id={`button-${title}`}
               data-tooltip-place={mobileMatches ? "top" : "right"}
             >
-              <span className="text-xl sm:text-2xl  group-hover:scale-105 transition-all">
+              <span className="relative text-xl sm:text-2xl  group-hover:scale-105 transition-all">
                 {icons[icon]}
+                {title === "navigation.notifications" && (
+                  <NotificationsCounter />
+                )}
               </span>
               {matches ? (
                 <span

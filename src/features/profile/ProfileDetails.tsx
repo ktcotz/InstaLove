@@ -17,6 +17,7 @@ import { useGetObservesByUser } from "./queries/useGetObservesByUser";
 import { ObservesByUser } from "./ObservesByUser";
 import { ObservesOnUser } from "./ObservesOnUser";
 import { useGetObservesOnUser } from "./queries/useGetObservesOnUser";
+import { useAddNotification } from "../notifications/mutations/useAddNotification";
 
 export const ProfileDetails = () => {
   const { profile } = useProfileParams();
@@ -27,6 +28,8 @@ export const ProfileDetails = () => {
   const { observations: onUserObservations } = useGetObservesOnUser({
     user_id: user?.user_id,
   });
+
+  const { notify } = useAddNotification({ user_id: currentUser!.id });
 
   const { observation } = useGetObserve({
     user_id: currentUser!.id,
@@ -52,12 +55,26 @@ export const ProfileDetails = () => {
   const handleObserve = () => {
     if (!currentUser) return;
 
-    observer({
-      user_id: currentUser.id,
-      observe_id: user?.user_id,
-      user_name: currentUser.user_metadata?.user_name,
-      observer_name: user?.user_name,
-    });
+    observer(
+      {
+        user_id: currentUser.id,
+        observe_id: user?.user_id,
+        user_name: currentUser.user_metadata?.user_name,
+        observer_name: user?.user_name,
+      },
+      {
+        onSuccess: () => {
+          if (isObserve) return;
+
+          notify({
+            status: "unread",
+            type: "observe",
+            user_id: user?.user_id,
+            by_user: currentUser.id,
+          });
+        },
+      }
+    );
   };
 
   const isObserve = observation && observation.length > 0;
