@@ -11,7 +11,7 @@ export type GetNotifications = {
 
 export const useGetNotifications = ({ user_id, date }: GetNotifications) => {
   const { data: notifications, isLoading } = useQuery({
-    queryKey: ["notifications", user_id],
+    queryKey: ["notifications", user_id, date],
     queryFn: () => getNotifications({ user_id, date }),
     enabled: !!user_id,
   });

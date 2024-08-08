@@ -23,6 +23,8 @@ export const Notifications = () => {
       <h2 className="text-3xl font-semibold mb-4">Notifications</h2>
       <div className="py-4 overflow-y-scroll">
         <NotificationsByDate date="today" />
+        <NotificationsByDate date="week" />
+        <NotificationsByDate date="month" />
       </div>
     </div>
   );

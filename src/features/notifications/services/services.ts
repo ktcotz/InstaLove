@@ -38,6 +38,8 @@ export const getNotifications = async ({
     });
   }
 
+  console.log(notifications);
+
   const parsed = NotificationsSchema.parse(notifications);
 
   return parsed;
