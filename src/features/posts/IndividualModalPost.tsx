@@ -90,11 +90,12 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
                   user_id={user.user_id}
                   comment={post.description}
                   pinned={true}
+                  post_id={post.id}
                 />
               )}
               {!isCommentsLoading &&
                 comments?.map((comment) => (
-                  <Comment key={comment.id} {...comment} />
+                  <Comment key={comment.id} {...comment} post_id={post.id} />
                 ))}
               {hasNextPage ? (
                 <div className="py-6 flex items-center justify-center border-t border-stone-300">

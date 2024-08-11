@@ -6,11 +6,15 @@ import { CustomLink } from "../../../ui/CustomLink";
 type LikeNotificationProps = {
   created_at?: string;
   user?: Profile;
+  post_id: number | null;
+  receiver?: Profile;
 };
 
 export const LikeNotification = ({
   created_at,
   user,
+  post_id,
+  receiver,
 }: LikeNotificationProps) => {
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
@@ -20,29 +24,23 @@ export const LikeNotification = ({
     : null;
 
   return (
-    <CustomLink modifier="link" to={`/dashboard/${user?.user_name}`}>
-      <div className="flex items-center gap-3">
-        <CustomLink modifier="link" to={`/dashboard/${user?.user_name}`}>
-          <img
-            src={user?.avatar_url}
-            alt={user?.user_name}
-            width={40}
-            height={40}
-            className="w-10 h-10 rounded-full"
-          />
-        </CustomLink>
-        <div className="text-xs">
-          <CustomLink
-            modifier="avatar-name"
-            to={`/dashboard/${user?.user_name}`}
-          >
-            <p className="text-xs">
-              <strong>{user?.user_name}</strong>
-            </p>
-          </CustomLink>
-          <p className="text-stone-900">polubił/a twój post</p>
-          <p className="text-stone-600">{formatedDate}</p>
-        </div>
+    <CustomLink
+      modifier="notification"
+      to={`/dashboard/${receiver?.user_name}/post/${post_id}`}
+    >
+      <img
+        src={user?.avatar_url}
+        alt={user?.user_name}
+        width={40}
+        height={40}
+        className="w-10 h-10 rounded-full"
+      />
+      <div className="text-xs">
+        <p className="text-xs">
+          <strong>{user?.user_name}</strong>
+        </p>
+        <p className="text-stone-900">polubił/a twój post</p>
+        <p className="text-stone-600">{formatedDate}</p>
       </div>
     </CustomLink>
   );

@@ -44,6 +44,7 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
             status: "unread",
             type: "like",
             user_id: post.user_id,
+            post_id:post.id
           });
         },
       }
@@ -72,6 +73,7 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
             status: "unread",
             type: "bookmark",
             user_id: post.user_id,
+            post_id:post.id
           });
         },
       }

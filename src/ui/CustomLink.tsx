@@ -17,7 +17,8 @@ export type CustomLinkModifier =
   | "all-profiles"
   | "profile-details"
   | "post-user"
-  | "post-avatar";
+  | "post-avatar"
+  | "notification";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -54,6 +55,7 @@ export const CustomLink = ({
     ["post-user"]:
       "text-xs text-stone-900 hover:text-stone-950 transition font-semibold",
     ["post-avatar"]: "w-6 h-6 rounded-full",
+    notification: "flex items-center gap-3",
   };
 
   const className = twMerge(base, modifiers[modifier]);

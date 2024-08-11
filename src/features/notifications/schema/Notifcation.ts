@@ -6,6 +6,7 @@ export const NotificationSchema = z.object({
   by_user: z.string(),
   status: z.enum(["read", "unread"]),
   type: z.enum(["like", "observe", "bookmark", "comment"]),
+  post_id: z.number().nullable(),
 });
 
 export const NotificationsSchema = z.array(

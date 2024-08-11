@@ -19,6 +19,7 @@ type CommentProps = {
   id?: number;
   created_at?: string;
   pinned?: boolean;
+  post_id: number;
 };
 
 export const Comment = ({
@@ -27,6 +28,7 @@ export const Comment = ({
   user_id,
   created_at,
   pinned = false,
+  post_id,
 }: CommentProps) => {
   const { user: current } = useUser();
   const { user } = useUserByID(user_id);
@@ -59,6 +61,7 @@ export const Comment = ({
             status: "unread",
             type: "comment",
             user_id: user.user_id,
+            post_id,
           });
         },
       }
