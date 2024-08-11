@@ -10,6 +10,9 @@ export const useAddComment = (post_id: number) => {
       queryClient.invalidateQueries({
         queryKey: ["comments", post_id],
       });
+      queryClient.invalidateQueries({
+        queryKey: ["comments-all", post_id],
+      });
     },
   });
 

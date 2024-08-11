@@ -11,7 +11,8 @@ type ButtonType =
   | "link"
   | "add-user"
   | "all-profiles"
-  | "pagination";
+  | "pagination"
+  | "reel";
 
 type ButtonProps = {
   children: ReactNode;
@@ -42,6 +43,7 @@ export const Button = ({
     ["all-profiles"]:
       "text-stone-900 hover:text-stone-950 text-sm  font-bold transition",
     pagination: "text-stone-900",
+    reel: "bg-black/40 p-4 rounded-full text-2xl text-stone-50",
   };
 
   const className = twMerge(base, modifier && modifierObject[modifier]);

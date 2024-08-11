@@ -103,3 +103,11 @@
 .epr-main {
   --epr-emoji-padding: -5px !important;
 }
+
+.reel-swiper .swiper-wrapper {
+  max-height: 100%;
+}
+
+.reel-swiper .swiper-slide {
+  max-height: 700px !important;
+}
