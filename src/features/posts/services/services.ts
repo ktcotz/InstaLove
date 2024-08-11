@@ -6,6 +6,7 @@ import { AddViewProps } from "../mutations/useAddView";
 import { Bookmark } from "../mutations/useBookmark";
 import { CommentLikes } from "../queries/useGetCommentLikes";
 import { PostLikes } from "../queries/useGetPostLikes";
+import { UserPost } from "../queries/useGetUserPost";
 import { Comment, CommentsSchema } from "../schema/CommentSchema";
 import { Like, LikesSchema } from "../schema/LikeSchema";
 import { PostsReelsSchema, PostsSchema } from "../schema/PostsSchema";
@@ -351,4 +352,22 @@ export const addViewReel = async ({ reel_id, user_id }: AddViewProps) => {
   }
 
   return reel;
+};
+
+export const getUserPost = async ({ post_id, user_id }: UserPost) => {
+  const { data: posts, error } = await supabase
+    .from("posts")
+    .select("*")
+    .eq("user_id", user_id)
+    .eq("id", post_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const parsed = PostsSchema.parse(posts);
+
+  return parsed[0];
 };
