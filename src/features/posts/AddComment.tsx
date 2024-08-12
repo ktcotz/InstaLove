@@ -17,9 +17,10 @@ export const AddComment = ({ user_id, post_id }: AddCommentProps) => {
   const { addComment } = useAddComment(post_id);
   const [showEmotes, setShowEmotes] = useState(false);
 
-  const { register, handleSubmit, reset, setValue } = useForm<CreateComment>({
-    resolver: zodResolver(CreateCommentSchema),
-  });
+  const { register, handleSubmit, reset, setValue, getValues } =
+    useForm<CreateComment>({
+      resolver: zodResolver(CreateCommentSchema),
+    });
 
   const submitHandler = ({ comment }: CreateComment) => {
     if (!comment) return;
@@ -53,7 +54,7 @@ export const AddComment = ({ user_id, post_id }: AddCommentProps) => {
               searchDisabled={true}
               skinTonesDisabled={true}
               onEmojiClick={(emoji) => {
-                setValue("comment", emoji.emoji);
+                setValue("comment", `${getValues("comment")}${emoji.emoji}`);
               }}
             />
           </div>

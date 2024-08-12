@@ -64,6 +64,7 @@ export const HoverProfile = ({
             type: "observe",
             user_id: user.user_id,
             by_user: currentUser.id,
+            post_id: null,
           });
         },
       }
@@ -77,7 +78,7 @@ export const HoverProfile = ({
       className={`absolute ${
         position === "bottom"
           ? "bottom-0 translate-y-full"
-          : "-top-2 -translate-y-full"
+          : "top-0 -translate-y-full"
       } left-0 p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg`}
     >
       {loading && <Loader />}

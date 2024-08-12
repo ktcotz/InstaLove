@@ -19,7 +19,10 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
   if (!user) return null;
 
   return (
-    <div className="relative flex items-center gap-2 mb-3">
+    <div
+      className="relative flex items-center gap-2 mb-3"
+      onMouseLeave={() => unhover()}
+    >
       <img
         src={user.avatar_url}
         alt=""
@@ -34,7 +37,6 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
             to={`/dashboard/${user.user_name}`}
             modifier="post-user"
             onMouseEnter={() => hover()}
-            onMouseLeave={() => unhover()}
           >
             {user.user_name}
           </CustomLink>
