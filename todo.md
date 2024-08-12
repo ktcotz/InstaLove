@@ -1,5 +1,3 @@
-1. Wyszukiwanie danych
-
 2. Eksploruj.
 
 3. Strona główna.

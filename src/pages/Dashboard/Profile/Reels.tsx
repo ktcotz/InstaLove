@@ -3,6 +3,7 @@ import { Post } from "../../../features/posts/Post";
 import { useGetReels } from "../../../features/posts/queries/useGetReels";
 import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
+import { Button } from "../../../ui/Button";
 import { Loader } from "../../../ui/Loader";
 import { Modal } from "../../../ui/modal/Modal";
 
@@ -18,9 +19,9 @@ export const Reels = () => {
       return (
         <Modal key={reel.id}>
           <Modal.Open>
-            <div>
+            <Button modifier="close">
               <Post {...reel} />
-            </div>
+            </Button>
           </Modal.Open>
           <Modal.Content>
             <IndividualModalPost post={reel} />

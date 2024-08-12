@@ -3,6 +3,7 @@ import { Post } from "../../../features/posts/Post";
 import { useGetBookmarks } from "../../../features/posts/queries/useGetBookmarks";
 import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
+import { Button } from "../../../ui/Button";
 import { Loader } from "../../../ui/Loader";
 import { Modal } from "../../../ui/modal/Modal";
 
@@ -25,9 +26,9 @@ export const Bookmarks = () => {
       return (
         <Modal key={bookmark.id}>
           <Modal.Open>
-            <div>
+            <Button modifier="close">
               <Post {...renderBookmark} />
-            </div>
+            </Button>
           </Modal.Open>
           <Modal.Content>
             <IndividualModalPost

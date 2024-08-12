@@ -3,6 +3,7 @@ import { Post } from "../../../features/posts/Post";
 import { useGetPosts } from "../../../features/posts/queries/useGetPosts";
 import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
+import { Button } from "../../../ui/Button";
 import { Loader } from "../../../ui/Loader";
 import { Modal } from "../../../ui/modal/Modal";
 
@@ -21,9 +22,9 @@ export const Posts = () => {
       return (
         <Modal key={post.id}>
           <Modal.Open>
-            <div>
+            <Button modifier="close">
               <Post {...post} />
-            </div>
+            </Button>
           </Modal.Open>
           <Modal.Content>
             <IndividualModalPost post={post} />
