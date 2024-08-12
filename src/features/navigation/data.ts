@@ -91,7 +91,7 @@ export const mobileDashboardNavigationData: Data[] = [
     id: 7,
     title: "navigation.create",
     icon: "create",
-    openComponent: "search",
+    openComponent: "create",
   },
   {
     id: 8,

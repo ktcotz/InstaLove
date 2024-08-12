@@ -1,20 +1,29 @@
 import { CiSearch } from "react-icons/ci";
 
+type SearchInputModifier = "with-reset";
+
 type SearchInputProps = {
   query: string;
   handleQuery: (value: string) => void;
+  modifier?: SearchInputModifier;
 };
 
 export type SearchQuery = {
   query?: string;
 };
 
-export const SearchInput = ({ query, handleQuery }: SearchInputProps) => {
+export const SearchInput = ({
+  query,
+  handleQuery,
+  modifier,
+}: SearchInputProps) => {
   return (
     <div className="relative">
       <input
         type="text"
-        className="peer w-full rounded-md border border-stone-300 pt-4 p-2 text-stone-950 transition-all"
+        className={`peer w-full rounded-md border border-stone-300 pt-4 p-2 text-stone-950 transition-all ${
+          modifier === "with-reset" ? "pr-8" : ""
+        }`}
         id="search"
         required
         value={query}

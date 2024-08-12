@@ -11,8 +11,6 @@ export const Reels = () => {
 
   if (isLoading) return <Loader />;
 
-  console.log(reels);
-
   return (
     <Wrapper modifier="reels">
       <Swiper

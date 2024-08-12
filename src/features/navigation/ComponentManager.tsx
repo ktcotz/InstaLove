@@ -8,9 +8,10 @@ export const ComponentManager = () => {
 
   if (!open || !component) return null;
 
-  const manageComponent: Record<NavigationComponent, JSX.Element> = {
+  const manageComponent: Record<NavigationComponent, JSX.Element | null> = {
     search: <DashboardSearch />,
     notifications: <DashboardNotifications />,
+    create: null,
   };
 
   return (

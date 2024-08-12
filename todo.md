@@ -1,3 +1,9 @@
-3. Zaczęcie pracy z rolkami. (Swiper vertical + scroll + custom reel component.)
-4. Dodawanie likeów, komentarzy, bookmark, możliwość autoPlay po kliknięciu w ikonę.
-5. Pobranie wszystkich reelsów każdego usera.
+1. Wyszukiwanie danych
+
+2. Eksploruj.
+
+3. Strona główna.
+
+4. Refaktor projektu & testy.
+
+NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.
