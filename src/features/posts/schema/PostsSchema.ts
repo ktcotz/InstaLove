@@ -20,8 +20,10 @@ export const PostReelsSchema = z.object({
 });
 
 export const GeneralPostSchema = z.intersection(PostSchema, PostReelsSchema);
+export const GeneralsPostsSchema = z.array(GeneralPostSchema);
 
 export type GeneralPost = z.infer<typeof GeneralPostSchema>;
+export type GeneralPosts = z.infer<typeof GeneralsPostsSchema>;
 
 export const PostsSchema = z.array(PostSchema);
 export const PostsReelsSchema = z.array(PostReelsSchema);
