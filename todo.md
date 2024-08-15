@@ -1,4 +1,4 @@
-1. Odpowiadanie na komentarze.
+1. Odpowiadanie na komentarze + dodawanie komentarza w którym możemy kogoś oznaczyc za pomocą @.
 
 2. Stories
 

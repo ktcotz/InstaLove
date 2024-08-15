@@ -1,26 +1,32 @@
-import { useForm } from "react-hook-form";
 import { Form } from "../../ui/form/Form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateComment, CreateCommentSchema } from "./schema/CommentSchema";
+import { CreateComment } from "./schema/CommentSchema";
 import { useAddComment } from "./mutations/useAddComment";
 import { useState } from "react";
 import { Button } from "../../ui/Button";
 import { MdOutlineInsertEmoticon } from "react-icons/md";
 import EmojiPicker from "emoji-picker-react";
+import { usePostsContext } from "./context/usePostsContext";
+import { CommentSuggestions } from "./CommentSuggestions";
+import { suggestions } from "./helpers/suggestions";
 
 type AddCommentProps = {
   user_id: string;
   post_id: number;
+  title?: string;
 };
 
-export const AddComment = ({ user_id, post_id }: AddCommentProps) => {
+export const AddComment = ({
+  user_id,
+  post_id,
+  title = "Dodaj komentarz...",
+}: AddCommentProps) => {
   const { addComment } = useAddComment(post_id);
   const [showEmotes, setShowEmotes] = useState(false);
 
-  const { register, handleSubmit, reset, setValue, getValues } =
-    useForm<CreateComment>({
-      resolver: zodResolver(CreateCommentSchema),
-    });
+  const { getValues, handleSubmit, register, reset, setValue, watch } =
+    usePostsContext();
+
+  const comment = suggestions(watch("comment"));
 
   const submitHandler = ({ comment }: CreateComment) => {
     if (!comment) return;
@@ -68,10 +74,11 @@ export const AddComment = ({ user_id, post_id }: AddCommentProps) => {
                 type="text"
                 {...register("comment")}
               />
-              <Form.Label id="comment">Dodaj komentarz...</Form.Label>
+              <Form.Label id="comment">{title}</Form.Label>
             </Form.InputContainer>
           </Form.Item>
         </Form>
+        {comment && <CommentSuggestions query={getValues("comment")} />}
       </div>
     </>
   );

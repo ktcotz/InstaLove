@@ -6,6 +6,8 @@ import { ProfilesSchema } from "../../profile/schema/ProfilesSchema";
 import { SearchDataSchema, SearchSchemaDTO } from "../schema/SearchSchema";
 
 export const getAllUsersByQuery = async ({ query }: SearchQuery) => {
+  console.log(query);
+
   const { data: users, error } = await supabase
     .from("users")
     .select("*")

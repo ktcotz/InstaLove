@@ -119,31 +119,29 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
           )}
         </li>
         <li className="flex flex-col gap-1 items-center">
-          {data?.count && (
-            <Modal>
-              <Modal.Open>
-                <Button aria-label="Comment" modifier="close">
-                  <div className="flex flex-col gap-1">
-                    <FaRegComment />
-                    <p className="text-xs">
-                      {new Intl.NumberFormat(navigator.language, {
-                        notation: "compact",
-                      }).format(data?.count)}
-                    </p>
-                  </div>
-                </Button>
-              </Modal.Open>
-              {data?.comments && (
-                <Modal.Content>
-                  <ReelsComments
-                    user_id={user.user_id}
-                    id={id}
-                    comments={data.comments}
-                  />
-                </Modal.Content>
-              )}
-            </Modal>
-          )}
+          <Modal>
+            <Modal.Open>
+              <Button aria-label="Comment" modifier="close">
+                <div className="flex flex-col gap-1">
+                  <FaRegComment />
+                  <p className="text-xs">
+                    {new Intl.NumberFormat(navigator.language, {
+                      notation: "compact",
+                    }).format(data?.count ?? 0)}
+                  </p>
+                </div>
+              </Button>
+            </Modal.Open>
+            {data?.comments && (
+              <Modal.Content>
+                <ReelsComments
+                  user_id={user.user_id}
+                  id={id}
+                  comments={data.comments}
+                />
+              </Modal.Content>
+            )}
+          </Modal>
         </li>
         <li>
           <Button

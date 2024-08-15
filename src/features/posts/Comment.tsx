@@ -12,8 +12,7 @@ import { useLike } from "./mutations/useLike";
 import { useGetCommentLikes } from "./queries/useGetCommentLikes";
 import { useUser } from "../authentication/queries/useUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
-import { CommentReply } from "./CommentReply";
-import { useState } from "react";
+import { usePostsContext } from "./context/usePostsContext";
 
 type CommentProps = {
   comment: string;
@@ -32,13 +31,13 @@ export const Comment = ({
   pinned = false,
   post_id,
 }: CommentProps) => {
-  const [showReply, setShowReply] = useState(false);
   const { user: current } = useUser();
   const { user } = useUserByID(user_id);
   const { hover, unhover, isHover } = useHover();
   const { likes, count } = useGetCommentLikes({ comment_id: id });
   const { like } = useLike({ user_id, comment_id: id });
   const { notify } = useAddNotification({ user_id: current!.id });
+  const { setValue, setFocus } = usePostsContext();
 
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
@@ -116,7 +115,10 @@ export const Comment = ({
           {current?.id === user.user_id ? null : (
             <Button
               modifier="close"
-              onClick={() => setShowReply((prevReply) => !prevReply)}
+              onClick={() => {
+                setValue("comment", `@${user.user_name} `);
+                setFocus("comment");
+              }}
             >
               Odpowiedz
             </Button>
@@ -140,11 +142,6 @@ export const Comment = ({
           <HoverProfile user_name={user.user_name} showPosts={false} />
         )}
       </div>
-      {showReply && (
-        <div className="ml-4">
-          <CommentReply />
-        </div>
-      )}
     </>
   );
 };

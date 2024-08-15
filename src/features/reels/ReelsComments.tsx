@@ -16,7 +16,7 @@ export const ReelsComments = ({
 }: ReelsCommentsProps) => {
   return (
     <Wrapper modifier="submodal">
-      <div className="flex flex-col items-center justify-center rounded-md shadow-lg bg-stone-100">
+      <div className="flex flex-col items-center justify-center rounded-md shadow-lg bg-stone-100 py-4">
         <div className="w-full text-center py-4 border-b border-stone-300 ">
           <h2 className="font-semibold">Komentarze</h2>
         </div>
