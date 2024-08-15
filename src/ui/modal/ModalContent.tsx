@@ -22,7 +22,7 @@ export const ModalContent = ({ children }: ModalContentProps) => {
   return (
     <ModalOverlay>
       <Modal.Close />
-      <div className="py-0 md:py-6 grow">{children}</div>
+      <div className="py-0 md:py-6 grow mt-14">{children}</div>
     </ModalOverlay>
   );
 };

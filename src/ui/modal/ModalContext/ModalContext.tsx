@@ -16,15 +16,12 @@ export const ModalContextProvider = ({
   children,
 }: ModalContextProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const open = () => {
     setIsOpen(true);
-    document.body.className = "overflow-y-hidden";
   };
 
   const close = () => {
     setIsOpen(false);
-    document.body.className = "overflow-y-auto";
   };
 
   return (

@@ -31,6 +31,8 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
     type: "post_url" in post ? "post" : "reel",
   });
 
+  console.log(likes, post);
+
   const handleLike = () => {
     if (!current) return;
 
@@ -82,7 +84,7 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
 
   return (
     <div className="absolute bottom-0 left-0 w-full p-4 shadow-lg border-t border-stone-300 bg-stone-100">
-      <div className="flex items-center gap-6 mb-3">
+      <div className="flex items-center gap-6 mb-3 text-xs">
         <Button aria-label="Like" modifier="close" onClick={handleLike}>
           {isAlreadyLike && isAlreadyLike > 0 ? (
             <FaHeart className="text-xl fill-red-600" />

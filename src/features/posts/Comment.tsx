@@ -12,6 +12,8 @@ import { useLike } from "./mutations/useLike";
 import { useGetCommentLikes } from "./queries/useGetCommentLikes";
 import { useUser } from "../authentication/queries/useUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
+import { CommentReply } from "./CommentReply";
+import { useState } from "react";
 
 type CommentProps = {
   comment: string;
@@ -30,6 +32,7 @@ export const Comment = ({
   pinned = false,
   post_id,
 }: CommentProps) => {
+  const [showReply, setShowReply] = useState(false);
   const { user: current } = useUser();
   const { user } = useUserByID(user_id);
   const { hover, unhover, isHover } = useHover();
@@ -73,56 +76,75 @@ export const Comment = ({
   ).length;
 
   return (
-    <div
-      className="relative grid grid-cols-[24px_1fr_auto] gap-2"
-      onMouseLeave={() => unhover()}
-    >
-      <CustomLink to={`/dashboard/${user.user_name}`} modifier="post-avatar">
-        <img
-          src={user.avatar_url}
-          alt=""
-          width={24}
-          height={24}
-          className="w-6 h-6 rounded-full"
-          onMouseEnter={() => hover()}
-        />
-      </CustomLink>
-      <p className="text-sm mb-3">
-        <CustomLink
-          to={`/dashboard/${user.user_name}`}
-          modifier="post-user"
-          onMouseEnter={() => hover()}
-        >
-          {user.fullName}
+    <>
+      <div
+        className="relative grid grid-cols-[24px_1fr_auto] gap-2"
+        onMouseLeave={() => unhover()}
+      >
+        <CustomLink to={`/dashboard/${user.user_name}`} modifier="post-avatar">
+          <img
+            src={user.avatar_url}
+            alt=""
+            width={24}
+            height={24}
+            className="w-6 h-6 rounded-full"
+            onMouseEnter={() => hover()}
+          />
         </CustomLink>
-        <span className="ml-2"> {comment}</span>
-      </p>
-      <div className="col-start-1 -col-end-1 text-xs text-stone-700 flex items-center gap-3">
-        <p>{formatedDate}</p>
-        {!pinned && count && likes && count > 0 ? (
-          <Modal>
-            <Modal.Open>
-              <Button modifier="text">{count} polubienia</Button>
-            </Modal.Open>
-            <Modal.Content>
-              <Likes likes={likes} />
-            </Modal.Content>
-          </Modal>
-        ) : null}
-        {current?.id === user.user_id ? null : <p>Odpowiedz</p>}
+        <p className="text-sm mb-3">
+          <CustomLink
+            to={`/dashboard/${user.user_name}`}
+            modifier="post-user"
+            onMouseEnter={() => hover()}
+          >
+            {user.fullName}
+          </CustomLink>
+          <span className="ml-2"> {comment}</span>
+        </p>
+        <div className="col-start-1 -col-end-1 text-xs text-stone-700 flex items-center gap-3">
+          <p>{formatedDate}</p>
+          {!pinned && count && likes && count > 0 ? (
+            <Modal>
+              <Modal.Open>
+                <Button modifier="text">{count} polubienia</Button>
+              </Modal.Open>
+              <Modal.Content>
+                <Likes likes={likes} />
+              </Modal.Content>
+            </Modal>
+          ) : null}
+          {current?.id === user.user_id ? null : (
+            <Button
+              modifier="close"
+              onClick={() => setShowReply((prevReply) => !prevReply)}
+            >
+              Odpowiedz
+            </Button>
+          )}
+        </div>
+        {formatedDate && (
+          <div className="col-start-3 col-end-4 row-start-1 flex items-center justify-center">
+            <Button modifier="close">
+              {isAlreadyLike && isAlreadyLike > 0 ? (
+                <FaHeart
+                  className="text-sm fill-red-600"
+                  onClick={handleLike}
+                />
+              ) : (
+                <FaRegHeart className="text-sm" onClick={handleLike} />
+              )}
+            </Button>
+          </div>
+        )}
+        {isHover && (
+          <HoverProfile user_name={user.user_name} showPosts={false} />
+        )}
       </div>
-      {formatedDate && (
-        <div className="col-start-3 col-end-4 row-start-1 flex items-center justify-center">
-          <Button modifier="close">
-            {isAlreadyLike && isAlreadyLike > 0 ? (
-              <FaHeart className="text-sm fill-red-600" onClick={handleLike} />
-            ) : (
-              <FaRegHeart className="text-sm" onClick={handleLike} />
-            )}
-          </Button>
+      {showReply && (
+        <div className="ml-4">
+          <CommentReply />
         </div>
       )}
-      {isHover && <HoverProfile user_name={user.user_name} showPosts={false} />}
-    </div>
+    </>
   );
 };

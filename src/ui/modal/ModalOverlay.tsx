@@ -9,10 +9,10 @@ type ModalOverlayProps = {
 export const ModalOverlay = ({ children }: ModalOverlayProps) => {
   return createPortal(
     <FocusTrap>
-      <div className="fixed top-0 left-0 h-full w-full z-50 bg-stone-50/75 backdrop-blur-sm p-4 flex flex-col lg:p-8">
+      <div className="absolute top-0 left-0 h-full w-full z-50 bg-stone-50/75 backdrop-blur-sm p-4 flex flex-col lg:p-8">
         {children}
       </div>
     </FocusTrap>,
-    document.querySelector("#modal")!
+    document.querySelector("#root")!
   );
 };

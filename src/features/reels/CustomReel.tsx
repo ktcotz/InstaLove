@@ -5,14 +5,17 @@ import { useUserByID } from "../authentication/queries/useUserByID";
 import { Reel } from "../posts/schema/PostsSchema";
 import { GoMute, GoUnmute } from "react-icons/go";
 import { ReelActions } from "./ReelActions";
+import { Loader } from "../../ui/Loader";
 
 export const CustomReel = ({ video_url, description, user_id, id }: Reel) => {
   const [muted, setMuted] = useState(true);
-  const { user } = useUserByID(user_id);
+  const { user, isLoading } = useUserByID(user_id);
 
   const toggleMuted = () => {
     setMuted((prevMuted) => !prevMuted);
   };
+
+  if (isLoading) return <Loader />;
 
   return (
     <div className="relative h-[700px] max-h-[700px] grid grid-cols-[1fr_auto]">

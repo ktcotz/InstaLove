@@ -31,7 +31,7 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
         className="h-6 w-6 rounded-full"
       />
       <div className="flex items-center gap-2">
-        <p className="text-sm">
+        <p className="text-xs">
           <span className="mr-1">Lubią to</span>
           <CustomLink
             to={`/dashboard/${user.user_name}`}
@@ -42,7 +42,7 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
           </CustomLink>
         </p>
         {count > 1 && (
-          <p className="flex gap-1">
+          <p className="flex gap-1 text-xs">
             <span>i</span>
             <Modal>
               <Modal.Open>

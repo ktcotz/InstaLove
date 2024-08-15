@@ -58,6 +58,15 @@
 
 /* Custom swiper styling */
 
+html {
+  height: 100%;
+}
+
+#root {
+  position: relative;
+  height: 100%;
+}
+
 .swiper-button-prev {
   --swiper-navigation-sides-offset: 1.6rem;
   background-color: #eee;
