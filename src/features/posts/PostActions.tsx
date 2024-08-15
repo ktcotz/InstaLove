@@ -18,7 +18,7 @@ type PostActionsProps = {
 export const PostActions = ({ user_id, post }: PostActionsProps) => {
   const { user: current } = useUser();
   const { like } = useLike({ post_id: post.id, user_id });
-  const { likes, count } = useGetPostLikes({ post_id: post.id });
+  const { likes, count } = useGetPostLikes({ post_id: post.id, user_id });
   const { bookmarking } = useBookmark({
     user_id: current?.id,
     post_id: post.id,
@@ -31,8 +31,6 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
     type: "post_url" in post ? "post" : "reel",
   });
 
-  console.log(likes, post);
-
   const handleLike = () => {
     if (!current) return;
 
@@ -40,7 +38,8 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
       { user_id: current.id, post_id: post.id },
       {
         onSuccess: () => {
-          if (isAlreadyLike) return;
+          if (current.id === post.user_id) return;
+
           notify({
             by_user: current.id,
             status: "unread",

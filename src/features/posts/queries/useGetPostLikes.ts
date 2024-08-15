@@ -3,11 +3,12 @@ import { getPostsLikes } from "../services/services";
 
 export type PostLikes = {
   post_id?: number;
+  user_id?: string;
 };
 
-export const useGetPostLikes = ({ post_id }: PostLikes) => {
+export const useGetPostLikes = ({ post_id, user_id }: PostLikes) => {
   const { data, isLoading } = useQuery({
-    queryKey: ["likes", post_id],
+    queryKey: ["likes", post_id, user_id],
     queryFn: () => getPostsLikes({ post_id }),
   });
 
