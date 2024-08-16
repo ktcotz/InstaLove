@@ -7,7 +7,11 @@ import { Bookmark } from "../mutations/useBookmark";
 import { CommentLikes } from "../queries/useGetCommentLikes";
 import { PostLikes } from "../queries/useGetPostLikes";
 import { UserPost } from "../queries/useGetUserPost";
-import { Comment, CommentsSchema } from "../schema/CommentSchema";
+import {
+  Comment,
+  CommentsSchema,
+  OnlyCommentsSchema,
+} from "../schema/CommentSchema";
 import { Like, LikesSchema } from "../schema/LikeSchema";
 import { PostsReelsSchema, PostsSchema } from "../schema/PostsSchema";
 
@@ -120,10 +124,19 @@ export const getReels = async ({ user_id }: UserID) => {
   return parsed;
 };
 
-export const addCommentToPost = async (data: Comment) => {
-  const { data: comment, error } = await supabase
+export const addCommentToPost = async ({
+  comment,
+  post_id,
+  user_id,
+  comment_id,
+}: Comment) => {
+  const insertData = comment_id
+    ? { comment, user_id, post_id: null, comment_id }
+    : { comment, post_id, user_id, comment_id: null };
+
+  const { data: comments, error } = await supabase
     .from("comments")
-    .insert([data])
+    .insert([insertData])
     .select();
 
   if (error) {
@@ -132,7 +145,7 @@ export const addCommentToPost = async (data: Comment) => {
     });
   }
 
-  return comment;
+  return comments;
 };
 
 export const getComments = async ({
@@ -372,4 +385,29 @@ export const getUserPost = async ({ post_id, user_id }: UserPost) => {
   const parsed = PostsSchema.parse(posts);
 
   return parsed[0];
+};
+
+export const getNestedComments = async ({
+  comment_id,
+}: {
+  comment_id?: number;
+}) => {
+  console.log(comment_id);
+
+  const { data: comments, error } = await supabase
+    .from("comments")
+    .select("*")
+    .eq("comment_id", comment_id);
+
+  console.log({ comment_id, comments });
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const parsed = OnlyCommentsSchema.parse(comments);
+
+  return parsed;
 };

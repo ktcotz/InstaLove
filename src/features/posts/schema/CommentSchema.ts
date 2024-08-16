@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const CreateCommentSchema = z.object({
   comment: z.string(),
+  id: z.number().optional(),
 });
 
 export const CommentDTOSchema = z.object({
@@ -21,6 +22,9 @@ export const CommentsSchema = z.object({
   comments: z.array(CommentSupabaseSchema),
 });
 
+export const OnlyCommentsSchema = z.array(CommentSupabaseSchema);
+
+export type OnlyComments = z.infer<typeof OnlyCommentsSchema>;
 export type CreateComment = z.infer<typeof CreateCommentSchema>;
 export type Comments = z.infer<typeof CommentsSchema>;
 export type Comment = z.infer<typeof CommentDTOSchema>;

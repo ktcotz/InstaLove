@@ -8,6 +8,7 @@ import EmojiPicker from "emoji-picker-react";
 import { usePostsContext } from "./context/usePostsContext";
 import { CommentSuggestions } from "./CommentSuggestions";
 import { suggestions } from "./helpers/suggestions";
+import { useQueryClient } from "@tanstack/react-query";
 
 type AddCommentProps = {
   user_id: string;
@@ -20,6 +21,7 @@ export const AddComment = ({
   post_id,
   title = "Dodaj komentarz...",
 }: AddCommentProps) => {
+  const queryClient = useQueryClient();
   const { addComment } = useAddComment(post_id);
   const [showEmotes, setShowEmotes] = useState(false);
 
@@ -28,13 +30,14 @@ export const AddComment = ({
 
   const comment = suggestions(watch("comment"));
 
-  const submitHandler = ({ comment }: CreateComment) => {
+  const submitHandler = ({ comment, id }: CreateComment) => {
     if (!comment) return;
 
     addComment(
-      { comment, post_id, user_id },
+      { comment, post_id, user_id, comment_id: id },
       {
         onSuccess: () => {
+          queryClient.invalidateQueries({ queryKey: ["nested-comments", id] });
           reset();
           setShowEmotes(false);
         },

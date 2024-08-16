@@ -15,27 +15,34 @@ import { zodResolver } from "@hookform/resolvers/zod";
 type PostsContextState = {
   register: UseFormRegister<{
     comment: string;
+    id?: number;
   }>;
   handleSubmit: UseFormHandleSubmit<
     {
       comment: string;
+      id?: number;
     },
     undefined
   >;
   reset: UseFormReset<{
     comment: string;
+    id?: number;
   }>;
   setValue: UseFormSetValue<{
     comment: string;
+    id?: number;
   }>;
   getValues: UseFormGetValues<{
     comment: string;
+    id?: number;
   }>;
   setFocus: UseFormSetFocus<{
     comment: string;
+    id?: number;
   }>;
   watch: UseFormWatch<{
     comment: string;
+    id?: number;
   }>;
 };
 

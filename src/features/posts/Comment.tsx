@@ -13,6 +13,8 @@ import { useGetCommentLikes } from "./queries/useGetCommentLikes";
 import { useUser } from "../authentication/queries/useUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { usePostsContext } from "./context/usePostsContext";
+import { useGetNestedComments } from "./queries/useGetNestedComments";
+import { NestedComments } from "./NestedComments";
 
 type CommentProps = {
   comment: string;
@@ -20,7 +22,8 @@ type CommentProps = {
   id?: number;
   created_at?: string;
   pinned?: boolean;
-  post_id: number;
+  post_id: number | null;
+  parentComment?: number;
 };
 
 export const Comment = ({
@@ -30,6 +33,7 @@ export const Comment = ({
   created_at,
   pinned = false,
   post_id,
+  parentComment,
 }: CommentProps) => {
   const { user: current } = useUser();
   const { user } = useUserByID(user_id);
@@ -38,6 +42,9 @@ export const Comment = ({
   const { like } = useLike({ user_id, comment_id: id });
   const { notify } = useAddNotification({ user_id: current!.id });
   const { setValue, setFocus } = usePostsContext();
+  const { data: nestedComments } = useGetNestedComments(
+    parentComment ? parentComment : id
+  );
 
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
@@ -130,6 +137,7 @@ export const Comment = ({
               modifier="close"
               onClick={() => {
                 setValue("comment", `@${user.user_name} `);
+                setValue("id", parentComment ? parentComment : id);
                 setFocus("comment");
               }}
             >
@@ -155,6 +163,9 @@ export const Comment = ({
           <HoverProfile user_name={user.user_name} showPosts={false} />
         )}
       </div>
+      {!parentComment && nestedComments && nestedComments.length > 0 && (
+        <NestedComments comments={nestedComments} parentComment={id} />
+      )}
     </>
   );
 };

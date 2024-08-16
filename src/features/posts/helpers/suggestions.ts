@@ -3,8 +3,6 @@ export const suggestions = (str?: string) => {
 
   const atIndex = str.lastIndexOf("@");
 
-  console.log(atIndex);
-
   if (atIndex !== -1) {
     const searchText = str.slice(atIndex + 1);
 
