@@ -85,7 +85,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
             </div>
             <>
               <div
-                className={`flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-[170px]`}
+                className={`flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-20`}
               >
                 {post.description && (
                   <Comment
@@ -96,9 +96,17 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
                   />
                 )}
                 {!isCommentsLoading &&
-                  comments?.map((comment) => (
-                    <Comment key={comment.id} {...comment} post_id={post.id} />
-                  ))}
+                  comments?.map((comment, index) => {
+                    const isLastestComments = index >= comments.length - 3;
+                    return (
+                      <Comment
+                        key={comment.id}
+                        {...comment}
+                        post_id={post.id}
+                        isTop={isLastestComments}
+                      />
+                    );
+                  })}
                 {hasNextPage ? (
                   <div className="py-6 flex items-center justify-center border-t border-stone-300">
                     <Button

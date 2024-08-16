@@ -24,6 +24,7 @@ type CommentProps = {
   pinned?: boolean;
   post_id: number | null;
   parentComment?: number;
+  isTop?: boolean;
 };
 
 export const Comment = ({
@@ -34,6 +35,7 @@ export const Comment = ({
   pinned = false,
   post_id,
   parentComment,
+  isTop = false,
 }: CommentProps) => {
   const { user: current } = useUser();
   const { user } = useUserByID(user_id);
@@ -160,7 +162,11 @@ export const Comment = ({
           </div>
         )}
         {isHover && (
-          <HoverProfile user_name={user.user_name} showPosts={false} />
+          <HoverProfile
+            user_name={user.user_name}
+            showPosts={false}
+            position={isTop ? "top" : "bottom"}
+          />
         )}
       </div>
       {!parentComment && nestedComments && nestedComments.length > 0 && (
