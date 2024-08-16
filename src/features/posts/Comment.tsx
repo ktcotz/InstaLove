@@ -74,6 +74,9 @@ export const Comment = ({
     (like) => like.user_id === current?.id
   ).length;
 
+  const linkProfile = comment.slice(comment.indexOf("@"), comment.indexOf(" "));
+  const rest = comment.slice(comment.indexOf(" ") + 1);
+
   return (
     <>
       <div
@@ -90,15 +93,25 @@ export const Comment = ({
             onMouseEnter={() => hover()}
           />
         </CustomLink>
-        <p className="text-sm mb-3">
+        <p className="text-sm mb-3 flex items-center">
           <CustomLink
             to={`/dashboard/${user.user_name}`}
             modifier="post-user"
             onMouseEnter={() => hover()}
           >
-            {user.fullName}
+            {user.user_name}
           </CustomLink>
-          <span className="ml-2"> {comment}</span>
+          <span className="ml-2 flex items-center gap-1">
+            {linkProfile && (
+              <CustomLink
+                modifier="link"
+                to={`/dashboard/${linkProfile.slice(1)}`}
+              >
+                {linkProfile}
+              </CustomLink>
+            )}
+            <span>{rest}</span>
+          </span>
         </p>
         <div className="col-start-1 -col-end-1 text-xs text-stone-700 flex items-center gap-3">
           <p>{formatedDate}</p>

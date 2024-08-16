@@ -1,5 +1,9 @@
 1. Odpowiadanie na komentarze + dodawanie komentarza w którym możemy kogoś oznaczyc za pomocą @.
 
+- Jeżeli odpowiadamy na komentarze, dodaj comment id i wyświetlaj komentarze dla danego komentarza.
+- Jeżeli wpiszemy bez kliknięcia w odpowiedz to ma się dodać po prostu komentarz do posta.
+- Komentarze które mają @asd mają mieć wszystko normalnie ale @asd ma być linkiem do profilu.
+
 2. Stories
 
 3. Strona główna.

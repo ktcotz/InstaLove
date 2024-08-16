@@ -7,7 +7,8 @@ export const CreateCommentSchema = z.object({
 export const CommentDTOSchema = z.object({
   comment: z.string(),
   user_id: z.string(),
-  post_id: z.number(),
+  post_id: z.number().nullable(),
+  comment_id: z.number().nullable().optional(),
 });
 
 export const CommentSupabaseSchema = z.intersection(
