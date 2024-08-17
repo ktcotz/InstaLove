@@ -4,6 +4,7 @@ import { MdOutlineInsertEmoticon } from "react-icons/md";
 import EmojiPicker from "emoji-picker-react";
 import { Button } from "../../ui/Button";
 import { useMediaQuery } from "usehooks-ts";
+import { AddMusic } from "../stories/AddMusic";
 
 export const MAX_LENGTH = 300;
 
@@ -13,6 +14,8 @@ type CreatePostDescriptionProps = {
   handleChange: (ev: ChangeEvent<HTMLTextAreaElement>) => void;
   options: { comments: boolean; likes: boolean };
   changeOptions: (ev: ChangeEvent<HTMLInputElement>) => void;
+  handleAddMusic: (music: string) => void;
+  type: "normal" | "storie";
 };
 
 export const CreatePostDescription = ({
@@ -21,6 +24,8 @@ export const CreatePostDescription = ({
   changeDescription,
   options,
   changeOptions,
+  type,
+  handleAddMusic,
 }: CreatePostDescriptionProps) => {
   const isMobile = useMediaQuery("(max-width:768px)");
   const { user } = useUser();
@@ -77,7 +82,7 @@ export const CreatePostDescription = ({
           </p>
         </div>
       </div>
-      <div className="py-4 flex flex-col gap-2">
+      <div className="py-4 flex flex-col gap-2 mb-4">
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
@@ -105,6 +110,7 @@ export const CreatePostDescription = ({
           </label>
         </div>
       </div>
+      {type === "storie" && <AddMusic handleAddMusic={handleAddMusic} />}
     </div>
   );
 };

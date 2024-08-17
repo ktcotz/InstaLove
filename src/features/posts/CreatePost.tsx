@@ -10,15 +10,22 @@ import { useUser } from "../authentication/queries/useUser";
 import { useNavigate } from "react-router";
 import { Loader } from "../../ui/Loader";
 import { useModal } from "../../ui/modal/ModalContext/useModal";
+import { useAddStorie } from "../stories/mutations/useAddStorie";
 
-export const CreatePost = () => {
+type CreatePostProps = {
+  type: "normal" | "storie";
+};
+
+export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
   const navigate = useNavigate();
   const { create, isCreating } = useCreatePost();
+  const { createStorie, isCreatingStorie } = useAddStorie();
   const { user } = useUser();
   const [file, setFile] = useState<{ drop: File | null; type: string }>({
     drop: null,
     type: "",
   });
+  const [music, setMusic] = useState("");
   const [preview, setPreview] = useState<string | null>(null);
   const [showDescription, setShowDescription] = useState(false);
   const [description, setDescription] = useState("");
@@ -44,6 +51,10 @@ export const CreatePost = () => {
 
   const changeDescription = (value: string) => {
     setDescription((prev) => prev + value);
+  };
+
+  const handleAddMusic = (music: string) => {
+    setMusic(music);
   };
 
   const { getRootProps, getInputProps } = useDropzone({
@@ -74,6 +85,21 @@ export const CreatePost = () => {
 
   const addPost = () => {
     if (!user || !file.drop) return;
+
+    if (type === "storie") {
+      return createStorie(
+        {
+          description,
+          disableComments: options.comments,
+          disableLike: options.likes,
+          user_id: user.id,
+          post_image: file.drop,
+          type: file.type === "video/mp4" ? "video" : "post",
+          music,
+        },
+        { onSuccess: () => close() }
+      );
+    }
 
     create(
       {
@@ -111,7 +137,7 @@ export const CreatePost = () => {
             </div>
           )}
           <h1 className={`font-medium ${preview ? "mr-auto" : ""}`}>
-            Utwórz nowy post
+            {type === "storie" ? "Utwórz nowe story" : "Utwórz nowy post"}
           </h1>
           {preview && !showDescription && (
             <Button modifier="text" onClick={() => setShowDescription(true)}>
@@ -120,7 +146,7 @@ export const CreatePost = () => {
           )}
 
           {showDescription &&
-            (isCreating ? (
+            (isCreating || isCreatingStorie ? (
               <Loader />
             ) : (
               <Button modifier="text" onClick={() => addPost()}>
@@ -183,6 +209,12 @@ export const CreatePost = () => {
               changeDescription={changeDescription}
               options={options}
               changeOptions={handleOptionsChange}
+              handleAddMusic={handleAddMusic}
+              type={
+                type === "storie" && file.type.includes("image")
+                  ? "storie"
+                  : "normal"
+              }
             />
           )}
         </div>

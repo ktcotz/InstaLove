@@ -2,8 +2,8 @@ import { Storie } from "./Storie";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper/modules";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import { AddStorie } from "./AddStorie";
 
 export const Stories = () => {
   return (
@@ -12,7 +12,7 @@ export const Stories = () => {
         slidesPerView={3}
         navigation={true}
         modules={[Navigation]}
-        className="mySwiper"
+        className="flex items-center gap-2 px-20"
         breakpoints={{
           360: {
             slidesPerView: 4,
@@ -25,6 +25,9 @@ export const Stories = () => {
           },
         }}
       >
+        <SwiperSlide>
+          <AddStorie />
+        </SwiperSlide>
         <SwiperSlide>
           <Storie />
         </SwiperSlide>
