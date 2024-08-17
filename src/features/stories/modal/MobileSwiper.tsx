@@ -2,8 +2,13 @@ import { SwiperSlide } from "swiper/react";
 import { Swiper } from "swiper/react";
 import { ModalStorie } from "./ModalStorie";
 import { EffectCreative } from "swiper/modules";
+import { Stories } from "../schema/StorieSchema";
 
-export const MobileSwiper = () => {
+type MobileSwiperProps = {
+  stories?: Stories;
+};
+
+export const MobileSwiper = ({ stories }: MobileSwiperProps) => {
   return (
     <Swiper
       grabCursor={true}
@@ -20,10 +25,10 @@ export const MobileSwiper = () => {
       modules={[EffectCreative]}
       className="mobile-swiper"
     >
-      {Array.from({ length: 15 }).map((_, id) => {
+      {stories?.map((storie, id) => {
         return (
           <SwiperSlide key={id}>
-            <ModalStorie mobile={true} />
+            <ModalStorie mobile={true} {...storie} />
           </SwiperSlide>
         );
       })}

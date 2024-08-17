@@ -1,15 +1,20 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ModalStorie } from "./ModalStorie";
+import { Stories } from "../schema/StorieSchema";
 
 type DesktopSwiperProps = {
   initialSlide: number;
   changeSlide: (id: number) => void;
+  stories?: Stories;
 };
 
 export const DesktopSwiper = ({
   initialSlide,
   changeSlide,
+  stories,
 }: DesktopSwiperProps) => {
+  console.log(stories);
+
   return (
     <Swiper
       className="modal-stories"
@@ -28,13 +33,13 @@ export const DesktopSwiper = ({
         changeSlide(ev.clickedIndex);
       }}
     >
-      {Array.from({ length: 15 }).map((_, id) => {
+      {stories?.map((storie, id) => {
         return (
           <SwiperSlide
             key={id}
             className={`${id === initialSlide ? "modal-active" : ""}`}
           >
-            <ModalStorie active={id === initialSlide} />
+            <ModalStorie active={id === initialSlide} {...storie} />
           </SwiperSlide>
         );
       })}

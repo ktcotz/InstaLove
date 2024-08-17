@@ -10,14 +10,14 @@ export const StorieDTOSchema = z.object({
 });
 
 export const StorieSchema = z.object({
-  image_url: z.string().optional().nullable().default(null),
-  video_url: z.string().optional().nullable().default(null),
+  post_url: z.string().optional().nullable(),
+  video_url: z.string().optional().nullable(),
   user_id: z.string(),
   disableComments: z.boolean().default(false),
   disableLike: z.boolean().default(false),
   description: z.string().default(""),
   type: z.enum(["video", "post"]),
-  music: z.string(),
+  music: z.string().nullable(),
 });
 
 export const StorieSupabaseSchema = z.intersection(
@@ -31,4 +31,4 @@ export const Stories = z.array(StorieSupabaseSchema);
 
 export type StorieDTO = z.infer<typeof StorieDTOSchema>;
 export type Storie = z.infer<typeof StorieSchema>;
-export type Stories = z.infer<typeof StorieSupabaseSchema>;
+export type Stories = z.infer<typeof Stories>;

@@ -1,6 +1,6 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
-import { StorieDTO } from "../schema/StorieSchema";
+import { StorieDTO, Stories } from "../schema/StorieSchema";
 
 export const addStorie = async ({
   post_image,
@@ -64,4 +64,18 @@ export const addStorie = async ({
   }
 
   return data;
+};
+
+export const getAllStories = async () => {
+  const { data: stories, error } = await supabase.from("stories").select("*");
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const parsed = Stories.parse(stories);
+
+  return parsed;
 };

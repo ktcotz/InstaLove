@@ -2,10 +2,15 @@ import { useState } from "react";
 import { useMediaQuery } from "usehooks-ts";
 import { DesktopSwiper } from "./DesktopSwiper";
 import { MobileSwiper } from "./MobileSwiper";
+import { useGetAllStories } from "../queries/useGetAllStories";
+import { Loader } from "../../../ui/Loader";
 
 export const ModalStories = () => {
+  const { stories, isLoading } = useGetAllStories();
   const [initialSlide, setInitialSlide] = useState(0);
   const isLaptop = useMediaQuery("(min-width:1024px)");
+
+  if (isLoading) return <Loader />;
 
   return (
     <div
@@ -18,9 +23,10 @@ export const ModalStories = () => {
         <DesktopSwiper
           initialSlide={initialSlide}
           changeSlide={(slide) => setInitialSlide(slide)}
+          stories={stories}
         />
       ) : (
-        <MobileSwiper />
+        <MobileSwiper stories={stories} />
       )}
     </div>
   );
