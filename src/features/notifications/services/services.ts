@@ -6,9 +6,36 @@ import { GetNotifications } from "../queries/useGetNotifications";
 import { Notification, NotificationsSchema } from "../schema/Notifcation";
 
 export const addNotification = async (notification: Notification) => {
+  const user_id = notification.user_id.startsWith("@")
+    ? notification.user_id.slice(1)
+    : notification.user_id;
+
+  if (!user_id) return;
+
+  const { data: users, error: userError } = await supabase
+    .from("users")
+    .select("*")
+    .eq("user_name", user_id);
+
+  if (userError) {
+    throw new CustomError({
+      message: userError.message,
+    });
+  }
+
+  if (users.length > 0 && users[0].user_id === notification.by_user) return;
+
   const { data, error } = await supabase
     .from("notifications")
-    .insert([notification])
+    .insert([
+      {
+        user_id: users.length > 0 ? users[0].user_id : notification.user_id,
+        status: notification.status,
+        type: notification.type,
+        post_id: notification.post_id,
+        by_user: notification.by_user,
+      },
+    ])
     .select();
 
   if (error) {

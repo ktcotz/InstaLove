@@ -14,8 +14,6 @@ export const NestedComments = ({
 }: NestedCommentsProps) => {
   const [showComments, setShowComments] = useState(false);
 
-  console.log(comments);
-
   return (
     <div className="pl-4">
       <div className="flex items-center gap-2 mb-4">

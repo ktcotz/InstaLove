@@ -71,6 +71,7 @@ export const ProfileDetails = () => {
             type: "observe",
             user_id: user?.user_id,
             by_user: currentUser.id,
+            post_id: null,
           });
         },
       }

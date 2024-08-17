@@ -1,7 +1,7 @@
-1. Odpowiadanie na komentarze + dodawanie komentarza w którym możemy kogoś oznaczyc za pomocą @.
+1. Dodawanie notyfikacji
 
-- Jeżeli odpowiadamy na komentarze, dodaj comment id i wyświetlaj komentarze dla danego komentarza.
-- Jeżeli wpiszemy bez kliknięcia w odpowiedz to ma się dodać po prostu komentarz do posta.
+- Jeżeli stworzony przez odpowiedz, to odpowiedział na twój komentarz.
+- Jeżeli nie to został oznaczony przez użytkownika.
 
 2. Stories
 

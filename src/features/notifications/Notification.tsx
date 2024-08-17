@@ -1,8 +1,10 @@
 import { useUserByID } from "../authentication/queries/useUserByID";
 import { Notification as NotificationSchema } from "./schema/Notifcation";
 import { BookmarkNotifications } from "./type/BookmarkNotification";
+import { CommentReplyNotifications } from "./type/CommentReplyNotification";
 import { LikeCommentNotification } from "./type/LikeCommentNotification";
 import { LikeNotification } from "./type/LikeNotification";
+import { MarkNotifications } from "./type/MarkNotifications";
 import { ObserveNotification } from "./type/ObserveNotification";
 
 export const Notification = ({
@@ -35,6 +37,22 @@ export const Notification = ({
     ),
     comment: (
       <LikeCommentNotification
+        created_at={created_at}
+        user={user}
+        post_id={post_id}
+        receiver={receiver}
+      />
+    ),
+    comment_reply: (
+      <CommentReplyNotifications
+        created_at={created_at}
+        user={user}
+        post_id={post_id}
+        receiver={receiver}
+      />
+    ),
+    mark: (
+      <MarkNotifications
         created_at={created_at}
         user={user}
         post_id={post_id}

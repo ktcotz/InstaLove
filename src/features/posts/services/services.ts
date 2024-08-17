@@ -392,14 +392,10 @@ export const getNestedComments = async ({
 }: {
   comment_id?: number;
 }) => {
-  console.log(comment_id);
-
   const { data: comments, error } = await supabase
     .from("comments")
     .select("*")
     .eq("comment_id", comment_id);
-
-  console.log({ comment_id, comments });
 
   if (error) {
     throw new CustomError({

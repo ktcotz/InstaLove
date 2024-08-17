@@ -9,6 +9,8 @@ import { usePostsContext } from "./context/usePostsContext";
 import { CommentSuggestions } from "./CommentSuggestions";
 import { suggestions } from "./helpers/suggestions";
 import { useQueryClient } from "@tanstack/react-query";
+import { useAddNotification } from "../notifications/mutations/useAddNotification";
+import { useUser } from "../authentication/queries/useUser";
 
 type AddCommentProps = {
   user_id: string;
@@ -21,22 +23,30 @@ export const AddComment = ({
   post_id,
   title = "Dodaj komentarz...",
 }: AddCommentProps) => {
-  const queryClient = useQueryClient();
-  const { addComment } = useAddComment(post_id);
-  const [showEmotes, setShowEmotes] = useState(false);
-
   const { getValues, handleSubmit, register, reset, setValue, watch } =
     usePostsContext();
 
   const comment = suggestions(watch("comment"));
+  const { user: current } = useUser();
+  const queryClient = useQueryClient();
+  const { addComment } = useAddComment(post_id);
+  const { notify } = useAddNotification({ user_id: current?.id });
+  const [showEmotes, setShowEmotes] = useState(false);
 
   const submitHandler = ({ comment, id }: CreateComment) => {
-    if (!comment) return;
+    if (!comment || !current) return;
 
     addComment(
       { comment, post_id, user_id, comment_id: id },
       {
         onSuccess: () => {
+          notify({
+            status: "unread",
+            post_id,
+            user_id: comment.slice(comment.indexOf("@"), comment.indexOf(" ")),
+            by_user: current.id,
+            type: id ? "comment_reply" : "mark",
+          });
           queryClient.invalidateQueries({ queryKey: ["nested-comments", id] });
           reset();
           setShowEmotes(false);
