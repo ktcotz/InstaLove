@@ -1,5 +1,5 @@
 export const suggestions = (str?: string) => {
-  if (!str) return false;
+  if (!str || !str.includes("@")) return false;
 
   const atIndex = str.lastIndexOf("@");
 

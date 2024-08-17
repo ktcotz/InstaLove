@@ -119,7 +119,7 @@ export const Comment = ({
                 {linkProfile}
               </CustomLink>
             )}
-            <span>{rest}</span>
+            <span>{comment.includes("@") ? rest : comment}</span>
           </span>
         </p>
         <div className="col-start-1 -col-end-1 text-xs text-stone-700 flex items-center gap-3">
