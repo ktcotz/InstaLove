@@ -3,12 +3,15 @@ import { Swiper } from "swiper/react";
 import { ModalStorie } from "./ModalStorie";
 import { EffectCreative } from "swiper/modules";
 import { Stories } from "../schema/StorieSchema";
+import { Dispatch, SetStateAction } from "react";
+import { Swiper as SwiperType } from "swiper/types";
 
 type MobileSwiperProps = {
   stories?: Stories;
+  setSwiper: Dispatch<SetStateAction<SwiperType | null>>;
 };
 
-export const MobileSwiper = ({ stories }: MobileSwiperProps) => {
+export const MobileSwiper = ({ stories, setSwiper }: MobileSwiperProps) => {
   return (
     <Swiper
       grabCursor={true}
@@ -24,6 +27,7 @@ export const MobileSwiper = ({ stories }: MobileSwiperProps) => {
       }}
       modules={[EffectCreative]}
       className="mobile-swiper"
+      onSwiper={setSwiper}
     >
       {stories?.map((storie, id) => {
         return (

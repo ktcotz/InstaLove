@@ -120,3 +120,17 @@ html {
 .reel-swiper .swiper-slide {
   max-height: 700px !important;
 }
+
+.mobile-swiper .swiper-slide-shadow {
+  display: none;
+}
+
+progress::-moz-progress-bar {
+  background: #fff;
+}
+progress::-webkit-progress-value {
+  background: #fff;
+}
+progress::-webkit-progress-bar {
+  background: transparent;
+}
