@@ -3,8 +3,11 @@ import { useUserByID } from "../../authentication/queries/useUserByID";
 import { Storie } from "../schema/StorieSchema";
 import { getDateFnsLocaleByActiveLanguage } from "../../posts/helpers/dateLocale";
 import { Button } from "../../../ui/Button";
-import { FaMusic, FaPlay, FaVolumeMute } from "react-icons/fa";
+import { FaMusic, FaPlay } from "react-icons/fa";
 import { useGetYoutubeTitle } from "../queries/useGetYoutubeTitle";
+import ReactPlayer from "react-player";
+import { GoMute, GoUnmute } from "react-icons/go";
+import { useEffect, useState } from "react";
 
 type ModalStorieProps = {
   active?: boolean;
@@ -22,6 +25,7 @@ export const ModalStorie = ({
 }: ModalStorieProps & Storie) => {
   const { user } = useUserByID(user_id);
   const { title } = useGetYoutubeTitle(music);
+  const [muted, setMuted] = useState(true);
 
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
@@ -29,6 +33,12 @@ export const ModalStorie = ({
         addSuffix: true,
       })
     : null;
+
+  useEffect(() => {
+    if (!active) {
+      setMuted(true);
+    }
+  }, [active]);
 
   return (
     <div
@@ -64,19 +74,37 @@ export const ModalStorie = ({
                   <p className="text-xs text-stone-50">{formatedDate}</p>
                 </div>
                 {music && (
-                  <p className="text-xs text-stone-50 flex items-center gap-2">
-                    <FaMusic />
-                    {title.snippet.title}
-                  </p>
+                  <>
+                    <p className="text-xs text-stone-50 flex items-center gap-2">
+                      <FaMusic />
+                      {title.snippet.title}
+                    </p>
+                    <ReactPlayer
+                      url={music}
+                      height={0}
+                      width={0}
+                      muted={muted}
+                      playing={true}
+                    />
+                  </>
                 )}
               </div>
               <div className="ml-auto flex gap-4">
                 <Button modifier="close">
                   <FaPlay className="text-stone-50" />
                 </Button>
-                <Button modifier="close">
-                  <FaVolumeMute className="text-stone-50" />
-                </Button>
+                {(video_url || music) && (
+                  <Button
+                    modifier="close"
+                    onClick={() => setMuted((prev) => !prev)}
+                  >
+                    {muted ? (
+                      <GoMute className="text-stone-50" />
+                    ) : (
+                      <GoUnmute className="text-stone-50" />
+                    )}
+                  </Button>
+                )}
               </div>
             </div>
           </div>
@@ -104,7 +132,8 @@ export const ModalStorie = ({
         >
           <video
             loop
-            muted
+            muted={muted}
+            autoPlay
             className="h-full w-full object-cover pointer-events-none"
           >
             <source src={video_url} type="video/mp4" />

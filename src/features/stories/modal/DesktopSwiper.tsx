@@ -9,6 +9,7 @@ type DesktopSwiperProps = {
   changeSlide: (id: number) => void;
   stories?: Stories;
   setSwiper: Dispatch<SetStateAction<SwiperType | null>>;
+
 };
 
 export const DesktopSwiper = ({
@@ -16,6 +17,7 @@ export const DesktopSwiper = ({
   changeSlide,
   stories,
   setSwiper,
+
 }: DesktopSwiperProps) => {
   return (
     <Swiper
@@ -42,7 +44,10 @@ export const DesktopSwiper = ({
             key={id}
             className={`${id === initialSlide ? "modal-active" : ""}`}
           >
-            <ModalStorie active={id === initialSlide} {...storie} />
+            <ModalStorie
+              active={id === initialSlide}
+              {...storie}
+            />
           </SwiperSlide>
         );
       })}

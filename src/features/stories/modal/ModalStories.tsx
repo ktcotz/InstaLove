@@ -8,9 +8,9 @@ import { Swiper } from "swiper/types";
 
 export const ModalStories = () => {
   const { stories, isLoading } = useGetAllStories();
+  const [swiper, setSwiper] = useState<Swiper | null>(null);
   const [initialSlide, setInitialSlide] = useState(0);
   const isLaptop = useMediaQuery("(min-width:1024px)");
-  const [swiper, setSwiper] = useState<Swiper | null>(null);
 
   const ref = useRef(document.body);
 
@@ -29,6 +29,7 @@ export const ModalStories = () => {
       setInitialSlide(slide);
     }
   };
+
 
   useEventListener("keydown", handleSwiperSlide, ref);
 
