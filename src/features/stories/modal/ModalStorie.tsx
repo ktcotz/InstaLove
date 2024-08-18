@@ -3,7 +3,8 @@ import { useUserByID } from "../../authentication/queries/useUserByID";
 import { Storie } from "../schema/StorieSchema";
 import { getDateFnsLocaleByActiveLanguage } from "../../posts/helpers/dateLocale";
 import { Button } from "../../../ui/Button";
-import { FaPlay, FaVolumeMute } from "react-icons/fa";
+import { FaMusic, FaPlay, FaVolumeMute } from "react-icons/fa";
+import { useGetYoutubeTitle } from "../queries/useGetYoutubeTitle";
 
 type ModalStorieProps = {
   active?: boolean;
@@ -16,9 +17,11 @@ export const ModalStorie = ({
   video_url,
   user_id,
   post_url,
+  music,
   created_at,
 }: ModalStorieProps & Storie) => {
   const { user } = useUserByID(user_id);
+  const { title } = useGetYoutubeTitle(music);
 
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
@@ -53,13 +56,19 @@ export const ModalStorie = ({
                 alt={user?.user_name}
                 className="rounded-full w-8 h-8"
               />
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col gap-1">
                 <div className="flex items-center gap-2">
                   <h2 className="text-sm font-semibold text-stone-50">
                     {user?.user_name}
                   </h2>
                   <p className="text-xs text-stone-50">{formatedDate}</p>
                 </div>
+                {music && (
+                  <p className="text-xs text-stone-50 flex items-center gap-2">
+                    <FaMusic />
+                    {title.snippet.title}
+                  </p>
+                )}
               </div>
               <div className="ml-auto flex gap-4">
                 <Button modifier="close">

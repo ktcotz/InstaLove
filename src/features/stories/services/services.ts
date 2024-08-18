@@ -79,3 +79,36 @@ export const getAllStories = async () => {
 
   return parsed;
 };
+
+export const getYoutubeTitle = async ({
+  youtube_id,
+}: {
+  youtube_id: string | null;
+}) => {
+  try {
+    const id = youtube_id?.slice(
+      youtube_id.indexOf("v=") + 2,
+      youtube_id.indexOf("&")
+    );
+
+    const res = await fetch(
+      `https://www.googleapis.com/youtube/v3/videos?id=${id}&key=${
+        import.meta.env.VITE_YOUTUBE_API_KEY
+      }&part=snippet`
+    );
+
+    if (!res.ok) {
+      throw new CustomError({
+        message: "No youtube video found!",
+      });
+    }
+
+    const data = await res.json();
+
+    return data.items[0];
+  } catch (err) {
+    if (err instanceof CustomError) {
+      return err;
+    }
+  }
+};
