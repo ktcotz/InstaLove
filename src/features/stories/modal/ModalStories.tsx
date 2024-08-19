@@ -1,5 +1,5 @@
-import { useRef, useState } from "react";
-import { useEventListener, useMediaQuery } from "usehooks-ts";
+import { useEffect, useRef, useState } from "react";
+import { useEventListener, useInterval, useMediaQuery } from "usehooks-ts";
 import { DesktopSwiper } from "./DesktopSwiper";
 import { MobileSwiper } from "./MobileSwiper";
 import { useGetAllStories } from "../queries/useGetAllStories";
@@ -9,8 +9,9 @@ import { Swiper } from "swiper/types";
 export const ModalStories = () => {
   const { stories, isLoading } = useGetAllStories();
   const [swiper, setSwiper] = useState<Swiper | null>(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [isPlaying, setIsPlaying] = useState(true);
   const [initialSlide, setInitialSlide] = useState(0);
+  const [timer, setTimer] = useState(0);
   const isLaptop = useMediaQuery("(min-width:1024px)");
   const ref = useRef(document.body);
 
@@ -36,6 +37,24 @@ export const ModalStories = () => {
 
   useEventListener("keydown", handleSwiperSlide, ref);
 
+  useInterval(
+    () => {
+      setTimer((prev) => prev + 1);
+    },
+    isPlaying && timer !== 25 ? 1000 : null
+  );
+
+  useEffect(() => {
+    if (timer === 25) {
+      const slide =
+        initialSlide === stories!.length - 1
+          ? stories!.length - 1
+          : initialSlide + 1;
+      swiper?.slideTo(slide);
+      setInitialSlide(slide);
+    }
+  }, [timer, swiper, initialSlide, stories]);
+
   if (isLoading) return <Loader />;
 
   return (
@@ -53,6 +72,8 @@ export const ModalStories = () => {
           setSwiper={setSwiper}
           isPlaying={isPlaying}
           handleChangePlaying={handleChangePlaying}
+          timer={timer}
+          resetTimer={() => setTimer(0)}
         />
       ) : (
         <MobileSwiper stories={stories} setSwiper={setSwiper} />

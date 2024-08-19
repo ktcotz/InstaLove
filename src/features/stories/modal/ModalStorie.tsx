@@ -13,8 +13,8 @@ import { useEventListener } from "usehooks-ts";
 type ModalStorieProps = {
   active?: boolean;
   mobile?: boolean;
-  isPlaying: boolean;
   handleChangePlaying: () => void;
+  timer: number;
 };
 
 export const ModalStorie = ({
@@ -25,7 +25,7 @@ export const ModalStorie = ({
   post_url,
   music,
   created_at,
-  isPlaying,
+  timer,
   handleChangePlaying,
 }: ModalStorieProps & Storie) => {
   const ref = useRef(document.body);
@@ -86,11 +86,11 @@ export const ModalStorie = ({
         <div className="relative">
           <div className="z-50 relative top-0 left-0 w-full p-4 flex flex-col gap-3">
             <progress
-              value={5}
-              max={100}
-              className="bg-stone-300 h-[2px] rounded-md accent-stone-50"
+              value={timer}
+              max={25}
+              className="bg-stone-400 h-[3px] rounded-md accent-stone-50"
             >
-              1%
+              {timer}%
             </progress>
             <div className="flex items-center gap-2">
               <img
@@ -126,6 +126,7 @@ export const ModalStorie = ({
                   modifier="close"
                   onClick={() => {
                     handlePlayPause();
+                    handleChangePlaying();
                   }}
                 >
                   {played ? (

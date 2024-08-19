@@ -9,8 +9,10 @@ type DesktopSwiperProps = {
   changeSlide: (id: number) => void;
   stories?: Stories;
   setSwiper: Dispatch<SetStateAction<SwiperType | null>>;
-  isPlaying: boolean;
   handleChangePlaying: () => void;
+  isPlaying: boolean;
+  timer: number;
+  resetTimer: () => void;
 };
 
 export const DesktopSwiper = ({
@@ -18,8 +20,9 @@ export const DesktopSwiper = ({
   changeSlide,
   stories,
   setSwiper,
-  isPlaying,
   handleChangePlaying,
+  timer,
+  resetTimer,
 }: DesktopSwiperProps) => {
   return (
     <Swiper
@@ -29,7 +32,6 @@ export const DesktopSwiper = ({
       centeredSlides={true}
       initialSlide={initialSlide}
       slideToClickedSlide={true}
-      autoplay={{ delay: 20000 }}
       autoHeight={true}
       keyboard={{ enabled: true }}
       breakpoints={{
@@ -39,6 +41,7 @@ export const DesktopSwiper = ({
       }}
       onSlideChange={(ev) => {
         changeSlide(ev.clickedIndex);
+        resetTimer();
       }}
     >
       {stories?.map((storie, id) => {
@@ -50,8 +53,8 @@ export const DesktopSwiper = ({
             <ModalStorie
               active={id === initialSlide}
               {...storie}
-              isPlaying={isPlaying}
               handleChangePlaying={handleChangePlaying}
+              timer={timer}
             />
           </SwiperSlide>
         );
