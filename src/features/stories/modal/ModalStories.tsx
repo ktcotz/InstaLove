@@ -76,7 +76,16 @@ export const ModalStories = () => {
           resetTimer={() => setTimer(0)}
         />
       ) : (
-        <MobileSwiper stories={stories} setSwiper={setSwiper} />
+        <MobileSwiper
+          stories={stories}
+          setSwiper={setSwiper}
+          initialSlide={initialSlide}
+          changeSlide={(slide) => setInitialSlide(slide)}
+          handleChangePlaying={handleChangePlaying}
+          timer={timer}
+          isPlaying={isPlaying}
+          resetTimer={() => setTimer(0)}
+        />
       )}
     </div>
   );
