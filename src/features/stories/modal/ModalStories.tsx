@@ -9,9 +9,9 @@ import { Swiper } from "swiper/types";
 export const ModalStories = () => {
   const { stories, isLoading } = useGetAllStories();
   const [swiper, setSwiper] = useState<Swiper | null>(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [initialSlide, setInitialSlide] = useState(0);
   const isLaptop = useMediaQuery("(min-width:1024px)");
-
   const ref = useRef(document.body);
 
   const handleSwiperSlide = (ev: KeyboardEvent) => {
@@ -30,6 +30,9 @@ export const ModalStories = () => {
     }
   };
 
+  const handleChangePlaying = () => {
+    setIsPlaying((prev) => !prev);
+  };
 
   useEventListener("keydown", handleSwiperSlide, ref);
 
@@ -48,6 +51,8 @@ export const ModalStories = () => {
           changeSlide={(slide) => setInitialSlide(slide)}
           stories={stories}
           setSwiper={setSwiper}
+          isPlaying={isPlaying}
+          handleChangePlaying={handleChangePlaying}
         />
       ) : (
         <MobileSwiper stories={stories} setSwiper={setSwiper} />

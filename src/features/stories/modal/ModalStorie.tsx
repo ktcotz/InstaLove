@@ -3,15 +3,18 @@ import { useUserByID } from "../../authentication/queries/useUserByID";
 import { Storie } from "../schema/StorieSchema";
 import { getDateFnsLocaleByActiveLanguage } from "../../posts/helpers/dateLocale";
 import { Button } from "../../../ui/Button";
-import { FaMusic, FaPlay } from "react-icons/fa";
+import { FaMusic, FaPause, FaPlay } from "react-icons/fa";
 import { useGetYoutubeTitle } from "../queries/useGetYoutubeTitle";
 import ReactPlayer from "react-player";
 import { GoMute, GoUnmute } from "react-icons/go";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useEventListener } from "usehooks-ts";
 
 type ModalStorieProps = {
   active?: boolean;
   mobile?: boolean;
+  isPlaying: boolean;
+  handleChangePlaying: () => void;
 };
 
 export const ModalStorie = ({
@@ -22,10 +25,31 @@ export const ModalStorie = ({
   post_url,
   music,
   created_at,
+  isPlaying,
+  handleChangePlaying,
 }: ModalStorieProps & Storie) => {
+  const ref = useRef(document.body);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [muted, setMuted] = useState(true);
+  const [played, setPlayed] = useState(false);
   const { user } = useUserByID(user_id);
   const { title } = useGetYoutubeTitle(music);
-  const [muted, setMuted] = useState(true);
+
+  const handlePlayPause = () => {
+    const toggled = !played;
+    setPlayed(toggled);
+    setupVideo(toggled);
+  };
+
+  const setupVideo = useCallback((play: boolean) => {
+    if (!videoRef) return;
+
+    if (play) {
+      videoRef.current?.play();
+    } else {
+      videoRef.current?.pause();
+    }
+  }, []);
 
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
@@ -35,10 +59,18 @@ export const ModalStorie = ({
     : null;
 
   useEffect(() => {
-    if (!active) {
-      setMuted(true);
-    }
-  }, [active]);
+    setMuted(true);
+    setPlayed(!!active);
+    setupVideo(!!active);
+  }, [active, setupVideo]);
+
+  useEventListener(
+    "keydown",
+    ({ key }) => {
+      if (key === "m" || key === "M") setMuted((prev) => !prev);
+    },
+    ref
+  );
 
   return (
     <div
@@ -84,14 +116,23 @@ export const ModalStorie = ({
                       height={0}
                       width={0}
                       muted={muted}
-                      playing={true}
+                      playing={played}
                     />
                   </>
                 )}
               </div>
               <div className="ml-auto flex gap-4">
-                <Button modifier="close">
-                  <FaPlay className="text-stone-50" />
+                <Button
+                  modifier="close"
+                  onClick={() => {
+                    handlePlayPause();
+                  }}
+                >
+                  {played ? (
+                    <FaPause className="text-stone-50" />
+                  ) : (
+                    <FaPlay className="text-stone-50" />
+                  )}
                 </Button>
                 {(video_url || music) && (
                   <Button
@@ -133,7 +174,7 @@ export const ModalStorie = ({
           <video
             loop
             muted={muted}
-            autoPlay
+            ref={videoRef}
             className="h-full w-full object-cover pointer-events-none"
           >
             <source src={video_url} type="video/mp4" />
