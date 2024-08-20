@@ -20,7 +20,8 @@ export type CustomLinkModifier =
   | "post-avatar"
   | "notification"
   | "reel"
-  | "explore";
+  | "explore"
+  | "mobile-notification";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -60,6 +61,7 @@ export const CustomLink = ({
     notification: "flex items-center gap-3",
     reel: "text-stone-50 transition hover:text-stone-100",
     explore: "",
+    "mobile-notification": "text-2xl relative ",
   };
 
   const className = twMerge(base, modifiers[modifier]);

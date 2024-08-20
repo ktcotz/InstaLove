@@ -100,7 +100,7 @@ export const DashboardNavigationItem = ({
           {title === "navigation.create" && (
             <>
               <Modal.Content>
-                <CreatePost />
+                <CreatePost type="normal" />
               </Modal.Content>
               <Modal.Open>
                 <Button

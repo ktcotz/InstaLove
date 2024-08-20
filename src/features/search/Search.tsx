@@ -7,23 +7,30 @@ import { SearchUser } from "./SearchUser";
 import { SearchUserProfiles } from "./SearchUserProfiles";
 import { useUser } from "../authentication/queries/useUser";
 
-export const Search = () => {
+type SearchProps = {
+  home?: boolean;
+};
+
+export const Search = ({ home }: SearchProps) => {
   const [query, setQuery] = useState("");
   const { user: current } = useUser();
   const { users, isLoading } = useGetAllUsersByQuery(query);
+  const [isFocused, setIsFocused] = useState(false);
 
   const handleQuery = (val: string) => {
     setQuery(val);
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-3xl font-semibold mb-4">Search</h2>
-      <div className="relative mb-4">
+    <div className="relative p-4">
+      {!home && <h2 className="text-3xl font-semibold mb-4">Search</h2>}
+      <div className={`relative ${home ? "" : "mb-4"}`}>
         <SearchInput
           query={query}
           handleQuery={handleQuery}
           modifier="with-reset"
+          upFocus={() => setIsFocused(true)}
+          downFocus={() => setIsFocused(false)}
         />
 
         {query && (
@@ -38,16 +45,36 @@ export const Search = () => {
           </div>
         )}
       </div>
-      <div className="flex flex-col gap-1">
-        {users?.map((user) => (
-          <SearchUser key={user.id} {...user} currentID={current?.id} />
-        ))}
+      {isFocused && (
+        <>
+          <div
+            className={`flex flex-col gap-1 ${
+              home
+                ? "absolute bottom-0 translate-y-full w-full z-50 bg-stone-50 left-0"
+                : ""
+            }`}
+          >
+            {users?.map((user) => (
+              <SearchUser key={user.id} {...user} currentID={current?.id} />
+            ))}
 
-        {!isLoading && users && users.length === 0 && (
-          <p className="text-xl font-medium text-stone-950">Brak wyników</p>
-        )}
-      </div>
-      {!query && <SearchUserProfiles />}
+            {!isLoading && users && users.length === 0 && (
+              <p className="text-xl font-medium text-stone-950">Brak wyników</p>
+            )}
+          </div>
+          {!query && (
+            <div
+              className={`${
+                home
+                  ? "absolute bottom-0 translate-y-full left-0 w-full z-50 bg-stone-50 p-4 rounded-md"
+                  : ""
+              }`}
+            >
+              <SearchUserProfiles />
+            </div>
+          )}
+        </>
+      )}
     </div>
   );
 };

@@ -1,7 +1,3 @@
-2. Stories
-
-- Auto play i progress, po kliknięciu w play, pokazuje się pause i stopuje autoplay. Stopuje sie też video o ile jest.
-
 3. Strona główna.
 
 4. Zod.

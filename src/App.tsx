@@ -24,6 +24,7 @@ import { Posts } from "./pages/Dashboard/Profile/Posts";
 import { Reels } from "./pages/Dashboard/Profile/Reels";
 import { Bookmarks } from "./pages/Dashboard/Profile/Bookmarks";
 import { DashboardIndividualPost } from "./pages/Dashboard/DashboardIndividualPost";
+import { DashboardNotifications } from "./pages/Dashboard/DashboardNotifications";
 
 const router = createBrowserRouter([
   {
@@ -87,6 +88,10 @@ const router = createBrowserRouter([
       {
         path: GlobalRoutes.DashboardMessages,
         element: <DashboardMessages />,
+      },
+      {
+        path: GlobalRoutes.DashboardNotifications,
+        element: <DashboardNotifications />,
       },
       {
         path: GlobalRoutes.DashboardProfile,

@@ -6,6 +6,8 @@ type SearchInputProps = {
   query: string;
   handleQuery: (value: string) => void;
   modifier?: SearchInputModifier;
+  upFocus: () => void;
+  downFocus: () => void;
 };
 
 export type SearchQuery = {
@@ -16,6 +18,8 @@ export const SearchInput = ({
   query,
   handleQuery,
   modifier,
+  upFocus,
+  downFocus,
 }: SearchInputProps) => {
   return (
     <div className="relative">
@@ -28,6 +32,8 @@ export const SearchInput = ({
         required
         value={query}
         onChange={(ev) => handleQuery(ev.target.value)}
+        onClick={upFocus}
+        onBlur={downFocus}
       />
       <label
         htmlFor="search"

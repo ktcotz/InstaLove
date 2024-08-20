@@ -10,7 +10,7 @@ export const Dashboard = () => {
         <ComponentManager />
       </aside>
       <main className="relative top-0 min-h-screen md:pl-20 lg:pl-60 bg-stone-50">
-        <div className="py-12">
+        <div className="py-0 md:py-12">
           <Outlet />
         </div>
       </main>
