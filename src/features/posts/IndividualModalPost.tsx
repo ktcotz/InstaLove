@@ -13,11 +13,15 @@ import { PostsContextProvider } from "./context/PostsContext";
 
 type IndividualModalPostProps = {
   post: GeneralPost;
+  main?: boolean;
 };
 
 export const MAX_COMMENTS_POST = 12;
 
-export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
+export const IndividualModalPost = ({
+  post,
+  main,
+}: IndividualModalPostProps) => {
   const { user: currentUser } = useUser();
   const { user } = useUserByID(post.user_id);
   const { addView } = useAddView({
@@ -48,7 +52,11 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
         <div
           className={`grid ${
             "video_url" in post ? "grid-rows-5" : "grid-rows-3"
-          } sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 bg-stone-50 rounded-md shadow-lg h-[800px] mt-3`}
+          }  bg-stone-50 rounded-md ${
+            main
+              ? "grid-rows-1"
+              : "shadow-lg sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5"
+          } h-[800px] max-h-[800px] mt-3`}
         >
           <div
             style={
@@ -69,6 +77,8 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
           <div
             className={`${
               "video_url" in post ? "row-start-3" : "row-start-2"
+            } ${
+              main ? "-row-end-1 col-start-4 -col-end-1" : ""
             } -row-end-1 col-start-4 -col-end-1 flex flex-col relative h-full sm:row-start-auto sm:row-end-auto`}
           >
             <div className="flex items-center gap-3 border-b border-stone-300 py-5 px-4">

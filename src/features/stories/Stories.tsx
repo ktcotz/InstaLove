@@ -16,19 +16,19 @@ export const Stories = () => {
     <div className="flex md:gap-3  justify-start md:justify-center xl:justify-start border-b border-stone-300 py-4">
       {stories && stories.length > 0 ? (
         <Swiper
-          slidesPerView={2}
+          slidesPerView={4}
           navigation={true}
           modules={[Navigation]}
-          className="flex self-start gap-4 px-20 w-full"
+          className="flex self-start gap-4 w-full"
           breakpoints={{
             360: {
-              slidesPerView: 3,
+              slidesPerView: 5,
             },
             500: {
-              slidesPerView: 4,
+              slidesPerView: 6,
             },
             768: {
-              slidesPerView: 8,
+              slidesPerView: 10,
             },
           }}
         >
@@ -36,8 +36,8 @@ export const Stories = () => {
             <AddStorie />
           </SwiperSlide>
           {stories?.map((storie) => (
-            <SwiperSlide>
-              <Storie key={storie.id} {...storie} />
+            <SwiperSlide key={storie.id}>
+              <Storie {...storie} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -6,6 +6,7 @@ import { Search } from "../../features/search/Search";
 import { CustomLink } from "../../ui/CustomLink";
 import { NotificationsCounter } from "../../features/notifications/NotificationsCounter";
 import { FaHeart } from "react-icons/fa";
+import { MainScreenPosts } from "../../features/posts/MainScreenPosts";
 
 export const DashboardHome = () => {
   const isLaptop = useMediaQuery("(min-width:1280px)");
@@ -27,8 +28,9 @@ export const DashboardHome = () => {
             </CustomLink>
           </div>
         )}
-        <div className="xl:col-start-1 xl:col-end-3 overflow-x-hidden">
+        <div className="xl:col-start-1 xl:col-end-3 overflow-x-hidden flex flex-col gap-6 pb-60">
           <Stories />
+          <MainScreenPosts />
         </div>
         {isLaptop && <HomeProfile />}
       </div>
