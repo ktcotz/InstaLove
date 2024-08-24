@@ -54,7 +54,7 @@ export const IndividualModalPost = ({
             "video_url" in post ? "grid-rows-5" : "grid-rows-3"
           }  bg-stone-50 rounded-md ${
             main
-              ? "grid-rows-1"
+              ? "grid-rows-7"
               : "shadow-lg sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5"
           } h-[800px] max-h-[800px] mt-3`}
         >
@@ -66,7 +66,9 @@ export const IndividualModalPost = ({
             }
             className={`${
               "video_url" in post ? "row-start-1 row-end-3" : ""
-            } bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100`}
+            } bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100 ${
+              main ? "row-start-1 row-end-4" : ""
+            }`}
           >
             {post.video_url && (
               <video loop muted autoPlay className="h-full w-full object-cover">
@@ -77,9 +79,11 @@ export const IndividualModalPost = ({
           <div
             className={`${
               "video_url" in post ? "row-start-3" : "row-start-2"
-            } ${
-              main ? "-row-end-1 col-start-4 -col-end-1" : ""
-            } -row-end-1 col-start-4 -col-end-1 flex flex-col relative h-full sm:row-start-auto sm:row-end-auto`}
+            }  -row-end-1 col-start-4 -col-end-1 flex flex-col relative h-full ${
+              main
+                ? "row-start-4 -row-end-1"
+                : "sm:row-start-auto sm:row-end-auto"
+            }`}
           >
             <div className="flex items-center gap-3 border-b border-stone-300 py-5 px-4">
               <img
@@ -95,7 +99,9 @@ export const IndividualModalPost = ({
             </div>
             <>
               <div
-                className={`flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 pb-20`}
+                className={`flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 ${
+                  main ? "pb-48" : "pb-20"
+                }`}
               >
                 {post.description && (
                   <Comment
