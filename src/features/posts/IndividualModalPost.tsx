@@ -48,7 +48,21 @@ export const IndividualModalPost = ({
 
   return (
     <PostsContextProvider>
-      <Wrapper>
+      <Wrapper modifier={main ? "main-posts" : "primary"}>
+        {main && (
+          <div className="flex items-center gap-3  py-2 px-4">
+            <img
+              src={user.avatar_url}
+              alt={user.fullName}
+              width={40}
+              height={40}
+              className="rounded-full w-10 h-10"
+            />
+            <h2 className="font-semibold text-sm text-stone-900">
+              {user.user_name}
+            </h2>
+          </div>
+        )}
         <div
           className={`grid ${
             "video_url" in post ? "grid-rows-5" : "grid-rows-3"
@@ -85,18 +99,20 @@ export const IndividualModalPost = ({
                 : "sm:row-start-auto sm:row-end-auto"
             }`}
           >
-            <div className="flex items-center gap-3 border-b border-stone-300 py-5 px-4">
-              <img
-                src={user.avatar_url}
-                alt={user.fullName}
-                width={40}
-                height={40}
-                className="rounded-full w-10 h-10"
-              />
-              <h2 className="font-semibold text-sm text-stone-900">
-                {user.user_name}
-              </h2>
-            </div>
+            {main ? null : (
+              <div className="flex items-center gap-3 border-b border-stone-300 py-5 px-4">
+                <img
+                  src={user.avatar_url}
+                  alt={user.fullName}
+                  width={40}
+                  height={40}
+                  className="rounded-full w-10 h-10"
+                />
+                <h2 className="font-semibold text-sm text-stone-900">
+                  {user.user_name}
+                </h2>
+              </div>
+            )}
             <>
               <div
                 className={`flex flex-col gap-6 text-stone-900 max-h-[600px] overflow-y-scroll p-4 ${

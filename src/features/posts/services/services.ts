@@ -13,7 +13,11 @@ import {
   OnlyCommentsSchema,
 } from "../schema/CommentSchema";
 import { Like, LikesSchema } from "../schema/LikeSchema";
-import { PostsReelsSchema, PostsSchema } from "../schema/PostsSchema";
+import {
+  GeneralsPostsSchema,
+  PostsReelsSchema,
+  PostsSchema,
+} from "../schema/PostsSchema";
 
 type SupabasePost = {
   post_image: File;
@@ -286,8 +290,6 @@ export const manageBookmark = async (bookmark: Bookmark) => {
     .insert([insertBookmark])
     .select();
 
-  console.log(error);
-
   if (error) {
     throw new CustomError({
       message: error.message,
@@ -302,8 +304,6 @@ export const getBookmarks = async ({ user_id }: UserID) => {
     .from("bookmarks")
     .select("*,post_id(*),reel_id(*)")
     .eq("user_id", user_id);
-
-  console.log(bookmarks);
 
   if (error) {
     throw new CustomError({
@@ -404,4 +404,32 @@ export const getNestedComments = async ({
   const parsed = OnlyCommentsSchema.parse(comments);
 
   return parsed;
+};
+
+export const getAllResources = async () => {
+  const { data: posts, error } = await supabase.from("posts").select("*");
+
+  const { data: reels, error: reelsError } = await supabase
+    .from("reels")
+    .select("*");
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  if (reelsError) {
+    throw new CustomError({
+      message: reelsError.message,
+    });
+  }
+
+  const combined = [...posts, ...reels];
+
+  if (combined.length === 0) return [];
+
+  const parsed = GeneralsPostsSchema.parse(combined);
+
+  return parsed.sort(() => Math.random() - 0.5);
 };
