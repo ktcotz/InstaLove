@@ -12,6 +12,7 @@ PROCES :
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI\*UX :
 
-- Wrapper.
+- Home i wszystkie podkomponenty.
+- Login Form.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.

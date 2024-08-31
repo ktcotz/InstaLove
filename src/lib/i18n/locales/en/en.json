@@ -12,7 +12,7 @@
   },
   "validation": {
     "email-required": "Email is required!",
-    "email-invalid": "Email is invalid, correct!",
+    "email-invalid": "Email is invalid!",
     "password-required": "Password is required!",
     "password-min-length": "Password must be more than 6 characters.",
     "password-not-match": "Passwords don't match.",
@@ -48,7 +48,8 @@
   },
   "utils": {
     "divider": "Or",
-    "home-text": "Log in and enjoy full InstaLove for free."
+    "home-text": "Log in and enjoy full InstaLove for free.",
+    "logo-label": "Home page of InstaLove"
   },
   "navigation": {
     "home": "Home",

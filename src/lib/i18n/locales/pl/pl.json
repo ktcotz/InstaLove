@@ -37,7 +37,7 @@
   "form": {
     "hide-password-label": "Schowaj hasło",
     "show-password-label": "Pokaż hasło",
-    "email-label": "Adres e-mail",
+    "email-label": "Adres email",
     "password-label": "Hasło",
     "confirm-password-label": "Potwierdź hasło",
     "login-submit": "Zaloguj się",
@@ -48,7 +48,8 @@
   },
   "utils": {
     "divider": "Lub",
-    "home-text": "Zaloguj się i korzystaj z pełni InstaLove za darmo."
+    "home-text": "Zaloguj się i korzystaj z pełni InstaLove za darmo.",
+    "logo-label": "Strona główna InstaLove"
   },
   "navigation": {
     "home": "Strona główna",

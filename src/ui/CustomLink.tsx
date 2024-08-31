@@ -41,9 +41,9 @@ export const CustomLink = ({
 
   const modifiers: Record<CustomLinkModifier, string> = {
     primary:
-      "rounded-sm flex items-center justify-center bg-blue-600 px-3 py-1 sm:px-4 sm:py-2 hover:bg-blue-700 transition text-stone-50",
+      "rounded-sm flex items-center justify-center bg-blue-600 px-3 py-1 sm:px-4 sm:py-2 hover:bg-blue-700 transition text-stone-50 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-blue-600",
     logo: "inline-block",
-    text: "text-stone-600 flex items-center justify-center gap-2 hover:text-blue-600 transition",
+    text: "text-stone-600 flex items-center justify-center gap-2 hover:text-stone-800 focus:text-stone-800 transition",
     link: "text-blue-600 hover:text-blue-700 transition",
     ["small-text"]: "text-sm text-stone-800",
     ["small-logo"]: "text-2xl",

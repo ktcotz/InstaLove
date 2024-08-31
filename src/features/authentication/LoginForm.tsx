@@ -44,7 +44,6 @@ export const LoginForm = () => {
               id="email"
               required
               type="text"
-              autoComplete="email"
               isError={errors?.email?.message}
               {...register("email")}
             />
