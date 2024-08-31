@@ -1,9 +1,17 @@
-3. Strona główna.
+DO ZROBIENIA :
 
-4. Zod.
+- STORIES
+- STRONA GŁÓWNA
+- ACCESIBILITY I ZOD
+- TESTY
+- UI&UX
 
-5. Responsivity.
+PROCES :
 
-6. Refaktor projektu & testy.
+1. Stories
+
+Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI\*UX :
+
+- Wrapper.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.
