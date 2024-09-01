@@ -16,7 +16,6 @@ export const LoginForm = () => {
     handleSubmit,
     formState: { errors },
     register,
-    reset,
   } = useForm<LoginSchema>({
     resolver: zodResolver(LoginFormSchema),
   });
@@ -25,14 +24,7 @@ export const LoginForm = () => {
   const { isPasswordShow } = useFormContext();
 
   const submitHandler = ({ email, password }: LoginSchema) => {
-    login(
-      { email, password },
-      {
-        onSuccess: () => {
-          reset();
-        },
-      }
-    );
+    login({ email, password });
   };
 
   return (
@@ -45,6 +37,7 @@ export const LoginForm = () => {
               required
               type="text"
               isError={errors?.email?.message}
+              aria-invalid={!!errors?.email?.message}
               {...register("email")}
             />
             <Form.Label id="email">{t("form.email-label")}</Form.Label>
@@ -60,6 +53,7 @@ export const LoginForm = () => {
               type={`${isPasswordShow ? "text" : "password"}`}
               required
               isError={errors?.password?.message}
+              aria-invalid={!!errors?.password?.message}
               {...register("password")}
             />
             <Form.Label id="password">{t("form.password-label")}</Form.Label>

@@ -1,5 +1,5 @@
-import { render } from "@testing-library/react";
-import { describe, expect, test } from "vitest";
+import { render, waitFor } from "@testing-library/react";
+import { describe, expect, test, vitest } from "vitest";
 import { screen } from "@testing-library/react";
 import { LoginForm } from "../LoginForm";
 import { MemoryRouter } from "react-router";
@@ -23,10 +23,23 @@ const renderFormWithProviders = () => {
   );
 };
 
+const loginFnMock = vitest.fn();
+
+vitest.mock("./../mutations/useLogin.ts", () => {
+  return {
+    useLogin: () => {
+      return {
+        login: loginFnMock,
+        isLogin: false,
+        loginError: null,
+      };
+    },
+  };
+});
+
 describe("Login Form component testing suite", () => {
   test("Should correctly render initially.", () => {
     renderFormWithProviders();
-
     const emailInput = screen.getByRole("textbox", { name: /email/i });
     const passwordInput = screen.getByLabelText(/Password/);
 
@@ -56,5 +69,28 @@ describe("Login Form component testing suite", () => {
 
     expect(screen.getByText(INVALID_EMAIL_MESSAGE)).toBeInTheDocument();
     expect(screen.getByText(INVALID_PASSWORD_MESSAGE)).toBeInTheDocument();
+  });
+
+  test("Should login correctly when provided valid data.", async () => {
+    renderFormWithProviders();
+
+    const VALID_EMAIL = "kamil123@wp.pl";
+    const VALID_PASSWORD = "mojesuperhasło";
+
+    const emailInput = screen.getByRole("textbox", { name: /email/i });
+    const passwordInput = screen.getByLabelText(/Password/g);
+    const submitButton = screen.getByRole("button", { name: /login/i });
+
+    await userEvent.type(emailInput, VALID_EMAIL);
+    await userEvent.type(passwordInput, VALID_PASSWORD);
+
+    await userEvent.click(submitButton);
+
+    await waitFor(() => {
+      expect(loginFnMock).toHaveBeenCalledWith({
+        email: VALID_EMAIL,
+        password: VALID_PASSWORD,
+      });
+    });
   });
 });

@@ -5,7 +5,6 @@ import { GlobalRoutes } from "../typing/routes";
 import { AnimatedImages } from "../ui/AnimatedImages";
 import { Container } from "../ui/Container";
 import { CustomLink } from "../ui/CustomLink";
-import { Logo } from "../ui/Logo";
 import { Wrapper } from "../ui/Wrapper";
 import { useMediaQuery } from "usehooks-ts";
 
@@ -25,9 +24,6 @@ export const Home = () => {
             {!isTablet && <AnimatedImages />}
             <div className="animate-fade-bottom lg:animate-fade-right w-full lg:w-4/5">
               <Container>
-                <div className="mb-12">
-                  <Logo />
-                </div>
                 <LoginForm />
               </Container>
               <div className="p-4 border border-stone-300 text-center mt-4">

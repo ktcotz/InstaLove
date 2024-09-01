@@ -45,7 +45,7 @@ export const CustomLink = ({
     logo: "inline-block",
     text: "text-stone-600 flex items-center justify-center gap-2 hover:text-stone-800 focus:text-stone-800 transition",
     link: "text-blue-600 hover:text-blue-700 transition",
-    ["small-text"]: "text-sm text-stone-800",
+    ["small-text"]: "text-sm text-stone-800 hover:text-stone-900",
     ["small-logo"]: "text-2xl",
     navigation:
       "flex items-center gap-4 p-3 hover:bg-stone-200 transition group",
