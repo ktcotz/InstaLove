@@ -1,5 +1,5 @@
+import { Loader, Form } from "./../../ui";
 import { useFormContext } from "../../ui/form/context/useFormContext";
-import { Form } from "../../ui/form/Form";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
@@ -9,14 +9,12 @@ import {
 import { useTranslation } from "react-i18next";
 import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
 import { useRegister } from "./mutations/useRegister";
-import { Loader } from "../../ui/Loader";
 
 export const RegisterForm = () => {
   const {
     handleSubmit,
     formState: { errors },
     register,
-    reset,
   } = useForm<RegisterSchema>({
     resolver: zodResolver(RegisterFormSchema),
   });
@@ -27,14 +25,7 @@ export const RegisterForm = () => {
   const { isPasswordShow } = useFormContext();
 
   const submitHandler = ({ email, password, nickname }: RegisterSchema) => {
-    signup(
-      { email, password, nickname },
-      {
-        onSuccess: () => {
-          reset();
-        },
-      }
-    );
+    signup({ email, password, nickname });
   };
 
   return (
@@ -46,8 +37,8 @@ export const RegisterForm = () => {
               id="email"
               required
               type="text"
-              autoComplete="email"
               isError={errors?.email?.message}
+              aria-invalid={!!errors?.email?.message}
               {...register("email")}
             />
             <Form.Label id="email">{t("form.email-label")}</Form.Label>
@@ -63,6 +54,7 @@ export const RegisterForm = () => {
               required
               type="text"
               isError={errors?.nickname?.message}
+              aria-invalid={!!errors?.nickname?.message}
               {...register("nickname")}
             />
             <Form.Label id="nickname">{t("form.nickname-label")}</Form.Label>
@@ -80,6 +72,7 @@ export const RegisterForm = () => {
               type={`${isPasswordShow ? "text" : "password"}`}
               required
               isError={errors?.password?.message}
+              aria-invalid={!!errors?.password?.message}
               {...register("password")}
             />
             <Form.Label id="password">{t("form.password-label")}</Form.Label>
@@ -100,6 +93,7 @@ export const RegisterForm = () => {
               type="password"
               required
               {...register("confirmPassword")}
+              aria-invalid={!!errors?.confirmPassword?.message}
             />
             <Form.Label id="confirmPassword">
               {t("form.confirm-password-label")}

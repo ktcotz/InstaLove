@@ -1,22 +1,19 @@
-import { Form } from "../../ui/form/Form";
+import { Form, Loader } from "./../../ui";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
-
 import {
   ForgotPasswordSchema,
   ForgotSchema,
 } from "./schema/ForgotPasswordSchema";
 import { useForgotPassword } from "./mutations/useForgotPassword";
-import { Loader } from "../../ui/Loader";
 
 export const ForgotPasswordForm = () => {
   const {
     handleSubmit,
     formState: { errors },
     register,
-    reset,
   } = useForm<ForgotSchema>({
     resolver: zodResolver(ForgotPasswordSchema),
   });
@@ -24,14 +21,7 @@ export const ForgotPasswordForm = () => {
   const { t } = useTranslation();
 
   const submitHandler = ({ email }: ForgotSchema) => {
-    forgot(
-      { email },
-      {
-        onSuccess: () => {
-          reset();
-        },
-      }
-    );
+    forgot({ email });
   };
 
   return (
@@ -43,8 +33,8 @@ export const ForgotPasswordForm = () => {
               id="email"
               required
               type="text"
-              autoComplete="email"
               isError={errors?.email?.message}
+              aria-invalid={!!errors?.email?.message}
               {...register("email")}
             />
             <Form.Label id="email">{t("form.email-label")}</Form.Label>

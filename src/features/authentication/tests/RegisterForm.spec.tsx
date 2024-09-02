@@ -10,19 +10,17 @@ import i18n from "./../../../lib/i18n/i18n";
 import { userEvent } from "@testing-library/user-event";
 
 const renderFormWithProviders = () => {
-  return render(<LoginForm />, {
-    wrapper: ({ children }) => {
-      return (
-        <MemoryRouter initialEntries={["/login"]}>
-          <CustomQueryClientProvider>
-            <FormContextProvider>
-              <I18nextProvider i18n={i18n}>{children}</I18nextProvider>
-            </FormContextProvider>
-          </CustomQueryClientProvider>
-        </MemoryRouter>
-      );
-    },
-  });
+  return render(
+    <MemoryRouter initialEntries={["/login"]}>
+      <CustomQueryClientProvider>
+        <FormContextProvider>
+          <I18nextProvider i18n={i18n}>
+            <LoginForm />
+          </I18nextProvider>
+        </FormContextProvider>
+      </CustomQueryClientProvider>
+    </MemoryRouter>
+  );
 };
 
 const loginFnMock = vitest.fn();

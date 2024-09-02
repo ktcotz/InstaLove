@@ -2,32 +2,19 @@ import { supabase } from "../../../lib/supabase/supabase";
 import { GlobalRoutes } from "../../../typing/routes";
 import { CustomError } from "../../../utils/CustomErrors";
 import { ProfileSchema } from "../../profile/schema/ProfilesSchema";
-
-type UserCredentials = {
-  email: string;
-  password: string;
-};
-
-type UserExtraData = {
-  nickname: string;
-  avatar_url?: string;
-};
-
-export type UserID = {
-  user_id?: string;
-};
+import { User, UserCredentials, UserID, UserPrivate } from "./types";
 
 export const registerWithPassword = async ({
   email,
   password,
   nickname,
-}: UserCredentials & UserExtraData) => {
+}: User) => {
   const { data: users } = await supabase
     .from("users")
     .select("*")
     .eq("user_name", nickname);
 
-  if (users!.length > 0) {
+  if (users && users.length > 0) {
     throw new CustomError({
       message: "Username is taken.",
       code: 422,
@@ -77,7 +64,7 @@ const addUser = async ({
   nickname,
   user_id,
   avatar_url,
-}: UserExtraData & UserID) => {
+}: UserPrivate & UserID) => {
   if (!user_id) return;
 
   const { data: users } = await supabase
@@ -87,16 +74,11 @@ const addUser = async ({
 
   if (users!.length > 0) return;
 
-  const { data: invalidUsers } = await supabase
-    .from("users")
-    .select("*")
-    .eq("user_name", nickname);
-
   const { data, error } = await supabase
     .from("users")
     .insert([
       {
-        user_name: invalidUsers!.length > 0 ? `${nickname}-github` : nickname,
+        user_name: nickname,
         user_id,
         fullName: "",
         biogram: "",
@@ -132,9 +114,7 @@ export const loginUser = async ({ email, password }: UserCredentials) => {
   return data;
 };
 
-export const forgotPassword = async ({
-  email,
-}: Pick<UserCredentials, "email">) => {
+export const forgotPassword = async ({ email }: Pick<User, "email">) => {
   const { data, error } = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: `http://localhost:5173${GlobalRoutes.ResetPassword}`,
   });
@@ -149,9 +129,7 @@ export const forgotPassword = async ({
   return data;
 };
 
-export const updatePassword = async ({
-  password,
-}: Pick<UserCredentials, "password">) => {
+export const updatePassword = async ({ password }: Pick<User, "password">) => {
   const { data, error } = await supabase.auth.updateUser({
     password,
   });

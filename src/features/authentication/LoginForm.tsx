@@ -1,15 +1,12 @@
-import { GlobalRoutes } from "../../typing/routes";
-import { CustomLink } from "../../ui/CustomLink";
-import { Divider } from "../../ui/Divider";
+import { Divider, CustomLink, Form, Loader } from "./../../ui";
 import { useFormContext } from "../../ui/form/context/useFormContext";
-import { Form } from "../../ui/form/Form";
 import { useForm } from "react-hook-form";
-import { LoginFormSchema, LoginSchema } from "./schema/LoginFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useTranslation } from "react-i18next";
+import { LoginFormSchema, LoginSchema } from "./schema/LoginFormSchema";
 import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
+import { useTranslation } from "react-i18next";
 import { useLogin } from "./mutations/useLogin";
-import { Loader } from "../../ui/Loader";
+import { GlobalRoutes } from "../../typing/routes";
 
 export const LoginForm = () => {
   const {
