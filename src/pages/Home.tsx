@@ -27,12 +27,12 @@ export const Home = () => {
                 <LoginForm />
               </Container>
               <div className="p-4 border border-stone-300 text-center mt-4">
-                <p className="text-stone-600 font-semibold">
-                  {t("home.no-account")}{" "}
-                  <CustomLink to={GlobalRoutes.Register} modifier="link">
-                    {t("links.register")}
-                  </CustomLink>
+                <p className="text-stone-600 font-semibold ">
+                  {t("home.no-account")}
                 </p>
+                <CustomLink to={GlobalRoutes.Register} modifier="link">
+                  {t("links.register")}
+                </CustomLink>
               </div>
             </div>
           </div>
