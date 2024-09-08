@@ -1,5 +1,5 @@
-import { render, waitFor } from "@testing-library/react";
-import { describe, expect, test, vitest } from "vitest";
+import { render, waitForElementToBeRemoved } from "@testing-library/react";
+import { describe, expect, test } from "vitest";
 import { screen } from "@testing-library/react";
 import { LoginForm } from "../LoginForm";
 import { MemoryRouter } from "react-router";
@@ -25,20 +25,6 @@ const renderFormWithProviders = () => {
   });
 };
 
-const loginFnMock = vitest.fn();
-
-vitest.mock("./../mutations/useLogin.ts", () => {
-  return {
-    useLogin: () => {
-      return {
-        login: loginFnMock,
-        isLogin: false,
-        loginError: null,
-      };
-    },
-  };
-});
-
 describe("Login Form component testing suite", () => {
   test("Should correctly render initially.", () => {
     renderFormWithProviders();
@@ -53,6 +39,7 @@ describe("Login Form component testing suite", () => {
 
   test("Should render correctly errors when trying to submit invalid data.", async () => {
     renderFormWithProviders();
+    const user = userEvent.setup();
 
     const INVALID_EMAIL = "asd";
     const INVALID_PASSWORD = "cos";
@@ -64,10 +51,10 @@ describe("Login Form component testing suite", () => {
     const passwordInput = screen.getByLabelText(/Password/g);
     const submitButton = screen.getByRole("button", { name: /login/i });
 
-    await userEvent.type(emailInput, INVALID_EMAIL);
-    await userEvent.type(passwordInput, INVALID_PASSWORD);
+    await user.type(emailInput, INVALID_EMAIL);
+    await user.type(passwordInput, INVALID_PASSWORD);
 
-    await userEvent.click(submitButton);
+    await user.click(submitButton);
 
     expect(screen.getByText(INVALID_EMAIL_MESSAGE)).toBeInTheDocument();
     expect(screen.getByText(INVALID_PASSWORD_MESSAGE)).toBeInTheDocument();
@@ -76,23 +63,56 @@ describe("Login Form component testing suite", () => {
   test("Should login correctly when provided valid data.", async () => {
     renderFormWithProviders();
 
-    const VALID_EMAIL = "kamil123@wp.pl";
-    const VALID_PASSWORD = "mojesuperhasło";
+    const user = userEvent.setup();
+
+    const VALID_EMAIL = "brabrak@wp.pl";
+    const VALID_PASSWORD = "123456";
 
     const emailInput = screen.getByRole("textbox", { name: /email/i });
     const passwordInput = screen.getByLabelText(/Password/g);
     const submitButton = screen.getByRole("button", { name: /login/i });
 
-    await userEvent.type(emailInput, VALID_EMAIL);
-    await userEvent.type(passwordInput, VALID_PASSWORD);
+    await user.type(emailInput, VALID_EMAIL);
+    await user.type(passwordInput, VALID_PASSWORD);
 
-    await userEvent.click(submitButton);
+    await user.click(submitButton);
 
-    await waitFor(() => {
-      expect(loginFnMock).toHaveBeenCalledWith({
-        email: VALID_EMAIL,
-        password: VALID_PASSWORD,
-      });
+    const loading = await screen.findByRole("status");
+
+    expect(loading).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(loading).then(() => {
+      const alerts = screen.queryAllByRole("alert");
+
+      expect(alerts).toHaveLength(0);
+    });
+  });
+
+  test("Should show form error when provided invalid data.", async () => {
+    renderFormWithProviders();
+
+    const user = userEvent.setup();
+
+    const INVALID_EMAIL = "wyspagier@wp.pl";
+    const INVALID_PASSWORD = "wyspagier";
+
+    const emailInput = screen.getByRole("textbox", { name: /email/i });
+    const passwordInput = screen.getByLabelText(/Password/g);
+    const submitButton = screen.getByRole("button", { name: /login/i });
+
+    await user.type(emailInput, INVALID_EMAIL);
+    await user.type(passwordInput, INVALID_PASSWORD);
+
+    await user.click(submitButton);
+
+    const loading = await screen.findByRole("status");
+
+    expect(loading).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(loading).then(() => {
+      const alert = screen.queryByRole("alert");
+
+      expect(alert).toHaveTextContent(/Invalid user credentials!/);
     });
   });
 });
