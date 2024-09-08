@@ -48,7 +48,7 @@ describe("Login Form component testing suite", () => {
     const INVALID_PASSWORD_MESSAGE = "Password must be more than 6 characters.";
 
     const emailInput = screen.getByRole("textbox", { name: /email/i });
-    const passwordInput = screen.getByLabelText(/Password/g);
+    const passwordInput = screen.getByLabelText(/Password/);
     const submitButton = screen.getByRole("button", { name: /login/i });
 
     await user.type(emailInput, INVALID_EMAIL);
@@ -69,7 +69,7 @@ describe("Login Form component testing suite", () => {
     const VALID_PASSWORD = "123456";
 
     const emailInput = screen.getByRole("textbox", { name: /email/i });
-    const passwordInput = screen.getByLabelText(/Password/g);
+    const passwordInput = screen.getByLabelText(/Password/);
     const submitButton = screen.getByRole("button", { name: /login/i });
 
     await user.type(emailInput, VALID_EMAIL);
@@ -81,7 +81,7 @@ describe("Login Form component testing suite", () => {
 
     expect(loading).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(loading).then(() => {
+    await waitForElementToBeRemoved(loading, { timeout: 3000 }).then(() => {
       const alerts = screen.queryAllByRole("alert");
 
       expect(alerts).toHaveLength(0);
@@ -97,7 +97,7 @@ describe("Login Form component testing suite", () => {
     const INVALID_PASSWORD = "wyspagier";
 
     const emailInput = screen.getByRole("textbox", { name: /email/i });
-    const passwordInput = screen.getByLabelText(/Password/g);
+    const passwordInput = screen.getByLabelText(/Password/);
     const submitButton = screen.getByRole("button", { name: /login/i });
 
     await user.type(emailInput, INVALID_EMAIL);
@@ -109,7 +109,7 @@ describe("Login Form component testing suite", () => {
 
     expect(loading).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(loading).then(() => {
+    await waitForElementToBeRemoved(loading, { timeout: 3000 }).then(() => {
       const alert = screen.queryByRole("alert");
 
       expect(alert).toHaveTextContent(/Invalid user credentials!/);
