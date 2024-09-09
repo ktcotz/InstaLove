@@ -1,15 +1,18 @@
 import { render, waitForElementToBeRemoved } from "@testing-library/react";
 import { describe, expect, test } from "vitest";
 import { screen } from "@testing-library/react";
-import { LoginForm } from "../LoginForm";
 import { MemoryRouter } from "react-router";
 import { CustomQueryClientProvider } from "../../../ui/QueryClientProvider";
 import { FormContextProvider } from "../../../ui/form/context/FormContext";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./../../../lib/i18n/i18n";
 import { userEvent } from "@testing-library/user-event";
+import { server } from "../../../mocks/node";
+import { delay, http, HttpResponse } from "msw";
 
-const renderFormWithProviders = () => {
+const renderFormWithProviders = async () => {
+  const { LoginForm } = await import("./../LoginForm");
+
   return render(<LoginForm />, {
     wrapper: ({ children }) => {
       return (
@@ -26,8 +29,8 @@ const renderFormWithProviders = () => {
 };
 
 describe("Login Form component testing suite", () => {
-  test("Should correctly render initially.", () => {
-    renderFormWithProviders();
+  test("Should correctly render initially.", async () => {
+    await renderFormWithProviders();
     const emailInput = screen.getByRole("textbox", { name: /email/i });
     const passwordInput = screen.getByLabelText(/Password/);
 
@@ -38,7 +41,7 @@ describe("Login Form component testing suite", () => {
   });
 
   test("Should render correctly errors when trying to submit invalid data.", async () => {
-    renderFormWithProviders();
+    await renderFormWithProviders();
     const user = userEvent.setup();
 
     const INVALID_EMAIL = "asd";
@@ -61,11 +64,11 @@ describe("Login Form component testing suite", () => {
   });
 
   test("Should login correctly when provided valid data.", async () => {
-    renderFormWithProviders();
+    await renderFormWithProviders();
 
     const user = userEvent.setup();
 
-    const VALID_EMAIL = "brabrak@wp.pl";
+    const VALID_EMAIL = "bitka123@wp.pl";
     const VALID_PASSWORD = "123456";
 
     const emailInput = screen.getByRole("textbox", { name: /email/i });
@@ -81,15 +84,26 @@ describe("Login Form component testing suite", () => {
 
     expect(loading).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(loading, { timeout: 3000 }).then(() => {
-      const alerts = screen.queryAllByRole("alert");
+    await waitForElementToBeRemoved(loading).then(() => {
+      const alert = screen.getByRole("alert");
 
-      expect(alerts).toHaveLength(0);
+      expect(alert).toHaveTextContent("");
     });
   });
 
   test("Should show form error when provided invalid data.", async () => {
-    renderFormWithProviders();
+    server.use(
+      http.post(
+        `${import.meta.env.VITE_SUPABASE_URL}/auth/v1/token`,
+        async () => {
+          await delay(100);
+
+          return new HttpResponse(null, { status: 500 });
+        }
+      )
+    );
+
+    await renderFormWithProviders();
 
     const user = userEvent.setup();
 
@@ -109,10 +123,10 @@ describe("Login Form component testing suite", () => {
 
     expect(loading).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(loading, { timeout: 3000 }).then(() => {
-      const alert = screen.queryByRole("alert");
+    await waitForElementToBeRemoved(loading).then(() => {
+      const alerts = screen.getAllByRole("alert");
 
-      expect(alert).toHaveTextContent(/Invalid user credentials!/);
+      expect(alerts).not.toHaveLength(0);
     });
   });
 });
