@@ -35,15 +35,15 @@ export const registerWithPassword = async ({
     },
   });
 
-  addUser({ nickname, user_id: data.user?.id });
-  createUserBucket({ user_id: data.user?.id });
-
   if (error) {
     throw new CustomError({
       message: error.message,
       code: error.status,
     });
   }
+
+  addUser({ nickname, user_id: data.user?.id });
+  createUserBucket({ user_id: data.user?.id });
 
   return data;
 };

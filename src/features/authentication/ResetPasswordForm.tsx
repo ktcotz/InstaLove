@@ -1,9 +1,9 @@
-import { Form } from "../../ui/form/Form";
+import { Form, Loader } from "../../ui";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslation } from "react-i18next";
 import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
-import { Loader } from "../../ui/Loader";
+
 import { useResetPassword } from "./mutations/useResetPassword";
 import { useNavigate } from "react-router";
 import {
@@ -47,6 +47,7 @@ export const ResetPasswordForm = () => {
             <Form.Input
               id="password"
               type={`${isPasswordShow ? "text" : "password"}`}
+              aria-invalid={!!errors?.password?.message}
               required
               {...register("password")}
             />

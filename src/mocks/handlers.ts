@@ -28,4 +28,20 @@ export const handlers = [
       { status: 200 }
     );
   }),
+
+  http.post(
+    `${import.meta.env.VITE_SUPABASE_URL}/auth/v1/recover`,
+    async () => {
+      await delay(100);
+
+      return HttpResponse.json(
+        [
+          {
+            email: "bitka123@wp.pl",
+          },
+        ],
+        { status: 200 }
+      );
+    }
+  ),
 ];
