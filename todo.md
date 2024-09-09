@@ -13,6 +13,7 @@ PROCES :
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI\*UX :
 
 - Home i wszystkie podkomponenty.
-- Login Form, Schema, Services, Queries, Mutations w authentication.
+- Authentication.
+- Navigation.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.

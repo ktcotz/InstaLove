@@ -1,17 +1,8 @@
-import { NavigationI18NHandler } from "../../lib/i18n/i18n.types";
 import { GlobalRoutes } from "../../typing/routes";
-import { NavigationComponent } from "./context/NavigationContext";
-import { NavigationRoutes } from "./DashboardNavigationItem";
+import { NavigationData } from "./types";
 
-type Data = {
-  id: number;
-  title: NavigationI18NHandler;
-  icon: NavigationRoutes;
-  to?: GlobalRoutes;
-  openComponent?: NavigationComponent;
-};
 
-export const dashboardNavigationData: Data[] = [
+export const dashboardNavigationData: NavigationData[] = [
   {
     id: 1,
     title: "navigation.home",
@@ -50,7 +41,7 @@ export const dashboardNavigationData: Data[] = [
   },
 ] as const;
 
-export const mobileDashboardNavigationData: Data[] = [
+export const mobileDashboardNavigationData: NavigationData[] = [
   {
     id: 1,
     title: "navigation.home",
@@ -100,3 +91,5 @@ export const mobileDashboardNavigationData: Data[] = [
     to: GlobalRoutes.DashboardProfile,
   },
 ] as const;
+
+

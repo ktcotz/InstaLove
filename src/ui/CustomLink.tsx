@@ -76,6 +76,7 @@ export const CustomLink = ({
       className={({ isActive }) =>
         `${isActive ? twMerge(className, activeClass) : className}`
       }
+      end
     >
       {children}
     </NavLink>

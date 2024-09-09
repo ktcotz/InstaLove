@@ -3,18 +3,20 @@ import { Logo } from "../../ui/Logo";
 import { DashboardNavigationItem } from "./DashboardNavigationItem";
 import { dashboardNavigationData, mobileDashboardNavigationData } from "./data";
 
+const MOBILE_VIEWPORT = "768px";
+
 export const DashboardNavigation = () => {
-  const matches = useMediaQuery("(min-width:768px)");
+  const matches = useMediaQuery(`(max-width:${MOBILE_VIEWPORT})`);
 
   return (
     <nav className="flex items-center md:flex-col lg:items-stretch py-6 p-3 relative z-10 bg-stone-50">
-      {matches ? (
+      {!matches && (
         <div className="mb-10 px-3">
           <Logo modifier="small-logo" />
         </div>
-      ) : null}
+      )}
       <ul className="flex w-full gap-1 justify-around md:justify-start md:flex-col sm:gap-4 items-center lg:items-stretch">
-        {(matches
+        {(!matches
           ? mobileDashboardNavigationData
           : dashboardNavigationData
         ).map((navItem) => (
