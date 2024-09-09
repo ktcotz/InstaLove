@@ -7,9 +7,12 @@ import { FormContextProvider } from "../../../ui/form/context/FormContext";
 import { I18nextProvider } from "react-i18next";
 import i18n from "./../../../lib/i18n/i18n";
 import { userEvent } from "@testing-library/user-event";
-import { RegisterForm } from "../RegisterForm";
+import { server } from "../../../mocks/node";
+import { http, HttpResponse } from "msw";
 
-const renderFormWithProviders = () => {
+const renderFormWithProviders = async () => {
+  const { RegisterForm } = await import("../RegisterForm");
+
   return render(<RegisterForm />, {
     wrapper: ({ children }) => {
       return (
@@ -26,8 +29,9 @@ const renderFormWithProviders = () => {
 };
 
 describe("Register Form component testing suite", () => {
-  test("Should correctly render initially.", () => {
-    renderFormWithProviders();
+  test("Should correctly render initially.", async () => {
+    await renderFormWithProviders();
+
     const emailInput = screen.getByRole("textbox", { name: /email/i });
     const nickNameInput = screen.getByLabelText(/Username/i);
     const passwordInput = screen.getByLabelText(/Password/);
@@ -45,7 +49,8 @@ describe("Register Form component testing suite", () => {
   });
 
   test("Should render correctly errors when trying to submit invalid data.", async () => {
-    renderFormWithProviders();
+    await renderFormWithProviders();
+
     const user = userEvent.setup();
 
     const INVALID_EMAIL = "asd";
@@ -88,7 +93,7 @@ describe("Register Form component testing suite", () => {
   });
 
   test("Should register correctly when provided valid data.", async () => {
-    renderFormWithProviders();
+    await renderFormWithProviders();
 
     const user = userEvent.setup();
 
@@ -115,38 +120,51 @@ describe("Register Form component testing suite", () => {
 
     expect(loading).toBeInTheDocument();
 
-    await waitForElementToBeRemoved(loading, { timeout: 2000 }).then(() => {
+    await waitForElementToBeRemoved(loading).then(() => {
       const alerts = screen.queryAllByRole("alert");
 
       expect(alerts).toHaveLength(0);
     });
   });
 
-  // test("Should show form error when provided invalid data.", async () => {
-  //   renderFormWithProviders();
+  test("Should show form error when provided invalid data.", async () => {
+    server.use(
+      http.post(`${import.meta.env.VITE_SUPABASE_URL}/auth/v1/signup`, () => {
+        return new HttpResponse(null, { status: 500 });
+      })
+    );
 
-  //   const user = userEvent.setup();
+    await renderFormWithProviders();
 
-  //   const INVALID_EMAIL = "wyspagier@wp.pl";
-  //   const INVALID_PASSWORD = "wyspagier";
+    const user = userEvent.setup();
 
-  //   const emailInput = screen.getByRole("textbox", { name: /email/i });
-  //   const passwordInput = screen.getByLabelText(/Password/);
-  //   const submitButton = screen.getByRole("button", { name: /login/i });
+    const VALID_EMAIL = "bitka123@wp.pl";
+    const VALID_PASSWORD = "123456";
+    const VALID_USERNAME = "bitek";
+    const VALID_CONFIRM_PASSWORD = "123456";
 
-  //   await user.type(emailInput, INVALID_EMAIL);
-  //   await user.type(passwordInput, INVALID_PASSWORD);
+    const emailInput = screen.getByRole("textbox", { name: /email/i });
+    const nickNameInput = screen.getByLabelText(/Username/i);
+    const passwordInput = screen.getByLabelText(/Password/);
+    const confirmPasswordInput = screen.getByLabelText(/Confirm password/);
 
-  //   await user.click(submitButton);
+    const submitButton = screen.getByRole("button", { name: /register/i });
 
-  //   const loading = await screen.findByRole("status");
+    await user.type(emailInput, VALID_EMAIL);
+    await user.type(passwordInput, VALID_PASSWORD);
+    await user.type(nickNameInput, VALID_USERNAME);
+    await user.type(confirmPasswordInput, VALID_CONFIRM_PASSWORD);
 
-  //   expect(loading).toBeInTheDocument();
+    await user.click(submitButton);
 
-  //   await waitForElementToBeRemoved(loading, { timeout: 2000 }).then(() => {
-  //     const alert = screen.queryByRole("alert");
+    const loading = await screen.findByRole("status");
 
-  //     expect(alert).toHaveTextContent(/Invalid user credentials!/);
-  //   });
-  // });
+    expect(loading).toBeInTheDocument();
+
+    await waitForElementToBeRemoved(loading).then(() => {
+      const alerts = screen.queryAllByRole("alert");
+
+      expect(alerts).not.toHaveLength(0);
+    });
+  });
 });

@@ -1,12 +1,18 @@
-import { afterAll, afterEach, beforeAll } from "vitest";
-import { cleanup } from "@testing-library/react";
-import "@testing-library/jest-dom/vitest";
-
+import "@testing-library/jest-dom";
+import * as matchers from "@testing-library/jest-dom/matchers";
+import { afterAll, afterEach, beforeAll, expect } from "vitest";
 import { server } from "./mocks/node";
 
-beforeAll(() => server.listen());
+expect.extend(matchers);
+
+beforeAll(() => {
+  server.listen();
+});
+
 afterEach(() => {
-  cleanup();
   server.resetHandlers();
 });
-afterAll(() => server.close());
+
+afterAll(() => {
+  server.close();
+});

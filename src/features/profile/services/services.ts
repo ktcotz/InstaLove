@@ -4,11 +4,8 @@ import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/services";
 import { MAX_PROPOSED_PROFILES } from "../AllProposedProfiles";
 import { ObserveUserData } from "../mutations/useObservation";
+import { ProposedProfilesProps } from "../queries/useProfiles";
 import { ProfileSchema, ProfilesSchema } from "../schema/ProfilesSchema";
-
-type CurrentUserID = {
-  id: string;
-};
 
 type ProfileName = {
   user_name?: string;
@@ -18,7 +15,7 @@ export const getProfiles = async ({
   id,
   limit,
   page,
-}: CurrentUserID & { limit?: number; page?: number }) => {
+}: ProposedProfilesProps) => {
   const observations = await getObserversByUser({ user_id: id });
   const observationsIds = observations.map(
     (observation) => observation.observe_id

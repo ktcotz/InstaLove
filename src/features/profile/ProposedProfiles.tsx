@@ -1,4 +1,3 @@
-import { User } from "@supabase/supabase-js";
 import { useUser } from "../authentication/queries/useUser";
 import { ProposedProfile } from "./ProposedProfile";
 import { useProfiles } from "./queries/useProfiles";
@@ -7,7 +6,7 @@ import { Loader } from "../../ui/Loader";
 export const ProposedProfiles = () => {
   const { user } = useUser();
   const { profiles, isLoading } = useProfiles({
-    id: (user as User).id,
+    id: user?.id,
     limit: 5,
   });
 
