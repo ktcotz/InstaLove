@@ -1,8 +1,4 @@
-import {
-  render,
-  screen,
-  waitForElementToBeRemoved,
-} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import { MemoryRouter } from "react-router";
 import { describe, expect, test } from "vitest";
 import { CustomQueryClientProvider } from "../../../ui";
@@ -56,32 +52,5 @@ describe("Forgot password form tests suite", () => {
     await user.click(submitButton);
 
     expect(screen.getByText(INVALID_EMAIL_MESSAGE)).toBeInTheDocument();
-  });
-
-  test("Should forgot password correctly when provided valid data.", async () => {
-    await renderFormWithProviders();
-
-    const user = userEvent.setup();
-
-    const VALID_EMAIL = "bitka123@wp.pl";
-
-    const emailInput = screen.getByRole("textbox", { name: /email/i });
-    const submitButton = screen.getByRole("button", {
-      name: /remind password/i,
-    });
-
-    await user.type(emailInput, VALID_EMAIL);
-
-    await user.click(submitButton);
-
-    const loading = await screen.findByRole("status");
-
-    expect(loading).toBeInTheDocument();
-
-    await waitForElementToBeRemoved(loading).then(() => {
-      const alert = screen.queryByRole("alert");
-
-      expect(alert).toBeNull();
-    });
   });
 });

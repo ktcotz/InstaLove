@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { UserID } from "../../authentication/services/services";
 import { getUnreadNotifications } from "../services/services";
+import { UserID } from "../../authentication/services/types";
 
 export const useGetUnreadNotifications = ({ user_id }: UserID) => {
   const { data: unreadNotifications, isLoading } = useQuery({

@@ -23,4 +23,10 @@ export const getMonthEnd = () => {
   return `${monthEnd.toISOString().split("T")[0]}T23:59:59`;
 };
 
-console.log("week start", getWeekStart());
+export const getTodayStart = () => {
+  return `${new Date().toISOString().split("T")[0]}T00:00:00`;
+};
+
+export const getTodayEnd = () => {
+  return `${new Date().toISOString().split("T")[0]}T23:59:59`;
+};

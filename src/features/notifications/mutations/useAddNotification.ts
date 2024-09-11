@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addNotification } from "../services/services";
-import { UserID } from "../../authentication/services/services";
+import { UserID } from "../../authentication/services/types";
 
 export const useAddNotification = ({ user_id }: UserID) => {
   const queryClient = useQueryClient();

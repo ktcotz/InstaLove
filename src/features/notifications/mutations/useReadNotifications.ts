@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateReadNotifications } from "../services/services";
-import { UserID } from "../../authentication/services/services";
 import { Notifications } from "../schema/Notifcation";
+import { UserID } from "../../authentication/services/types";
 
 export type UpdateNotifications = {
   notifications: Notifications;

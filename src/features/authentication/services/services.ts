@@ -156,7 +156,7 @@ export const getUser = async () => {
 
   const user = data.session?.user;
 
-  return user;
+  return user ?? null;
 };
 
 export const getUserByID = async ({ user_id }: UserID) => {

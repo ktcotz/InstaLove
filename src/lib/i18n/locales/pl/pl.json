@@ -60,5 +60,16 @@
     "notifications": "Powiadomienia",
     "create": "Utwórz",
     "profile": "Profil"
+  },
+  "notifications": {
+    "today": "Dzisiaj",
+    "week": "Do tygodnia wstecz",
+    "month": "Do miesiąca wstecz",
+    "like": "polubił/a twój post",
+    "observe": "zaobserwował/a Cię",
+    "mark": "oznaczył/a Cię pod postem",
+    "commentLike": "polubił/a twój komentarz",
+    "commentReply": "odpowiedział/a na twój komentarz",
+    "bookmark": "dodał/a twój post do ulubionych"
   }
 }

@@ -60,5 +60,16 @@
     "notifications": "Notifications",
     "create": "Create",
     "profile": "Profile"
+  },
+  "notifications": {
+    "today": "Today",
+    "week": "Up to a week ago",
+    "month": "Up to a month ago",
+    "like": "liked your post",
+    "observe": "observed you",
+    "mark": "tagged you under the post",
+    "commentLike": "liked your comment",
+    "commentReply": "replied to your comment",
+    "bookmark": "added your post to favorites"
   }
 }

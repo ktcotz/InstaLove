@@ -1,6 +1,6 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
-import { UserID } from "../../authentication/services/services";
+import { UserID } from "../../authentication/services/types";
 import { UpdateNotifications } from "../mutations/useReadNotifications";
 import { GetNotifications } from "../queries/useGetNotifications";
 import { Notification, NotificationsSchema } from "../schema/Notifcation";
@@ -64,8 +64,6 @@ export const getNotifications = async ({
       message: error.message,
     });
   }
-
-  console.log(notifications);
 
   const parsed = NotificationsSchema.parse(notifications);
 
