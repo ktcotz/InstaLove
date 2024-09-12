@@ -44,4 +44,17 @@ export const handlers = [
       );
     }
   ),
+  http.get(`${import.meta.env.VITE_SUPABASE_URL}/auth/v1/session`, () => {
+    return HttpResponse.json({
+      session: {
+        user: {
+          id: "123456",
+        },
+      },
+    });
+  }),
+
+  http.get(`${import.meta.env.VITE_SUPABASE_URL}/rest/v1/notification`, () => {
+    return HttpResponse.json([{ id: 1 }]);
+  }),
 ];

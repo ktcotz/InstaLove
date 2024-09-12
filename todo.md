@@ -10,10 +10,11 @@ PROCES :
 
 1. Stories
 
-Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI\*UX :
+Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
 - Home i wszystkie podkomponenty.
 - Authentication.
 - Navigation.
+- Notifications.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.
