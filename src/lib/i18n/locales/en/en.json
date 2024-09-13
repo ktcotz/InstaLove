@@ -71,5 +71,14 @@
     "commentLike": "liked your comment",
     "commentReply": "replied to your comment",
     "bookmark": "added your post to favorites"
+  },
+  "search": {
+    "delete": "Delete search user",
+    "empty": "No results found for this query",
+    "latest": "Latest",
+    "clear": "Clear all",
+    "clearHistory": "Clear search history?",
+    "clearDescription": "This action cannot be undone. If you delete your search history, you can still see previously searched accounts in the suggested results.",
+    "clearDisable": "Not now"
   }
 }

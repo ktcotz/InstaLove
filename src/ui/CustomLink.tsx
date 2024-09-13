@@ -48,7 +48,7 @@ export const CustomLink = ({
     ["small-text"]: "text-sm text-stone-800 hover:text-stone-900",
     ["small-logo"]: "text-2xl",
     navigation:
-      "flex items-center gap-4 p-3 hover:bg-stone-200 transition group",
+      "flex items-center gap-4 p-3 hover:bg-stone-100 transition group",
     avatar: "w-12 h-12 rounded-full border-2 border-stone-300",
     ["avatar-name"]: "text-base text-stone-950 font-medium",
     ["all-profiles"]:

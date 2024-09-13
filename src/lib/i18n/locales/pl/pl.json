@@ -71,5 +71,14 @@
     "commentLike": "polubił/a twój komentarz",
     "commentReply": "odpowiedział/a na twój komentarz",
     "bookmark": "dodał/a twój post do ulubionych"
+  },
+  "search": {
+    "delete": "Usuń wyszukiwanego użytkownika",
+    "empty": "Brak wyników dla tego wyszukiwania",
+    "latest": "Ostatnie",
+    "clear": "Wyczyść wszystko",
+    "clearHistory": "Wyczyścić historię wyszukiwania?",
+    "clearDescription": "Tej operacji nie będzie można cofnąć. Jeżeli usuniesz historię wyszukiwania, możesz nadal oglądać uprzednio wyszukiwane konta wproponowanych wynikach.",
+    "clearDisable": "Nie teraz"
   }
 }

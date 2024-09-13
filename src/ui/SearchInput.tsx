@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { CiSearch } from "react-icons/ci";
 
 type SearchInputModifier = "with-reset";
@@ -7,7 +8,6 @@ type SearchInputProps = {
   handleQuery: (value: string) => void;
   modifier?: SearchInputModifier;
   upFocus: () => void;
-  downFocus: () => void;
 };
 
 export type SearchQuery = {
@@ -19,8 +19,9 @@ export const SearchInput = ({
   handleQuery,
   modifier,
   upFocus,
-  downFocus,
 }: SearchInputProps) => {
+  const { t } = useTranslation();
+
   return (
     <div className="relative">
       <input
@@ -33,14 +34,13 @@ export const SearchInput = ({
         value={query}
         onChange={(ev) => handleQuery(ev.target.value)}
         onClick={upFocus}
-        onBlur={downFocus}
       />
       <label
         htmlFor="search"
         className="flex items-center gap-1 absolute left-0 top-1/2 -translate-y-1/2 px-2 text-sm text-stone-900 transition-all  peer-valid:top-3 peer-focus:top-3 peer-focus:rounded-sm peer-valid:text-xs peer-focus:text-xs"
       >
-        <CiSearch aria-label="Search" />
-        Search
+        <CiSearch aria-label={t("navigation.search")} />
+        {t("navigation.search")}
       </label>
     </div>
   );
