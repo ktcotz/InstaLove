@@ -1,7 +1,7 @@
 import { useGetAllPostsAndReels } from "./queries/useGetAllPostsAndReels";
 import { useCallback, useRef } from "react";
-import { Loader } from "../../ui/Loader";
 import { ExploreData } from "./ExploreData";
+import { ExploreSkeleton } from "./ExploreSkeleton";
 
 export const MAX_EXPLORE_POST = 4;
 
@@ -41,8 +41,8 @@ export const Explore = () => {
       </div>
 
       {isLoading && (
-        <div className="flex items-center justify-center p-6">
-          <Loader />
+        <div className="grid grid-cols-3 grid-rows-2 gap-1 p-6">
+          <ExploreSkeleton />
         </div>
       )}
     </div>
