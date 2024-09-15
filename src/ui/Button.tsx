@@ -13,7 +13,9 @@ type ButtonType =
   | "all-profiles"
   | "pagination"
   | "reel"
-  | "suggestion";
+  | "suggestion"
+  | "explore"
+  | "explore-back";
 
 type ButtonProps = {
   children: ReactNode;
@@ -45,6 +47,8 @@ export const Button = forwardRef<
     pagination: "text-stone-900",
     reel: "bg-black/40 p-4 rounded-full text-2xl text-stone-50",
     suggestion: "flex items-center gap-3 w-full p-2",
+    explore: "row-start-1 -row-end-1 col-start-1 col-end-2",
+    ["explore-back"]: "row-start-1 -row-end-1 col-start-3",
   };
 
   const className = twMerge(base, modifier && modifierObject[modifier]);

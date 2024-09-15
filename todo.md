@@ -8,8 +8,6 @@ DO ZROBIENIA :
 
 PROCES :
 
-1. Stories
-
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
 - Home i wszystkie podkomponenty.

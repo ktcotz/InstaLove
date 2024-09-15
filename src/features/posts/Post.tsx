@@ -24,7 +24,7 @@ export const Post = ({ post_url, video_url, id, views }: GeneralPost) => {
 
   return (
     <div
-      className="relative w-full h-full min-h-[350px]  bg-cover bg-center cursor-pointer"
+      className="relative w-full h-full min-h-[175px] sm:min-h-[250px] md:min-h-[350px]  bg-cover bg-center cursor-pointer"
       style={
         post_url
           ? {
@@ -46,7 +46,7 @@ export const Post = ({ post_url, video_url, id, views }: GeneralPost) => {
             <source src={video_url} type="video/mp4" />
           </video>
           {isHover ? null : (
-            <div className="absolute bottom-4 left-4 p-4 flex items-center gap-2 text-stone-50 font-semibold">
+            <div className="absolute bottom-0 left-0 text-xs md:text-base md:bottom-4 md:left-4 p-4 flex items-center gap-2 text-stone-50 font-semibold">
               <FaPlay /> <span>{formatedViews}</span>
             </div>
           )}

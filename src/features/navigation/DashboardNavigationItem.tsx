@@ -101,10 +101,10 @@ export const DashboardNavigationItem = ({
         {to === GlobalRoutes.DashboardProfile && user ? (
           <img
             src={`${currentUser.avatar_url}`}
-            width={32}
-            height={32}
+            width={24}
+            height={24}
             alt={`${currentUser.user_name}`}
-            className="rounded-full w-8 h-8"
+            className="rounded-full w-6 h-6"
           />
         ) : (
           <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">

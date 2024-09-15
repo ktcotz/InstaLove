@@ -211,8 +211,6 @@ export const manageLike = async (like: Like) => {
 };
 
 export const getPostsLikes = async ({ post_id }: PostLikes) => {
-  console.log(post_id);
-
   const {
     data: likes,
     count,

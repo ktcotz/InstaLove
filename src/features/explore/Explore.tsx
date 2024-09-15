@@ -1,14 +1,9 @@
-import Masonry, { ResponsiveMasonry } from "react-responsive-masonry";
-import { Post } from "../posts/Post";
-import { Wrapper } from "../../ui/Wrapper";
 import { useGetAllPostsAndReels } from "./queries/useGetAllPostsAndReels";
-import { Modal } from "../../ui/modal/Modal";
-import { Button } from "../../ui/Button";
-import { IndividualModalPost } from "../posts/IndividualModalPost";
 import { useCallback, useRef } from "react";
 import { Loader } from "../../ui/Loader";
+import { ExploreData } from "./ExploreData";
 
-export const MAX_EXPLORE_POST = 2;
+export const MAX_EXPLORE_POST = 4;
 
 export const Explore = () => {
   const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
@@ -32,33 +27,24 @@ export const Explore = () => {
     [fetchNextPage, hasNextPage, isFetching, isLoading]
   );
 
-  const items = data?.pages.flat();
-
   return (
-    <Wrapper>
-      <ResponsiveMasonry columnsCountBreakPoints={{ 400: 1, 768: 2, 1024: 3 }}>
-        <Masonry gutter="20px">
-          {items?.map((item) => {
-            return (
-              <Modal key={item.id}>
-                <Modal.Open>
-                  <Button modifier="close" ref={lastElementRef}>
-                    <Post {...item} />
-                  </Button>
-                </Modal.Open>
-                <Modal.Content>
-                  <IndividualModalPost post={item} />
-                </Modal.Content>
-              </Modal>
-            );
-          })}
-        </Masonry>
-      </ResponsiveMasonry>
+    <div className="mx-auto px-1 w-full max-w-6xl">
+      <div className="grid gap-1">
+        {data?.pages.map((dataPage, idx) => (
+          <ExploreData
+            key={idx}
+            idx={idx}
+            data={dataPage}
+            lastElement={lastElementRef}
+          />
+        ))}
+      </div>
+
       {isLoading && (
         <div className="flex items-center justify-center p-6">
           <Loader />
         </div>
       )}
-    </Wrapper>
+    </div>
   );
 };

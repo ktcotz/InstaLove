@@ -10,12 +10,14 @@ export const getAllPostsAndReels = async ({ page = 0 }: { page: number }) => {
     .from("posts")
     .select("*")
     .order("id")
+    .limit(4)
     .range(offset, offset + MAX_EXPLORE_POST - 1);
   const { data: reels, error: reelsError } = await supabase
     .from("reels")
     .select("*")
     .order("id")
-    .range(offset, offset + MAX_EXPLORE_POST - 1);
+    .range(page, page + 1)
+    .limit(1);
 
   if (error) {
     throw new CustomError({
@@ -31,7 +33,7 @@ export const getAllPostsAndReels = async ({ page = 0 }: { page: number }) => {
 
   const combined = [...posts, ...reels];
 
-  if (combined.length === 0) return [];
+  if (combined.length < MAX_EXPLORE_POST + 1) return [];
 
   const parsed = GeneralsPostsSchema.parse(combined);
 
