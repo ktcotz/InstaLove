@@ -15,5 +15,6 @@ Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 - Navigation.
 - Notifications.
 - Search.
+- Explore.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.
