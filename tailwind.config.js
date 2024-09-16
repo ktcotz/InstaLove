@@ -12,6 +12,7 @@ export default {
         "fade-left": "fadeFromLeft 1s ease-in-out",
         "fade-right": "fadeFromRight 1s ease-in-out",
         "fade-bottom": "fadeFromBottom 1s ease-in-out",
+        "play-video": "showPlayVideo 300ms ease-in-out",
       },
       keyframes: {
         fadeFromTop: {
@@ -48,6 +49,10 @@ export default {
           "30%": { opacity: 1 },
           "40%": { opacity: 0 },
           "100%": { opacity: 0 },
+        },
+        showPlayVideo: {
+          "0%": { opacity: 0, transform: "scale(0)" },
+          "100%": { opacity: 1, transform: "scale(1)" },
         },
       },
     },

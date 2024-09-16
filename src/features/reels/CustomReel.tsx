@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
 import { useUserByID } from "../authentication/queries/useUserByID";
@@ -6,37 +6,76 @@ import { Reel } from "../posts/schema/PostsSchema";
 import { GoMute, GoUnmute } from "react-icons/go";
 import { ReelActions } from "./ReelActions";
 import { Loader } from "../../ui/Loader";
+import { useTranslation } from "react-i18next";
+import { ReelMutedData } from "./Reels";
+import { FaPlay } from "react-icons/fa";
 
-export const CustomReel = ({ video_url, description, user_id, id }: Reel) => {
-  const [muted, setMuted] = useState(true);
+type CustomReelProps = {
+  muted: ReelMutedData;
+  toggleMuted: ({ id, isMuted }: ReelMutedData) => void;
+};
+
+export const CustomReel = ({
+  video_url,
+  description,
+  user_id,
+  id,
+  muted,
+  toggleMuted,
+}: Reel & CustomReelProps) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { user, isLoading } = useUserByID(user_id);
+  const { t } = useTranslation();
+  const [played, setPlayed] = useState(true);
 
-  const toggleMuted = () => {
-    setMuted((prevMuted) => !prevMuted);
+  const handleMuted = () => {
+    toggleMuted({ id, isMuted: !muted.isMuted });
+  };
+
+  const handleVideoPlaying = () => {
+    if (!videoRef.current) return;
+
+    const isPlaying = !played;
+
+    if (isPlaying) videoRef.current.play();
+    if (!isPlaying) videoRef.current.pause();
+
+    setPlayed(isPlaying);
   };
 
   if (isLoading) return <Loader />;
 
+  const isMuted = id === muted.id ? muted.isMuted : true;
+
   return (
-    <div className="relative h-[700px] max-h-[700px] grid grid-cols-[1fr_auto]">
+    <div className="relative h-[700px] max-h-[700px] grid grid-cols-[1fr_auto] rounded-xl">
       <div className="relative h-full">
         <video
           loop
-          muted={muted}
+          muted={isMuted}
           autoPlay
-          className="h-full w-full object-cover cursor-pointer"
+          className="h-full w-full object-cover cursor-pointer rounded-xl"
+          onClick={handleVideoPlaying}
+          ref={videoRef}
         >
           <source src={video_url} type="video/mp4" />
         </video>
         <div className="absolute top-4 right-4">
           <Button
             modifier="reel"
-            onClick={toggleMuted}
+            onClick={handleMuted}
             aria-label="Unmute video"
           >
-            {muted ? <GoMute /> : <GoUnmute />}
+            {isMuted ? <GoMute /> : <GoUnmute />}
           </Button>
         </div>
+        {!played && (
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+            <Button modifier="video-play" onClick={handleVideoPlaying}>
+              <FaPlay aria-label="Play video" />
+            </Button>
+          </div>
+        )}
         <div className="absolute bottom-0 left-0 w-full text-stone-50 p-4">
           <div className="flex items-center gap-3 mb-6">
             <CustomLink modifier="avatar" to={`/dashboard/${user?.user_name}`}>

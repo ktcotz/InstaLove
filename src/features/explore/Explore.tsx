@@ -6,32 +6,30 @@ import { ExploreSkeleton } from "./ExploreSkeleton";
 export const MAX_EXPLORE_POST = 4;
 
 export const Explore = () => {
-  // const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
-  //   useGetAllPostsAndReels();
+  const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
+    useGetAllPostsAndReels();
 
-  // const observer = useRef<IntersectionObserver>();
-  // const lastElementRef = useCallback(
-  //   (node: HTMLButtonElement) => {
-  //     if (isLoading) return;
+  const observer = useRef<IntersectionObserver>();
+  const lastElementRef = useCallback(
+    (node: HTMLButtonElement) => {
+      if (isLoading) return;
 
-  //     if (observer.current) observer.current.disconnect();
+      if (observer.current) observer.current.disconnect();
 
-  //     observer.current = new IntersectionObserver((entries) => {
-  //       if (entries[0].isIntersecting && hasNextPage && !isFetching) {
-  //         fetchNextPage();
-  //       }
-  //     });
+      observer.current = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting && hasNextPage && !isFetching) {
+          fetchNextPage();
+        }
+      });
 
-  //     if (node) observer.current.observe(node);
-  //   },
-  //   [fetchNextPage, hasNextPage, isFetching, isLoading]
-  // );
-
-  const isLoading = true;
+      if (node) observer.current.observe(node);
+    },
+    [fetchNextPage, hasNextPage, isFetching, isLoading]
+  );
 
   return (
     <div className="mx-auto px-1 w-full max-w-6xl">
-      {/* <div className="grid gap-1">
+      <div className="grid gap-1">
         {data?.pages.map((dataPage, idx) => (
           <ExploreData
             key={idx}
@@ -40,7 +38,7 @@ export const Explore = () => {
             lastElement={lastElementRef}
           />
         ))}
-      </div> */}
+      </div>
 
       {isLoading && (
         <div className="grid grid-cols-3 grid-rows-2 gap-1 p-6">

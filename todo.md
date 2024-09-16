@@ -8,6 +8,12 @@ DO ZROBIENIA :
 
 PROCES :
 
+Reels
+
+- Responsivity.
+- Poprawa reel actions.
+- Skeleton na loading.
+
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
 - Home i wszystkie podkomponenty.

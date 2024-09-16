@@ -15,7 +15,8 @@ type ButtonType =
   | "reel"
   | "suggestion"
   | "explore"
-  | "explore-back";
+  | "explore-back"
+  | "video-play";
 
 type ButtonProps = {
   children: ReactNode;
@@ -49,6 +50,8 @@ export const Button = forwardRef<
     suggestion: "flex items-center gap-3 w-full p-2",
     explore: "row-start-1 -row-end-1 col-start-1 col-end-2",
     ["explore-back"]: "row-start-1 -row-end-1 col-start-3",
+    ["video-play"]:
+      "bg-black/80 p-6 rounded-full text-3xl text-stone-50 animate-play-video",
   };
 
   const className = twMerge(base, modifier && modifierObject[modifier]);
