@@ -48,18 +48,21 @@ export const CustomReel = ({
   const isMuted = id === muted.id ? muted.isMuted : true;
 
   return (
-    <div className="relative h-[700px] max-h-[700px] grid grid-cols-[1fr_auto] rounded-xl">
-      <div className="relative h-full">
-        <video
-          loop
-          muted={isMuted}
-          autoPlay
-          className="h-full w-full object-cover cursor-pointer rounded-xl"
-          onClick={handleVideoPlaying}
-          ref={videoRef}
-        >
-          <source src={video_url} type="video/mp4" />
-        </video>
+    <div className="relative h-full max-h-[500px] sm:h-[700px] sm:max-h-[700px] grid grid-cols-[1fr_auto] rounded-xl">
+      <div className="relative max-h-[500px] sm:max-h-[700px]">
+        <div className="h-full w-full">
+          <video
+            loop
+            muted={isMuted}
+            autoPlay
+            className="h-full w-full object-cover cursor-pointer rounded-xs"
+            onClick={handleVideoPlaying}
+            ref={videoRef}
+          >
+            <source src={video_url} type="video/mp4" />
+          </video>
+          <div className="bg-black/15 h-full w-full absolute top-0 left-0"></div>
+        </div>
         <div className="absolute top-4 right-4">
           <Button
             modifier="reel"
@@ -82,9 +85,9 @@ export const CustomReel = ({
               <img
                 src={user?.avatar_url}
                 alt={user?.fullName}
-                width={48}
-                height={48}
-                className="rounded-full w-12 h-12"
+                width={32}
+                height={32}
+                className="rounded-full w-8 h-8"
               />
             </CustomLink>
             <h2 className="font-semibold">
@@ -97,7 +100,7 @@ export const CustomReel = ({
         </div>
       </div>
       {user && (
-        <div className="col-start-2 self-end px-4">
+        <div className="text-stone-50 sm:text-stone-950 absolute bottom-0 right-0 sm:col-start-2 sm:self-end sm:static p-4">
           <ReelActions user={user} id={id} />
         </div>
       )}

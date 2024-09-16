@@ -10,9 +10,7 @@ PROCES :
 
 Reels
 
-- Responsivity.
-- Poprawa reel actions.
-- Skeleton na loading.
+- Accessibility
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 

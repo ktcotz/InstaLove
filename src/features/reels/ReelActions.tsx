@@ -1,4 +1,5 @@
 import {
+  FaBookmark,
   FaHeart,
   FaRegBookmark,
   FaRegComment,
@@ -17,13 +18,18 @@ import { useGetAllComments } from "../posts/queries/useGetAllComments";
 import { useGetBookmark } from "../posts/queries/useGetBookmark";
 import { useBookmark } from "../posts/mutations/useBookmark";
 import { ReelsComments } from "./ReelsComments";
+import { PostsContextProvider } from "../posts/context/PostsContext";
+import { useMediaQuery } from "usehooks-ts";
 
 type ReelActionsProps = {
   user: Profile;
   id: number;
 };
 
+const MOBILE_VIEWPORT = "640px";
+
 export const ReelActions = ({ user, id }: ReelActionsProps) => {
+  const isMobile = useMediaQuery(`(max-width:${MOBILE_VIEWPORT})`);
   const { user: current } = useUser();
   const { like } = useLike({ post_id: id, user_id: user.user_id });
   const { likes, count } = useGetPostLikes({ post_id: id });
@@ -89,83 +95,91 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
   ).length;
 
   return (
-    <div className="flex flex-col items-center">
-      <ul className="list-none flex flex-col gap-4 mb-6 items-center">
-        <li className="flex flex-col gap-1 items-center">
-          <Button aria-label="Like" modifier="close" onClick={handleLike}>
-            {isAlreadyLike && isAlreadyLike > 0 ? (
-              <FaHeart className="text-xl fill-red-600" />
-            ) : (
-              <FaRegHeart className="text-xl" />
+    <PostsContextProvider>
+      <div className="flex flex-col items-center">
+        <ul className="list-none flex flex-col gap-4 mb-6 items-center text-xs">
+          <li className="flex flex-col gap-1 items-center">
+            <Button aria-label="Like" modifier="close" onClick={handleLike}>
+              {isAlreadyLike && isAlreadyLike > 0 ? (
+                <FaHeart className="text-xl fill-red-600" />
+              ) : (
+                <FaRegHeart className="text-xl" />
+              )}
+            </Button>
+            {count && count > 0 && (
+              <Modal>
+                <Modal.Open>
+                  <Button modifier="close">
+                    <p className="text-xs">
+                      {new Intl.NumberFormat(navigator.language, {
+                        notation: "compact",
+                      }).format(count)}
+                    </p>
+                  </Button>
+                </Modal.Open>
+                {likes && (
+                  <Modal.Content>
+                    <Likes likes={likes} />
+                  </Modal.Content>
+                )}
+              </Modal>
             )}
-          </Button>
-          {count && (
+          </li>
+          <li className="flex flex-col gap-1 items-center">
             <Modal>
               <Modal.Open>
-                <Button modifier="close">
-                  <p className="text-xs">
-                    {new Intl.NumberFormat(navigator.language, {
-                      notation: "compact",
-                    }).format(count)}
-                  </p>
+                <Button aria-label="Comment" modifier="close">
+                  <div className="flex flex-col gap-1">
+                    <FaRegComment className="text-xl" />
+                    <p className="text-xs">
+                      {new Intl.NumberFormat(navigator.language, {
+                        notation: "compact",
+                      }).format(data?.count ?? 0)}
+                    </p>
+                  </div>
                 </Button>
               </Modal.Open>
-              {likes && (
+              {data?.comments && (
                 <Modal.Content>
-                  <Likes likes={likes} />
+                  <ReelsComments
+                    user_id={user.user_id}
+                    id={id}
+                    comments={data.comments}
+                  />
                 </Modal.Content>
               )}
             </Modal>
-          )}
-        </li>
-        <li className="flex flex-col gap-1 items-center">
-          <Modal>
-            <Modal.Open>
-              <Button aria-label="Comment" modifier="close">
-                <div className="flex flex-col gap-1">
-                  <FaRegComment />
-                  <p className="text-xs">
-                    {new Intl.NumberFormat(navigator.language, {
-                      notation: "compact",
-                    }).format(data?.count ?? 0)}
-                  </p>
-                </div>
-              </Button>
-            </Modal.Open>
-            {data?.comments && (
-              <Modal.Content>
-                <ReelsComments
-                  user_id={user.user_id}
-                  id={id}
-                  comments={data.comments}
+          </li>
+          <li>
+            <Button
+              aria-label="Bookmark"
+              modifier="close"
+              onClick={handleBookmark}
+            >
+              {bookmarks!.length > 0 ? (
+                <FaBookmark
+                  className={`text-xl ${
+                    isMobile ? "fill-stone-50" : "fill-black"
+                  }`}
                 />
-              </Modal.Content>
-            )}
-          </Modal>
-        </li>
-        <li>
-          <Button
-            aria-label="Bookmark"
-            modifier="close"
-            onClick={handleBookmark}
-          >
-            {bookmarks!.length > 0 ? (
-              <FaRegBookmark className="text-xl fill-yellow-500" />
-            ) : (
-              <FaRegBookmark className="text-xl" />
-            )}
-          </Button>
-        </li>
-      </ul>
-      <CustomLink modifier="link" to={`/dashboard/${user.user_name}`}>
-        <img
-          src={user.avatar_url}
-          alt={user.fullName}
-          width={24}
-          height={24}
-          className=" w-6 h-6"
-        />
-      </CustomLink>
-    </div>
+              ) : (
+                <FaRegBookmark className="text-xl" />
+              )}
+            </Button>
+          </li>
+        </ul>
+        {!isMobile && (
+          <CustomLink modifier="link" to={`/dashboard/${user.user_name}`}>
+            <img
+              src={user.avatar_url}
+              alt={user.fullName}
+              width={24}
+              height={24}
+              className=" w-6 h-6 rounded-full"
+            />
+          </CustomLink>
+        )}
+      </div>
+    </PostsContextProvider>
   );
 };
