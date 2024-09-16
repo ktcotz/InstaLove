@@ -80,5 +80,15 @@
     "clearHistory": "Clear search history?",
     "clearDescription": "This action cannot be undone. If you delete your search history, you can still see previously searched accounts in the suggested results.",
     "clearDisable": "Not now"
+  },
+  "reels": {
+    "mute": "Mute video",
+    "unmute": "Unmute video",
+    "play": "Unpause video",
+    "like": "Like reel video",
+    "comment": "Comment reel video",
+    "unlike": "Unlike reel video",
+    "bookmark": "Bookmark reel video",
+    "unbookmark": "Unbookmark reel video"
   }
 }

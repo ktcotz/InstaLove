@@ -20,6 +20,7 @@ import { useBookmark } from "../posts/mutations/useBookmark";
 import { ReelsComments } from "./ReelsComments";
 import { PostsContextProvider } from "../posts/context/PostsContext";
 import { useMediaQuery } from "usehooks-ts";
+import { useTranslation } from "react-i18next";
 
 type ReelActionsProps = {
   user: Profile;
@@ -29,6 +30,7 @@ type ReelActionsProps = {
 const MOBILE_VIEWPORT = "640px";
 
 export const ReelActions = ({ user, id }: ReelActionsProps) => {
+  const { t } = useTranslation();
   const isMobile = useMediaQuery(`(max-width:${MOBILE_VIEWPORT})`);
   const { user: current } = useUser();
   const { like } = useLike({ post_id: id, user_id: user.user_id });
@@ -99,11 +101,25 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
       <div className="flex flex-col items-center">
         <ul className="list-none flex flex-col gap-4 mb-6 items-center text-xs">
           <li className="flex flex-col gap-1 items-center">
-            <Button aria-label="Like" modifier="close" onClick={handleLike}>
+            <Button
+              aria-label={
+                isAlreadyLike && isAlreadyLike > 0
+                  ? t("reels.unlike")
+                  : t("reels.like")
+              }
+              modifier="close"
+              onClick={handleLike}
+            >
               {isAlreadyLike && isAlreadyLike > 0 ? (
-                <FaHeart className="text-xl fill-red-600" />
+                <FaHeart
+                  className="text-xl fill-red-600"
+                  aria-label={t("reels.like")}
+                />
               ) : (
-                <FaRegHeart className="text-xl" />
+                <FaRegHeart
+                  className="text-xl"
+                  aria-label={t("reels.unlike")}
+                />
               )}
             </Button>
             {count && count > 0 && (
@@ -128,9 +144,12 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
           <li className="flex flex-col gap-1 items-center">
             <Modal>
               <Modal.Open>
-                <Button aria-label="Comment" modifier="close">
+                <Button aria-label={t("reels.comment")} modifier="close">
                   <div className="flex flex-col gap-1">
-                    <FaRegComment className="text-xl" />
+                    <FaRegComment
+                      className="text-xl"
+                      aria-label={t("reels.comment")}
+                    />
                     <p className="text-xs">
                       {new Intl.NumberFormat(navigator.language, {
                         notation: "compact",
@@ -152,7 +171,11 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
           </li>
           <li>
             <Button
-              aria-label="Bookmark"
+              aria-label={
+                bookmarks && bookmarks.length > 0
+                  ? t("reels.unbookmark")
+                  : t("reels.bookmark")
+              }
               modifier="close"
               onClick={handleBookmark}
             >
@@ -161,9 +184,13 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
                   className={`text-xl ${
                     isMobile ? "fill-stone-50" : "fill-black"
                   }`}
+                  aria-label={t("reels.bookmark")}
                 />
               ) : (
-                <FaRegBookmark className="text-xl" />
+                <FaRegBookmark
+                  className="text-xl"
+                  aria-label={t("reels.unbookmark")}
+                />
               )}
             </Button>
           </li>

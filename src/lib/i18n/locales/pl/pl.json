@@ -80,5 +80,15 @@
     "clearHistory": "Wyczyścić historię wyszukiwania?",
     "clearDescription": "Tej operacji nie będzie można cofnąć. Jeżeli usuniesz historię wyszukiwania, możesz nadal oglądać uprzednio wyszukiwane konta wproponowanych wynikach.",
     "clearDisable": "Nie teraz"
+  },
+  "reels": {
+    "mute": "Zmutuj video",
+    "unmute": "Odmutuj video",
+    "play": "Wznów video",
+    "like": "Polub reelsa",
+    "comment": "Skomentuj reelsa",
+    "unlike": "Przestań lubić reelsa",
+    "bookmark": "Zapisz reelsa do ulubionych",
+    "unbookmark": "Usuń reelsa z ulubionych"
   }
 }

@@ -48,7 +48,7 @@ export const CustomReel = ({
   const isMuted = id === muted.id ? muted.isMuted : true;
 
   return (
-    <div className="relative h-full max-h-[500px] sm:h-[700px] sm:max-h-[700px] grid grid-cols-[1fr_auto] rounded-xl">
+    <div className="relative h-full max-h-[500px] sm:h-[700px] sm:max-h-[700px] grid grid-cols-[1fr_auto] rounded-xl overflow-hidden">
       <div className="relative max-h-[500px] sm:max-h-[700px]">
         <div className="h-full w-full">
           <video
@@ -58,8 +58,10 @@ export const CustomReel = ({
             className="h-full w-full object-cover cursor-pointer rounded-xs"
             onClick={handleVideoPlaying}
             ref={videoRef}
+            aria-label={description}
           >
             <source src={video_url} type="video/mp4" />
+            <p>{description}</p>
           </video>
           <div className="bg-black/15 h-full w-full absolute top-0 left-0"></div>
         </div>
@@ -67,15 +69,23 @@ export const CustomReel = ({
           <Button
             modifier="reel"
             onClick={handleMuted}
-            aria-label="Unmute video"
+            aria-label={isMuted ? t("reels.unmute") : t("reels.mute")}
           >
-            {isMuted ? <GoMute /> : <GoUnmute />}
+            {isMuted ? (
+              <GoMute aria-label={t("reels.mute")} />
+            ) : (
+              <GoUnmute aria-label={t("reels.unmute")} />
+            )}
           </Button>
         </div>
         {!played && (
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
-            <Button modifier="video-play" onClick={handleVideoPlaying}>
-              <FaPlay aria-label="Play video" />
+            <Button
+              modifier="video-play"
+              onClick={handleVideoPlaying}
+              aria-label={t("reels.play")}
+            >
+              <FaPlay aria-label={t("reels.play")} />
             </Button>
           </div>
         )}
@@ -100,7 +110,7 @@ export const CustomReel = ({
         </div>
       </div>
       {user && (
-        <div className="text-stone-50 sm:text-stone-950 absolute bottom-0 right-0 sm:col-start-2 sm:self-end sm:static p-4">
+        <div className="text-stone-50 sm:text-stone-950 absolute bottom-0 right-0 sm:col-start-2 sm:self-end sm:static p-4 bg-black/25 rounded-md sm:bg-transparent">
           <ReelActions user={user} id={id} />
         </div>
       )}
