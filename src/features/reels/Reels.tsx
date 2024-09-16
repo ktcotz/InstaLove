@@ -6,6 +6,7 @@ import { CustomReel } from "./CustomReel";
 import "swiper/css";
 import { Mousewheel } from "swiper/modules";
 import { useState } from "react";
+import { ReelsSkeleton } from "./ReelsSkeleton";
 
 export type ReelMutedData = {
   id: number | null;
@@ -13,7 +14,7 @@ export type ReelMutedData = {
 };
 
 export const Reels = () => {
-  const { reels, isLoading } = useGetAllReels();
+  // const { reels, isLoading } = useGetAllReels();
 
   const [muted, setMuted] = useState<ReelMutedData>({
     id: null,
@@ -36,7 +37,9 @@ export const Reels = () => {
     });
   };
 
-  if (isLoading) return <Loader />;
+  const isLoading = true;
+
+  if (isLoading) return <ReelsSkeleton />;
 
   return (
     <Wrapper modifier="reels">
@@ -50,11 +53,11 @@ export const Reels = () => {
         className="reel-swiper"
         modules={[Mousewheel]}
       >
-        {reels?.map((reel) => (
+        {/* {reels?.map((reel) => (
           <SwiperSlide key={reel.id}>
             <CustomReel {...reel} muted={muted} toggleMuted={toggleMuted} />
           </SwiperSlide>
-        ))}
+        ))} */}
       </Swiper>
     </Wrapper>
   );
