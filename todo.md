@@ -8,9 +8,7 @@ DO ZROBIENIA :
 
 PROCES :
 
-Reels
-
-- Accessibility
+Create post
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
@@ -20,5 +18,6 @@ Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 - Notifications.
 - Search.
 - Explore.
+- Reels.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.
