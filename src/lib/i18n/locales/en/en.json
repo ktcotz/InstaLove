@@ -95,6 +95,12 @@
     "removePreview": "Remove preview image",
     "asStorie": "Create new storie",
     "asPost": "Create new post",
-    "next": "Continue"
+    "next": "Continue",
+    "heading": "Drag photos and videos here",
+    "button": "Select from computer",
+    "shareAsStorie": "Share as storie",
+    "shareAsPost": "Share as post",
+    "description": "Post description",
+    "area": "Add description..."
   }
 }

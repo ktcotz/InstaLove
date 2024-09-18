@@ -11,9 +11,6 @@ PROCES :
 Create post
 
 - I18n.
-- Wydzielenie do osobnego featura.
-- Responsivity
-- Lepsza separacja komponentów
 - Loader na ładowanie zdjęcia (WAŻNE, AXIOS?)
 - Pomyślec nad opcją oznaczania kogoś na poście.
 

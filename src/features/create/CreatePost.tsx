@@ -129,30 +129,31 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
             file={file}
           />
         </div>
-        
-        <FileDropzone
-          showDescription={showDescription}
-          setFile={setFile}
-          setPreview={setPreview}
-          file={file}
-          preview={preview}
-        />
-
-        {showDescription && (
-          <CreatePostDescription
-            description={description}
-            handleChange={handleChange}
-            changeDescription={changeDescription}
-            options={options}
-            changeOptions={handleOptionsChange}
-            handleAddMusic={handleAddMusic}
-            type={
-              type === "storie" && file.type.includes("image")
-                ? "storie"
-                : "normal"
-            }
+        <div className="grid md:grid-cols-3">
+          <FileDropzone
+            showDescription={showDescription}
+            setFile={setFile}
+            setPreview={setPreview}
+            file={file}
+            preview={preview}
           />
-        )}
+
+          {showDescription && (
+            <CreatePostDescription
+              description={description}
+              handleChange={handleChange}
+              changeDescription={changeDescription}
+              options={options}
+              changeOptions={handleOptionsChange}
+              handleAddMusic={handleAddMusic}
+              type={
+                type === "storie" && file.type.includes("image")
+                  ? "storie"
+                  : "normal"
+              }
+            />
+          )}
+        </div>
       </div>
     </div>
   );

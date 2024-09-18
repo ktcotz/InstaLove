@@ -17,6 +17,7 @@ export const DisablePostPreview = ({
     <div className="mr-auto">
       <Button
         modifier="close"
+        className="flex items-center justify-center"
         aria-label={t("create.removePreview")}
         onClick={() => {
           setPreview(null);

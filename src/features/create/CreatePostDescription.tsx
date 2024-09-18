@@ -5,8 +5,12 @@ import EmojiPicker from "emoji-picker-react";
 import { Button } from "../../ui/Button";
 import { useMediaQuery } from "usehooks-ts";
 import { AddMusic } from "../stories/AddMusic";
+import { useTranslation } from "react-i18next";
 
 export const MAX_LENGTH = 300;
+
+const MIN_ROW_AREA = 5;
+const MAX_ROW_AREA = 10;
 
 type CreatePostDescriptionProps = {
   description: string;
@@ -18,6 +22,8 @@ type CreatePostDescriptionProps = {
   type: "normal" | "storie";
 };
 
+const MOBILE_VIEWPORT = "768px";
+
 export const CreatePostDescription = ({
   description,
   handleChange,
@@ -27,8 +33,9 @@ export const CreatePostDescription = ({
   type,
   handleAddMusic,
 }: CreatePostDescriptionProps) => {
-  const isMobile = useMediaQuery("(max-width:768px)");
+  const { t } = useTranslation();
   const { user } = useUser();
+  const isMobile = useMediaQuery(`(max-width:${MOBILE_VIEWPORT})`);
   const [showEmotes, setShowEmotes] = useState(false);
 
   if (!user) return null;
@@ -41,18 +48,20 @@ export const CreatePostDescription = ({
           alt={user?.user_metadata.user_name}
           width={32}
           height={32}
-          className="rounded-full"
+          className="rounded-full w-8 h-8"
         />
-        <h2 className="font-medium text-sm">{user?.user_metadata.user_name}</h2>
+        <h2 className="font-semibold text-sm">
+          {user?.user_metadata.user_name}
+        </h2>
       </div>
       <div className="relative">
         <label htmlFor="description" className="sr-only">
-          Opis postu
+          {t("create.description")}
         </label>
         <textarea
-          placeholder="Dodaj opis..."
+          placeholder={t("create.area")}
           className="w-full overflow-scroll px-2 pt-2 pb-8 resize-none"
-          rows={isMobile ? 5 : 10}
+          rows={isMobile ? MIN_ROW_AREA : MAX_ROW_AREA}
           value={description}
           onChange={handleChange}
           id="description"

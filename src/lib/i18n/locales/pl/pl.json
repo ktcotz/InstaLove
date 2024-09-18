@@ -95,6 +95,12 @@
     "removePreview": "Usuń zdjęcie poglądowe",
     "asStorie": "Utwórz nowe storie",
     "asPost": "Utwórz nowy post",
-    "next": "Kontynuuj"
+    "next": "Kontynuuj",
+    "heading": "Przeciągnij zdjęcia i filmy tutaj",
+    "button": "Wybierz z komputera",
+    "shareAsStorie": "Udostępnij jako rolkę",
+    "shareAsPost": "Udostępnij jako post",
+    "description": "Opis postu",
+    "area": "Dodaj opis..."
   }
 }

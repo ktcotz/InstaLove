@@ -2,6 +2,7 @@ import { useDropzone } from "react-dropzone";
 import { CreatePostFile } from "./CreatePost";
 import { FaRegImages } from "react-icons/fa";
 import { Button } from "../../ui";
+import { useTranslation } from "react-i18next";
 
 type FileDropzoneProps = {
   showDescription: boolean;
@@ -18,6 +19,8 @@ export const FileDropzone = ({
   file,
   preview,
 }: FileDropzoneProps) => {
+  const { t } = useTranslation();
+
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     accept: {
@@ -48,42 +51,43 @@ export const FileDropzone = ({
   });
 
   return (
-    <div className="grid md:grid-cols-3">
+    <div
+      {...getRootProps({ className: "dropzone" })}
+      className={`${
+        showDescription ? "col-start-1 col-end-3" : "col-start-1 col-end-4"
+      }`}
+    >
+      <input {...getInputProps()} />
       <div
-        {...getRootProps({ className: "dropzone" })}
-        className={`${
-          showDescription ? "col-start-1 col-end-3" : "col-start-1 col-end-4"
-        }`}
+        className="h-[300px] md:h-[500px] bg-cover bg-center relative"
+        style={
+          preview && file.type.includes("image")
+            ? {
+                backgroundImage: `url(${preview})`,
+              }
+            : {}
+        }
       >
-        <input {...getInputProps()} />
-        <div
-          className="h-[500px] bg-cover bg-center relative"
-          style={
-            preview && file.type.includes("image")
-              ? {
-                  backgroundImage: `url(${preview})`,
-                }
-              : {}
-          }
-        >
-          {!preview && (
-            <div className="h-full flex flex-col items-center justify-center gap-6">
-              <FaRegImages aria-label="Post" className="text-6xl" />
-              <h2 className="text-xl sm:text-2xl">
-                Przeciągnij zdjęcia i filmy tutaj
-              </h2>
-              <Button modifier="submit">Wybierz z komputera</Button>
-            </div>
-          )}
+        {!preview && (
+          <div className="h-full flex flex-col items-center justify-center gap-6">
+            <FaRegImages
+              aria-label={t("create.heading")}
+              className="text-6xl"
+            />
+            <h2 className="text-xl sm:text-2xl">{t("create.heading")}</h2>
+            <Button modifier="submit" aria-label={t("create.button")}>
+              {t("create.button")}
+            </Button>
+          </div>
+        )}
 
-          {preview && file.type.includes("video") && (
-            <div className="absolute top-0 left-0 h-full w-full">
-              <video autoPlay loop muted className="h-full w-full object-cover">
-                <source src={preview} type="video/mp4" />
-              </video>
-            </div>
-          )}
-        </div>
+        {preview && file.type.includes("video") && (
+          <div className="absolute top-0 left-0 h-full w-full">
+            <video autoPlay loop muted className="h-full w-full object-cover">
+              <source src={preview} type="video/mp4" />
+            </video>
+          </div>
+        )}
       </div>
     </div>
   );

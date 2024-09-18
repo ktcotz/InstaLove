@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "../../ui";
 import { CreatePostFile } from "./CreatePost";
 
@@ -12,10 +13,14 @@ export const CreateAction = ({
   addPost,
   file,
 }: CreateActionProps) => {
+  const { t } = useTranslation();
+
   return (
     showDescription && (
       <Button modifier="text" onClick={() => addPost()}>
-        {file.type.includes("image") ? "Udostępnij" : "Udostępnij jako rolkę"}
+        {file.type.includes("image")
+          ? t("create.shareAsPost")
+          : t("create.shareAsStorie")}
       </Button>
     )
   );
