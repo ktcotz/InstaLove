@@ -34,8 +34,8 @@ export const Search = () => {
       )}
 
       <div
-        className={`relative p-4 border-b border-stone-200 ${
-          isMobile ? "" : "mb-4"
+        className={`relative p-4 ${
+          isMobile ? "" : "mb-4 border-b border-stone-200"
         }`}
       >
         <SearchInput

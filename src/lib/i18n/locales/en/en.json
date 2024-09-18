@@ -90,5 +90,11 @@
     "unlike": "Unlike reel video",
     "bookmark": "Bookmark reel video",
     "unbookmark": "Unbookmark reel video"
+  },
+  "create": {
+    "removePreview": "Remove preview image",
+    "asStorie": "Create new storie",
+    "asPost": "Create new post",
+    "next": "Continue"
   }
 }

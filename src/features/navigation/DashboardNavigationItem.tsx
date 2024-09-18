@@ -20,11 +20,11 @@ import { NavigationComponent } from "./context/NavigationContext";
 import { useMediaQuery } from "usehooks-ts";
 import { Tooltip } from "react-tooltip";
 import { useUser } from "../authentication/queries/useUser";
-import { CreatePost } from "../posts/CreatePost";
 import { useProfile } from "../profile/queries/useProfile";
 import { NotificationsCounter } from "../notifications/NotificationsCounter";
 import { NavigationRoutes } from "./types";
 import { useLocation } from "react-router";
+import { CreatePost } from "../create/CreatePost";
 
 type DashboardNavigationItemProps = {
   icon: NavigationRoutes;

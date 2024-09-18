@@ -90,5 +90,11 @@
     "unlike": "Przestań lubić reelsa",
     "bookmark": "Zapisz reelsa do ulubionych",
     "unbookmark": "Usuń reelsa z ulubionych"
+  },
+  "create": {
+    "removePreview": "Usuń zdjęcie poglądowe",
+    "asStorie": "Utwórz nowe storie",
+    "asPost": "Utwórz nowy post",
+    "next": "Kontynuuj"
   }
 }
