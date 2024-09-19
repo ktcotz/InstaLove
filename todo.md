@@ -10,7 +10,6 @@ PROCES :
 
 Create post
 
-- Loader na ładowanie zdjęcia (WAŻNE, AXIOS?)
 - Pomyślec nad opcją oznaczania kogoś na poście.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :

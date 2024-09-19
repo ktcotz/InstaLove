@@ -12,6 +12,8 @@ import { CreateAction } from "./CreateAction";
 import { FileDropzone } from "./FileDropzone";
 import { PostOptions, PostPossibilityFileType } from "./types";
 import { MAX_LENGTH } from "../../ui/Textarea";
+import { PostLoader } from "./PostLoader";
+import { AxiosProgressEvent } from "axios";
 
 export type CreatePostFile = {
   drop: File | null;
@@ -41,6 +43,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
     comments: false,
     likes: false,
   });
+  const [uploadProgress, setUploadProgress] = useState(0);
 
   const { close } = useModal();
 
@@ -63,6 +66,15 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
 
   const handleAddMusic = (music: string) => {
     setMusic(music);
+  };
+
+  const handleUploadProgress = (progressEvent: AxiosProgressEvent) => {
+    if (!progressEvent.total) return;
+
+    const percentCompleted = Math.round(
+      (progressEvent.loaded * 100) / progressEvent.total
+    );
+    setUploadProgress(percentCompleted);
   };
 
   const addPost = () => {
@@ -91,6 +103,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
         post_image: file.drop,
         user_id: user.id,
         type: file.type.startsWith("video") ? "reels" : "posts",
+        handleUploadProgress,
       },
       {
         onSuccess: () => {
@@ -130,6 +143,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
             type={type}
           />
         </div>
+        {uploadProgress > 0 && <PostLoader uploadProgress={uploadProgress} />}
         <div className="grid md:grid-cols-3">
           <FileDropzone
             showDescription={showDescription}
