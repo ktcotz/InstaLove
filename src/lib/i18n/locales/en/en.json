@@ -101,6 +101,12 @@
     "shareAsStorie": "Share as storie",
     "shareAsPost": "Share as post",
     "description": "Post description",
-    "area": "Add description..."
+    "area": "Add description...",
+    "comment": "Remove commenting ability",
+    "like": "Hide like count",
+    "musicStop": "Pause",
+    "musicStart": "Play",
+    "musicAccept": "Accept",
+    "musicRemove": "Reject"
   }
 }

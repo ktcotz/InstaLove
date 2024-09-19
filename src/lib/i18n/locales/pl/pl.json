@@ -101,6 +101,12 @@
     "shareAsStorie": "Udostępnij jako rolkę",
     "shareAsPost": "Udostępnij jako post",
     "description": "Opis postu",
-    "area": "Dodaj opis..."
+    "area": "Dodaj opis...",
+    "comment": "Usuń możliwość komentowania",
+    "like": "Ukryj liczbę polubień",
+    "musicStop": "Zatrzymaj",
+    "musicStart": "Graj",
+    "musicAccept": "Zaakceptuj",
+    "musicRemove": "Odrzuć"
   }
 }

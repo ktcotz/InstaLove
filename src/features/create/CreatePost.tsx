@@ -1,6 +1,6 @@
 import { Button } from "../../ui/Button";
 import { ChangeEvent, useState } from "react";
-import { CreatePostDescription, MAX_LENGTH } from "./CreatePostDescription";
+import { CreatePostDescription } from "./CreatePostDescription";
 import { useCreatePost } from "./mutations/useCreatePost";
 import { useUser } from "../authentication/queries/useUser";
 import { useNavigate } from "react-router";
@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import { CreateAction } from "./CreateAction";
 import { FileDropzone } from "./FileDropzone";
 import { PostOptions, PostPossibilityFileType } from "./types";
+import { MAX_LENGTH } from "../../ui/Textarea";
 
 export type CreatePostFile = {
   drop: File | null;
@@ -101,7 +102,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
   };
 
   return (
-    <div className="mx-auto max-w-xl sm:max-w-3xl">
+    <div className="mx-auto max-w-xl sm:max-w-5xl">
       <div className="text-center shadow-xl rounded-md bg-stone-50">
         <div className="p-3 border-b border-stone-300 flex items-center justify-center">
           {preview && (
@@ -126,7 +127,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
           <CreateAction
             showDescription={showDescription}
             addPost={addPost}
-            file={file}
+            type={type}
           />
         </div>
         <div className="grid md:grid-cols-3">
@@ -146,11 +147,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
               options={options}
               changeOptions={handleOptionsChange}
               handleAddMusic={handleAddMusic}
-              type={
-                type === "storie" && file.type.includes("image")
-                  ? "storie"
-                  : "normal"
-              }
+              type={type}
             />
           )}
         </div>

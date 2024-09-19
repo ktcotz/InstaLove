@@ -10,7 +10,6 @@ PROCES :
 
 Create post
 
-- I18n.
 - Loader na ładowanie zdjęcia (WAŻNE, AXIOS?)
 - Pomyślec nad opcją oznaczania kogoś na poście.
 

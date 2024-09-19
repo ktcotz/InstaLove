@@ -1,24 +1,24 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "../../ui";
-import { CreatePostFile } from "./CreatePost";
+import { PostOptions } from "./types";
 
 type CreateActionProps = {
   showDescription: boolean;
   addPost: () => void;
-  file: CreatePostFile;
+  type: PostOptions;
 };
 
 export const CreateAction = ({
   showDescription,
   addPost,
-  file,
+  type,
 }: CreateActionProps) => {
   const { t } = useTranslation();
 
   return (
     showDescription && (
       <Button modifier="text" onClick={() => addPost()}>
-        {file.type.includes("image")
+        {type === "normal"
           ? t("create.shareAsPost")
           : t("create.shareAsStorie")}
       </Button>
