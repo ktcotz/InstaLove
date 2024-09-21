@@ -7,11 +7,13 @@ import { useAddUserSearch } from "./mutations/useAddUserSearch";
 import { useTranslation } from "react-i18next";
 import { useDeleteIndividualUserSearch } from "./mutations/useDeleteIndividualUserSearch";
 import { useUser } from "../authentication/queries/useUser";
+import { MarkData } from "../mark/Mark";
 
 type SearchUserProps = {
   currentID?: string;
   isMarkable?: boolean;
-  handleChoosenUser?: (name: string) => void;
+  handleChoosenUser?: (mark: MarkData) => void;
+  position?: { x: number; y: number };
 };
 
 export const SearchUser = ({
@@ -22,6 +24,7 @@ export const SearchUser = ({
   currentID,
   handleChoosenUser,
   isMarkable,
+  position,
 }: Profile & SearchUserProps) => {
   const { user } = useUser();
 
@@ -46,8 +49,11 @@ export const SearchUser = ({
   if (isMarkable) {
     return (
       <Button
-        onClick={() => {
-          handleChoosenUser?.(user_name);
+        onClick={(e) => {
+          e.stopPropagation();
+          if (!position) return;
+
+          handleChoosenUser?.({ name: user_name, ...position });
         }}
         modifier="mark"
       >

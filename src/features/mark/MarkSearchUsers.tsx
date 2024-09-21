@@ -1,24 +1,42 @@
-import { SearchInput } from "../../ui";
+import { IoClose } from "react-icons/io5";
+import { Button, SearchInput } from "../../ui";
 import { useGetAllUsersByQuery } from "../search/query/useGetAllUsersByQuery";
 import { SearchUser } from "../search/SearchUser";
+import { MarkData } from "./Mark";
 
 type MarkSearchUsersProps = {
   query: string;
   handleQuery: (query: string) => void;
-  handleChoosenUser: (name: string) => void;
+  handleChoosenUser: (mark: MarkData) => void;
+  reset: () => void;
+  position: { x: number; y: number };
 };
 
 export const MarkSearchUsers = ({
   query,
   handleQuery,
   handleChoosenUser,
+  reset,
+  position,
 }: MarkSearchUsersProps) => {
   const { users } = useGetAllUsersByQuery(query);
 
   return (
-    <div className="relative bg-stone-50 w-full max-w-64 sm:max-w-96  min-h-24 shadow-lg rounded-md top-1/2 left-1/2 -translate-x-1/2 ">
-      <SearchInput query={query} handleQuery={handleQuery} />
-
+    <div className="relative bg-stone-50 z-50 w-full max-w-64 sm:max-w-96  min-h-24 shadow-lg rounded-md top-1/2 left-1/2 -translate-x-1/2 ">
+      <div className="grid grid-cols-[1fr_auto]">
+        <SearchInput query={query} handleQuery={handleQuery} />
+        <div className="px-4 flex items-center justify-center">
+          <Button
+            modifier="close"
+            onClick={(e) => {
+              e.stopPropagation();
+              reset();
+            }}
+          >
+            <IoClose />
+          </Button>
+        </div>
+      </div>
       {users && users.length > 0 && (
         <div className="flex flex-col gap-1 divide-y divide-stone-200 text-left">
           {users?.map((user) => (
@@ -27,6 +45,7 @@ export const MarkSearchUsers = ({
               {...user}
               handleChoosenUser={handleChoosenUser}
               isMarkable={true}
+              position={position}
             />
           ))}
         </div>

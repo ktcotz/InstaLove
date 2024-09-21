@@ -4,8 +4,8 @@ import { FaRegImages } from "react-icons/fa";
 import { Button } from "../../ui";
 import { useTranslation } from "react-i18next";
 import { PostLoader } from "./PostLoader";
-import { useState } from "react";
 import { MarkUsers } from "../mark/MarkUsers";
+import { useMarksContext } from "./context/useMarksContext";
 
 type FileDropzoneProps = {
   showDescription: boolean;
@@ -25,6 +25,7 @@ export const FileDropzone = ({
   uploadProgress,
 }: FileDropzoneProps) => {
   const { t } = useTranslation();
+  const { open, toggleOpen,resetMarks } = useMarksContext();
 
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
@@ -48,14 +49,13 @@ export const FileDropzone = ({
       const previewFile = URL.createObjectURL(droppedFile);
 
       setPreview(previewFile);
+      resetMarks();
       setFile({
         drop: droppedFile,
         type: droppedFile.type.startsWith("image") ? "image" : "video",
       });
     },
   });
-
-  const [markUsers, setMarkUsers] = useState(false);
 
   return (
     <div
@@ -80,7 +80,7 @@ export const FileDropzone = ({
             <Button
               onClick={(e) => {
                 e.stopPropagation();
-                setMarkUsers((prevMarkUsersState) => !prevMarkUsersState);
+                toggleOpen();
               }}
               modifier="submit"
             >
@@ -88,7 +88,7 @@ export const FileDropzone = ({
             </Button>
           </div>
         )}
-        {markUsers && <MarkUsers />}
+        {open && <MarkUsers />}
         {!preview && (
           <div className="h-full flex flex-col items-center justify-center gap-6">
             <FaRegImages

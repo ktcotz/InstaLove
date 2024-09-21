@@ -1,16 +1,23 @@
 import { IoClose } from "react-icons/io5";
 import { Button } from "../../ui";
 import { useEffect, useRef, useState } from "react";
+import { useMarksContext } from "../create/context/useMarksContext";
+import { ID } from "../create/context/MarksContextProvider";
 
-type MarkProps = {
+export type MarkData = {
   name: string;
   x: number;
   y: number;
 };
 
-export const Mark = ({ name, x, y }: MarkProps) => {
+export const Mark = ({ id, name, x, y }: MarkData & ID) => {
   const ref = useRef<HTMLDivElement>(null);
+  const { removeMark } = useMarksContext();
   const [left, setLeft] = useState(0);
+
+  const handleRemoveMark = () => {
+    removeMark(id);
+  };
 
   useEffect(() => {
     if (!ref.current) return;
@@ -34,7 +41,13 @@ export const Mark = ({ name, x, y }: MarkProps) => {
     >
       <div className="flex items-center gap-4">
         <p>{name}</p>
-        <Button modifier="close">
+        <Button
+          modifier="close"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRemoveMark();
+          }}
+        >
           <IoClose />
         </Button>
       </div>

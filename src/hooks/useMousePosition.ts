@@ -17,6 +17,7 @@ const useMousePosition = ({
     y: 0,
   });
 
+
   useEffect(() => {
     const updateClickPosition = (ev: MouseEvent) => {
       if (ref.current) {

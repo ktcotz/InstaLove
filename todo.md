@@ -12,7 +12,11 @@ Create post
 
 - Oznaczanie kogoś (PROCEDURA)
 
-4. Tagi są togglowane po kliknięciu w niego.
+1. Kliknięcie w add tags pokazuje komponent tag.
+2. Kliknięcie wywołuje search, dodanie usera, dodaje go do tablicy marks.
+3. Wyświetlam tablicę marks.
+4. Klikam w background i znowu pokazuje mozliwość dodania usera.
+
 5. Po zaakceptowaniu zdjęcia dodają się tagi do bazy danych, tabela tags
 
 X,Y,UserID,PostID.
