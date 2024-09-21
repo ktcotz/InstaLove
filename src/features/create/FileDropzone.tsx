@@ -3,6 +3,7 @@ import { CreatePostFile } from "./CreatePost";
 import { FaRegImages } from "react-icons/fa";
 import { Button } from "../../ui";
 import { useTranslation } from "react-i18next";
+import { PostLoader } from "./PostLoader";
 
 type FileDropzoneProps = {
   showDescription: boolean;
@@ -10,6 +11,7 @@ type FileDropzoneProps = {
   setPreview: (file: string | null) => void;
   file: CreatePostFile;
   preview: string | null;
+  uploadProgress: number;
 };
 
 export const FileDropzone = ({
@@ -18,6 +20,7 @@ export const FileDropzone = ({
   setPreview,
   file,
   preview,
+  uploadProgress,
 }: FileDropzoneProps) => {
   const { t } = useTranslation();
 
@@ -88,6 +91,8 @@ export const FileDropzone = ({
             </video>
           </div>
         )}
+
+        {uploadProgress > 0 && <PostLoader uploadProgress={uploadProgress} />}
       </div>
     </div>
   );

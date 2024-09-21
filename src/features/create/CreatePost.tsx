@@ -12,7 +12,6 @@ import { CreateAction } from "./CreateAction";
 import { FileDropzone } from "./FileDropzone";
 import { PostOptions, PostPossibilityFileType } from "./types";
 import { MAX_LENGTH } from "../../ui/Textarea";
-import { PostLoader } from "./PostLoader";
 import { AxiosProgressEvent } from "axios";
 
 export type CreatePostFile = {
@@ -143,7 +142,6 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
             type={type}
           />
         </div>
-        {uploadProgress > 0 && <PostLoader uploadProgress={uploadProgress} />}
         <div className="grid md:grid-cols-3">
           <FileDropzone
             showDescription={showDescription}
@@ -151,6 +149,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
             setPreview={setPreview}
             file={file}
             preview={preview}
+            uploadProgress={uploadProgress}
           />
 
           {showDescription && (

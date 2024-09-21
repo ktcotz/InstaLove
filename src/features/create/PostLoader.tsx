@@ -1,4 +1,5 @@
-import ProgressBar from "@ramonak/react-progress-bar";
+import { buildStyles, CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 type PostLoaderProps = {
   uploadProgress: number;
@@ -6,11 +7,21 @@ type PostLoaderProps = {
 
 export const PostLoader = ({ uploadProgress }: PostLoaderProps) => {
   return (
-    <div className="p-4">
-      <ProgressBar
-        completed={uploadProgress}
-        barContainerClassName="bg-stone-950 text-stone-50"
-      />
+    <div className="absolute top-0 left-0 w-full h-full bg-black/80 flex items-center justify-center">
+      <div className="w-32 h-32">
+        <CircularProgressbar
+          maxValue={100}
+          minValue={1}
+          value={uploadProgress}
+          text={`${uploadProgress} %`}
+          styles={buildStyles({
+            backgroundColor: "#000",
+            trailColor: "#000",
+            pathColor: "#fff",
+            textColor: "#fff",
+          })}
+        />
+      </div>
     </div>
   );
 };
