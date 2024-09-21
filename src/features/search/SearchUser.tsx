@@ -10,6 +10,8 @@ import { useUser } from "../authentication/queries/useUser";
 
 type SearchUserProps = {
   currentID?: string;
+  isMarkable?: boolean;
+  handleChoosenUser?: (name: string) => void;
 };
 
 export const SearchUser = ({
@@ -18,6 +20,8 @@ export const SearchUser = ({
   fullName,
   user_id,
   currentID,
+  handleChoosenUser,
+  isMarkable,
 }: Profile & SearchUserProps) => {
   const { user } = useUser();
 
@@ -38,6 +42,31 @@ export const SearchUser = ({
 
     deleteUser({ search_user_id: user_id, user_id: user.id });
   };
+
+  if (isMarkable) {
+    return (
+      <Button
+        onClick={() => {
+          handleChoosenUser?.(user_name);
+        }}
+        modifier="mark"
+      >
+        <div className="flex items-center gap-3 w-full">
+          <img
+            src={avatar_url}
+            alt={user_name}
+            width={32}
+            height={32}
+            className="rounded-full w-8 h-8"
+          />
+          <div>
+            <h2 className="font-semibold text-sm">{user_name}</h2>
+            <p className="text-sm text-stone-600">{fullName}</p>
+          </div>
+        </div>
+      </Button>
+    );
+  }
 
   return (
     <CustomLink

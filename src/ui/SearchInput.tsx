@@ -7,7 +7,7 @@ type SearchInputProps = {
   query: string;
   handleQuery: (value: string) => void;
   modifier?: SearchInputModifier;
-  upFocus: () => void;
+  upFocus?: () => void;
 };
 
 export type SearchQuery = {

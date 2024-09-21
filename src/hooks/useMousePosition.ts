@@ -1,8 +1,8 @@
 import { useState, useEffect, RefObject } from "react";
 
 interface MousePosition {
-  x: number | null;
-  y: number | null;
+  x: number;
+  y: number;
 }
 
 type useMousePositionProps<T extends HTMLElement> = {
@@ -13,8 +13,8 @@ const useMousePosition = ({
   ref,
 }: useMousePositionProps<HTMLDivElement>): MousePosition => {
   const [mousePosition, setMousePosition] = useState<MousePosition>({
-    x: null,
-    y: null,
+    x: 0,
+    y: 0,
   });
 
   useEffect(() => {
