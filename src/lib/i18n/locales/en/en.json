@@ -107,6 +107,7 @@
     "musicStop": "Pause",
     "musicStart": "Play",
     "musicAccept": "Accept",
-    "musicRemove": "Reject"
+    "musicRemove": "Reject",
+    "tag": "Tag a friend"
   }
 }

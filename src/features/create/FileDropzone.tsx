@@ -4,6 +4,8 @@ import { FaRegImages } from "react-icons/fa";
 import { Button } from "../../ui";
 import { useTranslation } from "react-i18next";
 import { PostLoader } from "./PostLoader";
+import { useState } from "react";
+import { MarkUsers } from "../mark/MarkUsers";
 
 type FileDropzoneProps = {
   showDescription: boolean;
@@ -53,6 +55,8 @@ export const FileDropzone = ({
     },
   });
 
+  const [markUsers, setMarkUsers] = useState(false);
+
   return (
     <div
       {...getRootProps({ className: "dropzone" })}
@@ -71,6 +75,20 @@ export const FileDropzone = ({
             : {}
         }
       >
+        {preview && (
+          <div className="absolute top-4 left-4 z-50">
+            <Button
+              onClick={(e) => {
+                e.stopPropagation();
+                setMarkUsers((prevMarkUsersState) => !prevMarkUsersState);
+              }}
+              modifier="submit"
+            >
+              {t("create.tag")}
+            </Button>
+          </div>
+        )}
+        {markUsers && <MarkUsers />}
         {!preview && (
           <div className="h-full flex flex-col items-center justify-center gap-6">
             <FaRegImages
