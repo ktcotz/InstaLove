@@ -10,6 +10,8 @@ import { useUser } from "../authentication/queries/useUser";
 import { useAddView } from "./mutations/useAddView";
 import { useEffect } from "react";
 import { PostsContextProvider } from "./context/PostsContext";
+import { useGetAllMarksOnPost } from "../mark/queries/useGetAllMarksOnPost";
+import { Mark } from "../mark/Mark";
 
 type IndividualModalPostProps = {
   post: GeneralPost;
@@ -27,6 +29,10 @@ export const IndividualModalPost = ({
   const { addView } = useAddView({
     reel_id: post.id,
     user_id: currentUser!.id,
+  });
+  const { marks } = useGetAllMarksOnPost({
+    user_id: user?.user_id,
+    post_id: post.id,
   });
 
   const {
@@ -80,7 +86,7 @@ export const IndividualModalPost = ({
             }
             className={`${
               "video_url" in post ? "row-start-1 row-end-3" : ""
-            } bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100 ${
+            } relative bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100 ${
               main ? "row-start-1 row-end-4" : ""
             }`}
           >
@@ -89,6 +95,9 @@ export const IndividualModalPost = ({
                 <source src={post.video_url} type="video/mp4" />
               </video>
             )}
+            {marks?.map((mark) => (
+              <Mark {...mark} key={mark.id} />
+            ))}
           </div>
           <div
             className={`${

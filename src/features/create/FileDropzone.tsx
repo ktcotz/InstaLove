@@ -25,7 +25,7 @@ export const FileDropzone = ({
   uploadProgress,
 }: FileDropzoneProps) => {
   const { t } = useTranslation();
-  const { open, toggleOpen,resetMarks } = useMarksContext();
+  const { open, toggleOpen, resetMarks } = useMarksContext();
 
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
@@ -75,7 +75,7 @@ export const FileDropzone = ({
             : {}
         }
       >
-        {preview && (
+        {preview && file.type.includes("image") && (
           <div className="absolute top-4 left-4 z-50">
             <Button
               onClick={(e) => {
@@ -88,7 +88,9 @@ export const FileDropzone = ({
             </Button>
           </div>
         )}
-        {open && <MarkUsers />}
+
+        {open && file.type.includes("image") && <MarkUsers />}
+
         {!preview && (
           <div className="h-full flex flex-col items-center justify-center gap-6">
             <FaRegImages

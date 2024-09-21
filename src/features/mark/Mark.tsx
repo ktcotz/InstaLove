@@ -33,7 +33,7 @@ export const Mark = ({ id, name, x, y }: MarkData & ID) => {
   return (
     <div
       ref={ref}
-      className="absolute bg-black/90 text-stone-50 rounded-md p-2"
+      className="absolute bg-black/90 text-stone-50 rounded-md p-2 z-40"
       style={{
         top: `${y}px`,
         left: `${left}px`,

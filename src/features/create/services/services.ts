@@ -1,6 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import axios, { AxiosProgressEvent } from "axios";
+import { GeneralsPostsSchema } from "../../posts/schema/PostsSchema";
 
 type SupabasePost = {
   post_image: File;
@@ -78,7 +79,9 @@ export const createPost = async ({
       });
     }
 
-    return data;
+    const parsedData = GeneralsPostsSchema.parse(data);
+
+    return parsedData;
   } catch (err) {
     if (err instanceof Error) {
       throw new CustomError({

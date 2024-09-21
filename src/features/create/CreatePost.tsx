@@ -13,6 +13,8 @@ import { FileDropzone } from "./FileDropzone";
 import { PostOptions, PostPossibilityFileType } from "./types";
 import { MAX_LENGTH } from "../../ui/Textarea";
 import { AxiosProgressEvent } from "axios";
+import { useAddMarks } from "../mark/mutations/useAddMarks";
+import { useMarksContext } from "./context/useMarksContext";
 
 export type CreatePostFile = {
   drop: File | null;
@@ -25,8 +27,9 @@ type CreatePostProps = {
 
 export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
   const { t } = useTranslation();
-
   const navigate = useNavigate();
+  const { mutate } = useAddMarks();
+  const { marks, resetMarks } = useMarksContext();
   const { create } = useCreatePost();
   const { createStorie } = useAddStorie();
   const { user } = useUser();
@@ -105,9 +108,21 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
         handleUploadProgress,
       },
       {
-        onSuccess: () => {
+        onSuccess: (post) => {
+          const mappedMarks = marks.map((mark) => {
+            return {
+              x: mark.x,
+              y: mark.y,
+              name: mark.name,
+              post_id: post![0].id,
+              user_id: user.id,
+            };
+          });
+
+          mutate(mappedMarks);
           close();
           navigate(`/dashboard/${user.user_metadata.user_name}`);
+          resetMarks();
         },
       }
     );
