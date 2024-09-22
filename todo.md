@@ -8,15 +8,6 @@ DO ZROBIENIA :
 
 PROCES :
 
-Create post
-
-- Oznaczanie kogoś (PROCEDURA)
-
-
-5. Po zaakceptowaniu zdjęcia dodają się tagi do bazy danych, tabela tags
-
-X,Y,UserID,PostID.
-
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
 - Home i wszystkie podkomponenty.

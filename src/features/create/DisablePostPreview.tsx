@@ -1,7 +1,7 @@
 import { IoIosArrowBack } from "react-icons/io";
 import { Button } from "../../ui";
 import { useTranslation } from "react-i18next";
-import { useMarksContext } from "./context/useMarksContext";
+import { useMarksContext } from "../mark/context/useMarksContext";
 
 type DisablePostPreviewProps = {
   setPreview: (state: string | null) => void;

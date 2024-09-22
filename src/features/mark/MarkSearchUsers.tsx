@@ -2,12 +2,12 @@ import { IoClose } from "react-icons/io5";
 import { Button, SearchInput } from "../../ui";
 import { useGetAllUsersByQuery } from "../search/query/useGetAllUsersByQuery";
 import { SearchUser } from "../search/SearchUser";
-import { MarkData } from "./Mark";
+import { MarkDTO } from "./schema/MarkSchema";
 
 type MarkSearchUsersProps = {
   query: string;
   handleQuery: (query: string) => void;
-  handleChoosenUser: (mark: MarkData) => void;
+  handleChoosenUser: (mark: MarkDTO) => void;
   reset: () => void;
   position: { x: number; y: number };
 };

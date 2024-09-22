@@ -14,7 +14,7 @@ import { PostOptions, PostPossibilityFileType } from "./types";
 import { MAX_LENGTH } from "../../ui/Textarea";
 import { AxiosProgressEvent } from "axios";
 import { useAddMarks } from "../mark/mutations/useAddMarks";
-import { useMarksContext } from "./context/useMarksContext";
+import { useMarksContext } from "../mark/context/useMarksContext";
 
 export type CreatePostFile = {
   drop: File | null;

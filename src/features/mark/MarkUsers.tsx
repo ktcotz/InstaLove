@@ -1,8 +1,9 @@
 import { useRef, useState } from "react";
 import useMousePosition from "../../hooks/useMousePosition";
 import { MarkSearchUsers } from "./MarkSearchUsers";
-import { Mark, MarkData } from "./Mark";
-import { useMarksContext } from "../create/context/useMarksContext";
+import { Mark } from "./Mark";
+import { useMarksContext } from "./context/useMarksContext";
+import { MarkDTO } from "./schema/MarkSchema";
 
 export const MarkUsers = () => {
   const { marks } = useMarksContext();
@@ -13,7 +14,7 @@ export const MarkUsers = () => {
   const [choosenUser, setChoosenUser] = useState("");
   const [position, setPosition] = useState({ x: 0, y: 0 });
 
-  const handleChoosenUser = (mark: MarkData) => {
+  const handleChoosenUser = (mark: MarkDTO) => {
     const newMark = {
       ...mark,
       id: Math.random(),

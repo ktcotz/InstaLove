@@ -1,17 +1,9 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { MarksByUserPost } from "../queries/useGetAllMarksOnPost";
+import { MarksDatabase } from "../schema/MarkSchema";
 
-type Marks = {
-  user_id: string;
-  post_id: number;
-  name: string;
-  x: number;
-  y: number;
-};
-
-
-export const addMarks = async (marks: Marks[]) => {
+export const addMarks = async (marks: MarksDatabase[]) => {
   const { data, error } = await supabase.from("marks").insert(marks).select();
 
   if (error) {

@@ -1,7 +1,7 @@
 import { Outlet } from "react-router";
 import { DashboardNavigation } from "../features/navigation/DashboardNavigation";
 import { ComponentManager } from "../features/navigation/ComponentManager";
-import { MarksContextProvider } from "../features/create/context/MarksContextProvider";
+import { MarksContextProvider } from "../features/mark/context/MarksContextProvider";
 export const Dashboard = () => {
   return (
     <MarksContextProvider>

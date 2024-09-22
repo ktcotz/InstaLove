@@ -5,7 +5,7 @@ import { Button } from "../../ui";
 import { useTranslation } from "react-i18next";
 import { PostLoader } from "./PostLoader";
 import { MarkUsers } from "../mark/MarkUsers";
-import { useMarksContext } from "./context/useMarksContext";
+import { useMarksContext } from "../mark/context/useMarksContext";
 
 type FileDropzoneProps = {
   showDescription: boolean;
@@ -75,7 +75,7 @@ export const FileDropzone = ({
             : {}
         }
       >
-        {preview && file.type.includes("image") && (
+        {preview && file.type.includes("image") && showDescription && (
           <div className="absolute top-4 left-4 z-50">
             <Button
               onClick={(e) => {
@@ -89,7 +89,7 @@ export const FileDropzone = ({
           </div>
         )}
 
-        {open && file.type.includes("image") && <MarkUsers />}
+        {open && file.type.includes("image") && preview && <MarkUsers />}
 
         {!preview && (
           <div className="h-full flex flex-col items-center justify-center gap-6">

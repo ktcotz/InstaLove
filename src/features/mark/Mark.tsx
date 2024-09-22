@@ -1,16 +1,12 @@
 import { IoClose } from "react-icons/io5";
 import { Button } from "../../ui";
 import { useEffect, useRef, useState } from "react";
-import { useMarksContext } from "../create/context/useMarksContext";
-import { ID } from "../create/context/MarksContextProvider";
+import { useMarksContext } from "./context/useMarksContext";
+import { MarkDTO } from "./schema/MarkSchema";
 
-export type MarkData = {
-  name: string;
-  x: number;
-  y: number;
-};
 
-export const Mark = ({ id, name, x, y }: MarkData & ID) => {
+
+export const Mark = ({ id, name, x, y }: MarkDTO) => {
   const ref = useRef<HTMLDivElement>(null);
   const { removeMark } = useMarksContext();
   const [left, setLeft] = useState(0);

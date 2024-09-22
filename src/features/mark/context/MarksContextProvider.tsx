@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react";
-import { MarkData } from "../../mark/Mark";
+import { MarkDTO } from "../schema/MarkSchema";
 
 type MarksContextProviderProps = {
   children: ReactNode;
@@ -13,8 +13,8 @@ type MarksContextState = {
   open: boolean;
   toggleOpen: () => void;
   removeMark: (id: number) => void;
-  addMark: (mark: MarkData & ID) => void;
-  marks: (MarkData & ID)[];
+  addMark: (mark: MarkDTO) => void;
+  marks: MarkDTO[];
   resetMarks: () => void;
 };
 
@@ -23,14 +23,14 @@ export const MarksContext = createContext<MarksContextState | null>(null);
 export const MarksContextProvider = ({
   children,
 }: MarksContextProviderProps) => {
-  const [marks, setMarks] = useState<(MarkData & ID)[]>([]);
+  const [marks, setMarks] = useState<MarkDTO[]>([]);
   const [open, setOpen] = useState(false);
 
   const removeMark = (id: number) => {
     setMarks(marks.filter((mark) => mark.id !== id));
   };
 
-  const addMark = (mark: MarkData & ID) => {
+  const addMark = (mark: MarkDTO) => {
     const isNameMarked = marks.find(
       (findedMark) => findedMark.name === mark.name
     );
