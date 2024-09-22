@@ -109,5 +109,10 @@
     "musicAccept": "Accept",
     "musicRemove": "Reject",
     "tag": "Tag a friend"
+  },
+  "mark": {
+    "remove": "Remove mark",
+    "removeAll": "Remove all marks",
+    "search": "Search for user"
   }
 }

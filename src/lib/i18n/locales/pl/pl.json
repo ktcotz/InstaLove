@@ -109,5 +109,10 @@
     "musicAccept": "Zaakceptuj",
     "musicRemove": "Odrzuć",
     "tag": "Oznacz znajomego"
+  },
+  "mark": {
+    "remove": "Usuń oznaczenie",
+    "removeAll": "Usuń wszystkie oznaczenia",
+    "search": "Wyszukaj użytkownika"
   }
 }

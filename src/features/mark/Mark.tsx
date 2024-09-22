@@ -3,13 +3,13 @@ import { Button } from "../../ui";
 import { useEffect, useRef, useState } from "react";
 import { useMarksContext } from "./context/useMarksContext";
 import { MarkDTO } from "./schema/MarkSchema";
-
-
+import { useTranslation } from "react-i18next";
 
 export const Mark = ({ id, name, x, y }: MarkDTO) => {
   const ref = useRef<HTMLDivElement>(null);
   const { removeMark } = useMarksContext();
   const [left, setLeft] = useState(0);
+  const { t } = useTranslation();
 
   const handleRemoveMark = () => {
     removeMark(id);
@@ -43,8 +43,9 @@ export const Mark = ({ id, name, x, y }: MarkDTO) => {
             e.stopPropagation();
             handleRemoveMark();
           }}
+          aria-label={t("mark.remove")}
         >
-          <IoClose />
+          <IoClose aria-label={t("mark.remove")} />
         </Button>
       </div>
     </div>
