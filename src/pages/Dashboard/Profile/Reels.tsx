@@ -1,38 +1,42 @@
+import { useTranslation } from "react-i18next";
 import { IndividualModalPost } from "../../../features/posts/IndividualModalPost";
 import { Post } from "../../../features/posts/Post";
 import { useGetReels } from "../../../features/posts/queries/useGetReels";
+import { ProfilePostsSkeleton } from "../../../features/profile/ProfilePostsSkeleton";
 import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
 import { Button } from "../../../ui/Button";
-import { Loader } from "../../../ui/Loader";
 import { Modal } from "../../../ui/modal/Modal";
 
 export const Reels = () => {
+  const { t } = useTranslation();
   const { profile } = useProfileParams();
   const { data: user, isLoading } = useProfile(profile);
   const { data: reels, isLoading: isPostsLoading } = useGetReels(user?.user_id);
 
-  if (isLoading || isPostsLoading) return <Loader />;
+  const componentLoading = isLoading || isPostsLoading;
 
-  return reels!.length > 0 ? (
-    reels?.map((reel) => {
-      return (
-        <Modal key={reel.id}>
-          <Modal.Open>
-            <Button modifier="close">
-              <Post {...reel} />
-            </Button>
-          </Modal.Open>
-          <Modal.Content>
-            <IndividualModalPost post={reel} />
-          </Modal.Content>
-        </Modal>
-      );
-    })
-  ) : (
-    <p className=" text-stone-600 col-start-1 -col-end-1 text-center mt-6">
-      No reels were found for your account. Create and publish them to see them
-      in this section.
-    </p>
-  );
+  if (componentLoading) return <ProfilePostsSkeleton />;
+
+  if (reels?.length === 0)
+    return (
+      <p className=" text-stone-600 col-start-1 -col-end-1 text-center mt-6">
+        {t("profile.noreels")}
+      </p>
+    );
+
+  return reels?.map((reel) => {
+    return (
+      <Modal key={reel.id}>
+        <Modal.Open>
+          <Button modifier="close">
+            <Post {...reel} />
+          </Button>
+        </Modal.Open>
+        <Modal.Content>
+          <IndividualModalPost post={reel} />
+        </Modal.Content>
+      </Modal>
+    );
+  });
 };

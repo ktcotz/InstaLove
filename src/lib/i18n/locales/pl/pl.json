@@ -135,6 +135,9 @@
     "privateTitle": "To konto jest prywatne",
     "privateDescription": "Obserwuj to konto, aby być na bieżąco z aktywnościami tego konta",
     "noobservers": "Nikt nie obserwuje tego profilu",
-    "noobserved": "Zarządca profilu nie obserwuje nikogo"
+    "noobserved": "Zarządca profilu nie obserwuje nikogo",
+    "noposts": " Nie znaleziono postów dla tego konta. Utwórz je i opublikuj, aby zobaczyć je w tej sekcji.",
+    "noreels": " Nie znaleziono reelsów dla tego konta. Utwórz je i opublikuj, aby zobaczyć je w tej sekcji.",
+    "nobookmarks": " Nie znaleziono zapisanych postów dla tego konta. Dodaj swoje ulubione posty aby zobaczyć je w tej sekcji."
   }
 }

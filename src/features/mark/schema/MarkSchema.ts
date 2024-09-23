@@ -8,7 +8,7 @@ export const MarkSchema = z.object({
 
 export const MarkDTOSchema = z.intersection(
   z.object({
-    id: z.number(),
+    id: z.number().optional(),
   }),
   MarkSchema
 );

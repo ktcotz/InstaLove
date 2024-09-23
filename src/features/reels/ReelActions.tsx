@@ -11,7 +11,7 @@ import { useUser } from "../authentication/queries/useUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { useLike } from "../posts/mutations/useLike";
 import { useGetPostLikes } from "../posts/queries/useGetPostLikes";
-import { Profile } from "../profile/schema/ProfilesSchema";
+import { Profile } from "../profile/queries/schema/ProfilesSchema";
 import { Modal } from "../../ui/modal/Modal";
 import { Likes } from "../posts/Likes";
 import { useGetAllComments } from "../posts/queries/useGetAllComments";

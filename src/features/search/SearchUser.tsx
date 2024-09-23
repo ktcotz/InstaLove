@@ -7,12 +7,12 @@ import { useAddUserSearch } from "./mutations/useAddUserSearch";
 import { useTranslation } from "react-i18next";
 import { useDeleteIndividualUserSearch } from "./mutations/useDeleteIndividualUserSearch";
 import { useUser } from "../authentication/queries/useUser";
-import { MarkData } from "../mark/Mark";
+import { MarkDTO } from "../mark/schema/MarkSchema";
 
 type SearchUserProps = {
   currentID?: string;
   isMarkable?: boolean;
-  handleChoosenUser?: (mark: MarkData) => void;
+  handleChoosenUser?: (mark: MarkDTO) => void;
   position?: { x: number; y: number };
 };
 

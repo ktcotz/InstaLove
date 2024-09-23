@@ -24,7 +24,7 @@ export const Post = ({ post_url, video_url, id, views }: GeneralPost) => {
 
   return (
     <div
-      className="relative w-full h-full min-h-[175px] sm:min-h-[250px] md:min-h-[350px]  bg-cover bg-center cursor-pointer"
+      className="relative w-full h-full min-h-[350px]  bg-cover bg-center cursor-pointer"
       style={
         post_url
           ? {
