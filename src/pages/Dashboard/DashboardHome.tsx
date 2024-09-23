@@ -15,7 +15,7 @@ export const DashboardHome = () => {
       {isMobile && (
         <div className="border-b border-stone-300 p-2 flex items-center gap-2 justify-between">
           <div className="grow">
-            <Search home={true} />
+            <Search />
           </div>
           <CustomLink
             modifier="mobile-notification"

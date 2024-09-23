@@ -6,7 +6,7 @@ export const Dashboard = () => {
   return (
     <MarksContextProvider>
       <div className="relative h-full">
-        <aside className="fixed bottom-0 left-0 w-full border-t border-stone-300 bg-stone-50 z-10 md:h-full md:top-0 md:w-20 md:border-t-0 md:border-r lg:w-60">
+        <aside className="fixed bottom-0 left-0 w-full border-t border-stone-300 bg-stone-50  z-10 md:h-full md:top-0 md:w-20 md:border-t-0 md:border-r lg:w-60">
           <DashboardNavigation />
           <ComponentManager />
         </aside>
