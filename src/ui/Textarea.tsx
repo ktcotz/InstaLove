@@ -15,6 +15,7 @@ type TextareaProps = {
   description: string;
   changeDescription: (description: string) => void;
   handleChange: (ev: ChangeEvent<HTMLTextAreaElement>) => void;
+  onBlur?: () => void;
   max?: number;
   type?: PostOptions;
 };
@@ -25,6 +26,7 @@ export const Textarea = ({
   changeDescription,
   max = MAX_LENGTH,
   type = "normal",
+  onBlur,
 }: TextareaProps) => {
   const { t } = useTranslation();
   const [showEmotes, setShowEmotes] = useState(false);
@@ -41,6 +43,7 @@ export const Textarea = ({
         rows={isMobile || type === "storie" ? MIN_ROW_AREA : MAX_ROW_AREA}
         value={description}
         onChange={handleChange}
+        onBlur={onBlur}
         id="description"
       ></textarea>
       <div className="absolute bottom-0 left-0 w-full h-8 px-2 flex items-center border-b border-stone-300 justify-between bg-stone-50">

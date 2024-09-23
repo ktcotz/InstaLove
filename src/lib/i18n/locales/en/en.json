@@ -138,6 +138,19 @@
     "noobserved": "Profile manager is not following anyone",
     "noposts": " No posts were found for this account. Create and publish them to see them in this section.",
     "noreels": " No reels were found for this account. Create and publish them to see them in this section.",
-    "nobookmarks": " No bookmarks were found for this account. Add your best post to see him in this section."
+    "nobookmarks": " No bookmarks were found for this account. Add your best post to see him in this section.",
+    "type": "Change profile type",
+    "publicType": "Public",
+    "privateType": "Private",
+    "biogram": "Change biogram",
+    "name": "Change name and surname",
+    "fullName": "Name and surname",
+    "settings": "Change application settings",
+    "changei18n": "Change language",
+    "polish": "Polish",
+    "english": "English",
+    "changeTheme": "Change theme",
+    "white": "White",
+    "black": "Dark"
   }
 }

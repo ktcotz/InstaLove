@@ -6,7 +6,7 @@ import { useUser } from "../authentication/queries/useUser";
 import { useGetPosts } from "../posts/queries/useGetPosts";
 import { Wrapper } from "../../ui/Wrapper";
 import { CiBookmark, CiViewBoard, CiVideoOn } from "react-icons/ci";
-import { Outlet } from "react-router";
+import { Outlet, useNavigate } from "react-router";
 import { Avatar } from "./avatar/Avatar";
 import { PrivateProfile } from "./PrivateProfile";
 import { Button } from "../../ui/Button";
@@ -20,12 +20,14 @@ import { useGetObservesOnUser } from "./queries/useGetObservesOnUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { StorieAvatar } from "./avatar/StorieAvatar";
 import { useTranslation } from "react-i18next";
+import { GlobalRoutes } from "../../typing/routes";
 
 export const ProfileDetails = () => {
   const { t } = useTranslation();
   const { profile } = useProfileParams();
   const { user: currentUser } = useUser();
   const { data: user, isLoading } = useProfile(profile);
+  const navigate = useNavigate();
 
   const { observations } = useGetObservesByUser({ user_id: user?.user_id });
   const { observations: onUserObservations } = useGetObservesOnUser({
@@ -53,7 +55,7 @@ export const ProfileDetails = () => {
       </div>
     );
 
-  if (!user) return null;
+  if (!user) return navigate(GlobalRoutes.Dashboard);
 
   const handleObserve = () => {
     if (!currentUser) return;

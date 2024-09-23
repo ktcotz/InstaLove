@@ -1,26 +1,29 @@
+import { useTranslation } from "react-i18next";
 import { FaAffiliatetheme } from "react-icons/fa";
 
 export const ThemeSwitcher = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="relative rounded-sm border bg-stone-200 text-stone-950">
       <FaAffiliatetheme
         className="absolute left-2 top-1/2 -translate-y-1/2 text-xl"
-        aria-label="Zmień motyw"
+        aria-label={t("profile.changeTheme")}
       />
 
       <label htmlFor="language" className="sr-only">
-        Zmień motyw
+        {t("profile.changeTheme")}
       </label>
       <select
         name="language"
         id="language"
-        className="rounded-sm bg-transparent px-10 py-4 text-lg transition focus:outline-none focus:ring focus:ring-slate-50"
+        className="rounded-sm bg-transparent w-full px-10 py-4 text-lg transition focus:outline-none focus:ring focus:ring-stone-500 focus:ring-offset-2"
       >
         <option value="light" className="text-slate-900">
-          Jasny
+          {t("profile.white")}
         </option>
         <option value="dark" className="text-slate-900">
-          Ciemny
+          {t("profile.black")}
         </option>
       </select>
     </div>

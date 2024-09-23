@@ -8,17 +8,11 @@ DO ZROBIENIA :
 
 PROCES :
 
-Dokończyć w create post wyszukiwarkę.
+Edycja profilu.
 
-Profil.
+Biogram z enterem.
 
--- AVATAR, STORIE AVATAR.
-
-- Accessibility.
-- Responsivity.
-- Edycja profilu.
-- Zrobienie avatara, jeżeli jest storie to ma dodać obramowanie najlepiej gradientowe. (Poczytaj o gradient borderze).
-- Zmiana avatara.
+Zmiana motywu (Czarny/biały).
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
@@ -30,5 +24,6 @@ Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 - Explore.
 - Reels.
 - Create Post.
+- Profile, profile details.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.
