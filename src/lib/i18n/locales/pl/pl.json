@@ -121,5 +121,18 @@
     "set": "Ustaw avatara ",
     "reject": "Odrzuć",
     "add": "Dodaj avatara"
+  },
+  "profile": {
+    "edit": "Edytuj profil",
+    "observe": "Obserwuj",
+    "unobserver": "Odobserwuj",
+    "posts": "Posty",
+    "observers": "Obserwujących",
+    "byobservers": "Obserwowani",
+    "reels": "Rolki",
+    "mark": "Zapisane",
+    "private": "Konto prywatne",
+    "privateTitle": "To konto jest prywatne",
+    "privateDescription": "Obserwuj to konto, aby być na bieżąco z aktywnościami tego konta"
   }
 }

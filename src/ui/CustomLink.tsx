@@ -55,7 +55,7 @@ export const CustomLink = ({
     ["all-profiles"]:
       "text-stone-900 hover:text-stone-950 text-sm  font-bold transition",
     ["profile-details"]:
-      "text-stone-950 p-6 flex items-center justify-center gap-2",
+      "text-stone-950 py-4 px-2 sm:p-6 flex items-center justify-center gap-2",
     ["post-user"]:
       "text-xs text-stone-900 hover:text-stone-950 transition font-semibold",
     ["post-avatar"]: "w-6 h-6 rounded-full",

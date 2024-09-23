@@ -19,8 +19,10 @@ import { ObservesOnUser } from "./ObservesOnUser";
 import { useGetObservesOnUser } from "./queries/useGetObservesOnUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { StorieAvatar } from "./avatar/StorieAvatar";
+import { useTranslation } from "react-i18next";
 
 export const ProfileDetails = () => {
+  const { t } = useTranslation();
   const { profile } = useProfileParams();
   const { user: currentUser } = useUser();
   const { data: user, isLoading } = useProfile(profile);
@@ -84,41 +86,47 @@ export const ProfileDetails = () => {
   return (
     <>
       <Wrapper modifier="details">
-        <div className="flex flex-col lg:flex-row gap-16 2xl:gap-32 py-6 md:py-0">
+        <div className="flex flex-col items-center lg:flex-row gap-16 2xl:gap-32 py-6 md:py-0">
           {currentUser?.id === user.user_id ? (
             <Avatar size={176} overlay={true} />
           ) : (
             <StorieAvatar size={176} profile={user} />
           )}
-          <div className="flex flex-col gap-12 grow">
+          <div className="flex flex-col gap-12 grow w-full lg:w-auto">
             <div className="flex items-center gap-3 justify-between">
-              <p className="text-xl font-medium">{user?.user_name}</p>
+              <p className="text-xl font-medium">
+                {user?.user_name} - {user.fullName}
+              </p>
               {currentUser!.id === user!.user_id && (
                 <CustomLink to="/dashboard/profile/edit" modifier="primary">
-                  Edytuj profil
+                  {t("profile.edit")}
                 </CustomLink>
               )}
               {currentUser!.id !== user!.user_id && (
                 <Button modifier="submit" onClick={handleObserve}>
-                  {isObserve ? "Odobserwuj" : "Obserwuj"}
+                  {isObserve ? t("profile.observe") : t("profile.unobserver")}
                 </Button>
               )}
             </div>
-            <div className="flex items-center justify-between gap-3">
-              <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-900 text-sm">
-                Posty
+            <div className="flex  justify-center gap-12 sm:gap-3 sm:items-center sm:justify-between sm:w-3/4">
+              <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-900">
                 <strong className="font-medium text-stone-950">
-                  {posts?.count ?? 0}
+                  {t("profile.posts")}:
                 </strong>
+                <span className="font-semibold mt-auto sm:mt-0">
+                  {posts?.count ?? 0}
+                </span>
               </p>
               <Modal>
                 <Modal.Open>
                   <Button modifier="all-profiles">
-                    <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
-                      <strong className="font-medium text-stone-950 mr-2">
-                        Obserwujących
+                    <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900">
+                      <strong className="font-medium text-stone-950">
+                        {t("profile.observers")}:
                       </strong>
-                      {onUserObservations?.length}
+                      <span className="font-semibold mt-auto sm:mt-0">
+                        {onUserObservations?.length ?? 0}
+                      </span>
                     </p>
                   </Button>
                 </Modal.Open>
@@ -129,11 +137,13 @@ export const ProfileDetails = () => {
               <Modal>
                 <Modal.Open>
                   <Button modifier="all-profiles">
-                    <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-700">
-                      <strong className="font-medium text-stone-950 mr-2">
-                        Obserwowani
+                    <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900">
+                      <strong className="font-medium text-stone-950">
+                        {t("profile.byobservers")}:
                       </strong>
-                      {observations?.length}
+                      <span className="font-semibold mt-auto sm:mt-0">
+                        {observations?.length ?? 0}
+                      </span>
                     </p>
                   </Button>
                 </Modal.Open>
@@ -152,15 +162,17 @@ export const ProfileDetails = () => {
       </Wrapper>
 
       <Wrapper>
-        <div className="flex items-center justify-center flex-col sm:flex-row gap-2 sm:gap-12 border-y sm:border-b-0 border-x-stone-300 ">
+        <div className="flex items-center justify-center sm:flex-row gap-2 sm:gap-12 border-y sm:border-b-0 border-x-stone-300 ">
           <CustomLink
             to="posts"
             modifier="profile-details"
             type="active-link"
             activeClass="border-t border-stone-950 font-semibold"
           >
-            <CiViewBoard aria-label="Posts" className="text-xl" />
-            Posty
+            <CiViewBoard className="text-xl" />
+            <span className="uppercase text-sm tracking-wide">
+              {t("profile.posts")}
+            </span>
           </CustomLink>
           <CustomLink
             to="reels"
@@ -168,8 +180,10 @@ export const ProfileDetails = () => {
             type="active-link"
             activeClass="border-t border-stone-950 font-semibold"
           >
-            <CiVideoOn aria-label="Posts" className="text-xl" />
-            Reels
+            <CiVideoOn className="text-xl" />
+            <span className="uppercase text-sm tracking-wide">
+              {t("profile.reels")}
+            </span>
           </CustomLink>
           {currentUser?.id === user.user_id && (
             <CustomLink
@@ -178,8 +192,10 @@ export const ProfileDetails = () => {
               type="active-link"
               activeClass="border-t border-stone-950 font-semibold"
             >
-              <CiBookmark aria-label="Bookmarks" className="text-xl" />
-              Zapisane
+              <CiBookmark className="text-xl" />
+              <span className="uppercase text-sm tracking-wide">
+                {t("profile.mark")}
+              </span>
             </CustomLink>
           )}
         </div>
