@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
-import { UserID } from "../../authentication/services/services";
 import { getObserversByUser } from "../services/services";
 import { SearchQuery } from "../../../ui/SearchInput";
+import { UserID } from "../../authentication/services/types";
 
 export const useGetObservesByUser = ({
   user_id,

@@ -27,7 +27,9 @@ export const EditBiogram = ({ biogram, user_name }: EditBiogramProps) => {
 
   return (
     <>
-      <h2 className="text-xl font-semibold mb-6">{t("profile.biogram")}</h2>
+      <h2 className="text-xl font-semibold mb-6 dark:text-stone-50">
+        {t("profile.biogram")}
+      </h2>
       <Textarea
         changeDescription={changeDescription}
         description={defaultBiogram}

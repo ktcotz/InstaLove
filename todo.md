@@ -8,9 +8,11 @@ DO ZROBIENIA :
 
 PROCES :
 
-Edycja profilu.
-
-Zmiana motywu (Czarny/biały).
+Poprawa skeleton dark theme.
+Poprawa logiki notyfikacji i obserwowania użytkowników.
+Hover profiles.
+Proposed profiles.
+Notyfikacja na dodanie do zdjęcia, oznaczenie.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
@@ -22,6 +24,6 @@ Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 - Explore.
 - Reels.
 - Create Post.
-- Profile, profile details.
+- Profile, profile details, edit profile, switchers.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.

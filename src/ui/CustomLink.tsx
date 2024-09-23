@@ -51,12 +51,12 @@ export const CustomLink = ({
     navigation:
       "flex items-center gap-4 p-3 hover:bg-stone-100 transition group dark:text-stone-50 hover:dark:text-stone-950",
     avatar:
-      "w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center",
-    ["avatar-name"]: "text-base text-stone-950 font-medium",
+      "w-10 h-10 rounded-full border border-stone-300 flex items-center justify-center",
+    ["avatar-name"]: "text-base text-stone-950 font-medium dark:text-stone-50",
     ["all-profiles"]:
-      "text-stone-900 hover:text-stone-950 text-sm  font-bold transition",
+      "text-stone-800 hover:text-stone-950 text-sm  font-bold transition",
     ["profile-details"]:
-      "text-stone-950 py-4 px-2 sm:p-6 flex items-center justify-center gap-2",
+      "text-stone-950 py-4 px-2 sm:p-6 flex items-center justify-center gap-2 dark:text-stone-50",
     ["post-user"]:
       "text-xs text-stone-900 hover:text-stone-950 transition font-semibold",
     ["post-avatar"]: "w-6 h-6 rounded-full",

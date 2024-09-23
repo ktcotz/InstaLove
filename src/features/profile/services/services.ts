@@ -117,11 +117,11 @@ export const getObserversByUser = async ({
   query,
 }: UserID & SearchQuery) => {
   const supabaseQuery = !query
-    ? supabase.from("observations").select("*").eq("user_id", user_id)
+    ? supabase.from("observations").select("*").eq("observe_id", user_id)
     : supabase
         .from("observations")
         .select("*")
-        .eq("user_id", user_id)
+        .eq("observe_id", user_id)
         .like("observer_name", `%${query}%`);
 
   const { data: observations, error } = await supabaseQuery;

@@ -69,7 +69,7 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
       {currentUser?.id === user?.user_id ? null : (
         <div className="ml-auto">
           <Button modifier="submit" onClick={handleObserve}>
-            {isObserve ? t("profile.observe") : t("profile.unobserver")}
+            {isObserve ? t("profile.unobserver") : t("profile.observe")}
           </Button>
         </div>
       )}

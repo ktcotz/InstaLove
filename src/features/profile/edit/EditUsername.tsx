@@ -30,7 +30,9 @@ export const EditUsername = ({ fullName, user_name }: EditUsernameProps) => {
 
   return (
     <>
-      <h2 className="text-xl font-semibold mb-6">{t("profile.name")}</h2>
+      <h2 className="text-xl font-semibold mb-6 dark:text-stone-50">
+        {t("profile.name")}
+      </h2>
       <Form onSubmit={handleSubmit(submitHandler)}>
         <Form.Item>
           <Form.InputContainer>

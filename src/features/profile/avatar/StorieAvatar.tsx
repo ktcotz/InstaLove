@@ -5,7 +5,7 @@ import { useGetProfileStories } from "../../stories/queries/useGetProfileStories
 import { Profile } from "../schema/ProfilesSchema";
 
 type StorieAvatarProps = {
-  size: 176;
+  size: 176 | 40;
   profile: Profile;
 };
 
@@ -17,6 +17,7 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
 
   const avatarSizes: Record<typeof size, string> = {
     176: "w-44 h-44 rounded-full",
+    40: "w-10 h-10 rounded-full",
   };
 
   const hasStorie = data && data.length > 0;
@@ -26,7 +27,7 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
       <Modal>
         <Modal.Open>
           <Button modifier="avatar" aria-label={t("avatar.storie")}>
-            <div className="p-1 bg-white rounded-full">
+            <div className="p-1 bg-white dark:bg-stone-950 rounded-full">
               <img
                 src={profile?.avatar_url}
                 alt={profile?.user_name}
@@ -45,12 +46,14 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
   }
 
   return (
-    <img
-      src={profile?.avatar_url}
-      alt={profile?.user_name}
-      width={size}
-      height={size}
-      className={avatarSizes[size]}
-    />
+    <div className="p-2">
+      <img
+        src={profile?.avatar_url}
+        alt={profile?.user_name}
+        width={size}
+        height={size}
+        className={avatarSizes[size]}
+      />
+    </div>
   );
 };

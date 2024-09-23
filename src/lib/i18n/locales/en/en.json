@@ -1,7 +1,8 @@
 {
   "home": {
     "no-account": "You don't have an account?",
-    "have-account": "Have already account?"
+    "have-account": "Have already account?",
+    "logout": "Sign out"
   },
   "links": {
     "register": "Register",
@@ -151,6 +152,14 @@
     "english": "English",
     "changeTheme": "Change theme",
     "white": "White",
-    "black": "Dark"
+    "black": "Dark",
+    "seeAll": "See all",
+    "proposes": "Suggestions for you",
+    "proposesFriends": "Suggested friends",
+    "noProposesFriends": "No proposed profiles data to show you!"
+  },
+  "pagination": {
+    "next": "Next page",
+    "previous": "Previous page"
   }
 }

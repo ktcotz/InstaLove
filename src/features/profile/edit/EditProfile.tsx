@@ -22,7 +22,7 @@ export const EditProfile = () => {
 
   return (
     <div className="pb-32">
-      <h1 className="text-xl text-stone-950 font-semibold mb-6">
+      <h1 className="text-xl text-stone-950 font-semibold mb-6 dark:text-stone-50">
         {t("profile.edit")}
       </h1>
       <div className="bg-stone-200 rounded-lg p-4 max-w-xl flex flex-col sm:flex-row items-center gap-6 mb-6">
@@ -48,14 +48,20 @@ export const EditProfile = () => {
       </div>
 
       <div>
-        <h2 className="text-xl font-semibold mb-6">{t("profile.settings")}</h2>
+        <h2 className="text-xl font-semibold mb-6 dark:text-stone-50">
+          {t("profile.settings")}
+        </h2>
         <div className="flex items-center justify-between gap-2 flex-wrap">
           <div>
-            <h3 className="text-xl mb-2">{t("profile.changei18n")}</h3>
+            <h3 className="text-xl mb-2 dark:text-stone-50">
+              {t("profile.changei18n")}
+            </h3>
             <LanguageSwitcher />
           </div>
           <div>
-            <h3 className="text-xl mb-2">{t("profile.changeTheme")}</h3>
+            <h3 className="text-xl mb-2 dark:text-stone-50">
+              {t("profile.changeTheme")}
+            </h3>
             <ThemeSwitcher />
           </div>
         </div>

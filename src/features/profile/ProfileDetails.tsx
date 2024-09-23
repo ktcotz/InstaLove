@@ -55,7 +55,10 @@ export const ProfileDetails = () => {
       </div>
     );
 
-  if (!user) return navigate(GlobalRoutes.Dashboard);
+  if (!user) {
+    navigate(GlobalRoutes.Dashboard);
+    return null;
+  }
 
   const handleObserve = () => {
     if (!currentUser) return;
@@ -96,7 +99,7 @@ export const ProfileDetails = () => {
           )}
           <div className="flex flex-col gap-12 grow w-full lg:w-auto">
             <div className="flex items-center gap-3 justify-between">
-              <p className="text-xl font-medium">
+              <p className="text-xl font-medium dark:text-stone-50">
                 {user?.user_name} - {user.fullName}
               </p>
               {currentUser!.id === user!.user_id && (
@@ -106,13 +109,13 @@ export const ProfileDetails = () => {
               )}
               {currentUser!.id !== user!.user_id && (
                 <Button modifier="submit" onClick={handleObserve}>
-                  {isObserve ? t("profile.observe") : t("profile.unobserver")}
+                  {isObserve ? t("profile.unobserver") : t("profile.observe")}
                 </Button>
               )}
             </div>
             <div className="flex  justify-center gap-12 sm:gap-3 sm:items-center sm:justify-between sm:w-3/4">
-              <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-900">
-                <strong className="font-medium text-stone-950">
+              <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">
+                <strong className="font-medium text-stone-950 dark:text-stone-100">
                   {t("profile.posts")}:
                 </strong>
                 <span className="font-semibold mt-auto sm:mt-0">
@@ -122,8 +125,8 @@ export const ProfileDetails = () => {
               <Modal>
                 <Modal.Open>
                   <Button modifier="all-profiles">
-                    <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900">
-                      <strong className="font-medium text-stone-950">
+                    <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">
+                      <strong className="font-medium text-stone-950 dark:text-stone-100">
                         {t("profile.observers")}:
                       </strong>
                       <span className="font-semibold mt-auto sm:mt-0">
@@ -139,8 +142,8 @@ export const ProfileDetails = () => {
               <Modal>
                 <Modal.Open>
                   <Button modifier="all-profiles">
-                    <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900">
-                      <strong className="font-medium text-stone-950">
+                    <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">
+                      <strong className="font-medium text-stone-950 dark:text-stone-100">
                         {t("profile.byobservers")}:
                       </strong>
                       <span className="font-semibold mt-auto sm:mt-0">
@@ -155,7 +158,7 @@ export const ProfileDetails = () => {
               </Modal>
             </div>
             <div className="py-2">
-              <p className="max-w-prose text-wrap text break-words">
+              <p className="max-w-prose text-wrap text break-words dark:text-stone-50">
                 {user.biogram.split("\n").map((row) => (
                   <span key={row} className="block">
                     {row}
@@ -168,7 +171,7 @@ export const ProfileDetails = () => {
       </Wrapper>
 
       <Wrapper>
-        <div className="flex items-center justify-center sm:flex-row gap-2 sm:gap-12 border-y sm:border-b-0 border-x-stone-300 ">
+        <div className="flex items-center justify-center sm:flex-row gap-2 sm:gap-12 border-y sm:border-b-0 border-x-stone-300 dark:border-x-stone-50">
           <CustomLink
             to="posts"
             modifier="profile-details"

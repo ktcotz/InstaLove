@@ -1,7 +1,8 @@
 {
   "home": {
     "no-account": "Nie masz konta?",
-    "have-account": " Masz konto?"
+    "have-account": " Masz konto?",
+    "logout": "Wyloguj"
   },
   "links": {
     "register": "Zarejestruj się",
@@ -151,6 +152,14 @@
     "english": "Angielski",
     "changeTheme": "Zmień motyw",
     "white": "Jasny",
-    "black": "Ciemny"
+    "black": "Ciemny",
+    "seeAll": "Zobacz wszystkich",
+    "proposes": "Propozycje dla Ciebie",
+    "proposesFriends": "Proponowani znajomi",
+    "noProposesFriends": "Nie znaleźliśmy dla Ciebie znajomych."
+  },
+  "pagination": {
+    "next": "Następna strona",
+    "previous": "Poprzednia strona"
   }
 }

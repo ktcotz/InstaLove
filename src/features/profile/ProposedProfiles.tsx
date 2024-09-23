@@ -1,9 +1,11 @@
 import { useUser } from "../authentication/queries/useUser";
 import { ProposedProfile } from "./ProposedProfile";
 import { useProfiles } from "./queries/useProfiles";
-import { Loader } from "../../ui/Loader";
+import { ProposedProfilesSkeleton } from "./ProposedProfilesSkeleton";
+import { useTranslation } from "react-i18next";
 
 export const ProposedProfiles = () => {
+  const { t } = useTranslation();
   const { user } = useUser();
   const { profiles, isLoading } = useProfiles({
     id: user?.id,
@@ -12,23 +14,23 @@ export const ProposedProfiles = () => {
 
   if (isLoading)
     return (
-      <div className="py-4">
-        <Loader />
+      <div className="py-4 flex flex-col w-full">
+        <ProposedProfilesSkeleton />
       </div>
     );
 
   if (!profiles?.length) {
     return (
-      <div className="text-sm text-center text-stone-700">
-        No proposed profiles data to show you!
+      <div className="text-sm text-center text-stone-700 dark:text-stone-50">
+        {t("profile.noProposesFriends")}
       </div>
     );
   }
 
   return (
-    <div className="flex flex-col gap-4 self-stretch">
+    <div className="flex flex-col gap-3 self-stretch">
       {profiles?.map((profile) => (
-        <ProposedProfile key={profile.id} {...profile} />
+        <ProposedProfile key={profile.id} profile={profile} />
       ))}
     </div>
   );
