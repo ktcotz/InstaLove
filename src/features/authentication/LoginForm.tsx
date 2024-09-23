@@ -81,7 +81,7 @@ export const LoginForm = () => {
           {t("links.forgot-password")}
         </CustomLink>
       </div>
-      <p className="text-sm text-center text-stone-600 font-medium">
+      <p className="text-sm text-center text-stone-600 font-medium dark:text-stone-50">
         {t("utils.home-text")}
       </p>
     </div>

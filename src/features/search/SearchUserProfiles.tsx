@@ -14,7 +14,7 @@ export const SearchUserProfiles = () => {
   return (
     <div className="flex flex-col gap-1">
       <div className="flex items-center justify-between px-3 mb-1">
-        <h3 className="text-sm font-semibold text-stone-950">
+        <h3 className="text-sm font-semibold text-stone-950 dark:text-stone-50">
           {t("search.latest")}
         </h3>
         {queries && queries.length > 0 && (

@@ -11,7 +11,6 @@ import { useUser } from "../authentication/queries/useUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { useLike } from "../posts/mutations/useLike";
 import { useGetPostLikes } from "../posts/queries/useGetPostLikes";
-import { Profile } from "../profile/queries/schema/ProfilesSchema";
 import { Modal } from "../../ui/modal/Modal";
 import { Likes } from "../posts/Likes";
 import { useGetAllComments } from "../posts/queries/useGetAllComments";
@@ -21,6 +20,7 @@ import { ReelsComments } from "./ReelsComments";
 import { PostsContextProvider } from "../posts/context/PostsContext";
 import { useMediaQuery } from "usehooks-ts";
 import { useTranslation } from "react-i18next";
+import { Profile } from "../profile/schema/ProfilesSchema";
 
 type ReelActionsProps = {
   user: Profile;
@@ -98,7 +98,7 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
 
   return (
     <PostsContextProvider>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center text-stone-950 dark:text-stone-50">
         <ul className="list-none flex flex-col gap-4 mb-6 items-center text-xs">
           <li className="flex flex-col gap-1 items-center">
             <Button

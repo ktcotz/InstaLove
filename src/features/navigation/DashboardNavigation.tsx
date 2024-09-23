@@ -9,7 +9,7 @@ export const DashboardNavigation = () => {
   const matches = useMediaQuery(`(max-width:${MOBILE_VIEWPORT})`);
 
   return (
-    <nav className="flex items-center md:flex-col lg:items-stretch py-6 p-3 relative z-10 bg-stone-50">
+    <nav className="flex items-center md:flex-col lg:items-stretch py-6 p-3 relative z-10 bg-stone-50 dark:bg-stone-950">
       {!matches && (
         <div className="mb-10 px-3">
           <Logo modifier="small-logo" />

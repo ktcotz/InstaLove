@@ -10,7 +10,7 @@ import { Wrapper } from "../ui/Wrapper";
 export const Login = () => {
   const { t } = useTranslation();
   return (
-    <div className="min-h-screen bg-stone-100 pb-20">
+    <div className="min-h-screen bg-stone-100 pb-20 dark:bg-stone-950">
       <HomeNavigation />
       <main className="flex items-center justify-center">
         <Wrapper modifier="form">
@@ -21,8 +21,8 @@ export const Login = () => {
               </div>
               <LoginForm />
             </Container>
-            <div className="p-4 border border-stone-300 text-center mt-4">
-              <p className="text-stone-600 font-semibold">
+            <div className="p-4 border border-stone-300 text-center mt-4 dark:border-stone-50">
+              <p className="text-stone-600 font-semibold dark:text-stone-50">
                 {t("home.no-account")}{" "}
                 <CustomLink to={GlobalRoutes.Register} modifier="link">
                   {t("links.register")}

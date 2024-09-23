@@ -6,7 +6,7 @@ type ContainerProps = {
 
 export const Container = ({ children }: ContainerProps) => {
   return (
-    <div className="border border-stone-300 rounded-md py-10 px-4 md:p-10 flex items-center justify-center flex-col">
+    <div className="border border-stone-300 rounded-md py-10 px-4 md:p-10 flex items-center justify-center flex-col dark:border-stone-50">
       {children}
     </div>
   );

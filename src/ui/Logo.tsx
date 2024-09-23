@@ -20,7 +20,7 @@ export const Logo = ({ modifier = "logo" }: LogoProps) => {
     <h1
       className={`font-hand ${
         modifier ? "text-xl lg:text-2xl" : "text-4xl lg:text-7xl"
-      }  text-stone-900`}
+      }  text-stone-900 dark:text-stone-50`}
     >
       <CustomLink modifier={modifier} to={GlobalRoutes.Home}>
         {matches && modifier === "small-logo" ? (

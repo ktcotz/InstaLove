@@ -67,7 +67,9 @@ export const SearchUser = ({
           />
           <div>
             <h2 className="font-semibold text-sm">{user_name}</h2>
-            <p className="text-sm text-stone-600">{fullName}</p>
+            <p className="text-sm text-stone-600 dark:text-stone-50">
+              {fullName}
+            </p>
           </div>
         </div>
       </Button>
@@ -90,7 +92,9 @@ export const SearchUser = ({
         />
         <div>
           <h2 className="font-semibold text-sm">{user_name}</h2>
-          <p className="text-sm text-stone-600">{fullName}</p>
+          <p className="text-sm text-stone-600 dark:text-stone-50">
+            {fullName}
+          </p>
         </div>
         {!currentID && (
           <div className="ml-auto">

@@ -38,15 +38,15 @@ export const Button = forwardRef<
       "flex items-center justify-center py-3 bg-blue-600 border rounded-md text-stone-50 transition-all hover:bg-stone-100 hover:text-blue-700 hover:border-stone-300 px-4",
     text: "text-stone-600 flex items-center justify-center gap-2 hover:text-blue-600 transition",
     navigation:
-      "relative flex items-center gap-4 p-3 hover:bg-stone-200 transition group w-full",
+      "relative flex items-center gap-4 p-3 hover:bg-stone-200 transition group w-full dark:text-stone-50 hover:dark:text-stone-50",
     storie:
       "w-14 h-14 rounded-full flex items-center justify-center overflow-hidden border-2 border-blue-600 p-[2px]",
-    close: "group",
-    link: "text-blue-600 hover:text-blue-700 transition text-sm font-bold",
+    close: "group dark:text-stone-50",
+    link: "text-blue-600 hover:text-blue-700 transition text-sm font-bold dark:text-blue-400 hover:dark:text-blue-500",
     ["add-user"]:
       "bg-blue-600 text-stone-50 rounded-md p-2 w-full flex items-center justify-center gap-1",
     ["all-profiles"]:
-      "text-stone-900 hover:text-stone-950 text-sm font-bold transition",
+      "text-stone-900 hover:text-stone-950 text-sm font-bold transition dark:text-stone-100 hover:dark:text-stone-50",
     pagination: "text-stone-900",
     reel: "bg-black/40 p-4 rounded-full text-2xl text-stone-50",
     suggestion: "flex items-center gap-3 w-full p-2",

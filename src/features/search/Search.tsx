@@ -30,12 +30,14 @@ export const Search = () => {
   return (
     <div className="relative">
       {!isMobile && (
-        <h2 className="text-3xl mb-4 p-4">{t("navigation.search")}</h2>
+        <h2 className="text-3xl mb-4 p-4 dark:text-stone-50">
+          {t("navigation.search")}
+        </h2>
       )}
 
       <div
         className={`relative p-4 ${
-          isMobile ? "" : "mb-4 border-b border-stone-200"
+          isMobile ? "" : "mb-4 border-b border-stone-200 dark:border-stone-50"
         }`}
       >
         <SearchInput
@@ -61,18 +63,18 @@ export const Search = () => {
       <div
         className={`flex flex-col gap-1 ${
           isMobile
-            ? "absolute bottom-0 translate-y-full w-full z-50 bg-stone-50 left-0"
+            ? "absolute bottom-0 translate-y-full w-full z-50 bg-stone-50 dark:bg-stone-950 left-0"
             : ""
         }`}
       >
-        <div className="flex flex-col gap-1 divide-y divide-stone-200">
+        <div className="flex flex-col gap-1 divide-y divide-stone-200 dark:divide-stone-50">
           {users?.map((user) => (
             <SearchUser key={user.id} {...user} currentID={current?.id} />
           ))}
         </div>
 
         {!isLoading && users && users.length === 0 && (
-          <p className="text-xl font-medium text-stone-950 p-4">
+          <p className="text-xl font-medium text-stone-950 dark:text-stone-50 p-4">
             {t("search.empty")}
           </p>
         )}
@@ -83,7 +85,7 @@ export const Search = () => {
           ref={ref}
           className={`${
             isMobile
-              ? "absolute bottom-0 translate-y-full left-0 w-full z-50 bg-stone-50 p-4 rounded-md"
+              ? "absolute bottom-0 translate-y-full left-0 w-full z-50 bg-stone-50 p-4 rounded-md dark:bg-stone-950"
               : ""
           }`}
         >

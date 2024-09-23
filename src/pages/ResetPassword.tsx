@@ -6,7 +6,7 @@ import { Wrapper } from "../ui/Wrapper";
 
 export const ResetPassword = () => {
   return (
-    <div className="min-h-screen bg-stone-100 pb-20">
+    <div className="min-h-screen bg-stone-100 pb-20 dark:bg-stone-950">
       <HomeNavigation />
       <main className="flex items-center justify-center">
         <Wrapper modifier="form">

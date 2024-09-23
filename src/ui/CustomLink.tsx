@@ -43,12 +43,13 @@ export const CustomLink = ({
     primary:
       "rounded-sm flex items-center justify-center bg-blue-600 px-3 py-1 sm:px-4 sm:py-2 hover:bg-blue-700 transition text-stone-50 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-blue-600",
     logo: "inline-block",
-    text: "text-stone-600 flex items-center justify-center gap-2 hover:text-stone-800 focus:text-stone-800 transition",
-    link: "font-semibold text-blue-700 hover:text-blue-800 transition",
-    ["small-text"]: "text-sm text-stone-800 hover:text-stone-900",
+    text: "text-stone-600 flex items-center justify-center gap-2 hover:text-stone-800 focus:text-stone-800 transition dark:text-stone-50 focus:dark:text-stone-100 focus:hover:text-stone-100",
+    link: "font-semibold text-blue-700 hover:text-blue-800 transition dark:text-blue-500 hover:dark-text-blue-600",
+    ["small-text"]:
+      "text-sm text-stone-800 hover:text-stone-900 dark:text-stone-50 hover:dark:text-stone-100",
     ["small-logo"]: "text-2xl",
     navigation:
-      "flex items-center gap-4 p-3 hover:bg-stone-100 transition group",
+      "flex items-center gap-4 p-3 hover:bg-stone-100 transition group dark:text-stone-50 hover:dark:text-stone-950",
     avatar:
       "w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center",
     ["avatar-name"]: "text-base text-stone-950 font-medium",
