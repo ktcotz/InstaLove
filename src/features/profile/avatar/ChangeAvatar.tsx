@@ -1,7 +1,7 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "../../../ui/Button";
 import { Loader } from "../../../ui/Loader";
 import { useModal } from "../../../ui/modal/ModalContext/useModal";
-import { Wrapper } from "../../../ui/Wrapper";
 import { useUpdateAvatar } from "./mutations/useUpdateAvatar";
 
 type ChangeAvatarProps = {
@@ -19,6 +19,7 @@ export const ChangeAvatar = ({
 }: ChangeAvatarProps) => {
   const { update, isUpdating } = useUpdateAvatar();
   const { close } = useModal();
+  const { t } = useTranslation();
 
   const updateAvatar = () => {
     if (!file) return;
@@ -34,26 +35,26 @@ export const ChangeAvatar = ({
   };
 
   return (
-    <Wrapper modifier="form">
+    <div className="max-w-lg mx-auto">
       <div className="bg-stone-100 rounded-md p-4 shadow-lg flex items-center justify-center flex-col gap-8">
         <h2 className="text-xl font-semibold text-center border-b py-3 border-stone-300 self-stretch">
-          Zmień avatar
+          {t("avatar.change")}
         </h2>
         <img
           src={preview}
           alt="Avatar"
-          width={128}
-          height={128}
-          className="rounded-full aspect-square"
+          width={176}
+          height={176}
+          className="rounded-full max-w-44 max-h-44 aspect-square"
         />
 
         <div className="flex flex-col gap-4">
           <Button modifier="submit" onClick={updateAvatar}>
-            {isUpdating ? <Loader /> : "Ustaw to zdjęcie jako avatar"}
+            {isUpdating ? <Loader /> : t("avatar.change")}
           </Button>
-          <Button onClick={disablePreview}>Nie ustawiaj</Button>
+          <Button onClick={disablePreview}>{t("avatar.reject")}</Button>
         </div>
       </div>
-    </Wrapper>
+    </div>
   );
 };

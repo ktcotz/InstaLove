@@ -114,5 +114,12 @@
     "remove": "Remove mark",
     "removeAll": "Remove all marks",
     "search": "Search for user"
+  },
+  "avatar": {
+    "storie": "Open stories",
+    "change": "Change avatar image",
+    "set": "Set avatar ",
+    "reject": "Reject",
+    "add": "Add avatar"
   }
 }

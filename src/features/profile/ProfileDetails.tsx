@@ -18,6 +18,7 @@ import { ObservesByUser } from "./ObservesByUser";
 import { ObservesOnUser } from "./ObservesOnUser";
 import { useGetObservesOnUser } from "./queries/useGetObservesOnUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
+import { StorieAvatar } from "./avatar/StorieAvatar";
 
 export const ProfileDetails = () => {
   const { profile } = useProfileParams();
@@ -83,8 +84,12 @@ export const ProfileDetails = () => {
   return (
     <>
       <Wrapper modifier="details">
-        <div className="flex flex-col lg:flex-row gap-16 2xl:gap-32">
-          <Avatar size={178} overlay={true} />
+        <div className="flex flex-col lg:flex-row gap-16 2xl:gap-32 py-6 md:py-0">
+          {currentUser?.id === user.user_id ? (
+            <Avatar size={176} overlay={true} />
+          ) : (
+            <StorieAvatar size={176} profile={user} />
+          )}
           <div className="flex flex-col gap-12 grow">
             <div className="flex items-center gap-3 justify-between">
               <p className="text-xl font-medium">{user?.user_name}</p>

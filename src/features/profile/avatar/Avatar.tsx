@@ -6,13 +6,15 @@ import { ChangeAvatar } from "./ChangeAvatar";
 import { useState } from "react";
 import { useProfileParams } from "../queries/useProfileParams";
 import { useUser } from "../../authentication/queries/useUser";
+import { useTranslation } from "react-i18next";
 
 type AvatarProps = {
   overlay?: boolean;
-  size: number;
+  size: 176 | 48 | 64;
 };
 
 export const Avatar = ({ overlay = false, size }: AvatarProps) => {
+  const { t } = useTranslation();
   const { profile } = useProfileParams();
   const { user } = useUser();
   const [preview, setPreview] = useState<string | null>(null);
@@ -35,7 +37,7 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
 
   const avatarSizes: Record<typeof size, string> = {
     48: "w-12 h-12 rounded-full",
-    178: "w-[178px] h-[178px] rounded-full",
+    176: "w-44 h-44 rounded-full",
     64: "w-[64px] h-[64px] rounded-full",
   };
 
@@ -43,7 +45,7 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
     <Modal>
       <div
         {...getRootProps({ className: "dropzone" })}
-        className="cursor-pointer"
+        className="cursor-pointer rounded-full h-full"
       >
         <input {...getInputProps()} />
         <Modal.Open>
@@ -56,8 +58,8 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
               className={avatarSizes[size]}
             />
             {user?.id === current?.user_id && overlay && (
-              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[178px] h-[178px] lg:w-full lg:h-full flex items-center justify-center bg-stone-500/70 rounded-full cursor-pointer">
-                <FaCamera className="text-5xl" aria-label="Add avatar" />
+              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-44 h-44 lg:w-full lg:h-full flex items-center justify-center bg-stone-600/60 rounded-full cursor-pointer">
+                <FaCamera className="text-5xl" aria-label={t("avatar.add")} />
               </div>
             )}
           </div>

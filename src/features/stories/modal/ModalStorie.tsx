@@ -33,7 +33,7 @@ export const ModalStorie = ({
   const [muted, setMuted] = useState(true);
   const [played, setPlayed] = useState(false);
   const { user } = useUserByID(user_id);
-  const { title } = useGetYoutubeTitle(music);
+  // const { title } = useGetYoutubeTitle(music);
 
   const handlePlayPause = () => {
     const toggled = !played;
@@ -105,7 +105,7 @@ export const ModalStorie = ({
                   </h2>
                   <p className="text-xs text-stone-50">{formatedDate}</p>
                 </div>
-                {music && (
+                {/* {music && (
                   <>
                     <p className="text-xs text-stone-50 flex items-center gap-2">
                       <FaMusic />
@@ -119,7 +119,7 @@ export const ModalStorie = ({
                       playing={played}
                     />
                   </>
-                )}
+                )} */}
               </div>
               <div className="ml-auto flex gap-4">
                 <Button

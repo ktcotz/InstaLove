@@ -114,5 +114,12 @@
     "remove": "Usuń oznaczenie",
     "removeAll": "Usuń wszystkie oznaczenia",
     "search": "Wyszukaj użytkownika"
+  },
+  "avatar": {
+    "storie": "Otwórz stories",
+    "change": "Zmień zdjęcie",
+    "set": "Ustaw avatara ",
+    "reject": "Odrzuć",
+    "add": "Dodaj avatara"
   }
 }

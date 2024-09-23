@@ -12,6 +12,8 @@ Dokończyć w create post wyszukiwarkę.
 
 Profil.
 
+-- AVATAR, STORIE AVATAR.
+
 - Accessibility.
 - Responsivity.
 - Edycja profilu.

@@ -1,5 +1,6 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
+import { GetProfileStoriesData } from "../queries/useGetProfileStories";
 import { StorieDTO, Stories } from "../schema/StorieSchema";
 
 export const addStorie = async ({
@@ -111,4 +112,23 @@ export const getYoutubeTitle = async ({
       return err;
     }
   }
+};
+
+export const getStoriesByProfileID = async ({
+  profileID,
+}: GetProfileStoriesData) => {
+  const { data: stories, error } = await supabase
+    .from("stories")
+    .select("*")
+    .eq("user_id", profileID);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const parsed = Stories.parse(stories);
+
+  return parsed;
 };
