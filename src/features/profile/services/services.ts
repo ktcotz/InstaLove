@@ -1,7 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { SearchQuery } from "../../../ui/SearchInput";
 import { CustomError } from "../../../utils/CustomErrors";
-import { UserID } from "../../authentication/services/services";
+import { UserID } from "../../authentication/services/types";
 import { MAX_PROPOSED_PROFILES } from "../AllProposedProfiles";
 import { ObserveUserData } from "../mutations/useObservation";
 import { ProposedProfilesProps } from "../queries/useProfiles";

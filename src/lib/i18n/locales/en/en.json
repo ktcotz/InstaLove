@@ -133,6 +133,8 @@
     "mark": "Bookmarks",
     "private": "Private account",
     "privateTitle": "This account is privated",
-    "privateDescription": "Follow this account to stay up to date with its activities"
+    "privateDescription": "Follow this account to stay up to date with its activities",
+    "noobservers": "No one observe this profile",
+    "noobserved": "Profile manager is not following anyone"
   }
 }

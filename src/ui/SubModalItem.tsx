@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { useUser } from "../features/authentication/queries/useUser";
 import { useUserByID } from "../features/authentication/queries/useUserByID";
 import { useAddNotification } from "../features/notifications/mutations/useAddNotification";
@@ -10,6 +11,7 @@ type SubModalItemProps = {
 };
 
 export const SubModalItem = ({ user_id }: SubModalItemProps) => {
+  const { t } = useTranslation();
   const { user: currentUser } = useUser();
   const { user } = useUserByID(user_id);
   const { observation } = useGetObserve({
@@ -67,7 +69,7 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
       {currentUser?.id === user?.user_id ? null : (
         <div className="ml-auto">
           <Button modifier="submit" onClick={handleObserve}>
-            {isObserve ? "Odobserwuj" : "Obserwuj"}
+            {isObserve ? t("profile.observe") : t("profile.unobserver")}
           </Button>
         </div>
       )}

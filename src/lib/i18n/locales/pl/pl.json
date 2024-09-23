@@ -133,6 +133,8 @@
     "mark": "Zapisane",
     "private": "Konto prywatne",
     "privateTitle": "To konto jest prywatne",
-    "privateDescription": "Obserwuj to konto, aby być na bieżąco z aktywnościami tego konta"
+    "privateDescription": "Obserwuj to konto, aby być na bieżąco z aktywnościami tego konta",
+    "noobservers": "Nikt nie obserwuje tego profilu",
+    "noobserved": "Zarządca profilu nie obserwuje nikogo"
   }
 }
