@@ -10,8 +10,6 @@ PROCES :
 
 Edycja profilu.
 
-Biogram z enterem.
-
 Zmiana motywu (Czarny/biały).
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :

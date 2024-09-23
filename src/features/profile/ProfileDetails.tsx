@@ -88,7 +88,7 @@ export const ProfileDetails = () => {
   return (
     <>
       <Wrapper modifier="details">
-        <div className="flex flex-col items-center lg:flex-row gap-16 2xl:gap-32 py-6 md:py-0">
+        <div className="flex flex-col  lg:flex-row gap-16 2xl:gap-32 py-6 md:py-0">
           {currentUser?.id === user.user_id ? (
             <Avatar size={176} overlay={true} />
           ) : (
@@ -156,7 +156,11 @@ export const ProfileDetails = () => {
             </div>
             <div className="py-2">
               <p className="max-w-prose text-wrap text break-words">
-                {user.biogram}
+                {user.biogram.split("\n").map((row) => (
+                  <span key={row} className="block">
+                    {row}
+                  </span>
+                ))}
               </p>
             </div>
           </div>
