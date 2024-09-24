@@ -4,7 +4,7 @@ import { HomeProfile } from "../../features/profile/HomeProfile";
 import { Search } from "../../features/search/Search";
 import { CustomLink } from "../../ui/CustomLink";
 import { NotificationsCounter } from "../../features/notifications/NotificationsCounter";
-import { FaHeart } from "react-icons/fa";
+import { FaRegHeart } from "react-icons/fa";
 import { MainScreenPosts } from "../../features/posts/MainScreenPosts";
 
 export const DashboardHome = () => {
@@ -21,7 +21,7 @@ export const DashboardHome = () => {
             modifier="mobile-notification"
             to={"/dashboard/notifications"}
           >
-            <FaHeart />
+            <FaRegHeart className="dark:fill-stone-50" />
             <NotificationsCounter />
           </CustomLink>
         </div>

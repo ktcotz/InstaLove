@@ -36,7 +36,7 @@ export const Search = () => {
       )}
 
       <div
-        className={`relative p-4 ${
+        className={`relative py-4 px-1 sm:p-4 ${
           isMobile ? "" : "mb-4 border-b border-stone-200 dark:border-stone-50"
         }`}
       >

@@ -164,5 +164,9 @@
   },
   "hover": {
     "noPosts": "User has no posts to display"
+  },
+  "stories": {
+    "add": "Add storie",
+    "open": "Open storie"
   }
 }

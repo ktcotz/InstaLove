@@ -95,6 +95,12 @@ html {
   color: #000;
 }
 
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .modal-stories .swiper-wrapper {
   gap: 2rem;
   align-items: center;
