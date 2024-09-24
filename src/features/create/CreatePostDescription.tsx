@@ -38,7 +38,7 @@ export const CreatePostDescription = ({
           height={32}
           className="rounded-full w-8 h-8"
         />
-        <h2 className="font-semibold text-sm">
+        <h2 className="font-semibold text-sm dark:text-stone-50">
           {user?.user_metadata.user_name}
         </h2>
       </div>
@@ -58,7 +58,10 @@ export const CreatePostDescription = ({
             defaultChecked={options.comments}
             onChange={changeOptions}
           />
-          <label htmlFor="comments" className="text-sm text-stone-600">
+          <label
+            htmlFor="comments"
+            className="text-sm text-stone-600 dark:text-stone-200"
+          >
             {t("create.comment")}
           </label>
         </div>
@@ -71,7 +74,10 @@ export const CreatePostDescription = ({
             defaultChecked={options.likes}
             onChange={changeOptions}
           />
-          <label htmlFor="likes" className="text-sm text-stone-600">
+          <label
+            htmlFor="likes"
+            className="text-sm text-stone-600 dark:text-stone-200"
+          >
             {t("create.like")}
           </label>
         </div>

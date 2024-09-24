@@ -95,9 +95,11 @@ export const FileDropzone = ({
           <div className="h-full flex flex-col items-center justify-center gap-6">
             <FaRegImages
               aria-label={t("create.heading")}
-              className="text-6xl"
+              className="text-6xl dark:fill-stone-100"
             />
-            <h2 className="text-xl sm:text-2xl">{t("create.heading")}</h2>
+            <h2 className="text-xl sm:text-2xl dark:text-stone-100">
+              {t("create.heading")}
+            </h2>
             <Button modifier="submit" aria-label={t("create.button")}>
               {t("create.button")}
             </Button>

@@ -66,7 +66,9 @@ export const SearchUser = ({
             className="rounded-full w-8 h-8"
           />
           <div>
-            <h2 className="font-semibold text-sm">{user_name}</h2>
+            <h2 className="font-semibold text-sm dark:text-stone-50">
+              {user_name}
+            </h2>
             <p className="text-sm text-stone-600 dark:text-stone-50">
               {fullName}
             </p>
@@ -78,7 +80,7 @@ export const SearchUser = ({
 
   return (
     <CustomLink
-      modifier="navigation"
+      modifier="search"
       to={`/dashboard/${user_name}`}
       onClick={handleNavigation}
     >

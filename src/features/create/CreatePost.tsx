@@ -130,15 +130,19 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
 
   return (
     <div className="mx-auto max-w-xl sm:max-w-5xl">
-      <div className="text-center shadow-xl rounded-md bg-stone-50">
-        <div className="p-3 border-b border-stone-300 flex items-center justify-center">
+      <div className="text-center shadow-xl rounded-md bg-stone-50 dark:bg-stone-950">
+        <div className="p-3 border-b border-stone-300 dark:border-stone-50 flex items-center justify-center">
           {preview && (
             <DisablePostPreview
               setPreview={setPreview}
               setShowDescription={setShowDescription}
             />
           )}
-          <h1 className={`font-medium ${preview ? "mr-auto" : ""}`}>
+          <h1
+            className={`font-medium dark:text-stone-50 ${
+              preview ? "mr-auto" : ""
+            }`}
+          >
             {type === "storie" ? t("create.asStorie") : t("create.asPost")}
           </h1>
           {preview && !showDescription && (

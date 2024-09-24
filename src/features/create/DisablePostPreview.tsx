@@ -27,7 +27,10 @@ export const DisablePostPreview = ({
           setShowDescription(false);
         }}
       >
-        <IoIosArrowBack aria-label={t("create.removePreview")} />
+        <IoIosArrowBack
+          aria-label={t("create.removePreview")}
+          className="dark:fill-stone-100"
+        />
       </Button>
     </div>
   );

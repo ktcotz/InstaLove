@@ -24,7 +24,7 @@ export const MarkSearchUsers = ({
   const { t } = useTranslation();
 
   return (
-    <div className="relative bg-stone-50 z-50 w-full max-w-64 sm:max-w-96  min-h-24 shadow-lg rounded-md top-1/2 left-1/2 -translate-x-1/2 ">
+    <div className="relative bg-stone-50 dark:bg-stone-950 z-50 w-full max-w-64 sm:max-w-96  min-h-24 shadow-lg rounded-md top-1/2 left-1/2 -translate-x-1/2 ">
       <div className="grid grid-cols-[1fr_auto]">
         <SearchInput query={query} handleQuery={handleQuery} />
         <div className="px-4 flex items-center justify-center">
@@ -41,7 +41,7 @@ export const MarkSearchUsers = ({
         </div>
       </div>
       {users && users.length > 0 ? (
-        <div className="flex flex-col gap-1 divide-y divide-stone-200 text-left">
+        <div className="flex flex-col gap-1 divide-y divide-stone-200 dark:divide-stone-50 text-left">
           {users?.map((user) => (
             <SearchUser
               key={user.id}
@@ -53,7 +53,9 @@ export const MarkSearchUsers = ({
           ))}
         </div>
       ) : (
-        <p className="py-2 font-semibold text-sm">{t("mark.search")}</p>
+        <p className="py-2 font-semibold text-sm dark:text-stone-200">
+          {t("mark.search")}
+        </p>
       )}
     </div>
   );

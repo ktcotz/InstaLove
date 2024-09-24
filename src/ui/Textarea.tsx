@@ -39,14 +39,14 @@ export const Textarea = ({
       </label>
       <textarea
         placeholder={t("create.area")}
-        className="w-full overflow-scroll px-2 pt-2 pb-8 resize-none"
+        className="w-full overflow-scroll px-2 pt-2 pb-8 resize-none dark:bg-stone-950 dark:text-stone-50"
         rows={isMobile || type === "storie" ? MIN_ROW_AREA : MAX_ROW_AREA}
         value={description}
         onChange={handleChange}
         onBlur={onBlur}
         id="description"
       ></textarea>
-      <div className="absolute bottom-0 left-0 w-full h-8 px-2 flex items-center border-b border-stone-300 justify-between bg-stone-50">
+      <div className="absolute bottom-0 left-0 w-full h-8 px-2 flex items-center border-b border-stone-300 justify-between bg-stone-50 dark:border-stone-50 dark:bg-stone-950">
         <Button
           modifier="close"
           onClick={() => setShowEmotes((prev) => !prev)}
@@ -66,7 +66,7 @@ export const Textarea = ({
             }}
           />
         )}
-        <p className="text-xs text-stone-600">
+        <p className="text-xs text-stone-600 dark:text-stone-200">
           {description.length}/{max}
         </p>
       </div>
