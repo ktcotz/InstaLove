@@ -13,7 +13,6 @@ Stories
 - UI&UX.
 - Oznaczenia tylko na zdjęciach.
 - Jeżeli nie obejrzany to gradient niebiesko różowy, jeżeli tak to szaro ciemny.
-- Usuwanie stories powyżej 24h (cron? poczytaj.)
 
 Notyfikacja na dodanie do zdjęcia, oznaczenie.
 
