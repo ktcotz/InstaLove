@@ -32,6 +32,11 @@ export const addStorie = async ({
     });
   }
 
+  const { data: stories } = await supabase
+    .from("stories")
+    .select("*")
+    .eq("user_id", user_id);
+
   const addObject =
     type === "post"
       ? {
@@ -55,7 +60,12 @@ export const addStorie = async ({
 
   const { data, error } = await supabase
     .from("stories")
-    .insert([addObject])
+    .insert([
+      {
+        ...addObject,
+        inner_id: stories && stories.length > 0 ? user_id : null,
+      },
+    ])
     .select();
 
   if (error) {
@@ -68,7 +78,10 @@ export const addStorie = async ({
 };
 
 export const getAllStories = async () => {
-  const { data: stories, error } = await supabase.from("stories").select("*");
+  const { data: stories, error } = await supabase
+    .from("stories")
+    .select("*")
+    .is("inner_id", null);
 
   if (error) {
     throw new CustomError({

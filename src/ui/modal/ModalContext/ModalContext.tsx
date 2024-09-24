@@ -17,10 +17,12 @@ export const ModalContextProvider = ({
 }: ModalContextProviderProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const open = () => {
+    document.documentElement.classList.add("no-scroll");
     setIsOpen(true);
   };
 
   const close = () => {
+    document.documentElement.classList.remove("no-scroll");
     setIsOpen(false);
   };
 

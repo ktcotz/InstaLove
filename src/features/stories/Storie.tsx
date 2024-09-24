@@ -23,7 +23,7 @@ export const Storie = ({ user_id }: StorieSchema) => {
     <div className="flex flex-col items-center gap-2">
       <Modal>
         <Modal.Content>
-          <ModalStories />
+          <ModalStories clickedID={user_id}/>
         </Modal.Content>
         <Modal.Open>
           <Button aria-label={t("stories.open")} modifier="storie">

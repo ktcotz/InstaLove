@@ -19,6 +19,7 @@ export const StorieSchema = z.object({
   type: z.enum(["video", "post"]),
   music: z.string().nullable(),
   created_at: z.string(),
+  inner_id: z.string().optional().nullable(),
 });
 
 export const StorieSupabaseSchema = z.intersection(

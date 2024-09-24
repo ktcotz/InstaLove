@@ -1,15 +1,17 @@
-import { ReactNode } from "react";
+import { ReactNode, useRef } from "react";
 import { ModalOverlay } from "./ModalOverlay";
 import { useModal } from "./ModalContext/useModal";
 import { Modal } from "./Modal";
-import { useEventListener } from "usehooks-ts";
+import { useEventListener, useOnClickOutside } from "usehooks-ts";
 
 type ModalContentProps = {
   children: ReactNode;
+  parentClass: string;
 };
 
-export const ModalContent = ({ children }: ModalContentProps) => {
+export const ModalContent = ({ children, parentClass }: ModalContentProps) => {
   const { isOpen, close } = useModal();
+  const ref = useRef<HTMLDivElement>(null);
 
   useEventListener("keydown", (ev) => {
     if (ev.key === "Escape") {
@@ -17,12 +19,18 @@ export const ModalContent = ({ children }: ModalContentProps) => {
     }
   });
 
+  useOnClickOutside(ref, close);
+
   if (!isOpen) return null;
 
   return (
     <ModalOverlay>
       <Modal.Close />
-      <div className="py-0 md:py-6 grow mt-14">{children}</div>
+      <div className="py-0 md:py-6 grow mt-14">
+        <div ref={ref} className={parentClass}>
+          {children}
+        </div>
+      </div>
     </ModalOverlay>
   );
 };

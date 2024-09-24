@@ -129,6 +129,10 @@ html {
   height: 700px;
 }
 
+.no-scroll {
+  overflow-y: hidden;
+}
+
 @media (max-width: 640px) {
   .reel-swiper .swiper-slide {
     max-height: 500px !important;

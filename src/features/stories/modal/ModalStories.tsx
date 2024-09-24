@@ -6,7 +6,11 @@ import { useGetAllStories } from "../queries/useGetAllStories";
 import { Loader } from "../../../ui/Loader";
 import { Swiper } from "swiper/types";
 
-export const ModalStories = () => {
+type ModalStoriesProps = {
+  clickedID: string;
+};
+
+export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
   const { stories, isLoading } = useGetAllStories();
   const [swiper, setSwiper] = useState<Swiper | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -14,6 +18,14 @@ export const ModalStories = () => {
   const [timer, setTimer] = useState(0);
   const isLaptop = useMediaQuery("(min-width:1024px)");
   const ref = useRef(document.body);
+
+  useEffect(() => {
+    const id = stories?.findIndex((storie) => storie.user_id === clickedID);
+    if (id) {
+      setInitialSlide(id);
+      swiper?.slideTo(id);
+    }
+  }, [clickedID, swiper, stories]);
 
   const handleSwiperSlide = (ev: KeyboardEvent) => {
     if (ev.key === "ArrowRight") {
@@ -61,7 +73,7 @@ export const ModalStories = () => {
     <div
       className={`flex items-center gap-6 ${
         !isLaptop &&
-        "relative w-full h-full md:max-w-[600px] md:h-[600px] mx-auto"
+        "relative w-full h-full md:max-w-[600px] md:h-[700px] mx-auto"
       }`}
     >
       {isLaptop ? (

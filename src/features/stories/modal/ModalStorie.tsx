@@ -77,10 +77,9 @@ export const ModalStorie = ({
       style={{
         backgroundImage: `${`linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.5)),url(${post_url})`}`,
       }}
-      className={`${active ? "h-[700px] w-full" : "h-[300px] w-full"}
-        ${
-          (mobile || active) && "h-[700px] w-full"
-        } relative transition-all duration-500 bg-no-repeat bg-cover bg-center`}
+      className={`${
+        active || mobile ? "min-h-[700px]" : "min-h-[350px]"
+      } w-full relative transition-all duration-1000 bg-no-repeat bg-cover bg-center`}
     >
       {active || mobile ? (
         <div className="relative">
