@@ -5,12 +5,14 @@ import { useUserByID } from "../authentication/queries/useUserByID";
 import { ModalStories } from "./modal/ModalStories";
 import { Storie as StorieSchema } from "./schema/StorieSchema";
 import { Tooltip } from "react-tooltip";
+import { useMediaQuery } from "usehooks-ts";
 
 const MAX_LENGTH = 10;
 
 export const Storie = ({ user_id }: StorieSchema) => {
   const { user } = useUserByID(user_id);
   const { t } = useTranslation();
+  const isLaptop = useMediaQuery("(min-width:1024px)");
 
   if (!user) return null;
 
@@ -22,8 +24,12 @@ export const Storie = ({ user_id }: StorieSchema) => {
   return (
     <div className="flex flex-col items-center gap-2">
       <Modal>
-        <Modal.Content>
-          <ModalStories clickedID={user_id}/>
+        <Modal.Content
+          parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
+            !isLaptop && "relative w-full h-full md:max-w-[600px]  mx-auto"
+          }`}
+        >
+          <ModalStories clickedID={user_id} />
         </Modal.Content>
         <Modal.Open>
           <Button aria-label={t("stories.open")} modifier="storie">

@@ -19,14 +19,6 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
   const isLaptop = useMediaQuery("(min-width:1024px)");
   const ref = useRef(document.body);
 
-  useEffect(() => {
-    const id = stories?.findIndex((storie) => storie.user_id === clickedID);
-    if (id) {
-      setInitialSlide(id);
-      swiper?.slideTo(id);
-    }
-  }, [clickedID, swiper, stories]);
-
   const handleSwiperSlide = (ev: KeyboardEvent) => {
     if (ev.key === "ArrowRight") {
       const slide =
@@ -68,37 +60,34 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
   }, [timer, swiper, initialSlide, stories]);
 
   if (isLoading) return <Loader />;
+  if (!stories) return null;
 
-  return (
-    <div
-      className={`flex items-center gap-6 ${
-        !isLaptop &&
-        "relative w-full h-full md:max-w-[600px] md:h-[700px] mx-auto"
-      }`}
-    >
-      {isLaptop ? (
-        <DesktopSwiper
-          initialSlide={initialSlide}
-          changeSlide={(slide) => setInitialSlide(slide)}
-          stories={stories}
-          setSwiper={setSwiper}
-          isPlaying={isPlaying}
-          handleChangePlaying={handleChangePlaying}
-          timer={timer}
-          resetTimer={() => setTimer(0)}
-        />
-      ) : (
-        <MobileSwiper
-          stories={stories}
-          setSwiper={setSwiper}
-          initialSlide={initialSlide}
-          changeSlide={(slide) => setInitialSlide(slide)}
-          handleChangePlaying={handleChangePlaying}
-          timer={timer}
-          isPlaying={isPlaying}
-          resetTimer={() => setTimer(0)}
-        />
-      )}
-    </div>
+  const sortedStories = [
+    ...stories.filter((storie) => storie.user_id === clickedID),
+    ...stories.filter((storie) => storie.user_id !== clickedID),
+  ];
+
+  return isLaptop ? (
+    <DesktopSwiper
+      initialSlide={initialSlide}
+      changeSlide={(slide) => setInitialSlide(slide)}
+      stories={sortedStories}
+      setSwiper={setSwiper}
+      isPlaying={isPlaying}
+      handleChangePlaying={handleChangePlaying}
+      timer={timer}
+      resetTimer={() => setTimer(0)}
+    />
+  ) : (
+    <MobileSwiper
+      stories={sortedStories}
+      setSwiper={setSwiper}
+      initialSlide={initialSlide}
+      changeSlide={(slide) => setInitialSlide(slide)}
+      handleChangePlaying={handleChangePlaying}
+      timer={timer}
+      isPlaying={isPlaying}
+      resetTimer={() => setTimer(0)}
+    />
   );
 };

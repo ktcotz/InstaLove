@@ -144,6 +144,10 @@ html {
   display: none;
 }
 
+.mobile-swiper .swiper-wrapper {
+  height: auto;
+}
+
 progress::-moz-progress-bar {
   background: #fff;
 }

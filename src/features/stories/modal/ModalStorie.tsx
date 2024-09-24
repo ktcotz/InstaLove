@@ -9,6 +9,7 @@ import ReactPlayer from "react-player";
 import { GoMute, GoUnmute } from "react-icons/go";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useEventListener } from "usehooks-ts";
+import ProgressBar from "@ramonak/react-progress-bar";
 
 type ModalStorieProps = {
   active?: boolean;
@@ -33,7 +34,7 @@ export const ModalStorie = ({
   const [muted, setMuted] = useState(true);
   const [played, setPlayed] = useState(false);
   const { user } = useUserByID(user_id);
-  // const { title } = useGetYoutubeTitle(music);
+  const { title, isLoading } = useGetYoutubeTitle(music);
 
   const handlePlayPause = () => {
     const toggled = !played;
@@ -77,20 +78,22 @@ export const ModalStorie = ({
       style={{
         backgroundImage: `${`linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.5)),url(${post_url})`}`,
       }}
-      className={`${
-        active || mobile ? "min-h-[700px]" : "min-h-[350px]"
-      } w-full relative transition-all duration-1000 bg-no-repeat bg-cover bg-center`}
+      className={`h-[350px] ${
+        (active || mobile) && "h-[700px]"
+      } w-full relative transition-all ease-linear duration-700 bg-no-repeat bg-cover bg-center`}
     >
       {active || mobile ? (
         <div className="relative">
           <div className="z-50 relative top-0 left-0 w-full p-4 flex flex-col gap-3">
-            <progress
-              value={timer}
-              max={25}
-              className="bg-stone-400 h-[3px] rounded-md accent-stone-50"
-            >
-              {timer}%
-            </progress>
+            <ProgressBar
+              completed={timer}
+              maxCompleted={25}
+              baseBgColor="#eee"
+              bgColor="#bbb"
+              customLabel=" "
+              height="4px"
+              transitionTimingFunction="linear"
+            />
             <div className="flex items-center gap-2">
               <img
                 src={user?.avatar_url}
@@ -104,7 +107,7 @@ export const ModalStorie = ({
                   </h2>
                   <p className="text-xs text-stone-50">{formatedDate}</p>
                 </div>
-                {/* {music && (
+                {music && !isLoading && (
                   <>
                     <p className="text-xs text-stone-50 flex items-center gap-2">
                       <FaMusic />
@@ -118,7 +121,7 @@ export const ModalStorie = ({
                       playing={played}
                     />
                   </>
-                )} */}
+                )}
               </div>
               <div className="ml-auto flex gap-4">
                 <Button
