@@ -21,7 +21,8 @@ export type CustomLinkModifier =
   | "notification"
   | "reel"
   | "explore"
-  | "mobile-notification";
+  | "mobile-notification"
+  | "hover-name";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -53,6 +54,7 @@ export const CustomLink = ({
     avatar:
       "w-10 h-10 rounded-full border border-stone-300 flex items-center justify-center",
     ["avatar-name"]: "text-base text-stone-950 font-medium dark:text-stone-50",
+    ["hover-name"]: "text-base text-stone-950 font-medium",
     ["all-profiles"]:
       "text-stone-800 hover:text-stone-950 text-sm  font-bold transition",
     ["profile-details"]:

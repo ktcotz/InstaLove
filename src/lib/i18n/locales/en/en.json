@@ -161,5 +161,8 @@
   "pagination": {
     "next": "Next page",
     "previous": "Previous page"
+  },
+  "hover": {
+    "noPosts": "User has no posts to display"
   }
 }

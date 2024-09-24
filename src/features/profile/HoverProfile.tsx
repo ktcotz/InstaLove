@@ -1,6 +1,5 @@
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
-import { Loader } from "../../ui/Loader";
 import { HiUserAdd } from "react-icons/hi";
 import { useProfile } from "./queries/useProfile";
 import { useGetPosts } from "../posts/queries/useGetPosts";
@@ -9,6 +8,14 @@ import { useGetObserve } from "./queries/useGetObserve";
 import { useUser } from "../authentication/queries/useUser";
 import { useObservation } from "./mutations/useObservation";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
+import { StorieAvatar } from "./avatar/StorieAvatar";
+import { useTranslation } from "react-i18next";
+import { HoverProfileSkeleton } from "./HoverProfileSkeleton";
+import { Modal } from "../../ui";
+import { ObservesByUser } from "./ObservesByUser";
+import { ObservesOnUser } from "./ObservesOnUser";
+import { useGetObservesByUser } from "./queries/useGetObservesByUser";
+import { useGetObservesOnUser } from "./queries/useGetObservesOnUser";
 
 type HoverProfileProps = {
   user_name: string;
@@ -21,13 +28,19 @@ export const HoverProfile = ({
   showPosts = true,
   position = "bottom",
 }: HoverProfileProps) => {
+  const { t } = useTranslation();
   const { user: currentUser } = useUser();
-  const { data: user, isLoading } = useProfile(user_name);
+  const { data: user } = useProfile(user_name);
 
   const { data: posts, isLoading: isPostsLoading } = useGetPosts(
     user?.user_id,
     showPosts
   );
+
+  const { observations } = useGetObservesByUser({ user_id: user?.user_id });
+  const { observations: userObservations } = useGetObservesOnUser({
+    user_id: user?.user_id,
+  });
 
   const { observation } = useGetObserve({
     user_id: currentUser!.id,
@@ -40,8 +53,6 @@ export const HoverProfile = ({
   });
 
   const { notify } = useAddNotification({ user_id: currentUser!.id });
-
-  const loading = isLoading || isPostsLoading;
 
   if (!user) return null;
 
@@ -79,89 +90,102 @@ export const HoverProfile = ({
         position === "bottom"
           ? "bottom-0 translate-y-full"
           : "top-0 -translate-y-full"
-      } left-0 p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg`}
+      } left-0 p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg rounded-md min-w-[388px]`}
     >
-      {loading && <Loader />}
-      {!loading && (
-        <>
-          <div className="flex items-center gap-4 mb-2">
-            <CustomLink to={`/dashboard/${user.user_name}`} modifier="avatar">
-              <img
-                src={`${user.avatar_url}`}
-                alt={user.user_name}
-                width={48}
-                height={48}
-                className="rounded-full w-12 h-12"
-              />
+      <>
+        <div className="flex items-center gap-4 mb-2">
+          <StorieAvatar profile={user} size={40} />
+          <div className="flex flex-col">
+            <CustomLink
+              to={`/dashboard/${user.user_name}`}
+              modifier="hover-name"
+            >
+              {user.user_name}
             </CustomLink>
-            <div className="flex flex-col">
-              <CustomLink
-                to={`/dashboard/${user.user_name}`}
-                modifier="avatar-name"
-              >
-                {user.user_name}
-              </CustomLink>
-              <p className="text-sm text-stone-500">Kamil Naskręt</p>
-            </div>
+            <p className="text-sm text-stone-500">Kamil Naskręt</p>
           </div>
-          <div className="flex items-center gap-6 mb-2">
-            <div className="text-center p-2 2xl:p-4">
-              <p className="font-semibold">{posts?.count ?? 0}</p>
-              <h2 className="text-sm text-stone-600">posty</h2>
-            </div>
-            <div className="text-center p-2 2xl:p-4">
-              <p className="font-semibold">322</p>
-              <h2 className="text-sm text-stone-600">obserwujący</h2>
-            </div>
-            <div className="text-center p-2 2xl:p-4">
-              <p className="font-semibold">1638</p>
-              <h2 className="text-sm text-stone-600">obserwowani</h2>
-            </div>
+        </div>
+        <div className="flex items-center gap-6 mb-2">
+          <div className="text-center p-2 2xl:p-4">
+            <p className="font-semibold">{posts?.count ?? 0}</p>
+            <h2 className="text-sm text-stone-600">{t("profile.posts")}</h2>
           </div>
-          {showPosts ? (
-            <div className="grid grid-cols-3 gap-1 mb-4">
-              {user.type === "public" || isObserve ? (
-                <>
-                  {isPostsLoading && <Loader />}
-                  {!isPostsLoading &&
-                    posts?.data.slice(0, 3).map((post) => {
-                      return (
-                        <CustomLink
-                          to={`/dashboard/${user_name}/post/${post.id}`}
-                          modifier="logo"
+          <div className="text-center p-2 2xl:p-4">
+            <Modal>
+              <Modal.Open>
+                <Button modifier="hover">
+                  <p className="font-semibold">{observations.length ?? 0}</p>
+                  <h2 className="text-sm text-stone-600">
+                    {t("profile.observers")}
+                  </h2>
+                </Button>
+              </Modal.Open>
+              <Modal.Content>
+                <ObservesByUser user_id={user.user_id} />
+              </Modal.Content>
+            </Modal>
+          </div>
+          <div className="text-center p-2 2xl:p-4">
+            <Modal>
+              <Modal.Open>
+                <Button modifier="hover">
+                  <p className="font-semibold">
+                    {userObservations.length ?? 0}
+                  </p>
+                  <h2 className="text-sm text-stone-600">
+                    {t("profile.byobservers")}
+                  </h2>
+                </Button>
+              </Modal.Open>
+              <Modal.Content>
+                <ObservesOnUser user_id={user.user_id} />
+              </Modal.Content>
+            </Modal>
+          </div>
+        </div>
+        {showPosts ? (
+          <div className="grid grid-cols-3 gap-2 mb-4">
+            {user.type === "public" || isObserve ? (
+              <>
+                {isPostsLoading && <HoverProfileSkeleton />}
+                {!isPostsLoading &&
+                  posts?.data.slice(0, 3).map((post) => {
+                    return (
+                      <CustomLink
+                        to={`/dashboard/${user_name}/post/${post.id}`}
+                        modifier="logo"
+                        key={post.id}
+                      >
+                        <div
+                          className="w-full aspect-square bg-center bg-cover"
                           key={post.id}
+                          style={{ backgroundImage: `url(${post.post_url})` }}
                         >
-                          <div
-                            className="w-full aspect-square bg-center bg-cover"
-                            key={post.id}
-                            style={{ backgroundImage: `url(${post.post_url})` }}
-                          >
-                            &nbsp;
-                          </div>
-                        </CustomLink>
-                      );
-                    })}
-                  {!isPostsLoading && posts?.data.length === 0 && (
-                    <p className="text-stone-600 text-center col-start-1 -col-end-1">
-                      Użytkownik nie ma postów do wyświetlenia
-                    </p>
-                  )}
-                </>
-              ) : (
-                <div className="col-start-1 -col-end-1">
-                  <PrivateProfile />
-                </div>
-              )}
-            </div>
-          ) : null}
-          {currentUser?.id === user.user_id ? null : (
-            <Button modifier="add-user" onClick={handleObserve}>
-              <HiUserAdd />
-              {isObserve ? "Odobserwuj" : "Obserwuj"}
-            </Button>
-          )}
-        </>
-      )}
+                          &nbsp;
+                        </div>
+                      </CustomLink>
+                    );
+                  })}
+                {!isPostsLoading && posts?.data.length === 0 && (
+                  <p className="text-stone-600 text-center col-start-1 -col-end-1">
+                    {t("hover.noPosts")}
+                  </p>
+                )}
+              </>
+            ) : (
+              <div className="col-start-1 -col-end-1">
+                <PrivateProfile />
+              </div>
+            )}
+          </div>
+        ) : null}
+        {currentUser?.id === user.user_id ? null : (
+          <Button modifier="add-user" onClick={handleObserve}>
+            <HiUserAdd />
+            {isObserve ? t("profile.unobserver") : t("profile.observe")}
+          </Button>
+        )}
+      </>
     </div>
   );
 };

@@ -8,10 +8,7 @@ DO ZROBIENIA :
 
 PROCES :
 
-Poprawa skeleton dark theme.
-Poprawa logiki notyfikacji i obserwowania użytkowników.
 Hover profiles.
-Proposed profiles.
 Notyfikacja na dodanie do zdjęcia, oznaczenie.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
@@ -24,6 +21,6 @@ Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 - Explore.
 - Reels.
 - Create Post.
-- Profile, profile details, edit profile, switchers.
+- Profile, profile details, edit profile, switchers, home profile,proposed profiles.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.

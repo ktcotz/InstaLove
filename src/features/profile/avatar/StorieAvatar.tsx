@@ -7,6 +7,7 @@ import { Profile } from "../schema/ProfilesSchema";
 type StorieAvatarProps = {
   size: 176 | 40;
   profile: Profile;
+  
 };
 
 export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {

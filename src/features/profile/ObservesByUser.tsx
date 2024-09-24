@@ -18,6 +18,8 @@ export const ObservesByUser = ({ user_id }: ObservesByUserProps) => {
     setQuery(value);
   };
 
+  console.log(observations);
+
   return (
     <div className="mx-auto max-w-lg">
       <div className="flex flex-col items-center justify-center rounded-md shadow-lg bg-stone-100">
@@ -44,7 +46,7 @@ export const ObservesByUser = ({ user_id }: ObservesByUserProps) => {
             observations?.map((observation) => (
               <SubModalItem
                 key={observation.id}
-                user_id={observation.user_id}
+                user_id={observation.observe_id}
               />
             ))}
         </div>

@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
 import { useUser } from "../authentication/queries/useUser";
@@ -15,7 +16,7 @@ type ProposedProfileProps = {
 
 export const ProposedProfile = ({ profile }: ProposedProfileProps) => {
   const { user_name, user_id } = profile;
-
+  const { t } = useTranslation();
   const { user: currentUser } = useUser();
   const { isHover, hover, unhover } = useHover();
   const { observer } = useObservation({
@@ -73,14 +74,16 @@ export const ProposedProfile = ({ profile }: ProposedProfileProps) => {
           >
             {user_name}
           </CustomLink>
-          <p className="text-sm text-stone-500">Propozycje dla Ciebie</p>
+          <p className="text-sm text-stone-500 dark:text-stone-100">
+            {t("profile.proposes")}
+          </p>
         </div>
       </div>
       <Button
         modifier={`${isObserve ? "text" : "link"}`}
         onClick={handleObserve}
       >
-        {isObserve ? "Odobserwuj" : "Obserwuj"}
+        {isObserve ? t("profile.unobserver") : t("profile.observe")}
       </Button>
       {isHover && <HoverProfile user_name={user_name} />}
     </div>
