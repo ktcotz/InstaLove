@@ -26,7 +26,7 @@ export const SearchInput = ({
     <div className="relative">
       <input
         type="text"
-        className={`peer w-full rounded-md border border-stone-300 pt-4 p-2 text-stone-950 transition-all ${
+        className={`dark:border-stone-50 dark:bg-stone-950 peer w-full rounded-md border border-stone-300 pt-4 p-2 text-stone-950 dark:text-stone-50 transition-all ${
           modifier === "with-reset" ? "pr-8" : ""
         }`}
         id="search"
@@ -37,7 +37,7 @@ export const SearchInput = ({
       />
       <label
         htmlFor="search"
-        className="flex items-center gap-1 absolute left-0 top-1/2 -translate-y-1/2 px-2 text-sm text-stone-900 transition-all  peer-valid:top-3 peer-focus:top-3 peer-focus:rounded-sm peer-valid:text-xs peer-focus:text-xs"
+        className="flex items-center gap-1 absolute left-0 top-1/2 -translate-y-1/2 px-2 text-sm text-stone-900 dark:text-stone-50 transition-all  peer-valid:top-3 peer-focus:top-3 peer-focus:rounded-sm peer-valid:text-xs peer-focus:text-xs"
       >
         <CiSearch aria-label={t("navigation.search")} />
         {t("navigation.search")}

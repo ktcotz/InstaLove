@@ -52,8 +52,8 @@ export const NotificationsByDate = ({ date }: NotificationsByDateProps) => {
   if (!notifications?.length) return null;
 
   return (
-    <div className="border-b border-stone-300 py-4 last:border-0">
-      <h3 className="text-xl font-semibold mb-3">
+    <div className="border-b border-stone-300 py-4 last:border-0 dark:border-stone-50">
+      <h3 className="text-xl font-semibold mb-3 dark:text-stone-50">
         {date === "today" && t("notifications.today")}
         {date === "week" && t("notifications.week")}
         {date === "month" && t("notifications.month")}

@@ -53,11 +53,13 @@ export const Notification = ({
         className="w-10 h-10 rounded-full"
       />
       <div className="text-xs">
-        <p className="text-xs">
+        <p className="text-xs dark:text-stone-50">
           <strong>{user?.user_name}</strong>
         </p>
-        <p className="text-stone-900">{notificationType[type]}</p>
-        <p className="text-stone-600">{formatedDate}</p>
+        <p className="text-stone-900 dark:text-stone-200">
+          {notificationType[type]}
+        </p>
+        <p className="text-stone-600 dark:text-stone-100">{formatedDate}</p>
       </div>
     </CustomLink>
   );

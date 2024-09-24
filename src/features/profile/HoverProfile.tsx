@@ -90,7 +90,7 @@ export const HoverProfile = ({
         position === "bottom"
           ? "bottom-0 translate-y-full"
           : "top-0 -translate-y-full"
-      } left-0 p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg rounded-md min-w-[388px]`}
+      } left-0 p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg rounded-md min-w-[388px] dark:bg-stone-950`}
     >
       <>
         <div className="flex items-center gap-4 mb-2">
@@ -102,20 +102,28 @@ export const HoverProfile = ({
             >
               {user.user_name}
             </CustomLink>
-            <p className="text-sm text-stone-500">Kamil Naskręt</p>
+            <p className="text-sm text-stone-500 dark:text-stone-200">
+              Kamil Naskręt
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-6 mb-2">
           <div className="text-center p-2 2xl:p-4">
-            <p className="font-semibold">{posts?.count ?? 0}</p>
-            <h2 className="text-sm text-stone-600">{t("profile.posts")}</h2>
+            <p className="font-semibold dark:text-stone-50">
+              {posts?.count ?? 0}
+            </p>
+            <h2 className="text-sm text-stone-600 dark:text-stone-200">
+              {t("profile.posts")}
+            </h2>
           </div>
           <div className="text-center p-2 2xl:p-4">
             <Modal>
               <Modal.Open>
                 <Button modifier="hover">
-                  <p className="font-semibold">{observations.length ?? 0}</p>
-                  <h2 className="text-sm text-stone-600">
+                  <p className="font-semibold dark:text-stone-50">
+                    {observations.length ?? 0}
+                  </p>
+                  <h2 className="text-sm text-stone-600 dark:text-stone-200">
                     {t("profile.observers")}
                   </h2>
                 </Button>
@@ -129,10 +137,10 @@ export const HoverProfile = ({
             <Modal>
               <Modal.Open>
                 <Button modifier="hover">
-                  <p className="font-semibold">
+                  <p className="font-semibold dark:text-stone-50">
                     {userObservations.length ?? 0}
                   </p>
-                  <h2 className="text-sm text-stone-600">
+                  <h2 className="text-sm text-stone-600 dark:text-stone-200">
                     {t("profile.byobservers")}
                   </h2>
                 </Button>
@@ -167,7 +175,7 @@ export const HoverProfile = ({
                     );
                   })}
                 {!isPostsLoading && posts?.data.length === 0 && (
-                  <p className="text-stone-600 text-center col-start-1 -col-end-1">
+                  <p className="text-stone-600 text-center col-start-1 -col-end-1 dark:text-stone-200">
                     {t("hover.noPosts")}
                   </p>
                 )}

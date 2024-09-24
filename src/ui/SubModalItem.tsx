@@ -63,8 +63,12 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
         className="rounded-full w-8 h-8"
       />
       <div>
-        <h2 className="font-semibold text-sm">{user.user_name}</h2>
-        <p className="text-sm text-stone-600">{user.fullName}</p>
+        <h2 className="font-semibold text-sm dark:text-stone-50">
+          {user.user_name}
+        </h2>
+        <p className="text-sm text-stone-600 dark:text-stone-200">
+          {user.fullName}
+        </p>
       </div>
       {currentUser?.id === user?.user_id ? null : (
         <div className="ml-auto">

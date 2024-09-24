@@ -18,7 +18,7 @@ export const Pagination = ({
   const { t } = useTranslation();
 
   return (
-    <div className="py-3 grid grid-cols-3 place-items-center gap-2 border-t border-stone-300">
+    <div className="py-3 grid grid-cols-3 place-items-center gap-2 border-t border-stone-300 dark:border-stone-50">
       {currentPage === 1 ? null : (
         <Button
           modifier="pagination"
@@ -31,9 +31,9 @@ export const Pagination = ({
           />
         </Button>
       )}
-      <p className="text-sm text-stone-950 col-start-2">
-        <span className="text-stone-950 font-medium mr-1">{currentPage}</span>/
-        <span className="text-stone-950 font-medium ml-1">{max}</span>
+      <p className="text-sm text-stone-950 col-start-2 dark:text-stone-50">
+        <span className=" font-medium mr-1">{currentPage}</span>/
+        <span className=" font-medium ml-1">{max}</span>
       </p>
       {currentPage === max ? null : (
         <div className="col-start-3 flex items-center justify-center">
