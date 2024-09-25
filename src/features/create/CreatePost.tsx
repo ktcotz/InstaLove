@@ -15,6 +15,8 @@ import { MAX_LENGTH } from "../../ui/Textarea";
 import { AxiosProgressEvent } from "axios";
 import { useAddMarks } from "../mark/mutations/useAddMarks";
 import { useMarksContext } from "../mark/context/useMarksContext";
+import { useAddNotification } from "../notifications/mutations/useAddNotification";
+import { getProfile } from "../profile/services/services";
 
 export type CreatePostFile = {
   drop: File | null;
@@ -45,6 +47,8 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
     comments: false,
     likes: false,
   });
+  const { notify } = useAddNotification({ user_id: user!.id });
+
   const [uploadProgress, setUploadProgress] = useState(0);
 
   const { close } = useModal();
@@ -124,15 +128,29 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
         handleUploadProgress,
       },
       {
-        onSuccess: (post) => {
-          const mappedMarks = marks.map((mark) => {
-            return {
-              x: mark.x,
-              y: mark.y,
-              name: mark.name,
-              post_id: post![0].id,
-              user_id: user.id,
-            };
+        onSuccess: async (post) => {
+          const mappedMarks = await Promise.all(
+            marks.map(async (mark) => {
+              const profile = await getProfile({ user_name: mark.name });
+
+              return {
+                ...mark,
+                mark_id: profile.user_id,
+                user_id: user.id,
+                post_id: post![0].id,
+              };
+            })
+          );
+
+          mappedMarks.forEach((mark) => {
+            if (mark.mark_id === user.id) return;
+            notify({
+              type: "post_mark",
+              status: "unread",
+              post_id: post![0]!.id,
+              by_user: user.id,
+              user_id: mark.mark_id,
+            });
           });
 
           mutate(mappedMarks);

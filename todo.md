@@ -11,10 +11,7 @@ PROCES :
 Stories
 
 - UI&UX.
-- Oznaczenia tylko na zdjęciach.
 - Jeżeli nie obejrzany to gradient niebiesko różowy, jeżeli tak to szaro ciemny.
-
-Notyfikacja na dodanie do zdjęcia, oznaczenie.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 

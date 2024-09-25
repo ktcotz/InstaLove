@@ -71,7 +71,8 @@
     "mark": "tagged you under the post",
     "commentLike": "liked your comment",
     "commentReply": "replied to your comment",
-    "bookmark": "added your post to favorites"
+    "bookmark": "added your post to favorites",
+    "postMark": "tagged you in his post"
   },
   "search": {
     "delete": "Delete search user",

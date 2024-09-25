@@ -4,6 +4,7 @@ export const MarkSchema = z.object({
   name: z.string(),
   x: z.number(),
   y: z.number(),
+  mark_id: z.string().nullable().optional(),
 });
 
 export const MarkDTOSchema = z.intersection(

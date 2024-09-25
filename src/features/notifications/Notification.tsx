@@ -32,6 +32,7 @@ export const Notification = ({
     comment: t("notifications.commentLike"),
     comment_reply: t("notifications.commentReply"),
     bookmark: t("notifications.bookmark"),
+    post_mark: t("notifications.postMark"),
   };
 
   const notificationLinkType: Record<typeof type, string> = {
@@ -41,6 +42,7 @@ export const Notification = ({
     comment: `/dashboard/${receiver?.user_name}/post/${post_id}`,
     comment_reply: `/dashboard/${receiver?.user_name}/post/${post_id}`,
     bookmark: `/dashboard/${receiver?.user_name}/post/${post_id}`,
+    post_mark: `/dashboard/${user?.user_name}/post/${post_id}`,
   };
 
   return (
