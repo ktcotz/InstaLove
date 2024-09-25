@@ -6,13 +6,20 @@ import { ModalStories } from "./modal/ModalStories";
 import { Storie as StorieSchema } from "./schema/StorieSchema";
 import { Tooltip } from "react-tooltip";
 import { useMediaQuery } from "usehooks-ts";
+import { useUser } from "../authentication/queries/useUser";
+import { useGetProfileStories } from "./queries/useGetProfileStories";
 
 const MAX_LENGTH = 10;
 
 export const Storie = ({ user_id }: StorieSchema) => {
+  const { user: current } = useUser();
   const { user } = useUserByID(user_id);
   const { t } = useTranslation();
   const isLaptop = useMediaQuery("(min-width:1024px)");
+  const { watched } = useGetProfileStories({
+    profileID: user!.user_id,
+    userID: current?.id,
+  });
 
   if (!user) return null;
 
@@ -20,6 +27,8 @@ export const Storie = ({ user_id }: StorieSchema) => {
     user?.user_name.length > MAX_LENGTH
       ? `${user.user_name.slice(0, MAX_LENGTH)}...`
       : user.user_name;
+
+  const isWatched = watched && watched.watched;
 
   return (
     <div className="flex flex-col items-center gap-2">
@@ -32,7 +41,10 @@ export const Storie = ({ user_id }: StorieSchema) => {
           <ModalStories clickedID={user_id} />
         </Modal.Content>
         <Modal.Open>
-          <Button aria-label={t("stories.open")} modifier="storie">
+          <Button
+            aria-label={t("stories.open")}
+            modifier={isWatched ? "watched-storie" : "storie"}
+          >
             <div className="p-1 bg-white dark:bg-black rounded-full">
               <img
                 src={user?.avatar_url}

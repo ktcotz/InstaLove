@@ -1,7 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { GetProfileStoriesData } from "../queries/useGetProfileStories";
-import { StorieDTO, Stories } from "../schema/StorieSchema";
+import { StorieDTO, Stories, WatchedDTO } from "../schema/StorieSchema";
 
 export const addStorie = async ({
   post_image,
@@ -129,6 +129,7 @@ export const getYoutubeTitle = async ({
 
 export const getStoriesByProfileID = async ({
   profileID,
+  userID,
 }: GetProfileStoriesData) => {
   const { data: stories, error } = await supabase
     .from("stories")
@@ -141,7 +142,42 @@ export const getStoriesByProfileID = async ({
     });
   }
 
+  const { data: watched, error: watchedError } = await supabase
+    .from("watched")
+    .select("watched")
+    .eq("user_id", profileID)
+    .eq("current_id", userID);
+
+  if (watchedError) {
+    throw new CustomError({
+      message: watchedError.message,
+    });
+  }
+
   const parsed = Stories.parse(stories);
 
-  return parsed;
+  return { parsed, watched: watched[0] };
+};
+
+export const addStorieToWatched = async (watched: WatchedDTO) => {
+  const { data: isWatched } = await supabase
+    .from("watched")
+    .select("*")
+    .eq("user_id", watched.user_id)
+    .eq("current_id", watched.current_id);
+
+  if (isWatched && isWatched.length > 0) return;
+
+  const { data, error } = await supabase
+    .from("watched")
+    .insert([watched])
+    .select();
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return data;
 };

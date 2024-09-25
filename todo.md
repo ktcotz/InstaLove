@@ -13,7 +13,6 @@ Stories
 - Inside wrapper in storie ?
 
 - UI&UX.
-- Jeżeli nie obejrzany to gradient niebiesko różowy, jeżeli tak to szaro ciemny.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 

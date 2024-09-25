@@ -3,17 +3,22 @@ import { Button, Modal } from "../../../ui";
 import { ModalStories } from "../../stories/modal/ModalStories";
 import { useGetProfileStories } from "../../stories/queries/useGetProfileStories";
 import { Profile } from "../schema/ProfilesSchema";
+import { useMediaQuery } from "usehooks-ts";
+import { useUser } from "../../authentication/queries/useUser";
 
 type StorieAvatarProps = {
   size: 176 | 40;
   profile: Profile;
-  
 };
 
 export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
-  const { data } = useGetProfileStories({
+  const { user } = useUser();
+  const { data, watched } = useGetProfileStories({
     profileID: profile.user_id,
+    userID: user?.id,
   });
+
+  const isLaptop = useMediaQuery("(min-width:1024px)");
   const { t } = useTranslation();
 
   const avatarSizes: Record<typeof size, string> = {
@@ -22,12 +27,16 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
   };
 
   const hasStorie = data && data.length > 0;
+  const isWatched = watched && watched.watched;
 
   if (hasStorie) {
     return (
       <Modal>
         <Modal.Open>
-          <Button modifier="avatar" aria-label={t("avatar.storie")}>
+          <Button
+            modifier={isWatched ? "watched" : "avatar"}
+            aria-label={t("avatar.storie")}
+          >
             <div className="p-1 bg-white dark:bg-stone-950 rounded-full">
               <img
                 src={profile?.avatar_url}
@@ -39,8 +48,12 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
             </div>
           </Button>
         </Modal.Open>
-        <Modal.Content>
-          <ModalStories />
+        <Modal.Content
+          parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
+            !isLaptop && "relative w-full h-full md:max-w-[800px]  mx-auto"
+          }`}
+        >
+          <ModalStories clickedID={profile.user_name} />
         </Modal.Content>
       </Modal>
     );

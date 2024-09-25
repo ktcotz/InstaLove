@@ -9,6 +9,12 @@ export const StorieDTOSchema = z.object({
   music: z.string().default(""),
 });
 
+export const WatchedDTOSchema = z.object({
+  user_id: z.string(),
+  watched: z.boolean(),
+  current_id: z.string(),
+});
+
 export const StorieSchema = z.object({
   post_url: z.string().optional().nullable(),
   video_url: z.string().optional().nullable(),
@@ -31,6 +37,7 @@ export const StorieSupabaseSchema = z.intersection(
 
 export const Stories = z.array(StorieSupabaseSchema);
 
+export type WatchedDTO = z.infer<typeof WatchedDTOSchema>;
 export type StorieDTO = z.infer<typeof StorieDTOSchema>;
 export type Storie = z.infer<typeof StorieSchema>;
 export type Stories = z.infer<typeof Stories>;

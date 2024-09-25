@@ -20,7 +20,9 @@ type ButtonType =
   | "mark"
   | "avatar"
   | "hover"
-  | "notification";
+  | "notification"
+  | "watched"
+  | "watched-storie";
 
 type ButtonProps = {
   children: ReactNode;
@@ -43,6 +45,8 @@ export const Button = forwardRef<
       "relative flex items-center gap-4 p-3 hover:bg-stone-200 transition group w-full dark:text-stone-50 hover:dark:text-stone-950",
     storie:
       "w-14 h-14 rounded-full flex items-center justify-center overflow-hidden h-full w-fit bg-gradient-to-r from-pink-400 to-blue-400 p-[2px]",
+    ["watched-storie"]:
+      "w-14 h-14 rounded-full flex items-center justify-center overflow-hidden h-full w-fit bg-gradient-to-r from-stone-300 to-stone-300 dark:from-stone-700 dark:to-stone-700 p-[2px]",
     close: "group dark:text-stone-50",
     link: "text-blue-600 hover:text-blue-700 transition text-sm font-bold dark:text-blue-400 hover:dark:text-blue-500",
     ["add-user"]:
@@ -59,6 +63,8 @@ export const Button = forwardRef<
     mark: "text-left p-3",
     hover: "flex flex-col",
     notification: "flex items-center gap-3",
+    watched:
+      "rounded-full  p-[2px] flex items-center justify-center h-full w-fit bg-gradient-to-r dark:from-stone-700 dark:to-stone-700 from-stone-300 to-stone-300",
     avatar:
       "rounded-full  p-[2px] flex items-center justify-center h-full w-fit bg-gradient-to-r from-pink-400 to-blue-400",
   };

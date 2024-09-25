@@ -19,7 +19,7 @@ export const AddStorie = () => {
           </div>
         </Button>
       </Modal.Open>
-      <Modal.Content>
+      <Modal.Content parentClass="mx-auto max-w-xl sm:max-w-5xl">
         <CreatePost type="storie" />
       </Modal.Content>
     </Modal>

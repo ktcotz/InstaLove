@@ -11,6 +11,8 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useEventListener } from "usehooks-ts";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { StoriesMarks } from "../StoriesMarks";
+import { useUser } from "../../authentication/queries/useUser";
+import { useAddWatched } from "../mutations/useAddWatched";
 
 type ModalStorieProps = {
   active?: boolean;
@@ -31,12 +33,14 @@ export const ModalStorie = ({
   timer,
   handleChangePlaying,
 }: ModalStorieProps & Storie & { id: number }) => {
+  const { user: current } = useUser();
   const ref = useRef(document.body);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
   const [played, setPlayed] = useState(false);
   const { user } = useUserByID(user_id);
   const { title, isLoading } = useGetYoutubeTitle(music);
+  const { addWatchedStorie } = useAddWatched();
 
   const handlePlayPause = () => {
     const toggled = !played;
@@ -74,6 +78,16 @@ export const ModalStorie = ({
     },
     ref
   );
+
+  useEffect(() => {
+    if (!current || !active) return;
+
+    addWatchedStorie({
+      current_id: current.id,
+      user_id: user_id,
+      watched: true,
+    });
+  }, [current, user_id, addWatchedStorie, active]);
 
   return (
     <div
