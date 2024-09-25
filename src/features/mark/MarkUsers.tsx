@@ -17,7 +17,6 @@ export const MarkUsers = () => {
   const handleChoosenUser = (mark: MarkDTO) => {
     const newMark = {
       ...mark,
-      id: Math.random(),
     };
 
     addMark(newMark);

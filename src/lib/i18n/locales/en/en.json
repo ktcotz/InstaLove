@@ -72,7 +72,8 @@
     "commentLike": "liked your comment",
     "commentReply": "replied to your comment",
     "bookmark": "added your post to favorites",
-    "postMark": "tagged you in his post"
+    "postMark": "tagged you in his post",
+    "storieMark": "tagged you in his storie"
   },
   "search": {
     "delete": "Delete search user",

@@ -98,15 +98,29 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
           music,
         },
         {
-          onSuccess: (post) => {
-            const mappedMarks = marks.map((mark) => {
-              return {
-                x: mark.x,
-                y: mark.y,
-                name: mark.name,
-                post_id: post![0].id,
-                user_id: user.id,
-              };
+          onSuccess: async (post) => {
+            const mappedMarks = await Promise.all(
+              marks.map(async (mark) => {
+                const profile = await getProfile({ user_name: mark.name });
+
+                return {
+                  ...mark,
+                  mark_id: profile.user_id,
+                  user_id: user.id,
+                  post_id: post![0].id,
+                };
+              })
+            );
+
+            mappedMarks.forEach((mark) => {
+              if (mark.mark_id === user.id) return;
+              notify({
+                type: "storie_mark",
+                status: "unread",
+                post_id: null,
+                by_user: user.id,
+                user_id: mark.mark_id,
+              });
             });
 
             mutate(mappedMarks);

@@ -72,7 +72,8 @@
     "commentLike": "polubił/a twój komentarz",
     "commentReply": "odpowiedział/a na twój komentarz",
     "bookmark": "dodał/a twój post do ulubionych",
-    "postMark": "oznaczył/a Cię w swoim poście"
+    "postMark": "oznaczył/a Cię w swoim poście",
+    "storieMark": "oznaczył/a Cię w swoim storie"
   },
   "search": {
     "delete": "Usuń wyszukiwanego użytkownika",

@@ -13,6 +13,7 @@ export const NotificationSchema = z.object({
     "comment_reply",
     "mark",
     "post_mark",
+    "storie_mark",
   ]),
   post_id: z.number().nullable(),
 });

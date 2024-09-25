@@ -10,7 +10,6 @@ PROCES :
 
 Stories
 
-- Powiadomienia na stories.
 - Inside wrapper in storie ?
 
 - UI&UX.
