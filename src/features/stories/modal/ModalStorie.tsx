@@ -10,6 +10,7 @@ import { GoMute, GoUnmute } from "react-icons/go";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useEventListener } from "usehooks-ts";
 import ProgressBar from "@ramonak/react-progress-bar";
+import { StoriesMarks } from "../StoriesMarks";
 
 type ModalStorieProps = {
   active?: boolean;
@@ -19,6 +20,7 @@ type ModalStorieProps = {
 };
 
 export const ModalStorie = ({
+  id,
   active,
   mobile,
   video_url,
@@ -28,7 +30,7 @@ export const ModalStorie = ({
   created_at,
   timer,
   handleChangePlaying,
-}: ModalStorieProps & Storie) => {
+}: ModalStorieProps & Storie & { id: number }) => {
   const ref = useRef(document.body);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
@@ -84,6 +86,7 @@ export const ModalStorie = ({
     >
       {active || mobile ? (
         <div className="relative">
+          {post_url && <StoriesMarks user_id={user_id} post_id={id} />}
           <div className="z-50 relative top-0 left-0 w-full p-4 flex flex-col gap-3">
             <ProgressBar
               completed={timer}

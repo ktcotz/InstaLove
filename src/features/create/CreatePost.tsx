@@ -93,7 +93,23 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
           type: file.type.startsWith("video") ? "video" : "post",
           music,
         },
-        { onSuccess: () => close() }
+        {
+          onSuccess: (post) => {
+            const mappedMarks = marks.map((mark) => {
+              return {
+                x: mark.x,
+                y: mark.y,
+                name: mark.name,
+                post_id: post![0].id,
+                user_id: user.id,
+              };
+            });
+
+            mutate(mappedMarks);
+            resetMarks();
+            close();
+          },
+        }
       );
     }
 

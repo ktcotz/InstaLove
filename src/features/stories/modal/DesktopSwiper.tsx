@@ -28,17 +28,12 @@ export const DesktopSwiper = ({
     <Swiper
       className="modal-stories"
       onSwiper={setSwiper}
-      slidesPerView={3}
+      slidesPerView={stories!.length <= 3 ? stories!.length : 3}
       centeredSlides={true}
       initialSlide={initialSlide}
       slideToClickedSlide={true}
       autoHeight={true}
       keyboard={{ enabled: true }}
-      breakpoints={{
-        1300: {
-          slidesPerView: 4,
-        },
-      }}
       onSlideChange={(ev) => {
         changeSlide(ev.clickedIndex);
         resetTimer();
