@@ -38,7 +38,12 @@ export const MarkUsers = () => {
         setChoosenUser("");
 
         if (e.target === ref.current) {
-          setPosition({ x, y });
+          const { width, height } = ref.current.getBoundingClientRect();
+
+          setPosition({
+            x: Math.ceil((x / width) * 100),
+            y: Math.ceil((y / height) * 100),
+          });
         }
       }}
       ref={ref}

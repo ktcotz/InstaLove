@@ -115,7 +115,8 @@
   "mark": {
     "remove": "Remove mark",
     "removeAll": "Remove all marks",
-    "search": "Search for user"
+    "search": "Search for user",
+    "marks": "marks"
   },
   "avatar": {
     "storie": "Open stories",

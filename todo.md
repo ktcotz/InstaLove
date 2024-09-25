@@ -10,6 +10,9 @@ PROCES :
 
 Stories
 
+- Powiadomienia na stories.
+- Inside wrapper in storie ?
+
 - UI&UX.
 - Jeżeli nie obejrzany to gradient niebiesko różowy, jeżeli tak to szaro ciemny.
 

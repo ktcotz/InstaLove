@@ -84,9 +84,9 @@ export const ModalStorie = ({
         (active || mobile) && "h-[700px]"
       } w-full relative transition-all ease-linear duration-700 bg-no-repeat bg-cover bg-center`}
     >
+      {post_url && active && <StoriesMarks user_id={user_id} post_id={id} />}
       {active || mobile ? (
         <div className="relative">
-          {post_url && <StoriesMarks user_id={user_id} post_id={id} />}
           <div className="z-50 relative top-0 left-0 w-full p-4 flex flex-col gap-3">
             <ProgressBar
               completed={timer}

@@ -115,7 +115,8 @@
   "mark": {
     "remove": "Usuń oznaczenie",
     "removeAll": "Usuń wszystkie oznaczenia",
-    "search": "Wyszukaj użytkownika"
+    "search": "Wyszukaj użytkownika",
+    "marks": "oznaczenia"
   },
   "avatar": {
     "storie": "Otwórz stories",
