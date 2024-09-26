@@ -13,6 +13,7 @@ import ProgressBar from "@ramonak/react-progress-bar";
 import { StoriesMarks } from "../StoriesMarks";
 import { useUser } from "../../authentication/queries/useUser";
 import { useAddWatched } from "../mutations/useAddWatched";
+import { NestedProgressBar } from "./NestedProgressbar";
 
 type ModalStorieProps = {
   active?: boolean;
@@ -20,6 +21,8 @@ type ModalStorieProps = {
   handleChangePlaying: () => void;
   timer: number;
   nested?: boolean;
+  nestedStories?: number;
+  nestedStorie?: number;
 };
 
 export const ModalStorie = ({
@@ -34,6 +37,8 @@ export const ModalStorie = ({
   timer,
   handleChangePlaying,
   nested = false,
+  nestedStories,
+  nestedStorie,
 }: ModalStorieProps & Storie & { id: number }) => {
   const { user: current } = useUser();
   const ref = useRef(document.body);
@@ -104,15 +109,23 @@ export const ModalStorie = ({
       {active || mobile ? (
         <div className="relative">
           <div className="z-50 relative top-0 left-0 w-full p-4 flex flex-col gap-3">
-            <ProgressBar
-              completed={timer}
-              maxCompleted={25}
-              baseBgColor="#eee"
-              bgColor="#bbb"
-              customLabel=" "
-              height="4px"
-              transitionTimingFunction="linear"
-            />
+            {!nested || !nestedStories ? (
+              <ProgressBar
+                completed={timer}
+                maxCompleted={25}
+                baseBgColor="#eee"
+                bgColor="#bbb"
+                customLabel=" "
+                height="4px"
+                transitionTimingFunction="linear"
+              />
+            ) : (
+              <NestedProgressBar
+                nestedStorie={nestedStorie}
+                timer={timer}
+                nestedStories={nestedStories}
+              />
+            )}
             <div className="flex items-center gap-2">
               <img
                 src={user?.avatar_url}

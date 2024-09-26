@@ -38,6 +38,8 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
       swiper?.slideTo(slide);
       setInitialSlide(slide);
     }
+
+    setIsPlaying(true);
   };
 
   const setupNestedStories = (length: number) => {
@@ -95,6 +97,7 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
       handleSetNextSlide={handleSetNextSlide}
       timer={timer}
       resetTimer={() => setTimer(0)}
+      resetPlaying={() => setIsPlaying(true)}
     />
   ) : (
     <MobileSwiper

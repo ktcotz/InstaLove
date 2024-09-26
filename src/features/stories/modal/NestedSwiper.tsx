@@ -13,6 +13,7 @@ type NestedSwiperProps = {
   handleSetNextSlide: () => void;
   resetTimer: () => void;
   handleChangePlaying: () => void;
+  resetPlaying: () => void;
 };
 
 export const NestedSwiper = ({
@@ -23,6 +24,7 @@ export const NestedSwiper = ({
   handleSetNextSlide,
   resetTimer,
   handleChangePlaying,
+  resetPlaying,
 }: NestedSwiperProps) => {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [nestedStorie, setNestedStorie] = useState(0);
@@ -50,6 +52,7 @@ export const NestedSwiper = ({
       swiper?.slideTo(slide);
       setNestedStorie(slide);
     }
+    resetPlaying();
   };
 
   const handleNextSlide = useCallback(() => {
@@ -104,7 +107,9 @@ export const NestedSwiper = ({
             {...storie}
             timer={timer}
             nested={true}
+            nestedStories={nestedStories}
             active={id === nestedStorie}
+            nestedStorie={nestedStorie}
             handleChangePlaying={handleChangePlaying}
           />
         </SwiperSlide>
