@@ -54,7 +54,7 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
   const isObserve = observation && observation.length > 0;
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 p-2">
       <img
         src={user.avatar_url}
         alt={user.user_name}
@@ -72,7 +72,7 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
       </div>
       {currentUser?.id === user?.user_id ? null : (
         <div className="ml-auto">
-          <Button modifier="submit" onClick={handleObserve}>
+          <Button modifier="follow" onClick={handleObserve}>
             {isObserve ? t("profile.unobserver") : t("profile.observe")}
           </Button>
         </div>

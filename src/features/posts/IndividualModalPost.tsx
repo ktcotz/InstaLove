@@ -49,7 +49,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
       <div
         className={`grid ${
           "video_url" in post ? "grid-rows-5" : "grid-rows-3"
-        }  bg-stone-50 dark:bg-stone-950 rounded-md shadow-lg sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 h-[800px] max-h-[800px] mt-3`}
+        }  bg-stone-50 dark:bg-stone-950 rounded-md shadow-lg sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 h-[700px] max-h-[800px] mt-3`}
       >
         <div
           style={
@@ -88,7 +88,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
 
           <>
             <div
-              className={`flex flex-col gap-6 text-stone-900 h-full max-h-[600px] overflow-y-scroll p-4 pb-20`}
+              className={`flex flex-col gap-6 text-stone-900 h-full max-h-[600px] overflow-y-scroll p-4 pb-40 sm:pb-36`}
             >
               {post.description && (
                 <Comment

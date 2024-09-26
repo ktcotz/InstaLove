@@ -12,6 +12,8 @@ Features POSTS.
 
 MODAL CONTENTS.
 
+MODAL ZAMYKANIE MODALA W MODALU.
+
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
 - Home i wszystkie podkomponenty.

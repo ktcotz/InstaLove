@@ -22,7 +22,8 @@ type ButtonType =
   | "hover"
   | "notification"
   | "watched"
-  | "watched-storie";
+  | "watched-storie"
+  | "follow";
 
 type ButtonProps = {
   children: ReactNode;
@@ -38,6 +39,8 @@ export const Button = forwardRef<
   const modifierObject: Record<ButtonType, string> = {
     primary:
       "w-full flex items-center justify-center bg-red-600 rounded-md bg-secondary text-slate-50 py-3 hover:bg-red-500 transition md:px-8 focus:outline-none focus:ring focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-primary",
+    follow:
+      "flex items-center justify-center py-1.5 px-3 sm:py-3 bg-blue-600 border rounded-md text-stone-50 transition-all hover:bg-stone-100 hover:text-blue-700 hover:border-stone-300 sm:px-4",
     submit:
       "flex items-center justify-center py-3 bg-blue-600 border rounded-md text-stone-50 transition-all hover:bg-stone-100 hover:text-blue-700 hover:border-stone-300 px-4",
     text: "text-stone-600 flex items-center justify-center gap-2 hover:text-blue-600 transition dark:text-stone-200 hover:dark:text-blue-500",
