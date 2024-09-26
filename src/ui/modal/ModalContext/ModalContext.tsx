@@ -1,9 +1,9 @@
 import { createContext, ReactNode, useState } from "react";
 
 type ModalContextState = {
-  isOpen: boolean;
-  open: () => void;
+  open: (openClass: string) => void;
   close: () => void;
+  opened: string[];
 };
 
 export const ModalContext = createContext<ModalContextState | null>(null);
@@ -15,19 +15,27 @@ type ModalContextProviderProps = {
 export const ModalContextProvider = ({
   children,
 }: ModalContextProviderProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const open = () => {
+  const [opened, setOpened] = useState<string[]>([]);
+
+  const open = (openClass: string) => {
     document.documentElement.classList.add("no-scroll");
-    setIsOpen(true);
+    const newOpened = [...opened, openClass];
+
+    setOpened(newOpened);
   };
 
   const close = () => {
-    document.documentElement.classList.remove("no-scroll");
-    setIsOpen(false);
+    const newOpened = opened.slice(0, -1);
+
+    if (newOpened.length === 0) {
+      document.documentElement.classList.remove("no-scroll");
+    }
+
+    setOpened(newOpened);
   };
 
   return (
-    <ModalContext.Provider value={{ isOpen, open, close }}>
+    <ModalContext.Provider value={{ open, close, opened }}>
       {children}
     </ModalContext.Provider>
   );

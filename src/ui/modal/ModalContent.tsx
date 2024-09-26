@@ -7,10 +7,15 @@ import { useEventListener, useOnClickOutside } from "usehooks-ts";
 type ModalContentProps = {
   children: ReactNode;
   parentClass: string;
+  manageClass: string;
 };
 
-export const ModalContent = ({ children, parentClass }: ModalContentProps) => {
-  const { isOpen, close } = useModal();
+export const ModalContent = ({
+  children,
+  parentClass,
+  manageClass,
+}: ModalContentProps) => {
+  const { close, opened } = useModal();
   const ref = useRef<HTMLDivElement>(null);
 
   useEventListener("keydown", (ev) => {
@@ -21,13 +26,15 @@ export const ModalContent = ({ children, parentClass }: ModalContentProps) => {
 
   useOnClickOutside(ref, close);
 
-  if (!isOpen) return null;
+  if (opened.length === 0) return null;
+
+  if (!opened.includes(manageClass)) return;
 
   return (
     <ModalOverlay>
       <Modal.Close />
 
-      <div className="min-h-screen">
+      <div>
         <div ref={ref} className={parentClass}>
           {children}
         </div>

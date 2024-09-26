@@ -33,7 +33,7 @@ export const Reels = () => {
             <Post {...reel} />
           </Button>
         </Modal.Open>
-        <Modal.Content>
+        <Modal.Content parentClass="mx-auto max-w-6xl">
           <IndividualModalPost post={reel} />
         </Modal.Content>
       </Modal>

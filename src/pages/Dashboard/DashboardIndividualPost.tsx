@@ -7,7 +7,7 @@ export const DashboardIndividualPost = () => {
   if (!postID || !profile) return;
 
   return (
-    <div className="px-4">
+    <div className="mx-auto max-w-6xl p-4">
       <UserPost postID={postID} profile={profile} />
     </div>
   );

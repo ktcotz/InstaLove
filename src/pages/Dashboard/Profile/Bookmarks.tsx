@@ -40,7 +40,7 @@ export const Bookmarks = () => {
             <Post {...renderBookmark} />
           </Button>
         </Modal.Open>
-        <Modal.Content>
+        <Modal.Content parentClass="mx-auto max-w-6xl">
           <IndividualModalPost
             post={bookmark.post_id ? bookmark.post_id : bookmark.reel_id}
           />

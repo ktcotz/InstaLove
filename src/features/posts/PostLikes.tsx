@@ -46,16 +46,18 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
         {count > 1 && (
           <p className="flex gap-1 text-xs">
             <span className="dark:text-stone-300">i</span>
-            <Modal>
-              <Modal.Open>
-                <Button modifier="text">
-                  {count - 1} {t("posts.likesOthers")}
-                </Button>
-              </Modal.Open>
-              <Modal.Content parentClass="mx-auto max-w-lg mt-14">
-                <Likes likes={likes} />
-              </Modal.Content>
-            </Modal>
+
+            <Modal.Open openClass="post-likes">
+              <Button modifier="text">
+                {count - 1} {t("posts.likesOthers")}
+              </Button>
+            </Modal.Open>
+            <Modal.Content
+              manageClass="post-likes"
+              parentClass="mx-auto max-w-lg mt-14 z-[60]"
+            >
+              <Likes likes={likes} />
+            </Modal.Content>
           </p>
         )}
       </div>

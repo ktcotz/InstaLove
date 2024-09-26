@@ -129,16 +129,19 @@ export const Comment = ({
         <div className="col-start-1 -col-end-1 text-xs text-stone-700 dark:text-stone-100 flex items-center gap-3">
           <p>{formatedDate}</p>
           {!pinned && count && likes && count > 0 ? (
-            <Modal>
-              <Modal.Open>
+            <div>
+              <Modal.Open openClass="comments-like">
                 <Button modifier="text">
                   {count} {t("posts.commentsLike")}
                 </Button>
               </Modal.Open>
-              <Modal.Content parentClass="mx-auto max-w-lg mt-14">
+              <Modal.Content
+                manageClass="comments-like"
+                parentClass="mx-auto max-w-lg mt-14"
+              >
                 <Likes likes={likes} />
               </Modal.Content>
-            </Modal>
+            </div>
           ) : null}
           {current?.id === user.user_id ? null : (
             <Button

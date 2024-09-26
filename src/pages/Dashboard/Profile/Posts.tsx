@@ -32,12 +32,12 @@ export const Posts = () => {
   return posts?.data.map((post) => {
     return (
       <Modal key={post.id}>
-        <Modal.Open>
+        <Modal.Open openClass="post">
           <Button modifier="close">
             <Post {...post} />
           </Button>
         </Modal.Open>
-        <Modal.Content parentClass="mx-auto max-w-6xl">
+        <Modal.Content manageClass="post" parentClass="mx-auto max-w-6xl">
           <IndividualModalPost post={post} />
         </Modal.Content>
       </Modal>

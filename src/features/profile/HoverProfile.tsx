@@ -37,8 +37,10 @@ export const HoverProfile = ({
     showPosts
   );
 
-  const { observations } = useGetObservesByUser({ user_id: user?.user_id });
-  const { observations: userObservations } = useGetObservesOnUser({
+  const { observations: userObservations } = useGetObservesByUser({
+    user_id: user?.user_id,
+  });
+  const { observations } = useGetObservesOnUser({
     user_id: user?.user_id,
   });
 
@@ -103,7 +105,7 @@ export const HoverProfile = ({
               {user.user_name}
             </CustomLink>
             <p className="text-sm text-stone-500 dark:text-stone-200">
-              Kamil Naskręt
+              {user.fullName}
             </p>
           </div>
         </div>
@@ -121,7 +123,7 @@ export const HoverProfile = ({
               <Modal.Open>
                 <Button modifier="hover">
                   <p className="font-semibold dark:text-stone-50">
-                    {observations.length ?? 0}
+                    {userObservations.length ?? 0}
                   </p>
                   <h2 className="text-sm text-stone-600 dark:text-stone-200">
                     {t("profile.observers")}
@@ -138,7 +140,7 @@ export const HoverProfile = ({
               <Modal.Open>
                 <Button modifier="hover">
                   <p className="font-semibold dark:text-stone-50">
-                    {userObservations.length ?? 0}
+                    {observations.length ?? 0}
                   </p>
                   <h2 className="text-sm text-stone-600 dark:text-stone-200">
                     {t("profile.byobservers")}

@@ -126,13 +126,16 @@ export const DashboardNavigationItem = ({
   return (
     <li>
       {openComponent && (
-        <Modal>
+        <>
           {title === "navigation.create" && (
             <>
-              <Modal.Content>
+              <Modal.Content
+                manageClass="create"
+                parentClass="mx-auto max-w-xl sm:max-w-5xl"
+              >
                 <CreatePost type="normal" />
               </Modal.Content>
-              <Modal.Open>
+              <Modal.Open openClass="create">
                 <Button
                   modifier="navigation"
                   onClick={() => toggleOpen(openComponent)}
@@ -181,7 +184,7 @@ export const DashboardNavigationItem = ({
               )}
             </Button>
           )}
-        </Modal>
+        </>
       )}
     </li>
   );
