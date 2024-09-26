@@ -26,7 +26,8 @@ export const ModalContent = ({ children, parentClass }: ModalContentProps) => {
   return (
     <ModalOverlay>
       <Modal.Close />
-      <div className="py-0 md:py-6 grow mt-14">
+
+      <div className="min-h-screen">
         <div ref={ref} className={parentClass}>
           {children}
         </div>

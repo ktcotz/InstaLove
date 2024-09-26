@@ -25,7 +25,7 @@ export const EditProfileType = ({ type, user_name }: EditProfileTypeProps) => {
       <h2 className="text-xl font-semibold mb-6 dark:text-stone-50">
         {t("profile.type")}
       </h2>
-      <div className="relative rounded-sm border bg-stone-200 text-stone-950">
+      <div className="relative rounded-sm border bg-stone-200 text-stone-950 dark:text-stone-50 dark:bg-stone-950">
         <FaRegUser
           className="absolute left-2 top-1/2 -translate-y-1/2 text-xl"
           aria-label={t("profile.type")}

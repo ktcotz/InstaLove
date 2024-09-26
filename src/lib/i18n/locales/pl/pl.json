@@ -171,5 +171,19 @@
   "stories": {
     "add": "Dodaj storie",
     "open": "Otwórz storie"
+  },
+  "posts": {
+    "likes": "Lubią to",
+    "likesTitle": "Polubienia",
+    "likesOthers": "innych użytkowników",
+    "like": "Polub",
+    "unlike": "Przestań lubić",
+    "bookmark": "Zapisz do ulubionych",
+    "unbookmark": "Usuń z ulubionych",
+    "commentsLike": "polubienia",
+    "commentReply": "Odpowiedz",
+    "showComments": "Wyświetl odpowiedzi",
+    "hideReplies": "Ukryj odpowiedzi",
+    "moreComments": "Pobierz więcej komentarzy"
   }
 }

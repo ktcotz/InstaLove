@@ -37,7 +37,7 @@ export const Posts = () => {
             <Post {...post} />
           </Button>
         </Modal.Open>
-        <Modal.Content>
+        <Modal.Content parentClass="mx-auto max-w-6xl">
           <IndividualModalPost post={post} />
         </Modal.Content>
       </Modal>

@@ -1,5 +1,5 @@
 import { Button } from "../../ui/Button";
-import { FaRegHeart, FaRegBookmark, FaHeart } from "react-icons/fa";
+import { FaRegHeart, FaRegBookmark, FaHeart, FaBookmark } from "react-icons/fa";
 import { AddComment } from "./AddComment";
 import { Post, Reel } from "./schema/PostsSchema";
 import { useLike } from "./mutations/useLike";
@@ -9,6 +9,7 @@ import { useUser } from "../authentication/queries/useUser";
 import { useBookmark } from "./mutations/useBookmark";
 import { useGetBookmark } from "./queries/useGetBookmark";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
+import { useTranslation } from "react-i18next";
 
 type PostActionsProps = {
   user_id: string;
@@ -16,6 +17,7 @@ type PostActionsProps = {
 };
 
 export const PostActions = ({ user_id, post }: PostActionsProps) => {
+  const { t } = useTranslation();
   const { user: current } = useUser();
   const { like } = useLike({ post_id: post.id, user_id });
   const { likes, count } = useGetPostLikes({ post_id: post.id, user_id });
@@ -82,9 +84,17 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
   };
 
   return (
-    <div className="absolute bottom-0 left-0 w-full p-4 shadow-lg border-t border-stone-300 bg-stone-100">
+    <div className="absolute bottom-0 left-0 w-full p-4 shadow-lg border-t border-stone-300 bg-stone-100 dark:bg-stone-950 dark:border-stone-50">
       <div className="flex items-center gap-6 mb-3 text-xs">
-        <Button aria-label="Like" modifier="close" onClick={handleLike}>
+        <Button
+          aria-label={
+            isAlreadyLike && isAlreadyLike > 0
+              ? t("posts.unlike")
+              : t("posts.like")
+          }
+          modifier="close"
+          onClick={handleLike}
+        >
           {isAlreadyLike && isAlreadyLike > 0 ? (
             <FaHeart className="text-xl fill-red-600" />
           ) : (
@@ -93,12 +103,16 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
         </Button>
         <div className="ml-auto">
           <Button
-            aria-label="Bookmark"
+            aria-label={
+              bookmarks!.length > 0
+                ? t("posts.bookmark")
+                : t("posts.unbookmark")
+            }
             modifier="close"
             onClick={handleBookmark}
           >
             {bookmarks!.length > 0 ? (
-              <FaRegBookmark className="text-xl fill-yellow-500" />
+              <FaBookmark className="text-xl fill-stone-950 dark:fill-stone-50" />
             ) : (
               <FaRegBookmark className="text-xl" />
             )}
@@ -108,7 +122,6 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
       {post.disableLike || !likes || !count ? null : (
         <PostLikes likes={likes} count={count} />
       )}
-      <p className="text-xs text-stone-700 mb-3">18 marca</p>
       {post.disableComment ? null : (
         <AddComment user_id={user_id} post_id={post.id} />
       )}

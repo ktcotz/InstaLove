@@ -10,7 +10,7 @@ export const LanguageSwitcher = () => {
   };
 
   return (
-    <div className="relative rounded-sm border bg-stone-200 text-stone-950">
+    <div className="relative rounded-sm border bg-stone-200 text-stone-950 dark:bg-stone-950 dark:text-stone-50">
       <MdOutlineTranslate
         className="absolute left-2 top-1/2 -translate-y-1/2 text-xl"
         aria-label={t("profile.changei18n")}

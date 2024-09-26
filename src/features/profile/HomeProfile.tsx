@@ -18,7 +18,7 @@ export const HomeProfile = () => {
           <Modal.Open>
             <Button modifier="all-profiles">{t("profile.seeAll")}</Button>
           </Modal.Open>
-          <Modal.Content parentClass="mx-auto max-w-lg">
+          <Modal.Content parentClass="mx-auto max-w-lg mt-14">
             <AllProposedProfiles />
           </Modal.Content>
         </Modal>

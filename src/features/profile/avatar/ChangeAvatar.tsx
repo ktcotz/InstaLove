@@ -36,8 +36,8 @@ export const ChangeAvatar = ({
 
   return (
     <div className="max-w-lg mx-auto">
-      <div className="bg-stone-100 rounded-md p-4 shadow-lg flex items-center justify-center flex-col gap-8">
-        <h2 className="text-xl font-semibold text-center border-b py-3 border-stone-300 self-stretch">
+      <div className="bg-stone-100 rounded-md p-4 shadow-lg flex items-center justify-center flex-col gap-8 dark:bg-stone-950">
+        <h2 className="text-xl font-semibold text-center border-b py-3 border-stone-300 dark:border-stone-50 self-stretch dark:text-stone-50">
           {t("avatar.change")}
         </h2>
         <img

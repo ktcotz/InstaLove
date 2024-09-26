@@ -171,5 +171,19 @@
   "stories": {
     "add": "Add storie",
     "open": "Open storie"
+  },
+  "posts": {
+    "likes": "Likes it",
+    "likesTitle": "Likes",
+    "likesOthers": "others users",
+    "like": "Like",
+    "unlike": "Unlike",
+    "bookmark": "Bookmark",
+    "unbookmark": "Delete from bookmarks",
+    "commentsLike": "likes",
+    "commentReply": "Reply",
+    "showComments": "Show replies",
+    "hideReplies": "Hide replies",
+        "moreComments": "Fetch more comments"
   }
 }

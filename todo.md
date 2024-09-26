@@ -8,12 +8,9 @@ DO ZROBIENIA :
 
 PROCES :
 
-Stories
+Features POSTS.
 
-- Przetestowanie działania
-- Wersja mobile
-
-- UI&UX.
+MODAL CONTENTS.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
@@ -26,5 +23,6 @@ Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 - Reels.
 - Create Post.
 - Profile, profile details, edit profile, switchers, home profile,proposed profiles, hover profiles.
+- Stories.
 
 NA SAMYM KOŃCU PO CAŁYM PROJEKCIE, WIADOMOŚCI.

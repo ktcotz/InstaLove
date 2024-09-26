@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
 import { Modal } from "../../ui/modal/Modal";
@@ -15,6 +16,7 @@ type PostLikesProps = {
 export const PostLikes = ({ likes, count }: PostLikesProps) => {
   const { user } = useUserByID(likes[0].user_id);
   const { hover, unhover, isHover } = useHover();
+  const { t } = useTranslation();
 
   if (!user) return null;
 
@@ -32,7 +34,7 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
       />
       <div className="flex items-center gap-2">
         <p className="text-xs">
-          <span className="mr-1">Lubią to</span>
+          <span className="mr-1 dark:text-stone-300">{t("posts.likes")}</span>
           <CustomLink
             to={`/dashboard/${user.user_name}`}
             modifier="post-user"
@@ -43,12 +45,14 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
         </p>
         {count > 1 && (
           <p className="flex gap-1 text-xs">
-            <span>i</span>
+            <span className="dark:text-stone-300">i</span>
             <Modal>
               <Modal.Open>
-                <Button modifier="text">{count - 1} innych użytkowników</Button>
+                <Button modifier="text">
+                  {count - 1} {t("posts.likesOthers")}
+                </Button>
               </Modal.Open>
-              <Modal.Content>
+              <Modal.Content parentClass="mx-auto max-w-lg mt-14">
                 <Likes likes={likes} />
               </Modal.Content>
             </Modal>

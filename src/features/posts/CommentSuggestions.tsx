@@ -12,7 +12,7 @@ export const CommentSuggestions = ({ query }: CommentSuggestionsProps) => {
   if (!users || users.length === 0) return null;
 
   return (
-    <div className="absolute top-0 left-0 -translate-y-full border border-stone-300 bg-stone-50 w-80 h-40 overflow-y-scroll">
+    <div className="absolute top-0 left-0 -translate-y-full border border-stone-300 bg-stone-50 dark:bg-stone-950 dark:border-stone-50 w-80 h-40 overflow-y-scroll">
       {users?.map((user) => (
         <SuggestionUser key={user.id} {...user} />
       ))}

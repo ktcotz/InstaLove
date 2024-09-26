@@ -4,13 +4,14 @@ import { useAddComment } from "./mutations/useAddComment";
 import { useState } from "react";
 import { Button } from "../../ui/Button";
 import { MdOutlineInsertEmoticon } from "react-icons/md";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
 import { usePostsContext } from "./context/usePostsContext";
 import { CommentSuggestions } from "./CommentSuggestions";
 import { suggestions } from "./helpers/suggestions";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { useUser } from "../authentication/queries/useUser";
+import { useTernaryDarkMode } from "usehooks-ts";
 
 type AddCommentProps = {
   user_id: string;
@@ -25,6 +26,8 @@ export const AddComment = ({
 }: AddCommentProps) => {
   const { getValues, handleSubmit, register, reset, setValue, watch } =
     usePostsContext();
+
+  const { isDarkMode } = useTernaryDarkMode();
 
   const comment = suggestions(watch("comment"));
   const { user: current } = useUser();
@@ -57,7 +60,7 @@ export const AddComment = ({
 
   return (
     <>
-      <div className="relative flex gap-2 bg-stone-50">
+      <div className="relative flex gap-2 bg-stone-50 dark:bg-stone-950">
         <Button
           modifier="close"
           onClick={() => setShowEmotes((prev) => !prev)}
@@ -70,6 +73,7 @@ export const AddComment = ({
             <EmojiPicker
               height={400}
               width={300}
+              theme={isDarkMode ? Theme.DARK : Theme.LIGHT}
               searchDisabled={true}
               skinTonesDisabled={true}
               onEmojiClick={(emoji) => {

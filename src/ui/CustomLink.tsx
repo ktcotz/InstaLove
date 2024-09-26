@@ -61,7 +61,7 @@ export const CustomLink = ({
     ["profile-details"]:
       "text-stone-950 py-4 px-2 sm:p-6 flex items-center justify-center gap-2 dark:text-stone-50",
     ["post-user"]:
-      "text-xs text-stone-900 hover:text-stone-950 transition font-semibold",
+      "text-xs text-stone-900 hover:text-stone-950 dark:text-stone-50 hover:dark:text-stone-100 transition font-semibold",
     ["post-avatar"]: "w-6 h-6 rounded-full",
     notification: "flex items-center gap-3",
     reel: "text-stone-50 transition hover:text-stone-100",

@@ -25,12 +25,16 @@ export const EditProfile = () => {
       <h1 className="text-xl text-stone-950 font-semibold mb-6 dark:text-stone-50">
         {t("profile.edit")}
       </h1>
-      <div className="bg-stone-200 rounded-lg p-4 max-w-xl flex flex-col sm:flex-row items-center gap-6 mb-6">
+      <div className="bg-stone-200 dark:bg-stone-950 border border-stone-300 rounded-lg p-4 max-w-xl flex flex-col sm:flex-row items-center gap-6 mb-6">
         <div className="flex items-center gap-4">
           <Avatar size={64} />
           <div className="flex flex-col gap-1">
-            <h2 className="font-semibold ">{current?.user_name}</h2>
-            <p className="text-sm text-stone-700">{current.fullName}</p>
+            <h2 className="font-semibold dark:text-stone-50">
+              {current?.user_name}
+            </h2>
+            <p className="text-sm text-stone-700 dark:text-stone-300">
+              {current.fullName}
+            </p>
           </div>
         </div>
       </div>

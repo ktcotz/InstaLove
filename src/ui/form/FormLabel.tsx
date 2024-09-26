@@ -13,7 +13,7 @@ export const FormLabel = ({
   return (
     <label
       htmlFor={id}
-      className="absolute left-2 top-1/2 -translate-y-1/2 px-2 text-sm text-stone-900 transition-all  peer-valid:top-3 peer-focus:top-3 peer-focus:rounded-sm peer-valid:text-xs peer-focus:text-xs "
+      className="absolute left-2 top-1/2 -translate-y-1/2 px-2 text-sm text-stone-900 dark:text-stone-50 transition-all  peer-valid:top-3 peer-focus:top-3 peer-focus:rounded-sm peer-valid:text-xs peer-focus:text-xs "
       {...rest}
     >
       {children}

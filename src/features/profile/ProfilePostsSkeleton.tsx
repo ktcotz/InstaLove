@@ -5,8 +5,8 @@ export const ProfilePostsSkeleton = () => {
 
   return Array.from({ length: MAX_EXPLORE_POSTS }, (_, i) => {
     return (
-      <div>
-        <div key={i}>
+      <div key={i}>
+        <div>
           <Skeleton className="w-full h-full" height={350} />
         </div>
       </div>

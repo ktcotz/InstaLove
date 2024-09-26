@@ -1,8 +1,8 @@
 import { ChangeEvent, useState } from "react";
 import { Button } from "./Button";
-import { useMediaQuery } from "usehooks-ts";
+import { useMediaQuery, useTernaryDarkMode } from "usehooks-ts";
 import { MdOutlineInsertEmoticon } from "react-icons/md";
-import EmojiPicker from "emoji-picker-react";
+import EmojiPicker, { Theme } from "emoji-picker-react";
 import { useTranslation } from "react-i18next";
 import { PostOptions } from "../features/create/types";
 
@@ -31,6 +31,7 @@ export const Textarea = ({
   const { t } = useTranslation();
   const [showEmotes, setShowEmotes] = useState(false);
   const isMobile = useMediaQuery(`(max-width:${MOBILE_VIEWPORT})`);
+  const { isDarkMode } = useTernaryDarkMode();
 
   return (
     <div className="relative">
@@ -58,6 +59,7 @@ export const Textarea = ({
           <EmojiPicker
             height={400}
             width={300}
+            theme={isDarkMode ? Theme.DARK : Theme.LIGHT}
             searchDisabled={true}
             skinTonesDisabled={true}
             onEmojiClick={({ emoji }) => {

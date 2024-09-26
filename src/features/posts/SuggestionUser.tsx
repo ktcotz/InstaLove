@@ -10,7 +10,7 @@ export const SuggestionUser = ({
   const { setValue, setFocus } = usePostsContext();
 
   return (
-    <div className="border-b border-stone-300">
+    <div className="border-b border-stone-300 dark:border-stone-50">
       <Button
         modifier="suggestion"
         onClick={() => {
@@ -26,8 +26,12 @@ export const SuggestionUser = ({
           className="rounded-full w-8 h-8"
         />
         <div className="text-left">
-          <h2 className="font-semibold text-sm">{user_name}</h2>
-          <p className="text-sm text-stone-600">{fullName}</p>
+          <h2 className="font-semibold text-sm dark:text-stone-50">
+            {user_name}
+          </h2>
+          <p className="text-sm text-stone-600 dark:text-stone-200">
+            {fullName}
+          </p>
         </div>
       </Button>
     </div>

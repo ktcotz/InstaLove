@@ -5,8 +5,7 @@ import { useTernaryDarkMode } from "usehooks-ts";
 
 export const ThemeSwitcher = () => {
   const { t } = useTranslation();
-  const { ternaryDarkMode, setTernaryDarkMode } =
-    useTernaryDarkMode();
+  const { ternaryDarkMode, setTernaryDarkMode } = useTernaryDarkMode();
 
   const handleChange = (ev: ChangeEvent<HTMLSelectElement>) => {
     const theme = ev.target.value;
@@ -17,7 +16,7 @@ export const ThemeSwitcher = () => {
   };
 
   return (
-    <div className="relative rounded-sm border bg-stone-200 text-stone-950">
+    <div className="relative rounded-sm border bg-stone-200 text-stone-950 dark:bg-stone-950 dark:text-stone-50">
       <FaAffiliatetheme
         className="absolute left-2 top-1/2 -translate-y-1/2 text-xl"
         aria-label={t("profile.changeTheme")}

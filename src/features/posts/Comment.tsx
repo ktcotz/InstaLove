@@ -15,6 +15,7 @@ import { useAddNotification } from "../notifications/mutations/useAddNotificatio
 import { usePostsContext } from "./context/usePostsContext";
 import { useGetNestedComments } from "./queries/useGetNestedComments";
 import { NestedComments } from "./NestedComments";
+import { useTranslation } from "react-i18next";
 
 type CommentProps = {
   comment: string;
@@ -37,6 +38,7 @@ export const Comment = ({
   parentComment,
   isTop = false,
 }: CommentProps) => {
+  const { t, i18n } = useTranslation();
   const { user: current } = useUser();
   const { user } = useUserByID(user_id);
   const { hover, unhover, isHover } = useHover();
@@ -50,7 +52,7 @@ export const Comment = ({
 
   const formatedDate = created_at
     ? formatDistanceToNow(new Date(created_at), {
-        locale: getDateFnsLocaleByActiveLanguage(navigator.language),
+        locale: getDateFnsLocaleByActiveLanguage(i18n.language),
         addSuffix: true,
       })
     : null;
@@ -119,17 +121,21 @@ export const Comment = ({
                 {linkProfile}
               </CustomLink>
             )}
-            <span>{comment.includes("@") ? rest : comment}</span>
+            <span className="dark:text-stone-300">
+              {comment.includes("@") ? rest : comment}
+            </span>
           </span>
         </p>
-        <div className="col-start-1 -col-end-1 text-xs text-stone-700 flex items-center gap-3">
+        <div className="col-start-1 -col-end-1 text-xs text-stone-700 dark:text-stone-100 flex items-center gap-3">
           <p>{formatedDate}</p>
           {!pinned && count && likes && count > 0 ? (
             <Modal>
               <Modal.Open>
-                <Button modifier="text">{count} polubienia</Button>
+                <Button modifier="text">
+                  {count} {t("posts.commentsLike")}
+                </Button>
               </Modal.Open>
-              <Modal.Content>
+              <Modal.Content parentClass="mx-auto max-w-lg mt-14">
                 <Likes likes={likes} />
               </Modal.Content>
             </Modal>
@@ -143,7 +149,7 @@ export const Comment = ({
                 setFocus("comment");
               }}
             >
-              Odpowiedz
+              {t("posts.commentReply")}
             </Button>
           )}
         </div>
