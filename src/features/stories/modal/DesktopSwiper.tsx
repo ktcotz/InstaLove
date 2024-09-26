@@ -15,6 +15,8 @@ type DesktopSwiperProps = {
   timer: number;
   resetTimer: () => void;
   fullStories: Stories;
+  setupNestedStories: (length: number) => void;
+  nestedStories: number;
 };
 
 export const DesktopSwiper = ({
@@ -26,6 +28,8 @@ export const DesktopSwiper = ({
   timer,
   resetTimer,
   fullStories,
+  setupNestedStories,
+  nestedStories,
 }: DesktopSwiperProps) => {
   return (
     <Swiper
@@ -51,7 +55,12 @@ export const DesktopSwiper = ({
         return (
           <SwiperSlide key={id} className={`${active ? "modal-active" : ""}`}>
             {nested.length >= 2 && active ? (
-              <NestedSwiper stories={nested} />
+              <NestedSwiper
+                stories={nested}
+                timer={timer}
+                setupNestedStories={setupNestedStories}
+                nestedStories={nestedStories}
+              />
             ) : (
               <ModalStorie
                 active={active}

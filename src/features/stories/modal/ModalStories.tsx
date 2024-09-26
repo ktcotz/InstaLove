@@ -15,6 +15,7 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
   const [swiper, setSwiper] = useState<Swiper | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [initialSlide, setInitialSlide] = useState(0);
+  const [nestedStories, setNestedStories] = useState(0);
   const [timer, setTimer] = useState(0);
   const isLaptop = useMediaQuery("(min-width:1024px)");
   const ref = useRef(document.body);
@@ -22,6 +23,8 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
   const filteredStories = stories?.filter((storie) => storie.inner_id === null);
 
   const handleSwiperSlide = (ev: KeyboardEvent) => {
+    if (nestedStories > 0) return;
+
     if (ev.key === "ArrowRight") {
       const slide =
         initialSlide === filteredStories!.length - 1
@@ -35,6 +38,10 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
       swiper?.slideTo(slide);
       setInitialSlide(slide);
     }
+  };
+
+  const setupNestedStories = (length: number) => {
+    setNestedStories(length);
   };
 
   const handleChangePlaying = () => {
@@ -75,9 +82,11 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
       changeSlide={(slide) => setInitialSlide(slide)}
       stories={sortedStories}
       fullStories={stories}
+      nestedStories={nestedStories}
       setSwiper={setSwiper}
       isPlaying={isPlaying}
       handleChangePlaying={handleChangePlaying}
+      setupNestedStories={setupNestedStories}
       timer={timer}
       resetTimer={() => setTimer(0)}
     />
