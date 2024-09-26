@@ -185,6 +185,8 @@
     "showComments": "Wyświetl odpowiedzi",
     "hideReplies": "Ukryj odpowiedzi",
     "moreComments": "Pobierz więcej komentarzy",
-    "comments": "Komentarze"
+    "comments": "Komentarze",
+    "likesCount": "Liczba polubień:",
+        "allComments": "Zobacz wszystkie komentarze:"
   }
 }

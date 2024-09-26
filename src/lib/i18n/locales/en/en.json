@@ -185,6 +185,8 @@
     "showComments": "Show replies",
     "hideReplies": "Hide replies",
     "moreComments": "Fetch more comments",
-    "comments": "Comments"
+    "comments": "Comments",
+    "likesCount": "Likes:",
+    "allComments": "See all comments:"
   }
 }

@@ -10,9 +10,7 @@ PROCES :
 
 Features POSTS.
 
-MODAL CONTENTS.
-
-MODAL ZAMYKANIE MODALA W MODALU.
+Usuwanie postów.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 

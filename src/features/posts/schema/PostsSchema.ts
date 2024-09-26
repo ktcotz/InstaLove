@@ -2,6 +2,7 @@ import { z } from "zod";
 
 export const PostSchema = z.object({
   id: z.number(),
+  created_at: z.string().optional(),
   post_url: z.string().optional(),
   disableComment: z.boolean(),
   disableLike: z.boolean(),
@@ -11,6 +12,7 @@ export const PostSchema = z.object({
 
 export const PostReelsSchema = z.object({
   id: z.number(),
+  created_at: z.string().optional(),
   video_url: z.string().optional(),
   disableComment: z.boolean(),
   disableLike: z.boolean(),

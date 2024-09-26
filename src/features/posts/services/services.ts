@@ -338,23 +338,13 @@ export const getNestedComments = async ({
 export const getAllResources = async () => {
   const { data: posts, error } = await supabase.from("posts").select("*");
 
-  const { data: reels, error: reelsError } = await supabase
-    .from("reels")
-    .select("*");
-
   if (error) {
     throw new CustomError({
       message: error.message,
     });
   }
 
-  if (reelsError) {
-    throw new CustomError({
-      message: reelsError.message,
-    });
-  }
-
-  const combined = [...posts, ...reels];
+  const combined = [...posts];
 
   if (combined.length === 0) return [];
 

@@ -54,7 +54,7 @@ export const PostLikes = ({ likes, count }: PostLikesProps) => {
             </Modal.Open>
             <Modal.Content
               manageClass="post-likes"
-              parentClass="mx-auto max-w-lg mt-14 z-[60]"
+              parentClass="mx-auto max-w-lg mt-14"
             >
               <Likes likes={likes} />
             </Modal.Content>

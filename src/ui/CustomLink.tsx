@@ -23,7 +23,8 @@ export type CustomLinkModifier =
   | "explore"
   | "mobile-notification"
   | "hover-name"
-  | "search";
+  | "search"
+  | "close";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -42,6 +43,7 @@ export const CustomLink = ({
   const base = "font-base";
 
   const modifiers: Record<CustomLinkModifier, string> = {
+    close: "group",
     primary:
       "rounded-sm flex items-center justify-center bg-blue-600 px-3 py-1 sm:px-4 sm:py-2 hover:bg-blue-700 transition text-stone-50 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-blue-600",
     logo: "inline-block",

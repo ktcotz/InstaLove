@@ -1,4 +1,4 @@
-import { IndividualModalPost } from "./IndividualModalPost";
+import { MainPost } from "./MainPost";
 import { useGetAllResources } from "./queries/useGetAllResources";
 
 export const MainScreenPosts = () => {
@@ -7,7 +7,7 @@ export const MainScreenPosts = () => {
   return (
     <div className="flex flex-col gap-8 ">
       {data?.map((item) => (
-        <IndividualModalPost post={item} />
+        <MainPost post={item} />
       ))}
     </div>
   );

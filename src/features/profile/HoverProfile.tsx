@@ -119,38 +119,40 @@ export const HoverProfile = ({
             </h2>
           </div>
           <div className="text-center p-2 2xl:p-4">
-            <Modal>
-              <Modal.Open>
-                <Button modifier="hover">
-                  <p className="font-semibold dark:text-stone-50">
-                    {userObservations.length ?? 0}
-                  </p>
-                  <h2 className="text-sm text-stone-600 dark:text-stone-200">
-                    {t("profile.observers")}
-                  </h2>
-                </Button>
-              </Modal.Open>
-              <Modal.Content parentClass="mx-auto max-w-lg mt-14">
-                <ObservesByUser user_id={user.user_id} />
-              </Modal.Content>
-            </Modal>
+            <Modal.Open openClass={`hover-${user_name}-user-observations`}>
+              <Button modifier="hover">
+                <p className="font-semibold dark:text-stone-50">
+                  {userObservations.length ?? 0}
+                </p>
+                <h2 className="text-sm text-stone-600 dark:text-stone-200">
+                  {t("profile.observers")}
+                </h2>
+              </Button>
+            </Modal.Open>
+            <Modal.Content
+              manageClass={`hover-${user_name}-user-observations`}
+              parentClass="mx-auto max-w-lg mt-14"
+            >
+              <ObservesByUser user_id={user.user_id} />
+            </Modal.Content>
           </div>
           <div className="text-center p-2 2xl:p-4">
-            <Modal>
-              <Modal.Open>
-                <Button modifier="hover">
-                  <p className="font-semibold dark:text-stone-50">
-                    {observations.length ?? 0}
-                  </p>
-                  <h2 className="text-sm text-stone-600 dark:text-stone-200">
-                    {t("profile.byobservers")}
-                  </h2>
-                </Button>
-              </Modal.Open>
-              <Modal.Content parentClass="mx-auto max-w-lg mt-14">
-                <ObservesOnUser user_id={user.user_id} />
-              </Modal.Content>
-            </Modal>
+            <Modal.Open openClass={`hover-${user_name}-observations`}>
+              <Button modifier="hover">
+                <p className="font-semibold dark:text-stone-50">
+                  {observations.length ?? 0}
+                </p>
+                <h2 className="text-sm text-stone-600 dark:text-stone-200">
+                  {t("profile.byobservers")}
+                </h2>
+              </Button>
+            </Modal.Open>
+            <Modal.Content
+              parentClass="mx-auto max-w-lg mt-14"
+              manageClass={`hover-${user_name}-observations`}
+            >
+              <ObservesOnUser user_id={user.user_id} />
+            </Modal.Content>
           </div>
         </div>
         {showPosts ? (
