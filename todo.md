@@ -10,13 +10,8 @@ PROCES :
 
 Stories
 
-- Inside wrapper in storie ?
-
-- Sprawdzenie czy wszystkie stories zostały obejrzane, dopiero wtedy setup jako obejrzane.
 - Przetestowanie działania
 - Wersja mobile
-
-- Do poprawy oglądanie stories, watched na dodaniu stories na false.
 
 - UI&UX.
 

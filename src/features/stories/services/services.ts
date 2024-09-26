@@ -162,7 +162,8 @@ export const addStorieToWatched = async (watched: WatchedDTO) => {
     .from("watched")
     .select("*")
     .eq("user_id", watched.user_id)
-    .eq("current_id", watched.current_id);
+    .eq("current_id", watched.current_id)
+    .eq("watched", true);
 
   if (isWatched && isWatched.length > 0) return;
 

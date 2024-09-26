@@ -33,7 +33,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
   const { mutate } = useAddMarks();
   const { marks, resetMarks } = useMarksContext();
   const { create } = useCreatePost();
-  const { createStorie } = useAddStorie();
+  const { createStorie,isCreatingStorie } = useAddStorie();
   const { user } = useUser();
   const [file, setFile] = useState<CreatePostFile>({
     drop: null,
@@ -207,6 +207,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
             showDescription={showDescription}
             addPost={addPost}
             type={type}
+            isCreatingStorie={isCreatingStorie}
           />
         </div>
         <div className="grid md:grid-cols-3">
