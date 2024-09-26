@@ -1,7 +1,7 @@
 import { Stories } from "../schema/StorieSchema";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { ModalStorie } from "./ModalStorie";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useEventListener } from "usehooks-ts";
 import { Swiper as SwiperType } from "swiper/types";
 
@@ -10,6 +10,9 @@ type NestedSwiperProps = {
   timer: number;
   setupNestedStories: (length: number) => void;
   nestedStories: number;
+  handleSetNextSlide: () => void;
+  resetTimer: () => void;
+  handleChangePlaying: () => void;
 };
 
 export const NestedSwiper = ({
@@ -17,6 +20,9 @@ export const NestedSwiper = ({
   timer,
   nestedStories,
   setupNestedStories,
+  handleSetNextSlide,
+  resetTimer,
+  handleChangePlaying,
 }: NestedSwiperProps) => {
   const [swiper, setSwiper] = useState<SwiperType | null>(null);
   const [nestedStorie, setNestedStorie] = useState(0);
@@ -46,6 +52,31 @@ export const NestedSwiper = ({
     }
   };
 
+  const handleNextSlide = useCallback(() => {
+    const slide =
+      nestedStorie === nestedStories - 1 ? nestedStories - 1 : nestedStorie + 1;
+    swiper?.slideTo(slide);
+    setNestedStorie(slide);
+  }, [nestedStorie, nestedStories, swiper]);
+
+  useEffect(() => {
+    if (timer === 25 && nestedStorie === nestedStories - 1) {
+      handleSetNextSlide();
+    }
+
+    if (timer === 25 && nestedStorie < nestedStories - 1) {
+      handleNextSlide();
+      resetTimer();
+    }
+  }, [
+    nestedStorie,
+    nestedStories,
+    timer,
+    handleSetNextSlide,
+    resetTimer,
+    handleNextSlide,
+  ]);
+
   useEffect(() => {
     setupNestedStories(stories.length);
 
@@ -57,16 +88,24 @@ export const NestedSwiper = ({
   useEventListener("keydown", handleChangeSlide, ref, { capture: true });
 
   return (
-    <Swiper nested={true} className="nested-stories " onSwiper={setSwiper}>
-      {stories.map((storie) => (
+    <Swiper
+      nested={true}
+      className="nested-stories "
+      onSwiper={setSwiper}
+      onSlideChange={(ev) => {
+        setNestedStorie(ev.activeIndex);
+        resetTimer();
+      }}
+    >
+      {stories.map((storie, id) => (
         <SwiperSlide>
           <ModalStorie
             key={storie.id}
             {...storie}
             timer={timer}
-            handleChangePlaying={() => {}}
             nested={true}
-            active={true}
+            active={id === nestedStorie}
+            handleChangePlaying={handleChangePlaying}
           />
         </SwiperSlide>
       ))}

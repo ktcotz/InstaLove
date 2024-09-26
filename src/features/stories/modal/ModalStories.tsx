@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { useEventListener, useInterval, useMediaQuery } from "usehooks-ts";
 import { DesktopSwiper } from "./DesktopSwiper";
 import { MobileSwiper } from "./MobileSwiper";
@@ -48,6 +48,15 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
     setIsPlaying((prev) => !prev);
   };
 
+  const handleSetNextSlide = useCallback(() => {
+    const slide =
+      initialSlide === filteredStories!.length - 1
+        ? filteredStories!.length - 1
+        : initialSlide + 1;
+    swiper?.slideTo(slide);
+    setInitialSlide(slide);
+  }, [filteredStories, swiper, initialSlide]);
+
   useEventListener("keydown", handleSwiperSlide, ref);
 
   useInterval(
@@ -58,15 +67,11 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
   );
 
   useEffect(() => {
+    if (nestedStories > 0) return;
     if (timer === 25) {
-      const slide =
-        initialSlide === filteredStories!.length - 1
-          ? filteredStories!.length - 1
-          : initialSlide + 1;
-      swiper?.slideTo(slide);
-      setInitialSlide(slide);
+      handleSetNextSlide();
     }
-  }, [timer, swiper, initialSlide, filteredStories]);
+  }, [timer, nestedStories, handleSetNextSlide]);
 
   if (isLoading) return <Loader />;
   if (!filteredStories || !stories) return null;
@@ -87,6 +92,7 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
       isPlaying={isPlaying}
       handleChangePlaying={handleChangePlaying}
       setupNestedStories={setupNestedStories}
+      handleSetNextSlide={handleSetNextSlide}
       timer={timer}
       resetTimer={() => setTimer(0)}
     />
