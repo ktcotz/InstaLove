@@ -12,6 +12,8 @@ Stories
 
 - Inside wrapper in storie ?
 
+- Zmiana slide na keyboard z uwzględnieniem nested stories.
+
 - UI&UX.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :

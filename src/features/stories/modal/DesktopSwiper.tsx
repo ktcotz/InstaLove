@@ -46,20 +46,20 @@ export const DesktopSwiper = ({
         const nested = fullStories.filter(
           (fullStorie) => fullStorie.user_id === storie.user_id
         );
+        const active = id === initialSlide;
 
         return (
-          <SwiperSlide
-            key={id}
-            className={`${id === initialSlide ? "modal-active" : ""}`}
-          >
-            <ModalStorie
-              active={id === initialSlide}
-              {...storie}
-              handleChangePlaying={handleChangePlaying}
-              timer={timer}
-            />
-
-            {id === initialSlide && <NestedSwiper stories={nested} />}
+          <SwiperSlide key={id} className={`${active ? "modal-active" : ""}`}>
+            {nested.length >= 2 && active ? (
+              <NestedSwiper stories={nested} />
+            ) : (
+              <ModalStorie
+                active={active}
+                {...storie}
+                handleChangePlaying={handleChangePlaying}
+                timer={timer}
+              />
+            )}
           </SwiperSlide>
         );
       })}

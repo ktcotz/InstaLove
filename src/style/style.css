@@ -109,6 +109,7 @@ html {
 
 .modal-stories .modal-active {
   width: 500px !important;
+  height: 700px !important;
   transition: 500ms;
 }
 

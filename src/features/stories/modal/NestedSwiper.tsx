@@ -7,6 +7,8 @@ type NestedSwiperProps = {
 };
 
 export const NestedSwiper = ({ stories }: NestedSwiperProps) => {
+  console.log(stories);
+
   return (
     <Swiper nested={true} className="nested-stories ">
       {stories.map((storie) => (
@@ -17,6 +19,7 @@ export const NestedSwiper = ({ stories }: NestedSwiperProps) => {
             timer={0}
             handleChangePlaying={() => {}}
             nested={true}
+            active={true}
           />
         </SwiperSlide>
       ))}
