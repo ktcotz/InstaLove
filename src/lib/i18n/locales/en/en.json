@@ -184,6 +184,7 @@
     "commentReply": "Reply",
     "showComments": "Show replies",
     "hideReplies": "Hide replies",
-        "moreComments": "Fetch more comments"
+    "moreComments": "Fetch more comments",
+    "comments": "Comments"
   }
 }

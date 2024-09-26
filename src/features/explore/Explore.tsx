@@ -6,7 +6,7 @@ import { ExploreSkeleton } from "./ExploreSkeleton";
 export const MAX_EXPLORE_POST = 4;
 
 export const Explore = () => {
-  const { data, fetchNextPage, hasNextPage, isLoading, isFetching } =
+  const { data, fetchNextPage, hasNextPage, isFetching, isLoading } =
     useGetAllPostsAndReels();
 
   const observer = useRef<IntersectionObserver>();

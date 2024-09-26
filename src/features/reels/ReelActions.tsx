@@ -30,7 +30,7 @@ type ReelActionsProps = {
 const MOBILE_VIEWPORT = "640px";
 
 export const ReelActions = ({ user, id }: ReelActionsProps) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery(`(max-width:${MOBILE_VIEWPORT})`);
   const { user: current } = useUser();
   const { like } = useLike({ post_id: id, user_id: user.user_id });
@@ -123,27 +123,30 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
               )}
             </Button>
             {count && count > 0 && (
-              <Modal>
-                <Modal.Open>
+              <>
+                <Modal.Open openClass={`reel-${id}-likes`}>
                   <Button modifier="close">
                     <p className="text-xs">
-                      {new Intl.NumberFormat(navigator.language, {
+                      {new Intl.NumberFormat(i18n.language, {
                         notation: "compact",
                       }).format(count)}
                     </p>
                   </Button>
                 </Modal.Open>
                 {likes && (
-                  <Modal.Content>
+                  <Modal.Content
+                    manageClass={`reel-${id}-likes`}
+                    parentClass="mx-auto max-w-lg mt-14"
+                  >
                     <Likes likes={likes} />
                   </Modal.Content>
                 )}
-              </Modal>
+              </>
             )}
           </li>
           <li className="flex flex-col gap-1 items-center">
-            <Modal>
-              <Modal.Open>
+            <>
+              <Modal.Open openClass={`reel-${id}-comments`}>
                 <Button aria-label={t("reels.comment")} modifier="close">
                   <div className="flex flex-col gap-1">
                     <FaRegComment
@@ -159,7 +162,10 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
                 </Button>
               </Modal.Open>
               {data?.comments && (
-                <Modal.Content>
+                <Modal.Content
+                  manageClass={`reel-${id}-comments`}
+                  parentClass="mx-auto max-w-lg mt-14"
+                >
                   <ReelsComments
                     user_id={user.user_id}
                     id={id}
@@ -167,7 +173,7 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
                   />
                 </Modal.Content>
               )}
-            </Modal>
+            </>
           </li>
           <li>
             <Button

@@ -18,14 +18,17 @@ export const SearchUserProfiles = () => {
           {t("search.latest")}
         </h3>
         {queries && queries.length > 0 && (
-          <Modal>
-            <Modal.Open>
+          <>
+            <Modal.Open openClass="clear">
               <Button modifier="link">{t("search.clear")}</Button>
             </Modal.Open>
-            <Modal.Content>
+            <Modal.Content
+              manageClass="clear"
+              parentClass="mx-auto max-w-lg mt-14"
+            >
               <ConfirmClearUserQueries />
             </Modal.Content>
-          </Modal>
+          </>
         )}
       </div>
       <div className="flex flex-col gap-1 ">

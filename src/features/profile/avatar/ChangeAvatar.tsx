@@ -35,25 +35,23 @@ export const ChangeAvatar = ({
   };
 
   return (
-    <div className="max-w-lg mx-auto">
-      <div className="bg-stone-100 rounded-md p-4 shadow-lg flex items-center justify-center flex-col gap-8 dark:bg-stone-950">
-        <h2 className="text-xl font-semibold text-center border-b py-3 border-stone-300 dark:border-stone-50 self-stretch dark:text-stone-50">
-          {t("avatar.change")}
-        </h2>
-        <img
-          src={preview}
-          alt="Avatar"
-          width={176}
-          height={176}
-          className="rounded-full max-w-44 max-h-44 aspect-square"
-        />
+    <div className="bg-stone-100 rounded-md p-4 shadow-lg flex items-center justify-center flex-col gap-8 dark:bg-stone-950">
+      <h2 className="text-xl font-semibold text-center border-b py-3 border-stone-300 dark:border-stone-50 self-stretch dark:text-stone-50">
+        {t("avatar.change")}
+      </h2>
+      <img
+        src={preview}
+        alt="Avatar"
+        width={176}
+        height={176}
+        className="rounded-full max-w-44 max-h-44 aspect-square"
+      />
 
-        <div className="flex flex-col gap-4">
-          <Button modifier="submit" onClick={updateAvatar}>
-            {isUpdating ? <Loader /> : t("avatar.change")}
-          </Button>
-          <Button onClick={disablePreview}>{t("avatar.reject")}</Button>
-        </div>
+      <div className="flex flex-col gap-4">
+        <Button modifier="submit" onClick={updateAvatar}>
+          {isUpdating ? <Loader /> : t("avatar.change")}
+        </Button>
+        <Button onClick={disablePreview}>{t("avatar.reject")}</Button>
       </div>
     </div>
   );

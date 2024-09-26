@@ -11,8 +11,6 @@ export const NestedProgressBar = ({
   nestedStories,
   nestedStorie,
 }: NestedProgressBarProps) => {
-  console.log(nestedStorie);
-
   const gridColumns = Array.from({ length: nestedStories }, () => "1fr").join(
     " "
   );

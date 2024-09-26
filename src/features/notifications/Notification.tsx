@@ -52,8 +52,8 @@ export const Notification = ({
 
   if (type === "storie_mark") {
     return (
-      <Modal>
-        <Modal.Open>
+      <>
+        <Modal.Open openClass="storie">
           <Button modifier="notification">
             <img
               src={user?.avatar_url}
@@ -76,13 +76,14 @@ export const Notification = ({
           </Button>
         </Modal.Open>
         <Modal.Content
+          manageClass="storie"
           parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
             !isLaptop && "relative w-full h-full md:max-w-[800px]  mx-auto"
           }`}
         >
           <ModalStories clickedID={by_user} />
         </Modal.Content>
-      </Modal>
+      </>
     );
   }
 

@@ -34,13 +34,14 @@ export const Storie = ({ user_id }: StorieSchema) => {
     <div className="flex flex-col items-center gap-2">
       <Modal>
         <Modal.Content
+          manageClass="open-stories"
           parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
             !isLaptop && "relative w-full h-full md:max-w-[800px]  mx-auto"
           }`}
         >
           <ModalStories clickedID={user_id} />
         </Modal.Content>
-        <Modal.Open>
+        <Modal.Open openClass="open-stories">
           <Button
             aria-label={t("stories.open")}
             modifier={isWatched ? "watched-storie" : "storie"}

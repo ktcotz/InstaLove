@@ -7,7 +7,7 @@ export const MainScreenPosts = () => {
   return (
     <div className="flex flex-col gap-8 ">
       {data?.map((item) => (
-        <IndividualModalPost post={item} main={true} />
+        <IndividualModalPost post={item} />
       ))}
     </div>
   );

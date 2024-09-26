@@ -14,8 +14,8 @@ export const ExploreData = ({ data, lastElement, idx }: ExploreDataProps) => {
     <div className="grid grid-cols-3 grid-rows-2 gap-1">
       {data.map((explore) => {
         return (
-          <Modal key={explore.id}>
-            <Modal.Open>
+          <>
+            <Modal.Open openClass={`explore-${explore.id}`}>
               <Button
                 modifier={
                   explore.video_url
@@ -29,10 +29,13 @@ export const ExploreData = ({ data, lastElement, idx }: ExploreDataProps) => {
                 <Post {...explore} />
               </Button>
             </Modal.Open>
-            <Modal.Content>
+            <Modal.Content
+              manageClass={`explore-${explore.id}`}
+              parentClass="mx-auto max-w-6xl"
+            >
               <IndividualModalPost post={explore} />
             </Modal.Content>
-          </Modal>
+          </>
         );
       })}
     </div>

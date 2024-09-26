@@ -31,8 +31,8 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
 
   if (hasStorie) {
     return (
-      <Modal>
-        <Modal.Open>
+      <>
+        <Modal.Open openClass="storie-avatar">
           <Button
             modifier={isWatched ? "watched" : "avatar"}
             aria-label={t("avatar.storie")}
@@ -49,13 +49,14 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
           </Button>
         </Modal.Open>
         <Modal.Content
+          manageClass="storie-avatar"
           parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
             !isLaptop && "relative w-full h-full md:max-w-[800px]  mx-auto"
           }`}
         >
           <ModalStories clickedID={profile.user_name} />
         </Modal.Content>
-      </Modal>
+      </>
     );
   }
 

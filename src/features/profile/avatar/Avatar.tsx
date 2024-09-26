@@ -42,13 +42,13 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
   };
 
   return (
-    <Modal>
+    <>
       <div
         {...getRootProps({ className: "dropzone" })}
         className="cursor-pointer rounded-full h-full"
       >
         <input {...getInputProps()} />
-        <Modal.Open>
+        <Modal.Open openClass="avatar">
           <div className="relative rounded-full flex items-center justify-center lg:items-start lg:justify-start">
             <img
               src={current?.avatar_url}
@@ -66,7 +66,7 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
         </Modal.Open>
       </div>
       {preview && (
-        <Modal.Content>
+        <Modal.Content manageClass="avatar" parentClass="max-w-lg mx-auto">
           <ChangeAvatar
             preview={preview}
             disablePreview={() => setPreview(null)}
@@ -75,6 +75,6 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
           />
         </Modal.Content>
       )}
-    </Modal>
+    </>
   );
 };

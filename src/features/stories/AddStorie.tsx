@@ -8,8 +8,8 @@ export const AddStorie = () => {
   const { t } = useTranslation();
 
   return (
-    <Modal>
-      <Modal.Open>
+    <>
+      <Modal.Open openClass="add-storie">
         <Button modifier="storie" aria-label={t("stories.add")}>
           <div className="w-16 h-16 flex items-center justify-center rounded-full p-1 bg-white dark:bg-black">
             <FaPlus
@@ -19,9 +19,12 @@ export const AddStorie = () => {
           </div>
         </Button>
       </Modal.Open>
-      <Modal.Content parentClass="mx-auto max-w-xl sm:max-w-5xl">
+      <Modal.Content
+        manageClass="add-storie"
+        parentClass="mx-auto max-w-xl sm:max-w-5xl"
+      >
         <CreatePost type="storie" />
       </Modal.Content>
-    </Modal>
+    </>
   );
 };

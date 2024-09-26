@@ -4,14 +4,21 @@ import { DashboardSearch } from "../../pages/Dashboard/DashboardSearch";
 import { NavigationComponent } from "./context/NavigationContext";
 import { useNavigationContext } from "./context/useNavigationContext";
 import { useOnClickOutside } from "usehooks-ts";
+import { useModal } from "../../ui/modal/ModalContext/useModal";
 
 export const ComponentManager = () => {
-  const { open, component, close } = useNavigationContext();
+  const { component, close, open } = useNavigationContext();
+  const { close: modalClose } = useModal();
   const ref = useRef(null);
 
-  useOnClickOutside(ref, close);
+  useOnClickOutside(ref, (ev) => {
+    if (ev.target instanceof HTMLButtonElement) return;
 
-  if (!open || !component) return null;
+    close();
+    modalClose();
+  });
+
+  if (!component || !open) return null;
 
   const manageComponent: Record<NavigationComponent, JSX.Element | null> = {
     search: <DashboardSearch />,
