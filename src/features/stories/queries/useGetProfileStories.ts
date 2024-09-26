@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getStoriesByProfileID } from "../services/services";
 
-export type GetProfileStoriesData = { profileID: string; userID?: string };
+export type GetProfileStoriesData = { profileID?: string; userID?: string };
 
 export const useGetProfileStories = ({
   profileID,

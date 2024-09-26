@@ -19,6 +19,7 @@ type ModalStorieProps = {
   mobile?: boolean;
   handleChangePlaying: () => void;
   timer: number;
+  nested?: boolean;
 };
 
 export const ModalStorie = ({
@@ -32,6 +33,7 @@ export const ModalStorie = ({
   created_at,
   timer,
   handleChangePlaying,
+  nested = false,
 }: ModalStorieProps & Storie & { id: number }) => {
   const { user: current } = useUser();
   const ref = useRef(document.body);
@@ -94,9 +96,9 @@ export const ModalStorie = ({
       style={{
         backgroundImage: `${`linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.5)),url(${post_url})`}`,
       }}
-      className={`h-[350px] ${
-        (active || mobile) && "h-[700px]"
-      } w-full relative transition-all ease-linear duration-700 bg-no-repeat bg-cover bg-center`}
+      className={`h-[350px] ${(active || mobile || nested) && "h-[700px]"} ${
+        nested ? "absolute top-0 left-0" : "relative"
+      } w-full  transition-all ease-linear duration-700 bg-no-repeat bg-cover bg-center`}
     >
       {post_url && active && <StoriesMarks user_id={user_id} post_id={id} />}
       {active || mobile ? (

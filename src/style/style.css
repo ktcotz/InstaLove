@@ -99,6 +99,7 @@ html {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .modal-stories .swiper-wrapper {
@@ -113,6 +114,23 @@ html {
 
 .mobile-swiper {
   height: 100%;
+}
+
+.nested-stories {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 700px;
+  max-height: 700px;
+  width: 100%;
+}
+
+.modal-stories .nested-stories .swiper-wrapper {
+  gap: 0;
+}
+
+.nested-stories .swiper-slide {
+  height: 100% !important;
 }
 
 .epr-main {

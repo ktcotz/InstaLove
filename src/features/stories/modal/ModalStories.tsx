@@ -19,11 +19,13 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
   const isLaptop = useMediaQuery("(min-width:1024px)");
   const ref = useRef(document.body);
 
+  const filteredStories = stories?.filter((storie) => storie.inner_id === null);
+
   const handleSwiperSlide = (ev: KeyboardEvent) => {
     if (ev.key === "ArrowRight") {
       const slide =
-        initialSlide === stories!.length - 1
-          ? stories!.length - 1
+        initialSlide === filteredStories!.length - 1
+          ? filteredStories!.length - 1
           : initialSlide + 1;
       swiper?.slideTo(slide);
       setInitialSlide(slide);
@@ -51,20 +53,20 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
   useEffect(() => {
     if (timer === 25) {
       const slide =
-        initialSlide === stories!.length - 1
-          ? stories!.length - 1
+        initialSlide === filteredStories!.length - 1
+          ? filteredStories!.length - 1
           : initialSlide + 1;
       swiper?.slideTo(slide);
       setInitialSlide(slide);
     }
-  }, [timer, swiper, initialSlide, stories]);
+  }, [timer, swiper, initialSlide, filteredStories]);
 
   if (isLoading) return <Loader />;
-  if (!stories) return null;
+  if (!filteredStories || !stories) return null;
 
   const sortedStories = [
-    ...stories.filter((storie) => storie.user_id === clickedID),
-    ...stories.filter((storie) => storie.user_id !== clickedID),
+    ...filteredStories.filter((storie) => storie.user_id === clickedID),
+    ...filteredStories.filter((storie) => storie.user_id !== clickedID),
   ];
 
   return isLaptop ? (
@@ -72,6 +74,7 @@ export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
       initialSlide={initialSlide}
       changeSlide={(slide) => setInitialSlide(slide)}
       stories={sortedStories}
+      fullStories={stories}
       setSwiper={setSwiper}
       isPlaying={isPlaying}
       handleChangePlaying={handleChangePlaying}

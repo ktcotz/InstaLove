@@ -3,6 +3,7 @@ import { ModalStorie } from "./ModalStorie";
 import { Stories } from "../schema/StorieSchema";
 import { Dispatch, SetStateAction } from "react";
 import { Swiper as SwiperType } from "swiper/types";
+import { NestedSwiper } from "./NestedSwiper";
 
 type DesktopSwiperProps = {
   initialSlide: number;
@@ -13,6 +14,7 @@ type DesktopSwiperProps = {
   isPlaying: boolean;
   timer: number;
   resetTimer: () => void;
+  fullStories: Stories;
 };
 
 export const DesktopSwiper = ({
@@ -23,6 +25,7 @@ export const DesktopSwiper = ({
   handleChangePlaying,
   timer,
   resetTimer,
+  fullStories,
 }: DesktopSwiperProps) => {
   return (
     <Swiper
@@ -35,11 +38,15 @@ export const DesktopSwiper = ({
       autoHeight={true}
       keyboard={{ enabled: true }}
       onSlideChange={(ev) => {
-        changeSlide(ev.clickedIndex);
+        changeSlide(ev.clickedIndex || ev.activeIndex);
         resetTimer();
       }}
     >
       {stories?.map((storie, id) => {
+        const nested = fullStories.filter(
+          (fullStorie) => fullStorie.user_id === storie.user_id
+        );
+
         return (
           <SwiperSlide
             key={id}
@@ -51,6 +58,8 @@ export const DesktopSwiper = ({
               handleChangePlaying={handleChangePlaying}
               timer={timer}
             />
+
+            {id === initialSlide && <NestedSwiper stories={nested} />}
           </SwiperSlide>
         );
       })}

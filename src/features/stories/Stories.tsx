@@ -11,6 +11,8 @@ import { StoriesSkeleton } from "./StoriesSkeleton";
 export const Stories = () => {
   const { stories, isLoading } = useGetAllStories();
 
+  const filteredStories = stories?.filter((storie) => storie.inner_id === null);
+
   if (isLoading)
     return (
       <div className="mx-auto w-full max-w-4xl flex md:gap-3 justify-start md:justify-center xl:justify-start border-b border-stone-300 py-4">
@@ -21,7 +23,7 @@ export const Stories = () => {
   return (
     <div className="flex md:gap-3 justify-start md:justify-center xl:justify-start border-b border-stone-300 py-4">
       <Wrapper modifier="details">
-        {stories && stories.length > 0 ? (
+        {filteredStories && filteredStories.length > 0 ? (
           <Swiper
             slidesPerView={4}
             navigation={true}
@@ -49,7 +51,7 @@ export const Stories = () => {
             <SwiperSlide>
               <AddStorie />
             </SwiperSlide>
-            {stories?.map((storie) => (
+            {filteredStories?.map((storie) => (
               <SwiperSlide key={storie.id}>
                 <Storie {...storie} />
               </SwiperSlide>

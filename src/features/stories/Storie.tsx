@@ -17,7 +17,7 @@ export const Storie = ({ user_id }: StorieSchema) => {
   const { t } = useTranslation();
   const isLaptop = useMediaQuery("(min-width:1024px)");
   const { watched } = useGetProfileStories({
-    profileID: user!.user_id,
+    profileID: user?.user_id,
     userID: current?.id,
   });
 
