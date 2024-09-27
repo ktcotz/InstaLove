@@ -35,7 +35,7 @@ export const Storie = ({ user_id }: StorieSchema) => {
       <Modal.Content
         manageClass={`open-stories-${user_id}`}
         parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
-          !isLaptop && "relative w-full h-full md:max-w-[800px]  mx-auto"
+          !isLaptop && "my-4 relative w-full  md:max-w-[800px]  mx-auto"
         }`}
       >
         <ModalStories clickedID={user_id} />
