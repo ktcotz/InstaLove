@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 
 export type CustomLinkModifier =
   | "primary"
+  | "send"
   | "logo"
   | "small-logo"
   | "text"
@@ -44,6 +45,7 @@ export const CustomLink = ({
 
   const modifiers: Record<CustomLinkModifier, string> = {
     close: "group",
+    send: "dark:bg-stone-50 dark:text-stone-950 bg-stone-950 text-stone-50 rounded-md p-2 w-full flex items-center justify-center gap-1",
     primary:
       "rounded-sm flex items-center justify-center bg-blue-600 px-3 py-1 sm:px-4 sm:py-2 hover:bg-blue-700 transition text-stone-50 focus:outline-none focus:ring focus:ring-offset-2 focus:ring-blue-600",
     logo: "inline-block",

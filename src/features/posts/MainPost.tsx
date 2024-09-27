@@ -35,7 +35,7 @@ export const MainPost = ({ post }: MainPostProps) => {
     <PostsContextProvider>
       <div className="mx-auto max-w-xl px-4 w-full">
         <div
-          className="relative flex  gap-3 border-b border-stone-300 py-3 "
+          className="relative flex  gap-3 py-3 "
           onMouseLeave={() => unhover()}
         >
           <StorieAvatar profile={user} size={40} />

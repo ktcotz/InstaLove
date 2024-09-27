@@ -21,11 +21,14 @@ export const getProfiles = async ({
     (observation) => observation.observe_id
   );
 
+  const rangeStart = Math.floor(Math.random() * 10 + 1);
+
   const limitQuery = limit
     ? supabase
         .from("users")
         .select("*", { count: "exact" })
         .neq("user_id", id)
+        .range(rangeStart, rangeStart + MAX_PROPOSED_PROFILES)
         .limit(limit)
     : supabase.from("users").select("*", { count: "exact" }).neq("user_id", id);
 

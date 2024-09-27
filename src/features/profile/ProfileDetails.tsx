@@ -21,6 +21,7 @@ import { useAddNotification } from "../notifications/mutations/useAddNotificatio
 import { StorieAvatar } from "./avatar/StorieAvatar";
 import { useTranslation } from "react-i18next";
 import { GlobalRoutes } from "../../typing/routes";
+import { LuSend } from "react-icons/lu";
 
 export const ProfileDetails = () => {
   const { t } = useTranslation();
@@ -102,16 +103,24 @@ export const ProfileDetails = () => {
               <p className="text-xl font-medium dark:text-stone-50">
                 {user?.user_name} - {user.fullName}
               </p>
-              {currentUser!.id === user!.user_id && (
-                <CustomLink to="/dashboard/profile/edit" modifier="primary">
-                  {t("profile.edit")}
-                </CustomLink>
-              )}
-              {currentUser!.id !== user!.user_id && (
-                <Button modifier="submit" onClick={handleObserve}>
-                  {isObserve ? t("profile.unobserver") : t("profile.observe")}
-                </Button>
-              )}
+              <div className="mr-left flex gap-2">
+                {currentUser?.id === user.user_id ? null : !isObserve ? null : (
+                  <CustomLink modifier="send" to="/dashboard/messages">
+                    <LuSend className="text-stone-50 dark:text-stone-950" />
+                    {t("posts.sendMessage")}
+                  </CustomLink>
+                )}
+                {currentUser!.id === user!.user_id && (
+                  <CustomLink to="/dashboard/profile/edit" modifier="primary">
+                    {t("profile.edit")}
+                  </CustomLink>
+                )}
+                {currentUser!.id !== user!.user_id && (
+                  <Button modifier="submit" onClick={handleObserve}>
+                    {isObserve ? t("profile.unobserver") : t("profile.observe")}
+                  </Button>
+                )}
+              </div>
             </div>
             <div className="flex  justify-center gap-12 sm:gap-3 sm:items-center sm:justify-between sm:w-3/4">
               <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">

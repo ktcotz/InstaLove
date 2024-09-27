@@ -20,8 +20,6 @@ export const UserPost = ({ postID, profile }: UserPostProps) => {
 
   if (isUserLoading || isPostLoading) return <Loader />;
 
-  console.log(post, user);
-
   if (!post || !user) {
     navigate(GlobalRoutes.Dashboard);
     return null;

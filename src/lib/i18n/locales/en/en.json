@@ -187,6 +187,7 @@
     "moreComments": "Fetch more comments",
     "comments": "Comments",
     "likesCount": "Likes:",
-    "allComments": "See all comments:"
+    "allComments": "See all comments:",
+    "sendMessage": "Send message"
   }
 }

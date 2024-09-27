@@ -1,16 +1,9 @@
-DO ZROBIENIA :
-
-- STORIES
-- STRONA GŁÓWNA
-- ACCESIBILITY I ZOD
-- TESTY
-- UI&UX
-
 PROCES :
 
-Features POSTS.
-
 Usuwanie postów.
+
+Deploy na vercel w celu testowania.
+Początek budowy messages.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 

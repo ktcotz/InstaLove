@@ -1,6 +1,7 @@
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
 import { HiUserAdd } from "react-icons/hi";
+import { LuSend } from "react-icons/lu";
 import { useProfile } from "./queries/useProfile";
 import { useGetPosts } from "../posts/queries/useGetPosts";
 import { PrivateProfile } from "./PrivateProfile";
@@ -191,12 +192,20 @@ export const HoverProfile = ({
             )}
           </div>
         ) : null}
-        {currentUser?.id === user.user_id ? null : (
-          <Button modifier="add-user" onClick={handleObserve}>
-            <HiUserAdd />
-            {isObserve ? t("profile.unobserver") : t("profile.observe")}
-          </Button>
-        )}
+        <div className="flex gap-2 flex-wrap">
+          {currentUser?.id === user.user_id ? null : (
+            <Button modifier="add-user" onClick={handleObserve}>
+              <HiUserAdd />
+              {isObserve ? t("profile.unobserver") : t("profile.observe")}
+            </Button>
+          )}
+          {currentUser?.id === user.user_id ? null : !isObserve ? null : (
+            <CustomLink modifier="send" to="/dashboard/messages">
+              <LuSend className="text-stone-50 dark:text-stone-950" />
+              {t("posts.sendMessage")}
+            </CustomLink>
+          )}
+        </div>
       </>
     </div>
   );
