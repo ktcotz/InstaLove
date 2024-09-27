@@ -36,10 +36,10 @@ export const DeletePostConfirmation = ({ id }: DeletePostConfirmationProps) => {
             );
           }}
         >
-          {t("posts.delete")}
+          {isPending ? <Loader /> : t("posts.delete")}
         </Button>
         <Button modifier="all-profiles" onClick={close}>
-          {isPending ? <Loader /> : t("posts.nodelete")}
+          {t("posts.nodelete")}
         </Button>
       </div>
     </div>

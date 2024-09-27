@@ -137,7 +137,7 @@ export const Comment = ({
               </Modal.Open>
               <Modal.Content
                 manageClass="comments-like"
-                parentClass="mx-auto max-w-lg mt-14"
+                parentClass="mx-auto max-w-lg mt-14 w-full"
               >
                 <Likes likes={likes} />
               </Modal.Content>

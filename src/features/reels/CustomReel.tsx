@@ -48,14 +48,14 @@ export const CustomReel = ({
   const isMuted = id === muted.id ? muted.isMuted : true;
 
   return (
-    <div className="relative h-full max-h-[500px] sm:h-[700px] sm:max-h-[700px] grid grid-cols-[1fr_auto] rounded-xl overflow-hidden">
+    <div className="relative h-[500px] max-h-[500px] sm:h-[700px] sm:max-h-[700px] grid grid-cols-[1fr_auto]  overflow-hidden">
       <div className="relative max-h-[500px] sm:max-h-[700px]">
-        <div className="h-full w-full">
+        <div className="h-full w-full ">
           <video
             loop
             muted={isMuted}
             autoPlay
-            className="h-full w-full object-cover cursor-pointer rounded-xs"
+            className="h-full w-full object-cover cursor-pointer rounded-xl"
             onClick={handleVideoPlaying}
             ref={videoRef}
             aria-label={description}
@@ -63,7 +63,7 @@ export const CustomReel = ({
             <source src={video_url} type="video/mp4" />
             <p>{description}</p>
           </video>
-          <div className="bg-black/15 h-full w-full absolute top-0 left-0"></div>
+          <div className="bg-black/20 h-full w-full absolute top-0 left-0 rounded-xl"></div>
         </div>
         <div className="absolute top-4 right-4">
           <Button

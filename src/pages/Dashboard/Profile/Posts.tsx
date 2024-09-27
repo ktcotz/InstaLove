@@ -39,7 +39,7 @@ export const Posts = () => {
         </Modal.Open>
         <Modal.Content
           manageClass={`post-${post.id}`}
-          parentClass="mx-auto max-w-6xl"
+          parentClass="mx-auto max-w-6xl w-full px-4"
         >
           <IndividualModalPost post={post} />
         </Modal.Content>

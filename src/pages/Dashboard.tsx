@@ -22,8 +22,8 @@ export const Dashboard = () => {
           <DashboardNavigation />
           <ComponentManager />
         </aside>
-        <main className="relative top-0 min-h-screen pb-24 md:pb-0 md:pl-20 lg:pl-60 bg-stone-50 dark:bg-stone-950">
-          <div className="py-0 md:py-12">
+        <main className="flex flex-col relative top-0 min-h-screen pb-24 md:pb-0 md:pl-20 lg:pl-60 bg-stone-50 dark:bg-stone-950">
+          <div className="py-0 md:py-12 grow flex flex-col">
             <Outlet />
           </div>
         </main>

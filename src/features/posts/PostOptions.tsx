@@ -32,7 +32,7 @@ export const PostOptions = ({ post, user }: PostOptionsProps) => {
             </Modal.Open>
             <Modal.Content
               manageClass={`delete`}
-              parentClass="mx-auto max-w-lg "
+              parentClass="mx-auto max-w-lg w-full absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
             >
               <DeletePostConfirmation id={post.id} />
             </Modal.Content>

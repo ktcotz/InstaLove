@@ -35,7 +35,7 @@ export const Reels = () => {
         </Modal.Open>
         <Modal.Content
           manageClass={`reel-${reel.id}`}
-          parentClass="mx-auto max-w-6xl"
+          parentClass="mx-auto max-w-6xl w-full"
         >
           <IndividualModalPost post={reel} />
         </Modal.Content>

@@ -14,7 +14,7 @@ export const resources = {
 } as const;
 
 export const defaultNS = "translation";
-export const defaultLanguage = "en";
+export const defaultLanguage = "pl";
 
 i18next
   .use(LanguageDetector)

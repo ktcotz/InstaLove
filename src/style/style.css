@@ -116,6 +116,22 @@ html {
 .mobile-swiper {
   height: 100%;
   width: 100%;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.mobile-swiper .swiper-wrapper {
+  height: auto;
+  flex-grow: 1;
+}
+
+.mobile-swiper .swiper-wrapper .swiper-slide {
+  height: 100%;
+}
+
+.mobile-swiper .nested-stories {
+  height: calc(100vh - 32px);
 }
 
 .nested-stories {
@@ -123,8 +139,8 @@ html {
   top: 0;
   left: 0;
   height: 700px;
-  max-height: 700px;
   width: 100%;
+  flex-grow: 1;
 }
 
 .modal-stories .nested-stories .swiper-wrapper {
@@ -162,10 +178,6 @@ html {
 
 .mobile-swiper .swiper-slide-shadow {
   display: none;
-}
-
-.mobile-swiper .swiper-wrapper {
-  height: auto;
 }
 
 progress::-moz-progress-bar {

@@ -98,7 +98,7 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
 
   return (
     <PostsContextProvider>
-      <div className="flex flex-col items-center text-stone-950 dark:text-stone-50">
+      <div className="flex flex-col items-center text-stone-50 sm:text-stone-950 dark:text-stone-50">
         <ul className="list-none flex flex-col gap-4 mb-6 items-center text-xs">
           <li className="flex flex-col gap-1 items-center">
             <Button
@@ -117,7 +117,7 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
                 />
               ) : (
                 <FaRegHeart
-                  className="text-xl"
+                  className="text-xl "
                   aria-label={t("reels.unlike")}
                 />
               )}
@@ -126,7 +126,7 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
               <>
                 <Modal.Open openClass={`reel-${id}-likes`}>
                   <Button modifier="close">
-                    <p className="text-xs">
+                    <p className="text-xs text-stone-50">
                       {new Intl.NumberFormat(i18n.language, {
                         notation: "compact",
                       }).format(count)}
@@ -136,7 +136,7 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
                 {likes && (
                   <Modal.Content
                     manageClass={`reel-${id}-likes`}
-                    parentClass="mx-auto max-w-lg mt-14"
+                    parentClass="mx-auto max-w-lg mt-14 w-full"
                   >
                     <Likes likes={likes} />
                   </Modal.Content>
@@ -164,7 +164,7 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
               {data?.comments && (
                 <Modal.Content
                   manageClass={`reel-${id}-comments`}
-                  parentClass="mx-auto max-w-lg mt-14"
+                  parentClass="mx-auto max-w-lg mt-14 w-full"
                 >
                   <ReelsComments
                     user_id={user.user_id}

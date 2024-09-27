@@ -84,7 +84,7 @@ export const PostActions = ({ user_id, post }: PostActionsProps) => {
   };
 
   return (
-    <div className="absolute bottom-0 left-0 w-full p-4 shadow-lg border-t border-stone-300 bg-stone-100 dark:bg-stone-950 dark:border-stone-50">
+    <div className="absolute bottom-0 left-0 w-full p-4  border-t border-stone-300 bg-stone-100 dark:bg-stone-950 dark:border-stone-50">
       <div className="flex items-center gap-6 mb-3 text-xs">
         <Button
           aria-label={

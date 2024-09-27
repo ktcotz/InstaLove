@@ -27,17 +27,21 @@ export const Explore = () => {
     [fetchNextPage, hasNextPage, isFetching, isLoading]
   );
 
+  console.log(data?.pages);
+
   return (
-    <div className="mx-auto px-1 w-full max-w-6xl">
-      <div className="grid gap-1">
-        {data?.pages.map((dataPage, idx) => (
-          <ExploreData
-            key={idx}
-            idx={idx}
-            data={dataPage}
-            lastElement={lastElementRef}
-          />
-        ))}
+    <div className="mx-auto px-1 w-full max-w-6xl grow flex flex-col">
+      <div className="grow grid gap-1 auto-rows-1fr">
+        {data?.pages
+          .filter((page) => page.length > 0)
+          .map((dataPage, idx) => (
+            <ExploreData
+              key={idx}
+              idx={idx}
+              data={dataPage}
+              lastElement={lastElementRef}
+            />
+          ))}
       </div>
 
       {isLoading && (

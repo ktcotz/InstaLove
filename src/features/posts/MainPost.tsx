@@ -37,7 +37,7 @@ export const MainPost = ({ post }: MainPostProps) => {
     <PostsContextProvider>
       <div className="mx-auto max-w-xl w-full">
         <div
-          className="relative flex  gap-3 py-3 px-4"
+          className="relative flex items-center gap-3 py-3 px-4"
           onMouseLeave={() => unhover()}
         >
           <StorieAvatar profile={user} size={40} />
@@ -67,7 +67,7 @@ export const MainPost = ({ post }: MainPostProps) => {
               </Modal.Open>
               <Modal.Content
                 manageClass={`${post.id}-options`}
-                parentClass="mx-auto max-w-lg mt-14"
+                parentClass="mx-auto max-w-lg mt-14 w-full"
               >
                 <PostOptions post={post} user={user} />
               </Modal.Content>

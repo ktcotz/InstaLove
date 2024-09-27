@@ -42,7 +42,7 @@ export const Bookmarks = () => {
         </Modal.Open>
         <Modal.Content
           manageClass={`bookmark-${bookmark.id}`}
-          parentClass="mx-auto max-w-6xl"
+          parentClass="mx-auto max-w-6xl w-full"
         >
           <IndividualModalPost
             post={bookmark.post_id ? bookmark.post_id : bookmark.reel_id}

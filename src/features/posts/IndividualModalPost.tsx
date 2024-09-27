@@ -49,7 +49,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
       <div
         className={`grid ${
           "video_url" in post ? "grid-rows-5" : "grid-rows-3"
-        }  bg-stone-50 dark:bg-stone-950 rounded-md shadow-lg sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 h-[700px] max-h-[800px] mt-3`}
+        }  bg-stone-50 dark:bg-stone-950 rounded-md sm:shadow-lg sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 h-[700px] max-h-[800px] mt-3`}
       >
         <div
           style={
@@ -59,7 +59,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
           }
           className={`${
             "video_url" in post ? "row-start-1 row-end-3" : ""
-          } relative bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100`}
+          }  relative bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100`}
         >
           {post.video_url && (
             <video loop muted autoPlay className="h-full w-full object-cover">
@@ -73,7 +73,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
             "video_url" in post ? "row-start-3" : "row-start-2"
           }  -row-end-1 col-start-4 -col-end-1 flex flex-col relative h-full sm:row-start-auto sm:row-end-auto `}
         >
-          <div className="flex items-center gap-3 border-b border-stone-300 py-5 px-4">
+          <div className="flex items-center gap-3 border-b border-stone-300 py-3 sm:py-5 px-4">
             <img
               src={user.avatar_url}
               alt={user.fullName}

@@ -8,12 +8,14 @@ type ModalContentProps = {
   children: ReactNode;
   parentClass: string;
   manageClass: string;
+  fullScreen?: boolean;
 };
 
 export const ModalContent = ({
   children,
   parentClass,
   manageClass,
+  fullScreen = false,
 }: ModalContentProps) => {
   const { close, opened } = useModal();
   const ref = useRef<HTMLDivElement>(null);
@@ -35,8 +37,7 @@ export const ModalContent = ({
 
   return (
     <ModalOverlay>
-      <Modal.Close />
-
+      {!fullScreen && <Modal.Close />}
       <div className="grow flex flex-col">
         <div ref={ref} className={parentClass}>
           {children}

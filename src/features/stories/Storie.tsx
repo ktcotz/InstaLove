@@ -33,9 +33,11 @@ export const Storie = ({ user_id }: StorieSchema) => {
   return (
     <div className="flex flex-col items-center gap-2">
       <Modal.Content
+        fullScreen={isLaptop ? false : true}
         manageClass={`open-stories-${user_id}`}
         parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
-          !isLaptop && "my-4 relative w-full  md:max-w-[800px]  mx-auto"
+          !isLaptop &&
+          "relative w-full  grow max-h-full flex flex-col  md:max-w-[800px]  mx-auto"
         }`}
       >
         <ModalStories clickedID={user_id} />

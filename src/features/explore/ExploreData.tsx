@@ -26,12 +26,12 @@ export const ExploreData = ({ data, lastElement, idx }: ExploreDataProps) => {
                 }
                 ref={lastElement}
               >
-                <Post {...explore} />
+                <Post {...explore} maxHeight={800} />
               </Button>
             </Modal.Open>
             <Modal.Content
               manageClass={`explore-${explore.id}`}
-              parentClass="mx-auto max-w-6xl"
+              parentClass="mx-auto max-w-6xl w-full"
             >
               <IndividualModalPost post={explore} />
             </Modal.Content>

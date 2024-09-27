@@ -177,7 +177,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
   };
 
   return (
-    <div className="grow flex flex-col text-center shadow-xl my-6 sm:my-0 rounded-md bg-stone-50 dark:bg-stone-950">
+    <div className="grow flex flex-col text-center shadow-xl my-6 md:my-0 rounded-md bg-stone-50 dark:bg-stone-950">
       <div className="p-3 border-b border-stone-300 dark:border-stone-50 flex items-center justify-center">
         {preview && (
           <DisablePostPreview
