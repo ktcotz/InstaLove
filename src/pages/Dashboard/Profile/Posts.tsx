@@ -31,16 +31,19 @@ export const Posts = () => {
 
   return posts?.data.map((post) => {
     return (
-      <Modal key={post.id}>
-        <Modal.Open openClass="post">
+      <>
+        <Modal.Open openClass={`post-${post.id}`}>
           <Button modifier="close">
             <Post {...post} />
           </Button>
         </Modal.Open>
-        <Modal.Content manageClass="post" parentClass="mx-auto max-w-6xl">
+        <Modal.Content
+          manageClass={`post-${post.id}`}
+          parentClass="mx-auto max-w-6xl"
+        >
           <IndividualModalPost post={post} />
         </Modal.Content>
-      </Modal>
+      </>
     );
   });
 };

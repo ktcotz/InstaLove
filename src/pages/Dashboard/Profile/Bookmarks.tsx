@@ -34,18 +34,21 @@ export const Bookmarks = () => {
       : bookmark.reel_id;
 
     return (
-      <Modal key={bookmark.id}>
-        <Modal.Open>
+      <>
+        <Modal.Open openClass={`bookmark-${bookmark.id}`}>
           <Button modifier="close">
             <Post {...renderBookmark} />
           </Button>
         </Modal.Open>
-        <Modal.Content parentClass="mx-auto max-w-6xl">
+        <Modal.Content
+          manageClass={`bookmark-${bookmark.id}`}
+          parentClass="mx-auto max-w-6xl"
+        >
           <IndividualModalPost
             post={bookmark.post_id ? bookmark.post_id : bookmark.reel_id}
           />
         </Modal.Content>
-      </Modal>
+      </>
     );
   });
 };

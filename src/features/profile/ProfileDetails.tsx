@@ -131,46 +131,44 @@ export const ProfileDetails = () => {
                   {posts?.count ?? 0}
                 </span>
               </p>
-              <Modal>
-                <Modal.Open openClass="observes">
-                  <Button modifier="all-profiles">
-                    <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">
-                      <strong className="font-medium text-stone-950 dark:text-stone-100">
-                        {t("profile.observers")}:
-                      </strong>
-                      <span className="font-semibold mt-auto sm:mt-0">
-                        {onUserObservations?.length ?? 0}
-                      </span>
-                    </p>
-                  </Button>
-                </Modal.Open>
-                <Modal.Content
-                  manageClass="observes"
-                  parentClass="mx-auto max-w-lg mt-14"
-                >
-                  <ObservesOnUser user_id={user?.user_id} />
-                </Modal.Content>
-              </Modal>
-              <Modal>
-                <Modal.Open openClass="user-observes">
-                  <Button modifier="all-profiles">
-                    <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">
-                      <strong className="font-medium text-stone-950 dark:text-stone-100">
-                        {t("profile.byobservers")}:
-                      </strong>
-                      <span className="font-semibold mt-auto sm:mt-0">
-                        {observations?.length ?? 0}
-                      </span>
-                    </p>
-                  </Button>
-                </Modal.Open>
-                <Modal.Content
-                  manageClass="user-observes"
-                  parentClass="mx-auto max-w-lg mt-14"
-                >
-                  <ObservesByUser user_id={user?.user_id} />
-                </Modal.Content>
-              </Modal>
+
+              <Modal.Open openClass="observes">
+                <Button modifier="all-profiles">
+                  <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">
+                    <strong className="font-medium text-stone-950 dark:text-stone-100">
+                      {t("profile.observers")}:
+                    </strong>
+                    <span className="font-semibold mt-auto sm:mt-0">
+                      {onUserObservations?.length ?? 0}
+                    </span>
+                  </p>
+                </Button>
+              </Modal.Open>
+              <Modal.Content
+                manageClass="observes"
+                parentClass="mx-auto max-w-lg mt-14"
+              >
+                <ObservesOnUser user_id={user?.user_id} />
+              </Modal.Content>
+
+              <Modal.Open openClass="user-observes">
+                <Button modifier="all-profiles">
+                  <p className="h-full flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">
+                    <strong className="font-medium text-stone-950 dark:text-stone-100">
+                      {t("profile.byobservers")}:
+                    </strong>
+                    <span className="font-semibold mt-auto sm:mt-0">
+                      {observations?.length ?? 0}
+                    </span>
+                  </p>
+                </Button>
+              </Modal.Open>
+              <Modal.Content
+                manageClass="user-observes"
+                parentClass="mx-auto max-w-lg mt-14"
+              >
+                <ObservesByUser user_id={user?.user_id} />
+              </Modal.Content>
             </div>
             <div className="py-2">
               <p className="max-w-prose text-wrap text break-words dark:text-stone-50">

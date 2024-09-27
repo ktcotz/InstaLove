@@ -14,14 +14,16 @@ export const HomeProfile = () => {
         <h2 className="text-stone-600 font-medium text-sm dark:text-stone-300">
           {t("profile.proposes")}
         </h2>
-        <Modal>
-          <Modal.Open>
-            <Button modifier="all-profiles">{t("profile.seeAll")}</Button>
-          </Modal.Open>
-          <Modal.Content parentClass="mx-auto max-w-lg mt-14">
-            <AllProposedProfiles />
-          </Modal.Content>
-        </Modal>
+
+        <Modal.Open openClass="all-profiles">
+          <Button modifier="all-profiles">{t("profile.seeAll")}</Button>
+        </Modal.Open>
+        <Modal.Content
+          manageClass="all-profiles"
+          parentClass="mx-auto max-w-lg mt-14"
+        >
+          <AllProposedProfiles />
+        </Modal.Content>
       </div>
       <ProposedProfiles />
     </div>

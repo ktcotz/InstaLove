@@ -27,16 +27,19 @@ export const Reels = () => {
 
   return reels?.map((reel) => {
     return (
-      <Modal key={reel.id}>
-        <Modal.Open>
+      <>
+        <Modal.Open openClass={`reel-${reel.id}`}>
           <Button modifier="close">
             <Post {...reel} />
           </Button>
         </Modal.Open>
-        <Modal.Content parentClass="mx-auto max-w-6xl">
+        <Modal.Content
+          manageClass={`reel-${reel.id}`}
+          parentClass="mx-auto max-w-6xl"
+        >
           <IndividualModalPost post={reel} />
         </Modal.Content>
-      </Modal>
+      </>
     );
   });
 };
