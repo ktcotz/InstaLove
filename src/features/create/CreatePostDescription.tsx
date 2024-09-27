@@ -29,7 +29,7 @@ export const CreatePostDescription = ({
   if (!user) return null;
 
   return (
-    <div className="col-start-1 col-end-3 md:col-start-auto md:col-end-auto md:border-r border-stone-300 p-4 text-left">
+    <div className="col-start-1 col-end-3 md:col-start-auto md:col-end-auto  p-4 text-left">
       <div className="flex items-center gap-4 mb-4">
         <img
           src={user?.user_metadata.avatar_url}

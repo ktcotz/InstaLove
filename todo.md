@@ -1,6 +1,8 @@
 PROCES :
 
-Deploy na vercel w celu testowania.
+1. Poprawa modala.
+2. Poprawa stories.
+
 Początek budowy messages.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :

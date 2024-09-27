@@ -32,44 +32,42 @@ export const Storie = ({ user_id }: StorieSchema) => {
 
   return (
     <div className="flex flex-col items-center gap-2">
-      <Modal>
-        <Modal.Content
-          manageClass="open-stories"
-          parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
-            !isLaptop && "relative w-full h-full md:max-w-[800px]  mx-auto"
-          }`}
+      <Modal.Content
+        manageClass={`open-stories-${user_id}`}
+        parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
+          !isLaptop && "relative w-full h-full md:max-w-[800px]  mx-auto"
+        }`}
+      >
+        <ModalStories clickedID={user_id} />
+      </Modal.Content>
+      <Modal.Open openClass={`open-stories-${user_id}`}>
+        <Button
+          aria-label={t("stories.open")}
+          modifier={isWatched ? "watched-storie" : "storie"}
         >
-          <ModalStories clickedID={user_id} />
-        </Modal.Content>
-        <Modal.Open openClass="open-stories">
-          <Button
-            aria-label={t("stories.open")}
-            modifier={isWatched ? "watched-storie" : "storie"}
-          >
-            <div className="p-1 bg-white dark:bg-black rounded-full">
-              <img
-                src={user?.avatar_url}
-                alt={user?.user_name}
-                className="rounded-full w-14 h-14"
-              />
-            </div>
-          </Button>
-        </Modal.Open>
-        {name.endsWith("...") ? (
-          <div>
-            <p
-              data-tooltip-id={`${name}-tooltip`}
-              data-tooltip-place="top"
-              className="text-xs text-stone-900 dark:text-stone-100"
-            >
-              {name}
-            </p>
-            <Tooltip id={`${name}-tooltip`}>{user.user_name}</Tooltip>
+          <div className="p-1 bg-white dark:bg-black rounded-full">
+            <img
+              src={user?.avatar_url}
+              alt={user?.user_name}
+              className="rounded-full w-14 h-14"
+            />
           </div>
-        ) : (
-          <p className="text-xs text-stone-900 dark:text-stone-100">{name}</p>
-        )}
-      </Modal>
+        </Button>
+      </Modal.Open>
+      {name.endsWith("...") ? (
+        <div>
+          <p
+            data-tooltip-id={`${name}-tooltip`}
+            data-tooltip-place="top"
+            className="text-xs text-stone-900 dark:text-stone-100"
+          >
+            {name}
+          </p>
+          <Tooltip id={`${name}-tooltip`}>{user.user_name}</Tooltip>
+        </div>
+      ) : (
+        <p className="text-xs text-stone-900 dark:text-stone-100">{name}</p>
+      )}
     </div>
   );
 };

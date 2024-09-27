@@ -33,7 +33,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
   const { mutate } = useAddMarks();
   const { marks, resetMarks } = useMarksContext();
   const { create } = useCreatePost();
-  const { createStorie,isCreatingStorie } = useAddStorie();
+  const { createStorie, isCreatingStorie } = useAddStorie();
   const { user } = useUser();
   const [file, setFile] = useState<CreatePostFile>({
     drop: null,
@@ -177,61 +177,59 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
   };
 
   return (
-    <div className="mx-auto max-w-xl sm:max-w-5xl">
-      <div className="text-center shadow-xl rounded-md bg-stone-50 dark:bg-stone-950">
-        <div className="p-3 border-b border-stone-300 dark:border-stone-50 flex items-center justify-center">
-          {preview && (
-            <DisablePostPreview
-              setPreview={setPreview}
-              setShowDescription={setShowDescription}
-            />
-          )}
-          <h1
-            className={`font-medium dark:text-stone-50 ${
-              preview ? "mr-auto" : ""
-            }`}
-          >
-            {type === "storie" ? t("create.asStorie") : t("create.asPost")}
-          </h1>
-          {preview && !showDescription && (
-            <Button
-              modifier="text"
-              onClick={() => setShowDescription(true)}
-              aria-label={t("create.next")}
-            >
-              {t("create.next")}
-            </Button>
-          )}
-
-          <CreateAction
-            showDescription={showDescription}
-            addPost={addPost}
-            type={type}
-            isCreatingStorie={isCreatingStorie}
-          />
-        </div>
-        <div className="grid md:grid-cols-3">
-          <FileDropzone
-            showDescription={showDescription}
-            setFile={setFile}
+    <div className="grow flex flex-col text-center shadow-xl my-6 sm:my-0 rounded-md bg-stone-50 dark:bg-stone-950">
+      <div className="p-3 border-b border-stone-300 dark:border-stone-50 flex items-center justify-center">
+        {preview && (
+          <DisablePostPreview
             setPreview={setPreview}
-            file={file}
-            preview={preview}
-            uploadProgress={uploadProgress}
+            setShowDescription={setShowDescription}
           />
+        )}
+        <h1
+          className={`font-medium dark:text-stone-50 ${
+            preview ? "mr-auto" : ""
+          }`}
+        >
+          {type === "storie" ? t("create.asStorie") : t("create.asPost")}
+        </h1>
+        {preview && !showDescription && (
+          <Button
+            modifier="text"
+            onClick={() => setShowDescription(true)}
+            aria-label={t("create.next")}
+          >
+            {t("create.next")}
+          </Button>
+        )}
 
-          {showDescription && (
-            <CreatePostDescription
-              description={description}
-              handleChange={handleChange}
-              changeDescription={changeDescription}
-              options={options}
-              changeOptions={handleOptionsChange}
-              handleAddMusic={handleAddMusic}
-              type={type}
-            />
-          )}
-        </div>
+        <CreateAction
+          showDescription={showDescription}
+          addPost={addPost}
+          type={type}
+          isCreatingStorie={isCreatingStorie}
+        />
+      </div>
+      <div className="grid md:grid-cols-3 grow">
+        <FileDropzone
+          showDescription={showDescription}
+          setFile={setFile}
+          setPreview={setPreview}
+          file={file}
+          preview={preview}
+          uploadProgress={uploadProgress}
+        />
+
+        {showDescription && (
+          <CreatePostDescription
+            description={description}
+            handleChange={handleChange}
+            changeDescription={changeDescription}
+            options={options}
+            changeOptions={handleOptionsChange}
+            handleAddMusic={handleAddMusic}
+            type={type}
+          />
+        )}
       </div>
     </div>
   );

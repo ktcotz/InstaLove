@@ -131,7 +131,7 @@ export const DashboardNavigationItem = ({
             <>
               <Modal.Content
                 manageClass="create"
-                parentClass="mx-auto max-w-xl sm:max-w-5xl"
+                parentClass="mx-auto grow w-full max-w-5xl flex flex-col"
               >
                 <CreatePost type="normal" />
               </Modal.Content>

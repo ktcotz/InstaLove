@@ -13,7 +13,7 @@ export const DashboardHome = () => {
   return (
     <div className="relative grid xl:grid-cols-3 gap-4">
       {isMobile && (
-        <div className="border-b border-stone-300 p-2 flex items-center gap-2 justify-between">
+        <div className="border-b border-stone-300 p-2 flex items-center gap-2 justify-between px-4 sm:px-0">
           <div className="grow">
             <Search />
           </div>

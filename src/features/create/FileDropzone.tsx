@@ -61,12 +61,14 @@ export const FileDropzone = ({
     <div
       {...getRootProps({ className: "dropzone" })}
       className={`${
-        showDescription ? "col-start-1 col-end-3" : "col-start-1 col-end-4"
+        showDescription
+          ? "col-start-1 col-end-3 h-[200px] sm:h-full"
+          : "col-start-1 col-end-4"
       }`}
     >
       <input {...getInputProps()} />
       <div
-        className="h-[300px] md:h-[500px] bg-cover bg-center relative"
+        className="h-full bg-cover bg-center relative"
         style={
           preview && file.type.includes("image")
             ? {

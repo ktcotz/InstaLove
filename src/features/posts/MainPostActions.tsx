@@ -93,7 +93,7 @@ export const MainPostActions = ({ user_id, post }: MainPostActionsProps) => {
   };
 
   return (
-    <div className="bg-stone-50 dark:bg-stone-950 py-4">
+    <div className="bg-stone-50 dark:bg-stone-950 p-4 sm:py-4">
       <div className="flex gap-4 items-center">
         <Button
           aria-label={

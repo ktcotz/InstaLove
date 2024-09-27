@@ -21,7 +21,7 @@ export const AddStorie = () => {
       </Modal.Open>
       <Modal.Content
         manageClass="add-storie"
-        parentClass="mx-auto max-w-xl sm:max-w-5xl"
+        parentClass="mx-auto grow w-full max-w-5xl flex flex-col"
       >
         <CreatePost type="storie" />
       </Modal.Content>

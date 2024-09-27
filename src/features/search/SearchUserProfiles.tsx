@@ -19,12 +19,12 @@ export const SearchUserProfiles = () => {
         </h3>
         {queries && queries.length > 0 && (
           <>
-            <Modal.Open openClass="clear">
+            <Modal.Open openClass="clear-search">
               <Button modifier="link">{t("search.clear")}</Button>
             </Modal.Open>
             <Modal.Content
-              manageClass="clear"
-              parentClass="mx-auto max-w-lg mt-14"
+              manageClass="clear-search"
+              parentClass="mx-auto max-w-lg"
             >
               <ConfirmClearUserQueries />
             </Modal.Content>

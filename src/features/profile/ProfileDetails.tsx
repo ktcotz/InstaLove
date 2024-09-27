@@ -93,13 +93,15 @@ export const ProfileDetails = () => {
     <>
       <Wrapper modifier="details">
         <div className="flex flex-col  lg:flex-row gap-16 2xl:gap-32 py-6 md:py-0">
-          {currentUser?.id === user.user_id ? (
-            <Avatar size={176} overlay={true} />
-          ) : (
-            <StorieAvatar size={176} profile={user} />
-          )}
+          <div className="self-center sm:self-start">
+            {currentUser?.id === user.user_id ? (
+              <Avatar size={176} overlay={true} />
+            ) : (
+              <StorieAvatar size={176} profile={user} />
+            )}
+          </div>
           <div className="flex flex-col gap-12 grow w-full lg:w-auto">
-            <div className="flex items-center gap-3 justify-between">
+            <div className="flex items-center gap-3 justify-between flex-wrap">
               <p className="text-xl font-medium dark:text-stone-50">
                 {user?.user_name} - {user.fullName}
               </p>

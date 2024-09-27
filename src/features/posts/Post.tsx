@@ -5,7 +5,17 @@ import { useGetPostLikes } from "./queries/useGetPostLikes";
 import { Loader } from "../../ui/Loader";
 import { useGetAllComments } from "./queries/useGetAllComments";
 
-export const Post = ({ post_url, video_url, id, views }: GeneralPost) => {
+type PostProps = {
+  maxHeight?: number;
+};
+
+export const Post = ({
+  post_url,
+  video_url,
+  id,
+  views,
+  maxHeight = 350,
+}: GeneralPost & PostProps) => {
   const { hover, unhover, isHover } = useHover();
 
   const { count, isLoading } = useGetPostLikes({ post_id: id });
@@ -24,13 +34,14 @@ export const Post = ({ post_url, video_url, id, views }: GeneralPost) => {
 
   return (
     <div
-      className="relative w-full h-full min-h-[350px]  bg-cover bg-center cursor-pointer"
+      className="relative w-full h-full aspect-square  bg-cover bg-center cursor-pointer"
       style={
         post_url
           ? {
               backgroundImage: `url(${post_url})`,
+              maxHeight: `${maxHeight}px`,
             }
-          : {}
+          : { maxHeight: `${maxHeight}px` }
       }
       onMouseEnter={() => hover()}
       onMouseLeave={() => unhover()}

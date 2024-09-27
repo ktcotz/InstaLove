@@ -6,7 +6,7 @@ import { useClearUserSearch } from "./mutations/useClearUserSearch";
 
 export const ConfirmClearUserQueries = () => {
   const { user } = useUser();
-  const { close } = useModal();
+  const { reset } = useModal();
   const { clear } = useClearUserSearch(user?.id);
   const { t } = useTranslation();
 
@@ -22,12 +22,12 @@ export const ConfirmClearUserQueries = () => {
         <Button
           onClick={() => {
             clear({ user_id: user?.id });
-            close();
+            reset();
           }}
         >
           {t("search.clear")}
         </Button>
-        <Button modifier="all-profiles" onClick={close}>
+        <Button modifier="all-profiles" onClick={reset}>
           {t("search.clearDisable")}
         </Button>
       </div>

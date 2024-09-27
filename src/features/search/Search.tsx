@@ -8,6 +8,7 @@ import { SearchUserProfiles } from "./SearchUserProfiles";
 import { useUser } from "../authentication/queries/useUser";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery, useOnClickOutside } from "usehooks-ts";
+import { useModal } from "../../ui/modal/ModalContext/useModal";
 
 const MOBILE_VIEWPORT = "768px";
 
@@ -20,12 +21,16 @@ export const Search = () => {
   const { users, isLoading } = useGetAllUsersByQuery(query);
   const [isFocused, setIsFocused] = useState(false);
   const ref = useRef(null);
+  const { opened } = useModal();
 
   const handleQuery = (val: string) => {
     setQuery(val);
   };
 
-  useOnClickOutside(ref, () => setIsFocused(false));
+  useOnClickOutside(ref, () => {
+    if (opened.length > 0) return;
+    setIsFocused(false);
+  });
 
   return (
     <div className="relative">

@@ -35,9 +35,9 @@ export const MainPost = ({ post }: MainPostProps) => {
 
   return (
     <PostsContextProvider>
-      <div className="mx-auto max-w-xl px-4 w-full">
+      <div className="mx-auto max-w-xl w-full">
         <div
-          className="relative flex  gap-3 py-3 "
+          className="relative flex  gap-3 py-3 px-4"
           onMouseLeave={() => unhover()}
         >
           <StorieAvatar profile={user} size={40} />
@@ -76,7 +76,7 @@ export const MainPost = ({ post }: MainPostProps) => {
           {isHover && <HoverProfile user_name={user.user_name} />}
         </div>
         <div
-          className="relative max-h-[700px] h-[500px] rounded-md bg-cover bg-center"
+          className="relative max-h-[700px] h-[500px] sm:rounded-md bg-cover bg-center"
           style={
             "post_url" in post
               ? { backgroundImage: `url(${post.post_url})` }

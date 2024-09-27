@@ -37,7 +37,7 @@ export const ModalContent = ({
     <ModalOverlay>
       <Modal.Close />
 
-      <div>
+      <div className="grow flex flex-col">
         <div ref={ref} className={parentClass}>
           {children}
         </div>
