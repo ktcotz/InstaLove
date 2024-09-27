@@ -1,6 +1,7 @@
 PROCES :
 
 Usuwanie postów.
+404 page.
 
 Deploy na vercel w celu testowania.
 Początek budowy messages.

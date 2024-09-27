@@ -189,5 +189,9 @@
     "likesCount": "Likes:",
     "allComments": "See all comments:",
     "sendMessage": "Send message"
+  },
+  "notFound": {
+    "title": "Server don't manage this route.",
+    "back": "Back to home"
   }
 }

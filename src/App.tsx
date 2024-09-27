@@ -25,6 +25,7 @@ import { Reels } from "./pages/Dashboard/Profile/Reels";
 import { Bookmarks } from "./pages/Dashboard/Profile/Bookmarks";
 import { DashboardIndividualPost } from "./pages/Dashboard/DashboardIndividualPost";
 import { DashboardNotifications } from "./pages/Dashboard/DashboardNotifications";
+import { NotFound } from "./pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -128,6 +129,10 @@ const router = createBrowserRouter([
         element: <DashboardReels />,
       },
     ],
+  },
+  {
+    path: GlobalRoutes.NotFound,
+    element: <NotFound />,
   },
 ]);
 

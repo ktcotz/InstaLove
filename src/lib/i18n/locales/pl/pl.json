@@ -189,5 +189,9 @@
     "likesCount": "Liczba polubień:",
     "allComments": "Zobacz wszystkie komentarze:",
     "sendMessage": "Wyślij wiadomość"
+  },
+  "notFound": {
+    "title": "Nie znaleziono takiej strony",
+    "back": "Wróć do strony głównej"
   }
 }

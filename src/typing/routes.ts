@@ -16,4 +16,5 @@ export enum GlobalRoutes {
   ForgotPassword = "/forgot-password",
   ResetPassword = "/reset-password",
   DashboardNotifications = "/dashboard/notifications",
+  NotFound = "*",
 }
