@@ -4,6 +4,7 @@ type ModalContextState = {
   open: (openClass: string) => void;
   close: () => void;
   opened: string[];
+  reset: () => void;
 };
 
 export const ModalContext = createContext<ModalContextState | null>(null);
@@ -34,8 +35,13 @@ export const ModalContextProvider = ({
     setOpened(newOpened);
   };
 
+  const reset = () => {
+    document.documentElement.classList.remove("no-scroll");
+    setOpened([]);
+  };
+
   return (
-    <ModalContext.Provider value={{ open, close, opened }}>
+    <ModalContext.Provider value={{ open, close, opened, reset }}>
       {children}
     </ModalContext.Provider>
   );

@@ -4,13 +4,15 @@ import { StorieAvatar } from "../profile/avatar/StorieAvatar";
 import { GeneralPost } from "./schema/PostsSchema";
 import { useTranslation } from "react-i18next";
 import { getDateFnsLocaleByActiveLanguage } from "./helpers/dateLocale";
-import { CustomLink } from "../../ui";
+import { Button, CustomLink, Modal } from "../../ui";
 import { useHover } from "../profile/hooks/useHover";
 import { HoverProfile } from "../profile/HoverProfile";
 import { StoriesMarks } from "../stories/StoriesMarks";
 import { MainPostActions } from "./MainPostActions";
 import { useUser } from "../authentication/queries/useUser";
 import { PostsContextProvider } from "./context/PostsContext";
+import { IoIosMore } from "react-icons/io";
+import { PostOptions } from "./PostOptions";
 
 type MainPostProps = {
   post: GeneralPost;
@@ -56,6 +58,21 @@ export const MainPost = ({ post }: MainPostProps) => {
               {user.fullName}
             </p>
           </div>
+          {user && (
+            <div className="ml-auto flex items-center justify-center text-stone-950 dark:text-stone-50 text-2xl">
+              <Modal.Open openClass={`${post.id}-options`}>
+                <Button modifier="close">
+                  <IoIosMore />
+                </Button>
+              </Modal.Open>
+              <Modal.Content
+                manageClass={`${post.id}-options`}
+                parentClass="mx-auto max-w-lg mt-14"
+              >
+                <PostOptions post={post} user={user} />
+              </Modal.Content>
+            </div>
+          )}
           {isHover && <HoverProfile user_name={user.user_name} />}
         </div>
         <div

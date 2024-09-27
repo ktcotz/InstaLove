@@ -188,7 +188,12 @@
     "comments": "Comments",
     "likesCount": "Likes:",
     "allComments": "See all comments:",
-    "sendMessage": "Send message"
+    "sendMessage": "Send message",
+    "goTo": "Navigate to post",
+    "delete": "Delete post",
+    "deleteTitle": "Delete this post?",
+    "deleteDescription": "This action cannot be undone. If you delete your post,it cannot be restored. ",
+    "nodelete": "Don't remove"
   },
   "notFound": {
     "title": "Server don't manage this route.",

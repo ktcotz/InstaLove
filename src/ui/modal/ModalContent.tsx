@@ -24,7 +24,10 @@ export const ModalContent = ({
     }
   });
 
-  useOnClickOutside(ref, close);
+  useOnClickOutside(ref, (ev) => {
+    if (ev.target instanceof HTMLButtonElement) return;
+    close();
+  });
 
   if (opened.length === 0) return null;
 

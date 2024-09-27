@@ -188,7 +188,12 @@
     "comments": "Komentarze",
     "likesCount": "Liczba polubień:",
     "allComments": "Zobacz wszystkie komentarze:",
-    "sendMessage": "Wyślij wiadomość"
+    "sendMessage": "Wyślij wiadomość",
+    "goTo": "Przejdź do posta",
+    "delete": "Usuń post",
+    "deleteTitle": "Usunąć tego posta?",
+    "deleteDescription": "Tej operacji nie będzie można cofnąć. Jeżeli usuniesz ten post, nie będziesz mógł go już przywrócić.",
+    "nodelete": "Nie usuwaj"
   },
   "notFound": {
     "title": "Nie znaleziono takiej strony",

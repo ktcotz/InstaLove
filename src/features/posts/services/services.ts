@@ -4,6 +4,7 @@ import { UserID } from "../../authentication/services/types";
 import { MAX_COMMENTS_POST } from "../IndividualModalPost";
 import { AddViewProps } from "../mutations/useAddView";
 import { Bookmark } from "../mutations/useBookmark";
+import { DeletePost } from "../mutations/useDeletePost";
 import { CommentLikes } from "../queries/useGetCommentLikes";
 import { PostLikes } from "../queries/useGetPostLikes";
 import { UserPost } from "../queries/useGetUserPost";
@@ -351,4 +352,22 @@ export const getAllResources = async () => {
   const parsed = GeneralsPostsSchema.parse(combined);
 
   return parsed.sort(() => Math.random() - 0.5);
+};
+
+export const deletePost = async ({ id, user_id }: DeletePost) => {
+  console.log(id, user_id);
+
+  const { error } = await supabase
+    .from("posts")
+    .delete()
+    .eq("id", id)
+    .eq("user_id", user_id);
+
+  console.log(error);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
 };
