@@ -22,6 +22,7 @@ import { StorieAvatar } from "./avatar/StorieAvatar";
 import { useTranslation } from "react-i18next";
 import { GlobalRoutes } from "../../typing/routes";
 import { LuSend } from "react-icons/lu";
+import { useEffect } from "react";
 
 export const ProfileDetails = () => {
   const { t } = useTranslation();
@@ -29,6 +30,14 @@ export const ProfileDetails = () => {
   const { user: currentUser } = useUser();
   const { data: user, isLoading } = useProfile(profile);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = `${user?.fullName} (@${user?.user_name})`;
+
+    return () => {
+      document.title = `InstaLove - love ❤️`;
+    };
+  }, [user?.fullName, user?.user_name]);
 
   const { observations } = useGetObservesByUser({ user_id: user?.user_id });
   const { observations: onUserObservations } = useGetObservesOnUser({

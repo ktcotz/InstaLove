@@ -255,9 +255,6 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
             file={file}
             preview={preview}
             uploadProgress={uploadProgress}
-            description={description}
-            handleChange={handleChange}
-            changeDescription={changeDescription}
             type={type}
             options={options}
             changeOptions={handleOptionsChange}

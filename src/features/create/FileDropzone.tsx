@@ -67,9 +67,9 @@ export const FileDropzone = ({
         showDescription && !isMobile
           ? "col-start-1 col-end-3 h-[200px] sm:h-full row-start-1 -row-end-1"
           : "col-start-1 col-end-4 row-start-1 -row-end-1"
-      } ${isMobile && "col-start-1 col-end-4 row-start-1 -row-end-1"} ${
+      } ${isMobile && "col-start-1 col-end-4"} ${
         mark && "grow w-full flex flex-col"
-      }`}
+      } ${showDescription && isMobile && "row-start-1 row-end-2"}`}
     >
       <input {...getInputProps()} />
       <div

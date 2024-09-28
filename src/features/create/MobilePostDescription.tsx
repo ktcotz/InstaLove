@@ -1,5 +1,4 @@
 import { ChangeEvent } from "react";
-import { Textarea } from "../../ui/Textarea";
 import { useTranslation } from "react-i18next";
 import { Button, Loader, Modal } from "../../ui";
 import { FaMusic } from "react-icons/fa";
@@ -9,9 +8,6 @@ import { CreatePostFile } from "./CreatePost";
 import { useModal } from "../../ui/modal/ModalContext/useModal";
 
 type MobilePostDescriptionProps = {
-  description: string;
-  changeDescription: (description: string) => void;
-  handleChange: (ev: ChangeEvent<HTMLTextAreaElement>) => void;
   type: "normal" | "storie";
   options: { comments: boolean; likes: boolean };
   changeOptions: (ev: ChangeEvent<HTMLInputElement>) => void;
@@ -27,9 +23,6 @@ type MobilePostDescriptionProps = {
 };
 
 export const MobilePostDescription = ({
-  description,
-  changeDescription,
-  handleChange,
   type,
   options,
   changeOptions,
@@ -41,19 +34,13 @@ export const MobilePostDescription = ({
   preview,
   uploadProgress,
   addPost,
-  isCreatingStorie
+  isCreatingStorie,
 }: MobilePostDescriptionProps) => {
   const { t } = useTranslation();
   const { reset } = useModal();
 
   return (
     <div className="p-4 col-start-1 col-end-4">
-      <Textarea
-        description={description}
-        changeDescription={changeDescription}
-        handleChange={handleChange}
-        type={type}
-      />
       <div className="py-4 flex flex-col gap-2 mb-4">
         <div className="flex items-center gap-2">
           <input
@@ -128,7 +115,7 @@ export const MobilePostDescription = ({
         <Button onClick={reset}>Zrezygnuj z tworzenia</Button>
 
         <Button modifier="submit" onClick={addPost}>
-          {isCreatingStorie ? <Loader/> : "Stwórz"}
+          {isCreatingStorie ? <Loader /> : "Stwórz"}
         </Button>
       </div>
     </div>
