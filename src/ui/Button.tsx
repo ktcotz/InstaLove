@@ -23,7 +23,9 @@ type ButtonType =
   | "notification"
   | "watched"
   | "watched-storie"
-  | "follow";
+  | "follow"
+  | "mobile-create"
+  | "music";
 
 type ButtonProps = {
   children: ReactNode;
@@ -37,6 +39,8 @@ export const Button = forwardRef<
   const base = "inline-block";
 
   const modifierObject: Record<ButtonType, string> = {
+    ["mobile-create"]:
+      "flex items-center gap-2 text-sm text-stone-50 bg-blue-500 py-2 px-4 font-medium rounded-full",
     primary:
       "w-full flex items-center justify-center bg-red-600 rounded-md bg-secondary text-slate-50 py-3 hover:bg-red-500 transition md:px-8 focus:outline-none focus:ring focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-primary",
     follow:
@@ -66,6 +70,7 @@ export const Button = forwardRef<
     mark: "text-left p-3",
     hover: "flex flex-col",
     notification: "flex items-center gap-3",
+    music: "absolute top-1/2 right-0 -translate-y-1/2 -translate-x-2",
     watched:
       "rounded-full  p-[2px] flex items-center justify-center h-full w-fit bg-gradient-to-r dark:from-stone-700 dark:to-stone-700 from-stone-300 to-stone-300",
     avatar:

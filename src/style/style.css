@@ -130,8 +130,10 @@ html {
   height: 100%;
 }
 
-.mobile-swiper .nested-stories {
-  height: calc(100vh - 32px);
+@media (max-width: 576px) {
+  .mobile-swiper .nested-stories {
+    height: 100vh;
+  }
 }
 
 .nested-stories {

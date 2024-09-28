@@ -15,7 +15,7 @@ export const Storie = ({ user_id }: StorieSchema) => {
   const { user: current } = useUser();
   const { user } = useUserByID(user_id);
   const { t } = useTranslation();
-  const isLaptop = useMediaQuery("(min-width:1024px)");
+  const isMobile = useMediaQuery("(min-width:576px)");
   const { watched } = useGetProfileStories({
     profileID: user?.user_id,
     userID: current?.id,
@@ -33,11 +33,11 @@ export const Storie = ({ user_id }: StorieSchema) => {
   return (
     <div className="flex flex-col items-center gap-2">
       <Modal.Content
-        fullScreen={isLaptop ? false : true}
+        fullScreen={isMobile ? false : true}
         manageClass={`open-stories-${user_id}`}
-        parentClass={`flex items-center gap-6 max-h-[700px] h-[700px] ${
-          !isLaptop &&
-          "relative w-full  grow max-h-full flex flex-col  md:max-w-[800px]  mx-auto"
+        parentClass={`w-full mx-auto flex items-center gap-6 max-h-[700px] h-[700px] max-w-[700px] ${
+          !isMobile &&
+          "relative w-full  grow max-h-full flex flex-col  md:max-w-[600px]  mx-auto"
         }`}
       >
         <ModalStories clickedID={user_id} />

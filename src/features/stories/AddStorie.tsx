@@ -3,9 +3,11 @@ import { Button } from "../../ui/Button";
 import { Modal } from "../../ui/modal/Modal";
 import { CreatePost } from "../create/CreatePost";
 import { useTranslation } from "react-i18next";
+import { useMediaQuery } from "usehooks-ts";
 
 export const AddStorie = () => {
   const { t } = useTranslation();
+  const isMobile = useMediaQuery("(max-width:576px)");
 
   return (
     <>
@@ -21,6 +23,7 @@ export const AddStorie = () => {
       </Modal.Open>
       <Modal.Content
         manageClass="add-storie"
+        fullScreen={!!isMobile}
         parentClass="mx-auto grow w-full max-w-5xl flex flex-col"
       >
         <CreatePost type="storie" />

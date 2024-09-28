@@ -48,7 +48,7 @@ export const CustomReel = ({
   const isMuted = id === muted.id ? muted.isMuted : true;
 
   return (
-    <div className="relative h-[500px] max-h-[500px] sm:h-[700px] sm:max-h-[700px] grid grid-cols-[1fr_auto]  overflow-hidden">
+    <div className="relative w-full h-[500px] max-h-[500px] sm:h-[700px] sm:max-h-[700px] grid grid-cols-[1fr_auto]  overflow-hidden">
       <div className="relative max-h-[500px] sm:max-h-[700px]">
         <div className="h-full w-full ">
           <video

@@ -1,7 +1,7 @@
 PROCES :
 
-1. Poprawa modala.
-2. Poprawa stories.
+1. Loader initial na środku.
+2. Create storie na całym polu.
 
 Początek budowy messages.
 

@@ -31,7 +31,7 @@ export const MarkUsers = () => {
 
   return (
     <div
-      className="relative top-0 left-0 w-full h-full bg-black/70"
+      className="absolute top-0 left-0 w-full h-full bg-black/30"
       onClick={(e) => {
         e.stopPropagation();
         setChoosenUser("");
@@ -47,7 +47,7 @@ export const MarkUsers = () => {
       }}
       ref={ref}
     >
-      {x && y && !choosenUser && (
+      {x && y && !choosenUser ? (
         <MarkSearchUsers
           query={query}
           handleQuery={handleQuery}
@@ -55,10 +55,11 @@ export const MarkUsers = () => {
           reset={() => setChoosenUser("reset")}
           position={position}
         />
-      )}
+      ) : null}
 
-      {marks.length > 0 &&
-        marks.map((mark) => <Mark {...mark} key={mark.id} />)}
+      {marks.length > 0
+        ? marks.map((mark) => <Mark {...mark} key={mark.id} />)
+        : null}
     </div>
   );
 };

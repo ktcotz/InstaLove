@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { PostLoader } from "./PostLoader";
 import { MarkUsers } from "../mark/MarkUsers";
 import { useMarksContext } from "../mark/context/useMarksContext";
+import { useMediaQuery } from "usehooks-ts";
 
 type FileDropzoneProps = {
   showDescription: boolean;
@@ -14,6 +15,7 @@ type FileDropzoneProps = {
   file: CreatePostFile;
   preview: string | null;
   uploadProgress: number;
+  mark?: boolean;
 };
 
 export const FileDropzone = ({
@@ -23,10 +25,11 @@ export const FileDropzone = ({
   file,
   preview,
   uploadProgress,
+  mark = false,
 }: FileDropzoneProps) => {
   const { t } = useTranslation();
   const { open, toggleOpen, resetMarks } = useMarksContext();
-
+  const isMobile = useMediaQuery("(max-width:576px)");
   const { getRootProps, getInputProps } = useDropzone({
     maxFiles: 1,
     accept: {
@@ -43,11 +46,11 @@ export const FileDropzone = ({
       "video/mpeg": [".mpeg"],
       "video/webm": [".webm"],
     },
+    disabled: showDescription,
     onDrop: (files) => {
       const droppedFile = files[0];
 
       const previewFile = URL.createObjectURL(droppedFile);
-
       setPreview(previewFile);
       resetMarks();
       setFile({
@@ -61,14 +64,16 @@ export const FileDropzone = ({
     <div
       {...getRootProps({ className: "dropzone" })}
       className={`${
-        showDescription
+        showDescription && !isMobile
           ? "col-start-1 col-end-3 h-[200px] sm:h-full"
           : "col-start-1 col-end-4"
+      } ${isMobile && "col-start-1 col-end-4 row-start-1 -row-end-1"} ${
+        mark && "grow w-full flex flex-col"
       }`}
     >
       <input {...getInputProps()} />
       <div
-        className="h-full bg-cover bg-center relative"
+        className="h-full bg-cover bg-center relative grow flex flex-col"
         style={
           preview && file.type.includes("image")
             ? {
@@ -77,21 +82,29 @@ export const FileDropzone = ({
             : {}
         }
       >
-        {preview && file.type.includes("image") && showDescription && (
-          <div className="absolute top-4 left-4 z-50">
-            <Button
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleOpen();
-              }}
-              modifier="submit"
-            >
-              {t("create.tag")}
-            </Button>
-          </div>
-        )}
+        {preview &&
+          file.type.includes("image") &&
+          showDescription &&
+          !isMobile && (
+            <div className="absolute top-4 left-4 z-50">
+              <Button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleOpen();
+                }}
+                modifier="submit"
+              >
+                {t("create.tag")}
+              </Button>
+            </div>
+          )}
 
-        {open && file.type.includes("image") && preview && <MarkUsers />}
+        {(open && file.type.includes("image") && preview) ||
+          (mark && (
+            <div className="grow">
+              <MarkUsers />
+            </div>
+          ))}
 
         {!preview && (
           <div className="h-full flex flex-col items-center justify-center gap-6">
@@ -99,7 +112,7 @@ export const FileDropzone = ({
               aria-label={t("create.heading")}
               className="text-6xl dark:fill-stone-100"
             />
-            <h2 className="text-xl sm:text-2xl dark:text-stone-100">
+            <h2 className="text-lg sm:text-2xl dark:text-stone-100">
               {t("create.heading")}
             </h2>
             <Button modifier="submit" aria-label={t("create.button")}>

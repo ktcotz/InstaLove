@@ -1,8 +1,9 @@
-import { ReactNode, useRef } from "react";
+import { ReactNode, useEffect, useRef } from "react";
 import { ModalOverlay } from "./ModalOverlay";
 import { useModal } from "./ModalContext/useModal";
 import { Modal } from "./Modal";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
+import { useLocation } from "react-router";
 
 type ModalContentProps = {
   children: ReactNode;
@@ -17,8 +18,25 @@ export const ModalContent = ({
   manageClass,
   fullScreen = false,
 }: ModalContentProps) => {
-  const { close, opened } = useModal();
+  const { close, opened, reset } = useModal();
+  const location = useLocation();
   const ref = useRef<HTMLDivElement>(null);
+  const parentRef = useRef<HTMLDivElement>(null);
+  const prevLocation = useRef(location);
+
+  useEffect(() => {
+    return () => {
+      if (location !== prevLocation.current) {
+        const isBackNavigation = location.key !== prevLocation.current.key;
+
+        if (isBackNavigation) {
+          reset();
+        }
+
+        prevLocation.current = location;
+      }
+    };
+  }, [location, reset]);
 
   useEventListener("keydown", (ev) => {
     if (ev.key === "Escape") {
@@ -27,8 +45,11 @@ export const ModalContent = ({
   });
 
   useOnClickOutside(ref, (ev) => {
-    if (ev.target instanceof HTMLButtonElement) return;
-    close();
+    if (!(ev.target instanceof HTMLElement)) return;
+
+    if (ev.target === parentRef.current) {
+      close();
+    }
   });
 
   if (opened.length === 0) return null;
@@ -38,7 +59,7 @@ export const ModalContent = ({
   return (
     <ModalOverlay>
       {!fullScreen && <Modal.Close />}
-      <div className="grow flex flex-col">
+      <div className="grow flex flex-col" ref={parentRef}>
         <div ref={ref} className={parentClass}>
           {children}
         </div>

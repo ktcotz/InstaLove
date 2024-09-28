@@ -22,12 +22,14 @@ type HoverProfileProps = {
   user_name: string;
   showPosts?: boolean;
   position?: "top" | "bottom";
+  proposed?: boolean;
 };
 
 export const HoverProfile = ({
   user_name,
   showPosts = true,
   position = "bottom",
+  proposed = true,
 }: HoverProfileProps) => {
   const { t } = useTranslation();
   const { user: currentUser } = useUser();
@@ -93,7 +95,9 @@ export const HoverProfile = ({
         position === "bottom"
           ? "bottom-0 translate-y-full"
           : "top-0 -translate-y-full"
-      } left-0 p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg rounded-md min-w-[388px] dark:bg-stone-950`}
+      } ${
+        !proposed ? "left-0" : "-left-32"
+      } p-4 2xl:p-6 bg-stone-50 z-50 shadow-lg rounded-md min-w-[388px] dark:bg-stone-950`}
     >
       <>
         <div className="flex items-center gap-4 mb-2">

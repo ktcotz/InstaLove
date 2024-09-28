@@ -8,7 +8,7 @@ import { useGetYoutubeTitle } from "../queries/useGetYoutubeTitle";
 import ReactPlayer from "react-player";
 import { GoMute, GoUnmute } from "react-icons/go";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { useEventListener } from "usehooks-ts";
+import { useEventListener, useMediaQuery } from "usehooks-ts";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { StoriesMarks } from "../StoriesMarks";
 import { useUser } from "../../authentication/queries/useUser";
@@ -48,6 +48,7 @@ export const ModalStorie = ({
   const { user } = useUserByID(user_id);
   const { title, isLoading } = useGetYoutubeTitle(music);
   const { addWatchedStorie } = useAddWatched();
+  const minimumMobile = useMediaQuery("(max-width:576px)");
 
   const handlePlayPause = () => {
     const toggled = !played;
@@ -102,7 +103,7 @@ export const ModalStorie = ({
         backgroundImage: `${`linear-gradient(to bottom,rgba(0,0,0,.5),rgba(0,0,0,.5)),url(${post_url})`}`,
       }}
       className={`h-[350px] ${(active || mobile || nested) && "h-[700px]"} ${
-        nested ? "absolute top-0 left-0 h-[calc(100vh-32px)]" : "relative"
+        minimumMobile ? "absolute top-0 left-0 h-screen" : "relative"
       } w-full  transition-all ease-linear duration-700 bg-no-repeat bg-cover bg-center`}
     >
       {post_url && active && <StoriesMarks user_id={user_id} post_id={id} />}

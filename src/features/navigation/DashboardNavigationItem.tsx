@@ -50,6 +50,7 @@ export const DashboardNavigationItem = ({
   const { toggleOpen, component } = useNavigationContext();
   const { user } = useUser();
   const { data: currentUser } = useProfile(user!.user_metadata.user_name);
+  const isMobile = useMediaQuery("(max-width:576px)");
 
   if (!currentUser) return;
 
@@ -130,6 +131,7 @@ export const DashboardNavigationItem = ({
           {title === "navigation.create" && (
             <>
               <Modal.Content
+                fullScreen={!!isMobile}
                 manageClass="create"
                 parentClass="mx-auto grow w-full max-w-5xl flex flex-col"
               >

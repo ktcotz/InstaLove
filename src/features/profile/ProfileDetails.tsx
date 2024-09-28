@@ -148,7 +148,7 @@ export const ProfileDetails = () => {
               </Modal.Open>
               <Modal.Content
                 manageClass="observes"
-                parentClass="mx-auto max-w-lg mt-14"
+                parentClass="mx-auto max-w-lg mt-14 w-full px-4"
               >
                 <ObservesOnUser user_id={user?.user_id} />
               </Modal.Content>
@@ -167,7 +167,7 @@ export const ProfileDetails = () => {
               </Modal.Open>
               <Modal.Content
                 manageClass="user-observes"
-                parentClass="mx-auto max-w-lg mt-14"
+                parentClass="mx-auto max-w-lg mt-14 w-full px-4"
               >
                 <ObservesByUser user_id={user?.user_id} />
               </Modal.Content>

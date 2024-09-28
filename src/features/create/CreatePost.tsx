@@ -17,6 +17,9 @@ import { useAddMarks } from "../mark/mutations/useAddMarks";
 import { useMarksContext } from "../mark/context/useMarksContext";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { getProfile } from "../profile/services/services";
+import { useMediaQuery } from "usehooks-ts";
+import { MobilePostPreview } from "./MobilePostPreview";
+import { MobilePostDescription } from "./MobilePostDescription";
 
 export type CreatePostFile = {
   drop: File | null;
@@ -47,6 +50,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
     comments: false,
     likes: false,
   });
+  const isMobile = useMediaQuery("(max-width:576px)");
   const { notify } = useAddNotification({ user_id: user!.id });
 
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -177,39 +181,51 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
   };
 
   return (
-    <div className="grow flex flex-col text-center shadow-xl my-6 md:my-0 rounded-md bg-stone-50 dark:bg-stone-950">
-      <div className="p-3 border-b border-stone-300 dark:border-stone-50 flex items-center justify-center">
-        {preview && (
-          <DisablePostPreview
+    <div
+      className={`grow flex flex-col text-center lg:shadow-xl ${
+        isMobile ? "my-0" : "my-6"
+      } md:my-0 rounded-md bg-stone-50 dark:bg-stone-950`}
+    >
+      {!isMobile && (
+        <div className="p-3 border-b border-stone-300 dark:border-stone-50 flex items-center justify-center">
+          {preview && (
+            <DisablePostPreview
+              setPreview={setPreview}
+              setShowDescription={setShowDescription}
+            />
+          )}
+          <h1
+            className={`font-medium dark:text-stone-50 ${
+              preview ? "mr-auto" : ""
+            }`}
+          >
+            {type === "storie" ? t("create.asStorie") : t("create.asPost")}
+          </h1>
+          {preview && !showDescription && (
+            <Button
+              modifier="text"
+              onClick={() => setShowDescription(true)}
+              aria-label={t("create.next")}
+            >
+              {t("create.next")}
+            </Button>
+          )}
+
+          <CreateAction
+            showDescription={showDescription}
+            addPost={addPost}
+            type={type}
+            isCreatingStorie={isCreatingStorie}
+          />
+        </div>
+      )}
+      <div className="grid md:grid-cols-3 grid-rows-2 grow">
+        {isMobile && preview && !showDescription && (
+          <MobilePostPreview
             setPreview={setPreview}
             setShowDescription={setShowDescription}
           />
         )}
-        <h1
-          className={`font-medium dark:text-stone-50 ${
-            preview ? "mr-auto" : ""
-          }`}
-        >
-          {type === "storie" ? t("create.asStorie") : t("create.asPost")}
-        </h1>
-        {preview && !showDescription && (
-          <Button
-            modifier="text"
-            onClick={() => setShowDescription(true)}
-            aria-label={t("create.next")}
-          >
-            {t("create.next")}
-          </Button>
-        )}
-
-        <CreateAction
-          showDescription={showDescription}
-          addPost={addPost}
-          type={type}
-          isCreatingStorie={isCreatingStorie}
-        />
-      </div>
-      <div className="grid md:grid-cols-3 grow">
         <FileDropzone
           showDescription={showDescription}
           setFile={setFile}
@@ -219,7 +235,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
           uploadProgress={uploadProgress}
         />
 
-        {showDescription && (
+        {!isMobile && showDescription && (
           <CreatePostDescription
             description={description}
             handleChange={handleChange}
@@ -228,6 +244,26 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
             changeOptions={handleOptionsChange}
             handleAddMusic={handleAddMusic}
             type={type}
+          />
+        )}
+
+        {isMobile && showDescription && (
+          <MobilePostDescription
+            showDescription={showDescription}
+            setFile={setFile}
+            setPreview={setPreview}
+            file={file}
+            preview={preview}
+            uploadProgress={uploadProgress}
+            description={description}
+            handleChange={handleChange}
+            changeDescription={changeDescription}
+            type={type}
+            options={options}
+            changeOptions={handleOptionsChange}
+            handleAddMusic={handleAddMusic}
+            addPost={addPost}
+            isCreatingStorie={isCreatingStorie}
           />
         )}
       </div>

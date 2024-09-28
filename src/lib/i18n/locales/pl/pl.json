@@ -193,7 +193,10 @@
     "delete": "Usuń post",
     "deleteTitle": "Usunąć tego posta?",
     "deleteDescription": "Tej operacji nie będzie można cofnąć. Jeżeli usuniesz ten post, nie będziesz mógł go już przywrócić.",
-    "nodelete": "Nie usuwaj"
+    "nodelete": "Nie usuwaj",
+    "continue": "Dalej",
+    "music": "Dodaj muzykę",
+    "tag": "Oznacz użytkownika"
   },
   "notFound": {
     "title": "Nie znaleziono takiej strony",

@@ -53,7 +53,7 @@ export const MarkSearchUsers = ({
           ))}
         </div>
       ) : (
-        <p className="py-2 font-semibold text-sm dark:text-stone-200">
+        <p className="py-2 font-semibold text-sm dark:text-stone-200 text-center">
           {t("mark.search")}
         </p>
       )}

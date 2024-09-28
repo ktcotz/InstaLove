@@ -193,7 +193,10 @@
     "delete": "Delete post",
     "deleteTitle": "Delete this post?",
     "deleteDescription": "This action cannot be undone. If you delete your post,it cannot be restored. ",
-    "nodelete": "Don't remove"
+    "nodelete": "Don't remove",
+    "continue": "Continue",
+    "music": "Add music",
+    "tag": "Mark user"
   },
   "notFound": {
     "title": "Server don't manage this route.",
