@@ -3,10 +3,12 @@ import { useNavigate } from "react-router";
 import { loginUser } from "../services/services";
 import { GlobalRoutes } from "../../../typing/routes";
 import { CustomError } from "../../../utils/CustomErrors";
+import { useModal } from "../../../ui/modal/ModalContext/useModal";
 
 export const useLogin = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
+  const { reset } = useModal();
 
   const {
     mutate: login,
@@ -21,6 +23,7 @@ export const useLogin = () => {
         },
         user.user
       );
+      reset();
       navigate(GlobalRoutes.Dashboard);
     },
 

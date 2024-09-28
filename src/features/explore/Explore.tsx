@@ -6,8 +6,9 @@ import { ExploreSkeleton } from "./ExploreSkeleton";
 export const MAX_EXPLORE_POST = 4;
 
 export const Explore = () => {
-  const { data, fetchNextPage, hasNextPage, isFetching, isLoading } =
+  const { data, fetchNextPage, hasNextPage, isFetching } =
     useGetAllPostsAndReels();
+  const isLoading = true;
 
   const observer = useRef<IntersectionObserver>();
   const lastElementRef = useCallback(
@@ -26,8 +27,6 @@ export const Explore = () => {
     },
     [fetchNextPage, hasNextPage, isFetching, isLoading]
   );
-
-  console.log(data?.pages);
 
   return (
     <div className="mx-auto px-1 w-full max-w-6xl grow flex flex-col">

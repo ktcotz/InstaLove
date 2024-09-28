@@ -3,7 +3,8 @@ import { ModalOverlay } from "./ModalOverlay";
 import { useModal } from "./ModalContext/useModal";
 import { Modal } from "./Modal";
 import { useEventListener, useOnClickOutside } from "usehooks-ts";
-import { useLocation } from "react-router";
+import { NavigationType, useLocation, useNavigate } from "react-router";
+import { router } from "../../App";
 
 type ModalContentProps = {
   children: ReactNode;
@@ -22,21 +23,17 @@ export const ModalContent = ({
   const location = useLocation();
   const ref = useRef<HTMLDivElement>(null);
   const parentRef = useRef<HTMLDivElement>(null);
-  const prevLocation = useRef(location);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    return () => {
-      if (location !== prevLocation.current) {
-        const isBackNavigation = location.key !== prevLocation.current.key;
-
-        if (isBackNavigation) {
+    if (opened.length > 0) {
+      router.subscribe((state) => {
+        if (state.historyAction === NavigationType.Pop) {
           reset();
         }
-
-        prevLocation.current = location;
-      }
-    };
-  }, [location, reset]);
+      });
+    }
+  }, [location.pathname, navigate, reset, opened.length]);
 
   useEventListener("keydown", (ev) => {
     if (ev.key === "Escape") {

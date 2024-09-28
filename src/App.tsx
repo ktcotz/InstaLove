@@ -27,7 +27,7 @@ import { DashboardIndividualPost } from "./pages/Dashboard/DashboardIndividualPo
 import { DashboardNotifications } from "./pages/Dashboard/DashboardNotifications";
 import { NotFound } from "./pages/NotFound";
 
-const router = createBrowserRouter([
+export const router = createBrowserRouter([
   {
     path: GlobalRoutes.Home,
     element: (

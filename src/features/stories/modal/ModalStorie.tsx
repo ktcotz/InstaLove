@@ -144,7 +144,7 @@ export const ModalStorie = ({
                   <>
                     <p className="text-xs text-stone-50 flex items-center gap-2">
                       <FaMusic />
-                      {title.snippet.title}
+                      {title?.snippet?.title ?? "Loading.."}
                     </p>
                     <ReactPlayer
                       url={music}
