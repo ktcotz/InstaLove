@@ -67,7 +67,7 @@ export const MainPost = ({ post }: MainPostProps) => {
               </Modal.Open>
               <Modal.Content
                 manageClass={`${post.id}-options`}
-                parentClass="mx-auto max-w-lg mt-14 w-full"
+                parentClass="mx-auto max-w-lg mt-14 w-full px-4"
               >
                 <PostOptions post={post} user={user} />
               </Modal.Content>

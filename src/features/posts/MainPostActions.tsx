@@ -145,7 +145,7 @@ export const MainPostActions = ({ user_id, post }: MainPostActionsProps) => {
           </Modal.Open>
           <Modal.Content
             manageClass={`likes-${post.id}`}
-            parentClass="mx-auto max-w-lg mt-14 w-full"
+            parentClass="mx-auto max-w-lg mt-14 w-full px-4"
           >
             <Likes likes={likes} />
           </Modal.Content>

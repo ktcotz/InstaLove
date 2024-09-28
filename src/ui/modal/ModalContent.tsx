@@ -27,6 +27,7 @@ export const ModalContent = ({
 
   useEffect(() => {
     if (opened.length > 0) {
+      navigate(location.pathname);
       router.subscribe((state) => {
         if (state.historyAction === NavigationType.Pop) {
           reset();
