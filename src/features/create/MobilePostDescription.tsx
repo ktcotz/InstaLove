@@ -49,11 +49,13 @@ export const MobilePostDescription = ({
   return (
     <div className="p-4 col-start-1 col-end-4">
       <div className="py-4 flex flex-col gap-2 mb-4">
-        <Textarea
-          description={description}
-          changeDescription={changeDescription}
-          handleChange={handleChange}
-        />
+        {type === "normal" ? (
+          <Textarea
+            description={description}
+            changeDescription={changeDescription}
+            handleChange={handleChange}
+          />
+        ) : null}
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
