@@ -201,5 +201,9 @@
   "notFound": {
     "title": "Server don't manage this route.",
     "back": "Back to home"
+  },
+  "messages": {
+    "startTitle": "Your messages",
+    "startDescription": "Send private photos and messages to a friend or group."
   }
 }

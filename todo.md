@@ -1,9 +1,15 @@
-PROCES :
+PROCES : BUDOWA MESSAGES
 
-1. Loader initial na środku.
-2. Create storie na całym polu.
+1. Logika aktywności usera, zalogowany i wylogowany. Potrzebne do sprawdzenia aktualnie zalogowanych użytkowników.
+2. Pobranie tych użytkowników w messages bar i wyrenderowanie ich (MAX 10 users).
 
-Początek budowy messages.
+Logika:
+
+1. Jeżeli zaloguje się to zaktualizuj usera w tabeli users, pole logged_in.
+2. Jeżeli zamknie stronę to zaktualizuj usera w tabeli users, pole logout_in.
+
+
+
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
