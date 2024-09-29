@@ -6,8 +6,12 @@ import { AddMusic } from "../stories/AddMusic";
 import { MobileMarkDropzone } from "./MobileMarkDropzone";
 import { CreatePostFile } from "./CreatePost";
 import { useModal } from "../../ui/modal/ModalContext/useModal";
+import { Textarea } from "../../ui/Textarea";
 
 type MobilePostDescriptionProps = {
+  description: string;
+  changeDescription: (description: string) => void;
+  handleChange: (ev: ChangeEvent<HTMLTextAreaElement>) => void;
   type: "normal" | "storie";
   options: { comments: boolean; likes: boolean };
   changeOptions: (ev: ChangeEvent<HTMLInputElement>) => void;
@@ -35,6 +39,9 @@ export const MobilePostDescription = ({
   uploadProgress,
   addPost,
   isCreatingStorie,
+  description,
+  changeDescription,
+  handleChange,
 }: MobilePostDescriptionProps) => {
   const { t } = useTranslation();
   const { reset } = useModal();
@@ -42,6 +49,11 @@ export const MobilePostDescription = ({
   return (
     <div className="p-4 col-start-1 col-end-4">
       <div className="py-4 flex flex-col gap-2 mb-4">
+        <Textarea
+          description={description}
+          changeDescription={changeDescription}
+          handleChange={handleChange}
+        />
         <div className="flex items-center gap-2">
           <input
             type="checkbox"

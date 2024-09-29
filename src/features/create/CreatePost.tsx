@@ -182,8 +182,8 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
 
   return (
     <div
-      className={`flex flex-col text-center lg:shadow-xl ${
-        isMobile ? "my-0 h-screen" : "my-6 min-h-[700px]"
+      className={`relative z-50 flex flex-col text-center lg:shadow-xl ${
+        isMobile ? "my-0 h-[calc(100vh-32px)]" : "my-6 min-h-[700px]"
       } md:my-0 rounded-md bg-stone-50 dark:bg-stone-950 `}
     >
       {!isMobile && (
@@ -219,7 +219,7 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
           />
         </div>
       )}
-      <div className="grid md:grid-cols-3 grid-rows-2 h-screen sm:h-[700px] sm:max-h-[700px]">
+      <div className="grid md:grid-cols-3 grid-rows-2 h-[calc(100vh-32px)] sm:h-[700px] sm:max-h-[700px]">
         {isMobile && preview && !showDescription && (
           <MobilePostPreview
             setPreview={setPreview}
@@ -252,6 +252,9 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
             showDescription={showDescription}
             setFile={setFile}
             setPreview={setPreview}
+            description={description}
+            handleChange={handleChange}
+            changeDescription={changeDescription}
             file={file}
             preview={preview}
             uploadProgress={uploadProgress}
