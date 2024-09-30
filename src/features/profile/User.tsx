@@ -46,7 +46,10 @@ export const User = () => {
           </p>
         </div>
       </div>
-      <Button modifier="text" onClick={() => signoutUser()}>
+      <Button
+        modifier="text"
+        onClick={() => signoutUser({ user_id: user?.id })}
+      >
         {t("home.logout")}
       </Button>
     </div>

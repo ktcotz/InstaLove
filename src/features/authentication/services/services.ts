@@ -81,6 +81,8 @@ const addUser = async ({
         user_name: nickname,
         user_id,
         fullName: "",
+        loggedIn: null,
+        unLoggedIn: null,
         biogram: "",
         avatar_url: avatar_url
           ? avatar_url
@@ -109,6 +111,18 @@ export const loginUser = async ({ email, password }: UserCredentials) => {
       message: error.message,
       code: error.status,
     });
+  }
+  if (data.user) {
+    const { error: updateError } = await supabase
+      .from("users")
+      .update({ loggedIn: new Date() })
+      .eq("user_id", data.user.id);
+
+    if (updateError) {
+      throw new CustomError({
+        message: updateError.message,
+      });
+    }
   }
 
   return data;
@@ -176,13 +190,39 @@ export const getUserByID = async ({ user_id }: UserID) => {
   return parsed;
 };
 
-export const signout = async () => {
+export const signout = async ({ user_id }: UserID) => {
+  const { error: updateError } = await supabase
+    .from("users")
+    .update({ unLoggedIn: new Date() })
+    .eq("user_id", user_id)
+    .select();
+
+  if (updateError) {
+    throw new CustomError({
+      message: updateError.message,
+    });
+  }
+
   const { error } = await supabase.auth.signOut();
 
   if (error) {
     throw new CustomError({
       message: error.message,
       code: error.status,
+    });
+  }
+};
+
+export const loggedOut = async ({ user_id }: UserID) => {
+  const { error: updateError } = await supabase
+    .from("users")
+    .update({ unLoggedIn: new Date() })
+    .eq("user_id", user_id)
+    .select();
+
+  if (updateError) {
+    throw new CustomError({
+      message: updateError.message,
     });
   }
 };

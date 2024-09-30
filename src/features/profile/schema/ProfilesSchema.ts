@@ -8,6 +8,8 @@ export const ProfileSchema = z.object({
   type: z.enum(["public", "private"]),
   fullName: z.string(),
   biogram: z.string(),
+  loggedIn: z.date().nullable(),
+  unLoggedIn: z.date().nullable(),
 });
 
 export const ProfilesSchema = z.array(ProfileSchema);

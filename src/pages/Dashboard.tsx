@@ -4,6 +4,7 @@ import { ComponentManager } from "../features/navigation/ComponentManager";
 import { MarksContextProvider } from "../features/mark/context/MarksContextProvider";
 import { useEffect } from "react";
 import { useTernaryDarkMode } from "usehooks-ts";
+
 export const Dashboard = () => {
   const { isDarkMode } = useTernaryDarkMode();
 
