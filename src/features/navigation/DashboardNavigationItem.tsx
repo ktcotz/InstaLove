@@ -49,10 +49,9 @@ export const DashboardNavigationItem = ({
   const { t } = useTranslation();
   const { toggleOpen, component } = useNavigationContext();
   const { user } = useUser();
-  const { data: currentUser } = useProfile(user!.user_metadata.user_name);
-  const isMobile = useMediaQuery("(max-width:576px)");
 
-  if (!currentUser) return;
+  const { data: currentUser } = useProfile(user?.user_metadata.user_name);
+  const isMobile = useMediaQuery("(max-width:576px)");
 
   const icons: Record<NavigationRoutes, JSX.Element> = {
     home:
@@ -91,7 +90,7 @@ export const DashboardNavigationItem = ({
         modifier="navigation"
         to={
           to === GlobalRoutes.DashboardProfile
-            ? `${currentUser!.user_name}`
+            ? `${currentUser?.user_name}`
             : to
         }
         activeClass="bg-stone-200 font-semibold dark:text-stone-950"
@@ -99,12 +98,12 @@ export const DashboardNavigationItem = ({
         data-tooltip-id={`link-${title}`}
         data-tooltip-place={mobileMatches ? "top" : "right"}
       >
-        {to === GlobalRoutes.DashboardProfile && user ? (
+        {to === GlobalRoutes.DashboardProfile && currentUser ? (
           <img
-            src={`${currentUser.avatar_url}`}
+            src={`${currentUser?.avatar_url ?? ""}`}
             width={24}
             height={24}
-            alt={`${currentUser.user_name}`}
+            alt={`${currentUser?.user_name ?? ""}`}
             className="rounded-full w-6 h-6"
           />
         ) : (

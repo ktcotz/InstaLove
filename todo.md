@@ -1,3 +1,8 @@
+Do poprawy:
+
+2. AuthContext do poprawy pobierania useUsera.
+3. Loading na profile details.
+
 PROCES : BUDOWA MESSAGES
 
 1. Logika aktywności usera, zalogowany i wylogowany. Potrzebne do sprawdzenia aktualnie zalogowanych użytkowników.
@@ -7,9 +12,6 @@ Logika:
 
 1. Jeżeli zaloguje się to zaktualizuj usera w tabeli users, pole logged_in.
 2. Jeżeli zamknie stronę to zaktualizuj usera w tabeli users, pole logout_in.
-
-
-
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 

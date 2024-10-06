@@ -78,6 +78,7 @@ const addUser = async ({
     .from("users")
     .insert([
       {
+        type: "public",
         user_name: nickname,
         user_id,
         fullName: "",
