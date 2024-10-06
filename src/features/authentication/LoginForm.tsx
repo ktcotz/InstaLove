@@ -7,6 +7,7 @@ import { ZodI18NHandler } from "../../lib/i18n/i18n.types";
 import { useTranslation } from "react-i18next";
 import { useLogin } from "./mutations/useLogin";
 import { GlobalRoutes } from "../../typing/routes";
+import { useAuth } from "./context/useAuth";
 
 export const LoginForm = () => {
   const {
@@ -19,9 +20,17 @@ export const LoginForm = () => {
   const { t } = useTranslation();
   const { login, isLogin, loginError } = useLogin();
   const { isPasswordShow } = useFormContext();
+  const { setupUser } = useAuth();
 
   const submitHandler = ({ email, password }: LoginSchema) => {
-    login({ email, password });
+    login(
+      { email, password },
+      {
+        onSuccess: (user) => {
+          setupUser(user.user);
+        },
+      }
+    );
   };
 
   return (

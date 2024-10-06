@@ -6,6 +6,7 @@ import "./style/style.css";
 import "./lib/i18n/i18n.ts";
 import { Modal } from "./ui/index.ts";
 import { NavigationContextProvider } from "./features/navigation/context/NavigationContext.tsx";
+import { AuthContextProvider } from "./features/authentication/context/AuthContext.tsx";
 
 const client = new QueryClient();
 
@@ -14,7 +15,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <QueryClientProvider client={client}>
       <NavigationContextProvider>
         <Modal>
-          <App />
+          <AuthContextProvider>
+            <App />
+          </AuthContextProvider>
         </Modal>
       </NavigationContextProvider>
     </QueryClientProvider>
