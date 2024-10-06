@@ -66,7 +66,10 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
         </Modal.Open>
       </div>
       {preview && (
-        <Modal.Content manageClass="avatar" parentClass="max-w-lg mx-auto">
+        <Modal.Content
+          manageClass="avatar"
+          parentClass="max-w-lg mx-auto w-full"
+        >
           <ChangeAvatar
             preview={preview}
             disablePreview={() => setPreview(null)}

@@ -100,10 +100,10 @@ export const DashboardNavigationItem = ({
       >
         {to === GlobalRoutes.DashboardProfile && currentUser ? (
           <img
-            src={`${currentUser?.avatar_url ?? ""}`}
+            src={currentUser.avatar_url}
             width={24}
             height={24}
-            alt={`${currentUser?.user_name ?? ""}`}
+            alt={currentUser.fullName}
             className="rounded-full w-6 h-6"
           />
         ) : (

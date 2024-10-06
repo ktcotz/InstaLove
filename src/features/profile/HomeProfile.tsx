@@ -20,7 +20,7 @@ export const HomeProfile = () => {
         </Modal.Open>
         <Modal.Content
           manageClass="all-profiles"
-          parentClass="mx-auto max-w-lg mt-14"
+          parentClass="mx-auto max-w-lg mt-14 w-full"
         >
           <AllProposedProfiles />
         </Modal.Content>

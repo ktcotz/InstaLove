@@ -28,6 +28,7 @@ export const ChangeAvatar = ({
       { file, user_id },
       {
         onSuccess: () => {
+          disablePreview();
           close();
         },
       }

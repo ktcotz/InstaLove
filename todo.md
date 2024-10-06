@@ -2,6 +2,7 @@ Do poprawy:
 
 2. AuthContext do poprawy pobierania useUsera.
 3. Loading na profile details.
+4. Poprawa pobierania znajomych.
 
 PROCES : BUDOWA MESSAGES
 

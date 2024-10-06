@@ -196,7 +196,8 @@
     "nodelete": "Don't remove",
     "continue": "Continue",
     "music": "Add music",
-    "tag": "Mark user"
+    "tag": "Mark user",
+    "noMainPosts": "No posts to display, add more friends or add a post yourself!"
   },
   "notFound": {
     "title": "Server don't manage this route.",

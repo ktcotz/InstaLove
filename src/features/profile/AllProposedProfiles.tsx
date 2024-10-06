@@ -34,9 +34,17 @@ export const AllProposedProfiles = () => {
             </div>
           )}
           {!isLoading &&
-            profiles?.map((profile) => (
+            profiles &&
+            profiles.length > 0 &&
+            profiles.map((profile) => (
               <SubModalItem key={profile.id} user_id={profile.user_id} />
             ))}
+
+          {!isLoading && !profiles?.length && (
+            <div className="flex items-center justify-center p-4">
+              <p>{t("profile.noProposesFriends")}</p>
+            </div>
+          )}
 
           {count && count > MAX_PROPOSED_PROFILES && (
             <Pagination

@@ -196,7 +196,8 @@
     "nodelete": "Nie usuwaj",
     "continue": "Dalej",
     "music": "Dodaj muzykę",
-    "tag": "Oznacz użytkownika"
+    "tag": "Oznacz użytkownika",
+    "noMainPosts": "Brak postów do wyświetlenia, dodaj więcej znajomych, albo sam dodaj post!"
   },
   "notFound": {
     "title": "Nie znaleziono takiej strony",
