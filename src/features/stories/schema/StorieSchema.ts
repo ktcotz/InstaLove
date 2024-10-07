@@ -10,6 +10,7 @@ export const StorieDTOSchema = z.object({
 });
 
 export const WatchedDTOSchema = z.object({
+  storie_id: z.number(),
   user_id: z.string(),
   watched: z.boolean(),
   current_id: z.string(),

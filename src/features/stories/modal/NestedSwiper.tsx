@@ -101,9 +101,8 @@ export const NestedSwiper = ({
       }}
     >
       {stories.map((storie, id) => (
-        <SwiperSlide>
+        <SwiperSlide key={storie.id}>
           <ModalStorie
-            key={storie.id}
             {...storie}
             timer={timer}
             nested={true}

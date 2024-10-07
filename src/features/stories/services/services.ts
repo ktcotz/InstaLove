@@ -142,7 +142,7 @@ export const getStoriesByProfileID = async ({
 
   const { data: watched, error: watchedError } = await supabase
     .from("watched")
-    .select("watched")
+    .select("*")
     .eq("user_id", profileID)
     .eq("current_id", userID);
 
@@ -152,18 +152,18 @@ export const getStoriesByProfileID = async ({
     });
   }
 
-  const parsed = Stories.parse(stories);
-
-  return { parsed, watched: watched[0] };
+  return { watched, stories };
 };
 
 export const addStorieToWatched = async (watched: WatchedDTO) => {
+  if (watched.current_id === watched.user_id) return;
+
   const { data: isWatched } = await supabase
     .from("watched")
     .select("*")
     .eq("user_id", watched.user_id)
     .eq("current_id", watched.current_id)
-    .eq("watched", true);
+    .eq("storie_id", watched.storie_id);
 
   if (isWatched && isWatched.length > 0) return;
 

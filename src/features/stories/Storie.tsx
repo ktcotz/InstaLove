@@ -6,17 +6,17 @@ import { ModalStories } from "./modal/ModalStories";
 import { Storie as StorieSchema } from "./schema/StorieSchema";
 import { Tooltip } from "react-tooltip";
 import { useMediaQuery } from "usehooks-ts";
-import { useUser } from "../authentication/queries/useUser";
 import { useGetProfileStories } from "./queries/useGetProfileStories";
+import { useAuth } from "../authentication/context/useAuth";
 
 const MAX_LENGTH = 10;
 
 export const Storie = ({ user_id }: StorieSchema) => {
-  const { user: current } = useUser();
+  const { user: current } = useAuth();
   const { user } = useUserByID(user_id);
   const { t } = useTranslation();
   const isMobile = useMediaQuery("(min-width:576px)");
-  const { watched } = useGetProfileStories({
+  const { watched, stories } = useGetProfileStories({
     profileID: user?.user_id,
     userID: current?.id,
   });
@@ -28,7 +28,7 @@ export const Storie = ({ user_id }: StorieSchema) => {
       ? `${user.user_name.slice(0, MAX_LENGTH)}...`
       : user.user_name;
 
-  const isWatched = watched && watched.watched;
+  const isWatched = watched?.length === stories?.length;
 
   return (
     <div className="flex flex-col items-center gap-2">

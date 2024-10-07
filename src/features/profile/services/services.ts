@@ -11,26 +11,16 @@ type ProfileName = {
   user_name?: string;
 };
 
-export const getProfiles = async ({
-  id,
-  limit,
-  page,
-}: ProposedProfilesProps) => {
+export const getProfiles = async ({ id, page }: ProposedProfilesProps) => {
   const observations = await getObserversByUser({ user_id: id });
   const observationsIds = observations.map(
     (observation) => observation.observe_id
   );
 
-  const rangeStart = Math.floor(Math.random() * 10 + 1);
-
-  const limitQuery = limit
-    ? supabase
-        .from("users")
-        .select("*", { count: "exact" })
-        .neq("user_id", id)
-        .range(rangeStart, rangeStart + MAX_PROPOSED_PROFILES)
-        .limit(limit)
-    : supabase.from("users").select("*", { count: "exact" }).neq("user_id", id);
+  const limitQuery = supabase
+    .from("users")
+    .select("*", { count: "exact" })
+    .neq("user_id", id);
 
   const query = page
     ? limitQuery.range(

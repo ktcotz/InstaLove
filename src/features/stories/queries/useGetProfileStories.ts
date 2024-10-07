@@ -13,5 +13,5 @@ export const useGetProfileStories = ({
     enabled: !!userID && !!profileID,
   });
 
-  return { data: data?.parsed, watched: data?.watched, isLoading } as const;
+  return { watched: data?.watched, stories: data?.stories, isLoading } as const;
 };

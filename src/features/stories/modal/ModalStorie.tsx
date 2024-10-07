@@ -11,9 +11,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { useEventListener, useMediaQuery } from "usehooks-ts";
 import ProgressBar from "@ramonak/react-progress-bar";
 import { StoriesMarks } from "../StoriesMarks";
-import { useUser } from "../../authentication/queries/useUser";
 import { useAddWatched } from "../mutations/useAddWatched";
 import { NestedProgressBar } from "./NestedProgressbar";
+import { useAuth } from "../../authentication/context/useAuth";
 
 type ModalStorieProps = {
   active?: boolean;
@@ -40,7 +40,7 @@ export const ModalStorie = ({
   nestedStories,
   nestedStorie,
 }: ModalStorieProps & Storie & { id: number }) => {
-  const { user: current } = useUser();
+  const { user: current } = useAuth();
   const ref = useRef(document.body);
   const videoRef = useRef<HTMLVideoElement>(null);
   const [muted, setMuted] = useState(true);
@@ -88,14 +88,15 @@ export const ModalStorie = ({
   );
 
   useEffect(() => {
-    if (!current || !active) return;
+    if (!active || !current) return;
 
     addWatchedStorie({
+      storie_id: id,
       current_id: current.id,
       user_id: user_id,
       watched: true,
     });
-  }, [current, user_id, addWatchedStorie, active]);
+  }, [current, user_id, addWatchedStorie, active, id]);
 
   return (
     <div
