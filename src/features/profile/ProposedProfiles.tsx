@@ -4,12 +4,14 @@ import { ProposedProfilesSkeleton } from "./ProposedProfilesSkeleton";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../authentication/context/useAuth";
 
+const MAX_PROFILES = 5;
+
 export const ProposedProfiles = () => {
   const { t } = useTranslation();
   const { user } = useAuth();
   const { profiles, isLoading } = useProfiles({
     id: user?.id,
-    limit: 5,
+    limit: MAX_PROFILES,
   });
 
   if (isLoading)
@@ -29,7 +31,7 @@ export const ProposedProfiles = () => {
 
   return (
     <div className="flex flex-col gap-3 self-stretch">
-      {profiles?.map((profile) => (
+      {profiles?.slice(0, MAX_PROFILES).map((profile) => (
         <ProposedProfile key={profile.id} profile={profile} />
       ))}
     </div>
