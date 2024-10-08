@@ -13,7 +13,7 @@ type StorieAvatarProps = {
 
 export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
   const { user } = useUser();
-  const { data, watched } = useGetProfileStories({
+  const { stories, watched } = useGetProfileStories({
     profileID: profile.user_id,
     userID: user?.id,
   });
@@ -26,8 +26,8 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
     40: "w-10 h-10 rounded-full",
   };
 
-  const hasStorie = data && data.length > 0;
-  const isWatched = watched && watched.watched;
+  const hasStorie = stories && stories.length > 0;
+  const isWatched = stories && watched && stories.length <= watched.length;
 
   if (hasStorie) {
     return (

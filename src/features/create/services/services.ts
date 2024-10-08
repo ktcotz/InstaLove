@@ -29,9 +29,17 @@ export const createPost = async ({
   const imageName = `${type}-${post_image.name}`;
 
   try {
+    await supabase.storage
+      .from(user_id)
+      .upload(`${type}/${imageName}`, post_image, {
+        cacheControl: "3600",
+        upsert: true,
+      });
+
     const { data: signedUrl } = await supabase.storage
       .from(user_id)
       .createSignedUrl(`${type}/${imageName}`, 365 * 24 * 60 * 60);
+
 
     if (!signedUrl?.signedUrl)
       throw new Error("Something wrong with this file!");

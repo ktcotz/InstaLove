@@ -1,12 +1,12 @@
-import { useUser } from "../authentication/queries/useUser";
 import { ProposedProfile } from "./ProposedProfile";
 import { useProfiles } from "./queries/useProfiles";
 import { ProposedProfilesSkeleton } from "./ProposedProfilesSkeleton";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../authentication/context/useAuth";
 
 export const ProposedProfiles = () => {
   const { t } = useTranslation();
-  const { user } = useUser();
+  const { user } = useAuth();
   const { profiles, isLoading } = useProfiles({
     id: user?.id,
     limit: 5,

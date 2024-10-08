@@ -6,8 +6,8 @@ import { Profile } from "../profile/schema/ProfilesSchema";
 import { useAddUserSearch } from "./mutations/useAddUserSearch";
 import { useTranslation } from "react-i18next";
 import { useDeleteIndividualUserSearch } from "./mutations/useDeleteIndividualUserSearch";
-import { useUser } from "../authentication/queries/useUser";
 import { MarkDTO } from "../mark/schema/MarkSchema";
+import { useAuth } from "../authentication/context/useAuth";
 
 type SearchUserProps = {
   currentID?: string;
@@ -26,7 +26,7 @@ export const SearchUser = ({
   isMarkable,
   position,
 }: Profile & SearchUserProps) => {
-  const { user } = useUser();
+  const { user } = useAuth();
 
   const { close } = useNavigationContext();
   const { addSearch } = useAddUserSearch(currentID);

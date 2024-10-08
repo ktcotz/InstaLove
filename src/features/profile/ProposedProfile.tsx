@@ -1,7 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
-import { useUser } from "../authentication/queries/useUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { StorieAvatar } from "./avatar/StorieAvatar";
 import { useHover } from "./hooks/useHover";
@@ -9,6 +8,7 @@ import { HoverProfile } from "./HoverProfile";
 import { useObservation } from "./mutations/useObservation";
 import { useGetObserve } from "./queries/useGetObserve";
 import { Profile } from "./schema/ProfilesSchema";
+import { useAuth } from "../authentication/context/useAuth";
 
 type ProposedProfileProps = {
   profile: Profile;
@@ -17,7 +17,7 @@ type ProposedProfileProps = {
 export const ProposedProfile = ({ profile }: ProposedProfileProps) => {
   const { user_name, user_id } = profile;
   const { t } = useTranslation();
-  const { user: currentUser } = useUser();
+  const { user: currentUser } = useAuth();
   const { isHover, hover, unhover } = useHover();
   const { observer } = useObservation({
     user_id: currentUser!.id,

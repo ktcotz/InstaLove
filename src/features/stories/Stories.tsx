@@ -7,9 +7,11 @@ import { Wrapper } from "../../ui/Wrapper";
 import "swiper/css";
 import "swiper/css/navigation";
 import { StoriesSkeleton } from "./StoriesSkeleton";
+import { useAuth } from "../authentication/context/useAuth";
 
 export const Stories = () => {
-  const { stories, isLoading } = useGetAllStories();
+  const { user } = useAuth();
+  const { stories, isLoading } = useGetAllStories({ current: user?.id });
 
   const filteredStories = stories?.filter((storie) => storie.inner_id === null);
 

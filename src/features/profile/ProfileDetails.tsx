@@ -1,8 +1,6 @@
 import { CustomLink } from "../../ui/CustomLink";
 import { useProfile } from "./queries/useProfile";
 import { useProfileParams } from "./queries/useProfileParams";
-import { Loader } from "../../ui/Loader";
-import { useUser } from "../authentication/queries/useUser";
 import { useGetPosts } from "../posts/queries/useGetPosts";
 import { Wrapper } from "../../ui/Wrapper";
 import { CiBookmark, CiViewBoard, CiVideoOn } from "react-icons/ci";
@@ -23,11 +21,13 @@ import { useTranslation } from "react-i18next";
 import { GlobalRoutes } from "../../typing/routes";
 import { LuSend } from "react-icons/lu";
 import { useEffect } from "react";
+import { useAuth } from "../authentication/context/useAuth";
+import { ProfileDetailsLoading } from "./ProfileDetailsLoading";
 
 export const ProfileDetails = () => {
   const { t } = useTranslation();
   const { profile } = useProfileParams();
-  const { user: currentUser } = useUser();
+  const { user: currentUser } = useAuth();
   const { data: user, isLoading } = useProfile(profile);
   const navigate = useNavigate();
 
@@ -44,26 +44,21 @@ export const ProfileDetails = () => {
     user_id: user?.user_id,
   });
 
-  const { notify } = useAddNotification({ user_id: currentUser!.id });
+  const { notify } = useAddNotification({ user_id: currentUser?.id });
 
   const { observation } = useGetObserve({
-    user_id: currentUser!.id,
+    user_id: currentUser?.id,
     observe_id: user?.user_id,
   });
 
   const { observer } = useObservation({
-    user_id: currentUser!.id,
+    user_id: currentUser?.id,
     observe_id: user?.user_id,
   });
 
   const { data: posts, isLoading: isPostsLoading } = useGetPosts(user?.user_id);
 
-  if (isLoading || isPostsLoading)
-    return (
-      <div className="p-4">
-        <Loader />
-      </div>
-    );
+  if (isLoading || isPostsLoading) return <ProfileDetailsLoading />;
 
   if (!user) {
     navigate(GlobalRoutes.Dashboard);
@@ -112,7 +107,7 @@ export const ProfileDetails = () => {
           <div className="flex flex-col gap-12 grow w-full lg:w-auto">
             <div className="flex items-center gap-3 justify-between flex-wrap">
               <p className="text-xl font-medium dark:text-stone-50">
-                {user?.user_name} - {user.fullName}
+                {user?.user_name} {user?.fullName && `- ${user.fullName}`}
               </p>
               <div className="mr-left flex gap-2">
                 {currentUser?.id === user.user_id ? null : !isObserve ? null : (

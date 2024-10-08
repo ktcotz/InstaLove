@@ -5,10 +5,10 @@ import { useGetAllUsersByQuery } from "./query/useGetAllUsersByQuery";
 import { Loader } from "../../ui/Loader";
 import { SearchUser } from "./SearchUser";
 import { SearchUserProfiles } from "./SearchUserProfiles";
-import { useUser } from "../authentication/queries/useUser";
 import { useTranslation } from "react-i18next";
 import { useMediaQuery, useOnClickOutside } from "usehooks-ts";
 import { useModal } from "../../ui/modal/ModalContext/useModal";
+import { useAuth } from "../authentication/context/useAuth";
 
 const MOBILE_VIEWPORT = "768px";
 
@@ -17,7 +17,7 @@ export const Search = () => {
 
   const { t } = useTranslation();
   const [query, setQuery] = useState("");
-  const { user: current } = useUser();
+  const { user: current } = useAuth();
   const { users, isLoading } = useGetAllUsersByQuery(query);
   const [isFocused, setIsFocused] = useState(false);
   const ref = useRef(null);

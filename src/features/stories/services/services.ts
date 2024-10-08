@@ -1,6 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { NestedStoriesData } from "../queries/useGetAllNestedStories";
+import { AllNonUserStories } from "../queries/useGetAllStories";
 import { GetProfileStoriesData } from "../queries/useGetProfileStories";
 import { StorieDTO, Stories, WatchedDTO } from "../schema/StorieSchema";
 
@@ -78,8 +79,11 @@ export const addStorie = async ({
   return data;
 };
 
-export const getAllStories = async () => {
-  const { data: stories, error } = await supabase.from("stories").select("*");
+export const getAllStories = async ({ current }: AllNonUserStories) => {
+  const { data: stories, error } = await supabase
+    .from("stories")
+    .select("*")
+    .neq("user_id", current);
 
   if (error) {
     throw new CustomError({

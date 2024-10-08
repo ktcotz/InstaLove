@@ -1,13 +1,13 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "../../ui/Button";
 import { Modal } from "../../ui/modal/Modal";
-import { useUser } from "../authentication/queries/useUser";
 import { ConfirmClearUserQueries } from "./ConfirmClearUserQueries";
 import { useGetUserSearchQueries } from "./query/useGetUserSearchQueries";
 import { SearchQueryProfile } from "./SearchQueryProfile";
+import { useAuth } from "../authentication/context/useAuth";
 
 export const SearchUserProfiles = () => {
-  const { user } = useUser();
+  const { user } = useAuth();
   const { queries } = useGetUserSearchQueries(user?.id);
   const { t } = useTranslation();
 

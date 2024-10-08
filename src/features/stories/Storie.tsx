@@ -28,7 +28,7 @@ export const Storie = ({ user_id }: StorieSchema) => {
       ? `${user.user_name.slice(0, MAX_LENGTH)}...`
       : user.user_name;
 
-  const isWatched = watched?.length === stories?.length;
+  const isWatched = watched && stories && watched.length >= stories.length;
 
   return (
     <div className="flex flex-col items-center gap-2">

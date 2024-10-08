@@ -19,7 +19,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
       navigate(GlobalRoutes.Login);
     }
 
-    if (user) {
+    if (!isLoading && user) {
       setupUser(user);
     }
   }, [isLoading, isAuthenticated, navigate, setupUser, user]);

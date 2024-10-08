@@ -7,7 +7,6 @@ import {
 } from "react-icons/fa";
 import { Button } from "../../ui/Button";
 import { CustomLink } from "../../ui/CustomLink";
-import { useUser } from "../authentication/queries/useUser";
 import { useAddNotification } from "../notifications/mutations/useAddNotification";
 import { useLike } from "../posts/mutations/useLike";
 import { useGetPostLikes } from "../posts/queries/useGetPostLikes";
@@ -21,6 +20,7 @@ import { PostsContextProvider } from "../posts/context/PostsContext";
 import { useMediaQuery } from "usehooks-ts";
 import { useTranslation } from "react-i18next";
 import { Profile } from "../profile/schema/ProfilesSchema";
+import { useAuth } from "../authentication/context/useAuth";
 
 type ReelActionsProps = {
   user: Profile;
@@ -32,7 +32,7 @@ const MOBILE_VIEWPORT = "640px";
 export const ReelActions = ({ user, id }: ReelActionsProps) => {
   const { t, i18n } = useTranslation();
   const isMobile = useMediaQuery(`(max-width:${MOBILE_VIEWPORT})`);
-  const { user: current } = useUser();
+  const { user: current } = useAuth();
   const { like } = useLike({ post_id: id, user_id: user.user_id });
   const { likes, count } = useGetPostLikes({ post_id: id });
   const { notify } = useAddNotification({ user_id: current!.id });

@@ -1,7 +1,3 @@
-Do poprawy:
-
-3. Loading na profile details.
-
 PROCES : BUDOWA MESSAGES
 
 1. Logika aktywności usera, zalogowany i wylogowany. Potrzebne do sprawdzenia aktualnie zalogowanych użytkowników.

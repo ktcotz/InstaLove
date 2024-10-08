@@ -1,11 +1,11 @@
 import { useTranslation } from "react-i18next";
 import { Button } from "../../ui/Button";
 import { useModal } from "../../ui/modal/ModalContext/useModal";
-import { useUser } from "../authentication/queries/useUser";
 import { useClearUserSearch } from "./mutations/useClearUserSearch";
+import { useAuth } from "../authentication/context/useAuth";
 
 export const ConfirmClearUserQueries = () => {
-  const { user } = useUser();
+  const { user } = useAuth();
   const { reset } = useModal();
   const { clear } = useClearUserSearch(user?.id);
   const { t } = useTranslation();
