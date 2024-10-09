@@ -3,7 +3,7 @@ import { IndividualModalPost } from "./IndividualModalPost";
 import { useGetUserPost } from "./queries/useGetUserPost";
 import { useNavigate } from "react-router";
 import { GlobalRoutes } from "../../typing/routes";
-import { Loader } from "../../ui/Loader";
+import { UserPostSkeleton } from "./UserPostSkeleton";
 
 type UserPostProps = {
   postID: string;
@@ -18,7 +18,9 @@ export const UserPost = ({ postID, profile }: UserPostProps) => {
     user_id: user?.user_id,
   });
 
-  if (isUserLoading || isPostLoading) return <Loader />;
+  const isLoading = isUserLoading || isPostLoading;
+
+  if (isLoading) return <UserPostSkeleton />;
 
   if (!post || !user) {
     navigate(GlobalRoutes.Dashboard);

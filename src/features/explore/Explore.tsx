@@ -6,9 +6,8 @@ import { ExploreSkeleton } from "./ExploreSkeleton";
 export const MAX_EXPLORE_POST = 4;
 
 export const Explore = () => {
-  const { data, fetchNextPage, hasNextPage, isFetching } =
+  const { data, fetchNextPage, hasNextPage, isFetching, isLoading } =
     useGetAllPostsAndReels();
-  const isLoading = true;
 
   const observer = useRef<IntersectionObserver>();
   const lastElementRef = useCallback(
@@ -41,13 +40,12 @@ export const Explore = () => {
               lastElement={lastElementRef}
             />
           ))}
+        {isLoading && (
+          <div className="grid grid-cols-3 grid-rows-2 gap-1 p-6">
+            <ExploreSkeleton />
+          </div>
+        )}
       </div>
-
-      {isLoading && (
-        <div className="grid grid-cols-3 grid-rows-2 gap-1 p-6">
-          <ExploreSkeleton />
-        </div>
-      )}
     </div>
   );
 };

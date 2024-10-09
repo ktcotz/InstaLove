@@ -49,7 +49,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
       <div
         className={`grid ${
           "video_url" in post ? "grid-rows-5" : "grid-rows-3"
-        }  bg-stone-50 dark:bg-stone-950 rounded-md sm:shadow-lg sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 h-[700px] max-h-[800px] mt-3`}
+        }  bg-stone-50 dark:bg-stone-950 rounded-md sm:shadow-lg sm:grid-rows-1 sm:grid-cols-6 md:grid-cols-5 h-[650px] max-h-[800px] mt-3`}
       >
         <div
           style={

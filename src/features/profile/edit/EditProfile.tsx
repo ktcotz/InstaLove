@@ -1,4 +1,3 @@
-import { useUser } from "../../authentication/queries/useUser";
 import { LanguageSwitcher } from "../../../ui/LanguageSwitcher";
 import { ThemeSwitcher } from "../../../ui/ThemeSwitcher";
 import { EditUsername } from "./EditUsername";
@@ -8,10 +7,11 @@ import { useProfile } from "../queries/useProfile";
 import { Loader } from "../../../ui/Loader";
 import { Avatar } from "../avatar/Avatar";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../../authentication/context/useAuth";
 
 export const EditProfile = () => {
   const { t } = useTranslation();
-  const { user } = useUser();
+  const { user } = useAuth();
   const { data: current, isLoading } = useProfile(
     user?.user_metadata.user_name
   );
@@ -21,7 +21,7 @@ export const EditProfile = () => {
   if (!current) return;
 
   return (
-    <div className="pb-32">
+    <div className="py-8">
       <h1 className="text-xl text-stone-950 font-semibold mb-6 dark:text-stone-50">
         {t("profile.edit")}
       </h1>

@@ -76,6 +76,7 @@ export const AddComment = ({
               theme={isDarkMode ? Theme.DARK : Theme.LIGHT}
               searchDisabled={true}
               skinTonesDisabled={true}
+              className="z-50"
               onEmojiClick={(emoji) => {
                 setValue("comment", `${getValues("comment")}${emoji.emoji}`);
               }}
