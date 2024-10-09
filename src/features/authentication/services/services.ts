@@ -227,3 +227,17 @@ export const loggedOut = async ({ user_id }: UserID) => {
     });
   }
 };
+
+export const loggedIn = async ({ user_id }: UserID) => {
+  const { error: updateError } = await supabase
+    .from("users")
+    .update({ loggedIn: new Date() })
+    .eq("user_id", user_id)
+    .select();
+
+  if (updateError) {
+    throw new CustomError({
+      message: updateError.message,
+    });
+  }
+};
