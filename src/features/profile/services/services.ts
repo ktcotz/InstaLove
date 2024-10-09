@@ -150,3 +150,17 @@ export const getObserversOnUser = async ({
 
   return observations;
 };
+
+export const getAllActiveUsers = async () => {
+  const { data, error } = await supabase.from("users").select("*");
+
+  const filtered = data?.filter((item) => item.loggedIn > item.unLoggedIn);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return filtered;
+};

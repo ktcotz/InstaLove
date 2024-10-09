@@ -25,7 +25,8 @@ export type CustomLinkModifier =
   | "mobile-notification"
   | "hover-name"
   | "search"
-  | "close";
+  | "close"
+  | "active";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -44,6 +45,7 @@ export const CustomLink = ({
   const base = "font-base";
 
   const modifiers: Record<CustomLinkModifier, string> = {
+    active: "flex flex-col items-center gap-2",
     close: "group",
     send: "dark:bg-stone-50 dark:text-stone-950 bg-stone-950 text-stone-50 rounded-md p-2 w-full flex items-center justify-center gap-1",
     primary:
