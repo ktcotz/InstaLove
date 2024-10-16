@@ -10,7 +10,7 @@ export const ChatBar = () => {
 
   return (
     <div className="p-4 flex flex-col border-r border-stone-300 dark:border-stone-50">
-      <h2 className="text-stone-950 dark:text-stone-50 font-semibold text-xl mb-8">
+      <h2 className="text-stone-950 dark:text-stone-50 font-semibold text-xl mb-4 md:mb-8">
         {user?.user_name}
       </h2>
       <ChatBarSwipper />

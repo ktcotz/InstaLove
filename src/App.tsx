@@ -25,6 +25,7 @@ import { Bookmarks } from "./pages/Dashboard/Profile/Bookmarks";
 import { DashboardIndividualPost } from "./pages/Dashboard/DashboardIndividualPost";
 import { DashboardNotifications } from "./pages/Dashboard/DashboardNotifications";
 import { NotFound } from "./pages/NotFound";
+import { StartChat } from "./features/chat/StartChat";
 
 export const router = createBrowserRouter([
   {
@@ -86,6 +87,12 @@ export const router = createBrowserRouter([
       {
         path: GlobalRoutes.DashboardMessages,
         element: <DashboardMessages />,
+        children: [
+          {
+            path: "",
+            element: <StartChat />,
+          },
+        ],
       },
       {
         path: GlobalRoutes.DashboardNotifications,

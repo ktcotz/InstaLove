@@ -4,6 +4,7 @@ import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/types";
 import { MAX_PROPOSED_PROFILES } from "../AllProposedProfiles";
 import { ObserveUserData } from "../mutations/useObservation";
+import { GetActiveProfilesData } from "../queries/useGetActiveProfiles";
 import { ProposedProfilesProps } from "../queries/useProfiles";
 import { ProfileSchema, ProfilesSchema } from "../schema/ProfilesSchema";
 
@@ -151,8 +152,11 @@ export const getObserversOnUser = async ({
   return observations;
 };
 
-export const getAllActiveUsers = async () => {
-  const { data, error } = await supabase.from("users").select("*");
+export const getAllActiveUsers = async ({ current }: GetActiveProfilesData) => {
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .neq("user_id", current);
 
   const filtered = data?.filter((item) => item.loggedIn > item.unLoggedIn);
 

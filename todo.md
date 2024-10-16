@@ -1,13 +1,14 @@
 PROCES : BUDOWA MESSAGES
 
-1. Logika aktywności usera, zalogowany i wylogowany. Potrzebne do sprawdzenia aktualnie zalogowanych użytkowników.
-2. Pobranie tych użytkowników w messages bar i wyrenderowanie ich (MAX 10 users).
+Tworzenie chatów:
 
-Logika:
+Wyświetla się modal i wyszukiwanie znajomych
 
-1. Jeżeli zaloguje się to zaktualizuj usera w tabeli users, pole logged_in.
-2. Jeżeli zamknie stronę to zaktualizuj usera w tabeli users, pole logout_in.
-3. Jeżeli się wyloguje to też.
+Jeżeli zaakceptujemy z 1 tworzymy chat.
+Jeżeli dodamy więcej niż 1 tworzymy grupę.
+
+Kliknięcie w usera przekierowuje go do podstrony /chat/user
+Kliknięcie w grupe przekierowuje go do podstrony /group/grupa
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 

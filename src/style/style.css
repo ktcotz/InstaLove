@@ -130,6 +130,15 @@ html {
   height: 100%;
 }
 
+.active-users {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.active-users .swiper-wrapper {
+  gap: 1rem;
+}
+
 @media (max-width: 576px) {
   .mobile-swiper .nested-stories {
     height: 100vh;
