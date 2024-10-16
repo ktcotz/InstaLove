@@ -25,7 +25,8 @@ type ButtonType =
   | "watched-storie"
   | "follow"
   | "mobile-create"
-  | "music";
+  | "music"
+  | "add-chat";
 
 type ButtonProps = {
   children: ReactNode;
@@ -39,6 +40,8 @@ export const Button = forwardRef<
   const base = "inline-block";
 
   const modifierObject: Record<ButtonType, string> = {
+    ["add-chat"]:
+      "w-full justify-center flex items-center text-sm text-stone-50 bg-blue-500 py-3 px-4 font-medium rounded-full",
     ["mobile-create"]:
       "flex items-center gap-2 text-sm text-stone-50 bg-blue-500 py-2 px-4 font-medium rounded-full",
     primary:

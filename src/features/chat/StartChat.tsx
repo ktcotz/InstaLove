@@ -1,6 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { PiMessengerLogo } from "react-icons/pi";
 import { Button, Modal } from "../../ui";
+import { AddUsers } from "./AddUsers";
 export const StartChat = () => {
   const { t } = useTranslation();
   return (
@@ -19,9 +20,9 @@ export const StartChat = () => {
       </Modal.Open>
       <Modal.Content
         manageClass="message-friend"
-        parentClass="mx-auto max-w-2xl px-4"
+        parentClass="w-full mx-auto max-w-2xl px-4"
       >
-        <div>MESSAGE!</div>
+        <AddUsers />
       </Modal.Content>
     </div>
   );

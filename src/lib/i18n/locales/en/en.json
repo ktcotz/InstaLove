@@ -205,6 +205,8 @@
   },
   "messages": {
     "startTitle": "Your messages",
-    "startDescription": "Send private photos and messages to a friend or group."
+    "startDescription": "Send private photos and messages to a friend or group.",
+    "addTitle": "New message",
+    "toFriend": "To"
   }
 }
