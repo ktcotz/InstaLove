@@ -207,6 +207,8 @@
     "startTitle": "Your messages",
     "startDescription": "Send private photos and messages to a friend or group.",
     "addTitle": "New message",
-    "toFriend": "To"
+    "toFriend": "To",
+    "notFind": "Account not found.",
+    "chat": "Chat"
   }
 }

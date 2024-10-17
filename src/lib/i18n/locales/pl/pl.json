@@ -207,6 +207,8 @@
     "startTitle": "Twoje wiadomości",
     "startDescription": "Wysyłaj prywatne zdjęcia i wiadomości do znajomego lub grupy.",
     "addTitle": "Nowa wiadomość",
-    "toFriend": "Do"
+    "toFriend": "Do",
+    "notFind": "Nie znaleziono konta.",
+    "chat": "Czat"
   }
 }

@@ -1,7 +1,7 @@
 import { useTranslation } from "react-i18next";
 import { PiMessengerLogo } from "react-icons/pi";
 import { Button, Modal } from "../../ui";
-import { AddUsers } from "./AddUsers";
+import { AddUsers } from "./add-user/AddUsers";
 export const StartChat = () => {
   const { t } = useTranslation();
   return (
