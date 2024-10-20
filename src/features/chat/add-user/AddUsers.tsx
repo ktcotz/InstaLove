@@ -31,6 +31,12 @@ export const AddUsers = () => {
     setQuery("");
   };
 
+  const handleRemoveUser = (id: string) => {
+    setSelectedUsers(
+      selectedUsers.filter((selectedUser) => selectedUser.user_id !== id)
+    );
+  };
+
   const isDisabled = !users || users?.length === 0;
 
   const { t } = useTranslation();
@@ -42,8 +48,11 @@ export const AddUsers = () => {
       <div className="border-b border-stone-300 dark:border-stone-50 p-4 flex flex-wrap gap-4 items-center">
         <span className="font-semibold">{t("messages.toFriend")}:</span>
         {selectedUsers.length > 0 ? (
-          <div className="flex gap-4">
-            <UsersPreview selectedUsers={selectedUsers} />
+          <div className="flex gap-4 flex-wrap">
+            <UsersPreview
+              selectedUsers={selectedUsers}
+              handleRemoveUser={handleRemoveUser}
+            />
           </div>
         ) : null}
         <div className="min-w-48 md:min-w-96 grow">

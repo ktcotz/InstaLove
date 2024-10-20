@@ -26,7 +26,8 @@ export type CustomLinkModifier =
   | "hover-name"
   | "search"
   | "close"
-  | "active";
+  | "active"
+  | "chat-add";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -69,6 +70,7 @@ export const CustomLink = ({
     ["post-user"]:
       "text-xs text-stone-900 hover:text-stone-950 dark:text-stone-50 hover:dark:text-stone-100 transition font-semibold",
     ["post-avatar"]: "w-6 h-6 rounded-full",
+    ["chat-add"]: "text-blue-700  text-sm hover:text-stone-800 transition",
     notification: "flex items-center gap-3",
     reel: "text-stone-50 transition hover:text-stone-100",
     explore: "",
