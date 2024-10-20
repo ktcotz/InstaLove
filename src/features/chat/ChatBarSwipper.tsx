@@ -24,7 +24,7 @@ export const ChatBarSwipper = () => {
   return (
     <Swiper
       className="active-users"
-      slidesPerView={isTablet ? (isMobile ? 7 : 10) : 5}
+      slidesPerView={isTablet ? (isMobile ? 7 : 10) : 6}
     >
       {data?.slice(0, 10).map((user) => (
         <SwiperSlide key={user.id}>

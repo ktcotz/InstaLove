@@ -4,18 +4,34 @@ import { useState } from "react";
 import { useGetAllUsersByQuery } from "../../search/query/useGetAllUsersByQuery";
 import { SearchUsersSkeleton } from "./SearchUsersSkeleton";
 import { ChatAddUser } from "./ChatAddUsers";
+import { Profile } from "../../profile/schema/ProfilesSchema";
+import { UsersPreview } from "./UsersPreview";
 
 export const AddUsers = () => {
   const [query, setQuery] = useState("");
   const { users, isLoading } = useGetAllUsersByQuery(query);
+  const [selectedUsers, setSelectedUsers] = useState<Profile[]>([]);
 
   const handleQuery = (newQuery: string) => {
     setQuery(newQuery);
   };
 
-  const isDisabled = !users || users?.length === 0;
+  const handleAddUser = (user: Profile) => {
+    const isAlreadyInSelected = selectedUsers.find(
+      (selectedUser) => selectedUser.user_id === user.user_id
+    );
 
-  console.log(users);
+    setSelectedUsers((prev) =>
+      isAlreadyInSelected
+        ? selectedUsers.filter(
+            (selectedUser) => selectedUser.user_id !== user.user_id
+          )
+        : [...prev, user]
+    );
+    setQuery("");
+  };
+
+  const isDisabled = !users || users?.length === 0;
 
   const { t } = useTranslation();
   return (
@@ -25,22 +41,31 @@ export const AddUsers = () => {
       </h2>
       <div className="border-b border-stone-300 dark:border-stone-50 p-4 flex flex-wrap gap-4 items-center">
         <span className="font-semibold">{t("messages.toFriend")}:</span>
-        <div className="flex gap-4">
-          <h1>ASD</h1>
-        </div>
+        {selectedUsers.length > 0 ? (
+          <div className="flex gap-4">
+            <UsersPreview selectedUsers={selectedUsers} />
+          </div>
+        ) : null}
         <div className="min-w-48 md:min-w-96 grow">
           <SearchInput query={query} handleQuery={handleQuery} />
         </div>
       </div>
       <div className="h-[450px] overflow-y-scroll mb-4">
-        <div className="p-4 flex flex-col gap-4">
+        <div className="flex flex-col gap-1">
           {isLoading && <SearchUsersSkeleton />}
           {!isLoading &&
             users &&
             users.length > 0 &&
-            users.map((user) => <ChatAddUser key={user.id} {...user} />)}
+            users.map((user) => (
+              <ChatAddUser
+                key={user.id}
+                user={user}
+                selectedUsers={selectedUsers}
+                handleAddUser={handleAddUser}
+              />
+            ))}
           {!isLoading && users && users.length === 0 && (
-            <p className="text-stone-800 dark:text-stone-50 text-sm">
+            <p className="text-stone-800 dark:text-stone-50 text-sm p-4">
               {t("messages.notFind")}
             </p>
           )}
