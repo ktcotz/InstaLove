@@ -1,19 +1,40 @@
 import { useTranslation } from "react-i18next";
-import { Button, SearchInput } from "../../../ui";
+import { Button, Loader, SearchInput } from "../../../ui";
 import { useState } from "react";
 import { useGetAllUsersByQuery } from "../../search/query/useGetAllUsersByQuery";
 import { SearchUsersSkeleton } from "./SearchUsersSkeleton";
 import { ChatAddUser } from "./ChatAddUsers";
 import { Profile } from "../../profile/schema/ProfilesSchema";
 import { UsersPreview } from "./UsersPreview";
+import { useCreateChat } from "../mutations/useCreateChat";
+import { useAuth } from "../../authentication/context/useAuth";
+import { useUserByID } from "../../authentication/queries/useUserByID";
 
 export const AddUsers = () => {
+  const { user: current } = useAuth();
   const [query, setQuery] = useState("");
   const { users, isLoading } = useGetAllUsersByQuery(query);
   const [selectedUsers, setSelectedUsers] = useState<Profile[]>([]);
+  const { user } = useUserByID(current?.id);
+
+  const { create, isPending } = useCreateChat();
 
   const handleQuery = (newQuery: string) => {
     setQuery(newQuery);
+  };
+
+  const addChat = () => {
+    if (!current || !user) return;
+
+    const type = selectedUsers.length === 1 ? "chat" : "group";
+
+    const mappedSelectedUsers = [...selectedUsers, user];
+
+    create({
+      created_by: current.id,
+      type,
+      selectedUsers: mappedSelectedUsers,
+    });
   };
 
   const handleAddUser = (user: Profile) => {
@@ -37,7 +58,7 @@ export const AddUsers = () => {
     );
   };
 
-  const isDisabled = !users || users?.length === 0;
+  const isDisabled = !selectedUsers || selectedUsers?.length === 0;
 
   const { t } = useTranslation();
   return (
@@ -81,11 +102,12 @@ export const AddUsers = () => {
         </div>
       </div>
       <Button
+        onClick={addChat}
         modifier="add-chat"
         disabled={isDisabled}
         style={isDisabled ? { opacity: "50%" } : {}}
       >
-        {t("messages.chat")}
+        {isPending ? <Loader /> : t("messages.chat")}
       </Button>
     </div>
   );

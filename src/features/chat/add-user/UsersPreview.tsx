@@ -14,7 +14,10 @@ export const UsersPreview = ({
   return (
     <div className="flex gap-2 flex-wrap">
       {selectedUsers.map((selectedUser) => (
-        <div className="px-3 py-1 bg-blue-200 rounded-full flex items-center gap-1">
+        <div
+          className="px-3 py-1 bg-blue-200 rounded-full flex items-center gap-1"
+          key={selectedUser.user_id}
+        >
           <CustomLink
             to={`/dashboard/${selectedUser.user_name}`}
             target="_blank"

@@ -1,14 +1,6 @@
 PROCES : BUDOWA MESSAGES
 
-Tworzenie chatów:
-
-Wyświetla się modal i wyszukiwanie znajomych
-
-Jeżeli zaakceptujemy z 1 tworzymy chat.
-Jeżeli dodamy więcej niż 1 tworzymy grupę.
-
-Kliknięcie w usera przekierowuje go do podstrony /chat/user
-Kliknięcie w grupe przekierowuje go do podstrony /group/grupa
+1. Walidacja tworzonych chatów, jezeli tworzę z tymi samymi użytkownikami, to ma nie tworzyć tylko przekierować do konkretnego chatu.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
