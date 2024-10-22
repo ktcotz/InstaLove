@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router";
 import { useGetChat } from "./queries/useGetChat";
 import { useEffect } from "react";
+import { Users } from "./dashboard/Users";
 
 export const ChatDashboard = () => {
   const { id } = useParams();
@@ -8,11 +9,10 @@ export const ChatDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && !data) {
+    if (!isLoading && data?.data.length === 0) {
       navigate(-1);
     }
   }, [data, isLoading, navigate]);
 
-
-  return <div className="px-4">CHAT! - {id}</div>;
+  return <div>{data?.users && <Users users={data.users} />}</div>;
 };

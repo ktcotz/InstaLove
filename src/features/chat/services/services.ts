@@ -94,7 +94,7 @@ export const getChat = async ({ chat_id }: GetChatData) => {
 
   const { data: users, error: usersError } = await supabase
     .from("chat_participants")
-    .select("*")
+    .select("*,user_id(*)")
     .eq("chat_id", chat_id);
 
   if (usersError) {

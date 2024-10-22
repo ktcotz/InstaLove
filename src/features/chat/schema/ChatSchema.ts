@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { ProfileSchema } from "../../profile/schema/ProfilesSchema";
 
 export const ChatSchema = z.object({
   created_by: z.string(),
@@ -11,6 +12,14 @@ export const ChatParticipant = z.object({
   role: z.string(),
 });
 
+export const ChatSupabaseUser = z.object({
+  chat_id: z.string(),
+  user_id: ProfileSchema,
+  role: z.string(),
+});
+
+export const ChatSupabaseUsers = z.array(ChatSupabaseUser);
+
 export const ChatParticipants = z.array(ChatParticipant);
 
 export type ChatSchemaType = z.infer<typeof ChatSchema>;
@@ -18,3 +27,5 @@ export type ChatSchemaType = z.infer<typeof ChatSchema>;
 export type ChatParticipantType = z.infer<typeof ChatParticipant>;
 
 export type ChatParticipantsType = z.infer<typeof ChatParticipants>;
+
+export type ChatSupabaseUsersType = z.infer<typeof ChatSupabaseUsers>;
