@@ -26,6 +26,7 @@ import { DashboardIndividualPost } from "./pages/Dashboard/DashboardIndividualPo
 import { DashboardNotifications } from "./pages/Dashboard/DashboardNotifications";
 import { NotFound } from "./pages/NotFound";
 import { StartChat } from "./features/chat/StartChat";
+import { ChatDashboard } from "./features/chat/ChatDashboard";
 
 export const router = createBrowserRouter([
   {
@@ -91,6 +92,10 @@ export const router = createBrowserRouter([
           {
             path: "",
             element: <StartChat />,
+          },
+          {
+            path: ":id",
+            element: <ChatDashboard />,
           },
         ],
       },

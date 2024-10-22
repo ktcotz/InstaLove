@@ -1,6 +1,7 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { Profile } from "../../profile/schema/ProfilesSchema";
+import { GetChatData } from "../queries/useGetChat";
 import { ChatSchemaType } from "../schema/ChatSchema";
 
 type SelectedUsers = {
@@ -35,21 +36,16 @@ export const createChat = async ({
     })
   );
 
-  const eachChatUsers = chatsUsers
-    .map((chat) => {
-      for (const user of selectedUsers) {
-        return chat?.includes(user.user_id);
-      }
-    })
-    .filter((state) => Boolean(state));
+  const eachChatUsers = chatsUsers.map((chat) => {
+    for (const user of selectedUsers) {
+      return chat?.includes(user.user_id);
+    }
+  });
 
-  const isAlreadyCreatedChat =
-    eachChatUsers.length - 1 === selectedUsers.length;
+  const actuallyCreatedChat = eachChatUsers.indexOf(true);
 
-  console.log(chats);
-
-  if (isAlreadyCreatedChat) {
-    return chats[0].chat_id;
+  if (actuallyCreatedChat !== -1) {
+    return chats[actuallyCreatedChat].chat_id;
   }
 
   const { data, error } = await supabase
@@ -82,4 +78,30 @@ export const createChat = async ({
   }
 
   return data;
+};
+
+export const getChat = async ({ chat_id }: GetChatData) => {
+  const { data, error } = await supabase
+    .from("chats")
+    .select("*")
+    .eq("id", chat_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  const { data: users, error: usersError } = await supabase
+    .from("chat_participants")
+    .select("*")
+    .eq("chat_id", chat_id);
+
+  if (usersError) {
+    throw new CustomError({
+      message: usersError.message,
+    });
+  }
+
+  return { data, users };
 };
