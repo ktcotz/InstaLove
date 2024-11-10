@@ -27,7 +27,8 @@ export type CustomLinkModifier =
   | "search"
   | "close"
   | "active"
-  | "chat-add";
+  | "chat-add"
+  | "chat-users";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -46,6 +47,8 @@ export const CustomLink = ({
   const base = "font-base";
 
   const modifiers: Record<CustomLinkModifier, string> = {
+    ["chat-users"]:
+      "flex items-center gap-2 hover:bg-stone-100 transition transition",
     active: "flex flex-col items-center gap-2",
     close: "group",
     send: "dark:bg-stone-50 dark:text-stone-950 bg-stone-950 text-stone-50 rounded-md p-2 w-full flex items-center justify-center gap-1",

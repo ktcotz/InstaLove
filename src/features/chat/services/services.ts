@@ -1,5 +1,6 @@
 import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
+import { UserID } from "../../authentication/services/types";
 import { Profile } from "../../profile/schema/ProfilesSchema";
 import { GetChatData } from "../queries/useGetChat";
 import { ChatSchemaType } from "../schema/ChatSchema";
@@ -104,4 +105,19 @@ export const getChat = async ({ chat_id }: GetChatData) => {
   }
 
   return { data, users };
+};
+
+export const getChats = async ({ user_id }: UserID) => {
+  const { data, error } = await supabase
+    .from("chat_participants")
+    .select("*")
+    .eq("user_id", user_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return data;
 };

@@ -209,6 +209,7 @@
     "addTitle": "New message",
     "toFriend": "To",
     "notFind": "Account not found.",
-    "chat": "Chat"
+    "chat": "Chat",
+    "chats": "Messages"
   }
 }
