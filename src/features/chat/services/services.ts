@@ -39,14 +39,24 @@ export const createChat = async ({
 
   const eachChatUsers = chatsUsers.map((chat) => {
     for (const user of selectedUsers) {
-      return chat?.includes(user.user_id);
+      return chat?.includes(user.user_id) ? chat.sort() : null;
     }
   });
 
-  const actuallyCreatedChat = eachChatUsers.indexOf(true);
+  const actuallyCreatedChats = eachChatUsers.filter((users) => Boolean(users));
 
-  if (actuallyCreatedChat !== -1) {
-    return chats[actuallyCreatedChat].chat_id;
+  const mappedSelectedIDs = selectedUsers.map((user) => user.user_id).sort();
+
+  const hasCreatedChat = actuallyCreatedChats.map((chat) => {
+    if (chat?.length !== mappedSelectedIDs.length) return false;
+
+    return chat.every((user) => mappedSelectedIDs.includes(user));
+  });
+
+  const hasCreatedChatIndex = hasCreatedChat.findIndex((chat) => chat);
+
+  if (hasCreatedChatIndex !== -1) {
+    return chats[hasCreatedChatIndex].chat_id;
   }
 
   const { data, error } = await supabase

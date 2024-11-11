@@ -71,7 +71,7 @@ export const ChatDashboard = () => {
       </div>
       <div
         className={`absolute top-0 left-0 right-0 bottom-0 bg-red-500 md:static transition-all duration-300 overflow-hidden ${
-          showSidebar ? "w-[400px] md:w-[200px]" : "w-0"
+          showSidebar ? "w-[250px] sm:w-[400px] md:w-[300px]" : "w-0"
         }`}
       >
         <ChatSidebar />
