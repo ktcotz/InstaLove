@@ -14,6 +14,9 @@ export const createChat = async ({
   type,
   selectedUsers,
 }: ChatSchemaType & SelectedUsers) => {
+  if (selectedUsers.length === 1 && selectedUsers[0].user_id === created_by)
+    return;
+
   const { data: chats, error: chatsError } = await supabase
     .from("chat_participants")
     .select("chat_id")

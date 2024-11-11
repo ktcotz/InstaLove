@@ -26,6 +26,7 @@ export const ChatDashboard = () => {
         {data?.users && (
           <Users users={data.users} toggleSidebar={toggleSidebar} />
         )}
+
         <div className="overflow-y-scroll  max-h-[calc(100vh-200px)]">
           <h1>asd</h1>
           <h1>asd</h1>
@@ -70,7 +71,7 @@ export const ChatDashboard = () => {
         </div>
       </div>
       <div
-        className={`absolute top-0 left-0 right-0 bottom-0 bg-red-500 md:static transition-all duration-300 overflow-hidden ${
+        className={`absolute top-0 left-0 right-0 bottom-0  md:static transition-all duration-300 overflow-hidden ${
           showSidebar ? "w-[250px] sm:w-[400px] md:w-[300px]" : "w-0"
         }`}
       >

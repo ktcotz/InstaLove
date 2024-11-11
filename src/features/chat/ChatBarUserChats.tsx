@@ -2,11 +2,19 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../authentication/context/useAuth";
 import { useGetChats } from "./queries/useGetChats";
 import { Chat } from "./dashboard/Chat";
+import { ChatBarSkeletonChats } from "./ChatBarSkeletonChats";
 
 export const ChatBarUserChats = () => {
   const { user } = useAuth();
   const { t } = useTranslation();
   const { data, isLoading } = useGetChats({ user_id: user?.id });
+
+  if (isLoading)
+    return (
+      <div className="flex flex-wrap md:flex-col items-center md:items-start gap-4">
+        <ChatBarSkeletonChats />
+      </div>
+    );
 
   if (!isLoading && data?.length === 0) return null;
 
@@ -16,7 +24,7 @@ export const ChatBarUserChats = () => {
         {t("messages.chats")}
       </h2>
       {data && (
-        <div className="flex flex-row md:flex-col">
+        <div className="flex flex-wrap md:flex-nowrap flex-row md:flex-col">
           {data.map((chat) => (
             <Chat chat={chat} key={chat.id} />
           ))}

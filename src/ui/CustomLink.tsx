@@ -48,7 +48,7 @@ export const CustomLink = ({
 
   const modifiers: Record<CustomLinkModifier, string> = {
     ["chat-users"]:
-      "flex gap-3 flex-col xl:flex-row p-2 hover:bg-stone-100 transition transition",
+      "flex gap-3 flex-col xl:flex-row p-2 hover:bg-stone-100 transition transition border-b border-stone-200 last:border-b-0",
     active: "flex flex-col items-center gap-2",
     close: "group",
     send: "dark:bg-stone-50 dark:text-stone-950 bg-stone-950 text-stone-50 rounded-md p-2 w-full flex items-center justify-center gap-1",
