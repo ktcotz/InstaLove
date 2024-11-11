@@ -3,8 +3,7 @@ PROCES : BUDOWA MESSAGES
 1. Sidebar w messages.
 2. Poprawa users.
 3. Aktywny user.
-4. Cofanie aktywnego chatu.
-5. Responsivity.
+4. Responsivity.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 

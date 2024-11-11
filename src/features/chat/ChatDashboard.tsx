@@ -2,6 +2,7 @@ import { useNavigate, useParams } from "react-router";
 import { useGetChat } from "./queries/useGetChat";
 import { useEffect, useState } from "react";
 import { Users } from "./dashboard/Users";
+import { ChatSidebar } from "./ChatSidebar";
 
 export const ChatDashboard = () => {
   const { id } = useParams();
@@ -20,12 +21,12 @@ export const ChatDashboard = () => {
   };
 
   return (
-    <div className="relative flex-col md:flex-row flex">
+    <div className="absolute top-0 left-0 right-0 bottom-0 z-[5] bg-stone-100 md:relative flex-col md:flex-row flex">
       <div className="grow flex flex-col">
         {data?.users && (
           <Users users={data.users} toggleSidebar={toggleSidebar} />
         )}
-        <div className="overflow-y-scroll grow">
+        <div className="overflow-y-scroll  max-h-[calc(100vh-200px)]">
           <h1>asd</h1>
           <h1>asd</h1>
           <h1>asd</h1>
@@ -69,11 +70,11 @@ export const ChatDashboard = () => {
         </div>
       </div>
       <div
-        className={`transition-all duration-300 overflow-hidden ${
-          showSidebar ? "w-[300px] md:w-[200px]" : "w-0"
+        className={`absolute top-0 left-0 right-0 bottom-0 bg-red-500 md:static transition-all duration-300 overflow-hidden ${
+          showSidebar ? "w-[400px] md:w-[200px]" : "w-0"
         }`}
       >
-        SIDEBAR
+        <ChatSidebar />
       </div>
     </div>
   );
