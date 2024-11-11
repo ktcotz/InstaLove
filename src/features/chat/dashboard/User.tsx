@@ -9,7 +9,7 @@ type UserProps = {
 
 export const User = ({ user_id, isLastElement }: UserProps) => {
   return (
-    <p className="font-semibold">
+    <p className="font-semibold text-sm">
       {user_id.user_name}
       {isLastElement ? "" : ","}
     </p>

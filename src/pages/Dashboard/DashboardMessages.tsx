@@ -3,7 +3,7 @@ import { ChatBar } from "../../features/chat/ChatBar";
 
 export const DashboardMessages = () => {
   return (
-    <div className="grid grid-rows-[150px_1fr] md:grid-rows-1 md:grid-cols-4 grow">
+    <div className="grid grid-rows-[max-content_1fr] md:grid-rows-1 md:grid-cols-4 grow">
       <ChatBar />
       <div className="col-start-2 -col-end-1">
         <Outlet />
