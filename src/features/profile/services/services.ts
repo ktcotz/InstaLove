@@ -154,11 +154,16 @@ export const getObserversOnUser = async ({
 
 export const getAllActiveUsers = async ({ current }: GetActiveProfilesData) => {
   const { data, error } = await supabase
-    .from("users")
-    .select("*")
-    .neq("user_id", current);
+    .from("observations")
+    .select("*,user_id(*),observe_id(*)")
+    .eq("user_id", current);
 
-  const filtered = data?.filter((item) => item.loggedIn > item.unLoggedIn);
+  const filtered = data?.filter((item) => {
+    if (item.observe_id.unLoggedIn === null) return true;
+    return (
+      new Date(item.observe_id.loggedIn) > new Date(item.observe_id.unLoggedIn)
+    );
+  });
 
   if (error) {
     throw new CustomError({

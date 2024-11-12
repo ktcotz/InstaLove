@@ -10,12 +10,36 @@ import { useCreateChat } from "../mutations/useCreateChat";
 import { useAuth } from "../../authentication/context/useAuth";
 import { useUserByID } from "../../authentication/queries/useUserByID";
 
-export const AddUsers = () => {
+type AddUsersProps = {
+  clickedUser?: Profile;
+};
+
+export const AddUsers = ({ clickedUser }: AddUsersProps) => {
   const { user: current } = useAuth();
   const [query, setQuery] = useState("");
   const { users, isLoading } = useGetAllUsersByQuery(query);
-  const [selectedUsers, setSelectedUsers] = useState<Profile[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<Profile[]>(() => {
+    if (clickedUser) {
+      return [clickedUser];
+    }
+    return [];
+  });
   const { user } = useUserByID(current?.id);
+
+  const handleAddUser = (user: Profile) => {
+    const isAlreadyInSelected = selectedUsers.find(
+      (selectedUser) => selectedUser.user_id === user.user_id
+    );
+
+    setSelectedUsers((prev) =>
+      isAlreadyInSelected
+        ? selectedUsers.filter(
+            (selectedUser) => selectedUser.user_id !== user.user_id
+          )
+        : [...prev, user]
+    );
+    setQuery("");
+  };
 
   const { create, isPending } = useCreateChat();
 
@@ -35,21 +59,6 @@ export const AddUsers = () => {
       type,
       selectedUsers: mappedSelectedUsers,
     });
-  };
-
-  const handleAddUser = (user: Profile) => {
-    const isAlreadyInSelected = selectedUsers.find(
-      (selectedUser) => selectedUser.user_id === user.user_id
-    );
-
-    setSelectedUsers((prev) =>
-      isAlreadyInSelected
-        ? selectedUsers.filter(
-            (selectedUser) => selectedUser.user_id !== user.user_id
-          )
-        : [...prev, user]
-    );
-    setQuery("");
   };
 
   const handleRemoveUser = (id: string) => {

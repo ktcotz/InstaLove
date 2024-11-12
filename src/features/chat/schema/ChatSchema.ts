@@ -18,6 +18,12 @@ export const ChatSupabaseUser = z.object({
   role: z.string(),
 });
 
+export const ActiveSupabaseUser = z.object({
+  id: z.number(),
+  user_id: ProfileSchema,
+  observe_id: ProfileSchema,
+});
+
 export const ChatSupabaseUsers = z.array(ChatSupabaseUser);
 
 export const ChatParticipants = z.array(ChatParticipant);
@@ -29,3 +35,5 @@ export type ChatParticipantType = z.infer<typeof ChatParticipant>;
 export type ChatParticipantsType = z.infer<typeof ChatParticipants>;
 
 export type ChatSupabaseUsersType = z.infer<typeof ChatSupabaseUsers>;
+
+export type ActiveSupabaseUserType = z.infer<typeof ActiveSupabaseUser>;
