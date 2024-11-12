@@ -211,6 +211,12 @@
     "notFind": "Nie znaleziono konta.",
     "chat": "Czat",
     "chats": "Wiadomości",
-    "details": "Szczegóły"
+    "details": "Szczegóły",
+    "users": "Użytkownicy",
+    "removeChat": "Usuń czat",
+    "removeGroup": "Usuń grupę",
+    "removeChatTitle": "Usuń czat/grupę?",
+    "remove": "Usuń",
+    "removeDescription": "Tej operacji nie będzie można cofnąć. Jeżeli usuniesz czat/grupę, nie będzie można go już przywrócić."
   }
 }

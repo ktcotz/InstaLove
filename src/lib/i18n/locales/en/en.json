@@ -211,6 +211,12 @@
     "notFind": "Account not found.",
     "chat": "Chat",
     "chats": "Messages",
-    "details": "Details"
+    "details": "Details",
+    "users": "Users",
+    "removeChat": "Remove chat",
+    "removeGroup": "Remove group",
+    "removeChatTitle": "Remove chat/group?",
+    "remove": "Remove",
+    "removeDescription": "This action cannot be undone. If you delete your chat/group,it cannot be restored. "
   }
 }

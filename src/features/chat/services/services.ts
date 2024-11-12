@@ -98,7 +98,8 @@ export const getChat = async ({ chat_id }: GetChatData) => {
   const { data, error } = await supabase
     .from("chats")
     .select("*")
-    .eq("id", chat_id);
+    .eq("id", chat_id)
+    .single();
 
   if (error) {
     throw new CustomError({
@@ -133,4 +134,25 @@ export const getChats = async ({ user_id }: UserID) => {
   }
 
   return data;
+};
+
+export const deleteChat = async ({ chat_id }: GetChatData) => {
+  const { error: participantsError } = await supabase
+    .from("chat_participants")
+    .delete()
+    .eq("chat_id", chat_id);
+
+  if (participantsError) {
+    throw new CustomError({
+      message: participantsError.message,
+    });
+  }
+
+  const { error } = await supabase.from("chats").delete().eq("id", chat_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
 };
