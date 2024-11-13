@@ -217,6 +217,7 @@
     "removeGroup": "Remove group",
     "removeChatTitle": "Remove chat/group?",
     "remove": "Remove",
-    "removeDescription": "This action cannot be undone. If you delete your chat/group,it cannot be restored. "
+    "removeDescription": "This action cannot be undone. If you delete your chat/group,it cannot be restored.",
+    "name": "Name"
   }
 }

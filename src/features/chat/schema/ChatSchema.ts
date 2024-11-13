@@ -4,6 +4,7 @@ import { ProfileSchema } from "../../profile/schema/ProfilesSchema";
 export const ChatSchema = z.object({
   created_by: z.string(),
   type: z.enum(["chat", "group"]),
+  name: z.string().nullable().optional(),
 });
 
 export const ChatParticipant = z.object({
