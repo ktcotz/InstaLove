@@ -5,6 +5,7 @@ import { Button, Modal, SubModalItem } from "../../ui";
 import { ConfirmDelete } from "./ConfirmDelete";
 import { useUser } from "../authentication/queries/useUser";
 import { EditChatName } from "./edit/EditChatName";
+import { ConfirmLeaveGroup } from "./ConfirmLeaveGroup";
 
 export const ChatSidebar = () => {
   const { id } = useParams();
@@ -25,7 +26,7 @@ export const ChatSidebar = () => {
 
       {user?.id === chat?.created_by && (
         <div className="p-4">
-          <EditChatName name={chat.name} chatId={Number(id)} />
+          <EditChatName key={chat.name} name={chat.name} chatId={Number(id)} />
         </div>
       )}
 
@@ -42,23 +43,38 @@ export const ChatSidebar = () => {
           ))}
         </div>
 
-        {user?.id === chat?.created_by && (
-          <div className="py-4 border-t border-stone-200 dark:border-stone-50 mt-auto">
-            <Modal.Open openClass={`delete-chat-${chat?.id}`}>
-              <Button modifier="delete">
-                {chat?.type === "chat"
-                  ? t("messages.removeChat")
-                  : t("messages.removeGroup")}
-              </Button>
-            </Modal.Open>
-            <Modal.Content
-              manageClass={`delete-chat-${chat?.id}`}
-              parentClass="w-full mx-auto max-w-2xl px-4"
-            >
-              <ConfirmDelete chat_id={chat?.id} />
-            </Modal.Content>
-          </div>
-        )}
+        <div className="py-4 border-t border-stone-200 dark:border-stone-50 mt-auto">
+          {user?.id === chat?.created_by && (
+            <>
+              <Modal.Open openClass={`delete-chat-${chat?.id}`}>
+                <Button modifier="delete">
+                  {chat?.type === "chat"
+                    ? t("messages.removeChat")
+                    : t("messages.removeGroup")}
+                </Button>
+              </Modal.Open>
+              <Modal.Content
+                manageClass={`delete-chat-${chat?.id}`}
+                parentClass="w-full mx-auto max-w-2xl px-4"
+              >
+                <ConfirmDelete chat_id={chat?.id} />
+              </Modal.Content>
+            </>
+          )}
+          {chat?.type === "group" && user?.id !== chat?.created_by && (
+            <>
+              <Modal.Open openClass={`leave-chat-${chat?.id}`}>
+                <Button modifier="delete">{t("messages.goOut")}</Button>
+              </Modal.Open>
+              <Modal.Content
+                manageClass={`leave-chat-${chat?.id}`}
+                parentClass="w-full mx-auto max-w-2xl px-4"
+              >
+                <ConfirmLeaveGroup chatId={chat?.id} />
+              </Modal.Content>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

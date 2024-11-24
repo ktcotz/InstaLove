@@ -2,6 +2,7 @@ import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/types";
 import { Profile } from "../../profile/schema/ProfilesSchema";
+import { LeaveGroupData } from "../ConfirmLeaveGroup";
 import { EditChatNameData } from "../edit/EditChatName";
 import { GetChatData } from "../queries/useGetChat";
 import { ChatSchemaType } from "../schema/ChatSchema";
@@ -172,4 +173,21 @@ export const changeChatName = async ({ chatId, name }: EditChatNameData) => {
   }
 
   return data;
+};
+
+export const leaveGroup = async ({
+  chatId,
+  user_id,
+}: LeaveGroupData & UserID) => {
+  const { error } = await supabase
+    .from("chat_participants")
+    .delete()
+    .eq("chat_id", chatId)
+    .eq("user_id", user_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
 };

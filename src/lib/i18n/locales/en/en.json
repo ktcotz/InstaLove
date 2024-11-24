@@ -216,8 +216,12 @@
     "removeChat": "Remove chat",
     "removeGroup": "Remove group",
     "removeChatTitle": "Remove chat/group?",
+    "goOut": "Leave the group",
     "remove": "Remove",
     "removeDescription": "This action cannot be undone. If you delete your chat/group,it cannot be restored.",
-    "name": "Chat name"
+    "name": "Chat name",
+    "noLeave": "No leave",
+    "leaveTitle": "Leaving the group",
+    "leaveDescription": "This action cannot be undone. If you leave this group,it cannot be restored."
   }
 }
