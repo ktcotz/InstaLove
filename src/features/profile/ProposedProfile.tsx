@@ -85,7 +85,7 @@ export const ProposedProfile = ({ profile }: ProposedProfileProps) => {
       >
         {isObserve ? t("profile.unobserver") : t("profile.observe")}
       </Button>
-      {isHover && <HoverProfile user_name={user_name} />}
+      {isHover && <HoverProfile user_name={user_name} proposed={true} />}
     </div>
   );
 };

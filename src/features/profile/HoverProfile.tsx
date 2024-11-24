@@ -29,7 +29,7 @@ export const HoverProfile = ({
   user_name,
   showPosts = true,
   position = "bottom",
-  proposed = true,
+  proposed = false,
 }: HoverProfileProps) => {
   const { t } = useTranslation();
   const { user: currentUser } = useUser();
