@@ -25,6 +25,10 @@ export const ActiveSupabaseUser = z.object({
   observe_id: ProfileSchema,
 });
 
+export const ChatName = z.object({
+  name: z.string(),
+});
+
 export const ChatSupabaseUsers = z.array(ChatSupabaseUser);
 
 export const ChatParticipants = z.array(ChatParticipant);
@@ -38,3 +42,5 @@ export type ChatParticipantsType = z.infer<typeof ChatParticipants>;
 export type ChatSupabaseUsersType = z.infer<typeof ChatSupabaseUsers>;
 
 export type ActiveSupabaseUserType = z.infer<typeof ActiveSupabaseUser>;
+
+export type ChatNameType = z.infer<typeof ChatName>;

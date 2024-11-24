@@ -27,7 +27,8 @@ type ButtonType =
   | "mobile-create"
   | "music"
   | "add-chat"
-  | "active";
+  | "active"
+  | "delete";
 
 type ButtonProps = {
   children: ReactNode;
@@ -45,6 +46,7 @@ export const Button = forwardRef<
       "w-full justify-center flex items-center text-sm text-stone-50 bg-blue-500 py-3 px-4 font-medium rounded-full",
     ["mobile-create"]:
       "flex items-center gap-2 text-sm text-stone-50 bg-blue-500 py-2 px-4 font-medium rounded-full",
+    delete: "text-red-600 hover:text-red-700 transition",
     primary:
       "w-full flex items-center justify-center bg-red-600 rounded-md bg-secondary text-slate-50 py-3 hover:bg-red-500 transition md:px-8 focus:outline-none focus:ring focus:ring-red-500 focus:ring-offset-1 focus:ring-offset-primary",
     follow:

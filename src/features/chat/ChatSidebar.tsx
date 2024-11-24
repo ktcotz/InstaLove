@@ -23,9 +23,11 @@ export const ChatSidebar = () => {
         <h2 className="text-xl font-semibold">{t("messages.details")}</h2>
       </div>
 
-      <div className="p-4">
-        <EditChatName />
-      </div>
+      {user?.id === chat?.created_by && (
+        <div className="p-4">
+          <EditChatName name={chat.name} chatId={Number(id)} />
+        </div>
+      )}
 
       <div className="p-2 mt-8 grow flex flex-col">
         <div className="flex flex-col gap-4">
@@ -43,7 +45,7 @@ export const ChatSidebar = () => {
         {user?.id === chat?.created_by && (
           <div className="py-4 border-t border-stone-200 dark:border-stone-50 mt-auto">
             <Modal.Open openClass={`delete-chat-${chat?.id}`}>
-              <Button>
+              <Button modifier="delete">
                 {chat?.type === "chat"
                   ? t("messages.removeChat")
                   : t("messages.removeGroup")}

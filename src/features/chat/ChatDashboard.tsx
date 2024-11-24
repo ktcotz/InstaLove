@@ -24,7 +24,11 @@ export const ChatDashboard = () => {
     <div className="absolute top-0 left-0 right-0 bottom-0 z-[5] bg-stone-100 md:relative flex-col md:flex-row flex">
       <div className="grow flex flex-col">
         {data?.users && (
-          <Users users={data.users} toggleSidebar={toggleSidebar} />
+          <Users
+            name={data.data.name}
+            users={data.users}
+            toggleSidebar={toggleSidebar}
+          />
         )}
 
         <div className="overflow-y-scroll  max-h-[calc(100vh-200px)]">
