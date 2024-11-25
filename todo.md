@@ -1,6 +1,9 @@
 PROCES : BUDOWA MESSAGES
 
-3. Poprawa tworzenia czatu jak ktoś już stworzył taki czat, powinno nawigować do stworzonego przez inną osobę.
+1. Poprawa tworzenia czatu jak ktoś już stworzył taki czat, powinno nawigować do stworzonego przez inną osobę.
+2. Główny czat.
+3. Tabela messages i wiadomości.
+4. Poprawa zalogowanych użytkowników.
 
 Otestowane komponenty, sprawdzone accesibility i zod z poprawą UI&UX :
 
