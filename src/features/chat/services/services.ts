@@ -4,7 +4,9 @@ import { UserID } from "../../authentication/services/types";
 import { Profile } from "../../profile/schema/ProfilesSchema";
 import { LeaveGroupData } from "../ConfirmLeaveGroup";
 import { EditChatNameData } from "../edit/EditChatName";
+import { AddMessageData } from "../mutations/useAddMessage";
 import { GetChatData } from "../queries/useGetChat";
+import { GetMessagesData } from "../queries/useGetMessages";
 import { ChatSchemaType } from "../schema/ChatSchema";
 
 type SelectedUsers = {
@@ -184,6 +186,38 @@ export const leaveGroup = async ({
     .delete()
     .eq("chat_id", chatId)
     .eq("user_id", user_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+};
+
+export const getMessages = async ({ chatId }: GetMessagesData) => {
+  const { data, error } = await supabase
+    .from("messages")
+    .select("*")
+    .eq("chat_id", chatId)
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return data;
+};
+
+export const addMessage = async ({
+  chatId,
+  message,
+  userId,
+}: AddMessageData) => {
+  const { error } = await supabase
+    .from("messages")
+    .insert([{ chat_id: chatId, user_id: userId, message }]);
 
   if (error) {
     throw new CustomError({

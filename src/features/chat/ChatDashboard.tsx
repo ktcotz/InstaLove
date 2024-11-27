@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import { Users } from "./dashboard/Users";
 import { ChatSidebar } from "./ChatSidebar";
 import { AddChatMessage } from "./dashboard/AddChatMessage";
+import { useGetMessages } from "./queries/useGetMessages";
 
 export const ChatDashboard = () => {
   const { id } = useParams();
   const [showSidebar, setShowSidebar] = useState(false);
   const { data, isLoading } = useGetChat({ chat_id: Number(id) });
+  const { data: messages } = useGetMessages({ chatId: Number(id) });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -33,73 +35,12 @@ export const ChatDashboard = () => {
         )}
 
         <div className="relative md:static max-h-[calc(100vh-200px)] md:max-h-[calc(100vh-180px)]">
-          <div className="overflow-y-scroll max-h-[calc(100vh-200px)] pb-24">
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
-            <h1>asd</h1>
+          <div className="overflow-y-scroll h-[calc(100vh-200px)] pb-24">
+            {messages?.map((message) => {
+              return <p>{message.message}</p>;
+            })}
           </div>
-          <AddChatMessage />
+          <AddChatMessage chatId={Number(id)} />
         </div>
       </div>
       <div
