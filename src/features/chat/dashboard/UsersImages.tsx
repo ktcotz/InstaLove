@@ -4,28 +4,50 @@ import { ChatSupabaseUsersType } from "../schema/ChatSchema";
 type UsersImagesProps = {
   users: ChatSupabaseUsersType;
 };
-const MAX_USERS = 3;
+const MAX_USERS = 2;
 
 export const UsersImages = ({ users }: UsersImagesProps) => {
   const images = users.slice(0, MAX_USERS);
 
   return (
-    <div className="relative  h-12 xl:w-12 flex items-center xl:justify-center">
+    <div className="relative  h-14 w-14 flex items-center xl:justify-center">
       {images.map((user, idx) => (
         <CustomLink
           key={user.user_id.user_name}
           to={`/dashboard/${user.user_id.user_name}`}
           target="_blank"
           modifier="close"
+          onClick={(ev) => ev.stopPropagation()}
         >
           <img
             key={user.user_id.user_name}
             src={user.user_id.avatar_url}
             width={32}
             height={32}
-            className="h-8 w-8 xl:left-1/2 xl:absolute border border-stone-300 rounded-full xl:-translate-x-1/2 xl:-translate-y-1/2"
+            className="border border-stone-300 absolute top-0 left-0 w-full h-full rounded-full"
             style={{
-              top: `calc(30% + ${idx * 20}px)`,
+              width: `${
+                100 / images.length +
+                (images.length === 2 ? 20 : images.length === 3 ? 35 : 0)
+              }%`,
+              height: `${
+                100 / images.length +
+                (images.length === 2 ? 20 : images.length === 3 ? 35 : 0)
+              }%`,
+              top: `${
+                images.length === 1
+                  ? 0
+                  : images.length === 2
+                  ? 25 * idx
+                  : 50 * idx
+              }%`,
+              left: `${
+                images.length === 1
+                  ? 0
+                  : images.length === 2
+                  ? 25 * idx
+                  : 50 * idx
+              }%`,
             }}
           />
         </CustomLink>

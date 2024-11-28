@@ -197,7 +197,7 @@ export const leaveGroup = async ({
 export const getMessages = async ({ chatId }: GetMessagesData) => {
   const { data, error } = await supabase
     .from("messages")
-    .select("*")
+    .select("*,user_id(*)")
     .eq("chat_id", chatId)
     .order("created_at", { ascending: true });
 
