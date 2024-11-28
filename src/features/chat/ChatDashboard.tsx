@@ -36,12 +36,14 @@ export const ChatDashboard = () => {
           />
         )}
 
-        <div className="relative md:static max-h-[calc(100vh-200px)] md:max-h-[calc(100vh-180px)]">
-          <div className="overflow-y-scroll h-[calc(100vh-200px)] pb-24">
+        <div className="relative md:static max-h-screen">
+          <div className="overflow-y-scroll h-[calc(100vh-215px)] md:h-[calc(100vh-175px)] pb-24">
             {data?.users && <IntroChat users={data.users} chat={data.data} />}
-            {messages?.map((message) => {
-              return <Message key={message.id} {...message} />;
-            })}
+            <div className="flex flex-col gap-4 px-4">
+              {messages?.map((message) => {
+                return <Message key={message.id} {...message} />;
+              })}
+            </div>
           </div>
           <AddChatMessage chatId={Number(id)} />
         </div>
