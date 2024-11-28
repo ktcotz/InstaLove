@@ -10,7 +10,7 @@ export const UsersImages = ({ users }: UsersImagesProps) => {
   const images = users.slice(0, MAX_USERS);
 
   return (
-    <div className="relative  h-14 w-14 flex items-center xl:justify-center">
+    <div className="relative  h-full w-full flex items-center xl:justify-center">
       {images.map((user, idx) => (
         <CustomLink
           key={user.user_id.user_name}

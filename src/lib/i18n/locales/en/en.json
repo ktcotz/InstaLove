@@ -222,6 +222,8 @@
     "name": "Chat name",
     "noLeave": "No leave",
     "leaveTitle": "Leaving the group",
-    "leaveDescription": "This action cannot be undone. If you leave this group,it cannot be restored."
+    "leaveDescription": "This action cannot be undone. If you leave this group,it cannot be restored.",
+    "createGroup": "You created this group",
+    "seeProfile": "View profile"
   }
 }

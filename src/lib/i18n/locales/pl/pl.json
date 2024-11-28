@@ -222,6 +222,8 @@
     "name": "Nazwa czatu",
     "noLeave": "Nie opuszczaj",
     "leaveTitle": "Opuścić grupę?",
-    "leaveDescription": "Tej operacji nie będzie można cofnąć. Jeżeli opuścisz grupę, nie będziesz mógł już do niej wrócić"
+    "leaveDescription": "Tej operacji nie będzie można cofnąć. Jeżeli opuścisz grupę, nie będziesz mógł już do niej wrócić",
+    "createGroup": "Ty utworzyłeś(aś) tą grupę",
+    "seeProfile": "Zobacz profil"
   }
 }

@@ -6,6 +6,7 @@ import { ChatSidebar } from "./ChatSidebar";
 import { AddChatMessage } from "./dashboard/AddChatMessage";
 import { useGetMessages } from "./queries/useGetMessages";
 import { Message } from "./messages/Message";
+import { IntroChat } from "./dashboard/IntroChat";
 
 export const ChatDashboard = () => {
   const { id } = useParams();
@@ -37,7 +38,7 @@ export const ChatDashboard = () => {
 
         <div className="relative md:static max-h-[calc(100vh-200px)] md:max-h-[calc(100vh-180px)]">
           <div className="overflow-y-scroll h-[calc(100vh-200px)] pb-24">
-            {data?.data.type === "chat" && <p>CHAT!</p>}
+            {data?.users && <IntroChat users={data.users} chat={data.data} />}
             {messages?.map((message) => {
               return <Message key={message.id} {...message} />;
             })}

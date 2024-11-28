@@ -7,12 +7,7 @@ type MessageProps = {
   created_at: string;
 };
 
-export const Message = ({
-  created_at,
-  message,
-  user_id,
-  chat_id,
-}: MessageProps) => {
+export const Message = ({ created_at, message, user_id }: MessageProps) => {
   return (
     <div>
       {message} - {user_id.user_name} - {created_at}
