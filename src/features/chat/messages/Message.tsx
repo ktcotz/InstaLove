@@ -46,9 +46,13 @@ export const Message = ({ message, user_id, chat_id }: MessageProps) => {
           isCreator ? "bg-blue-600 text-white" : "bg-stone-200 text-stone-950"
         } p-2 rounded-md`}
       >
-        {message} - {user_id.user_name}
+        {message}
       </div>
-      {isHover && <MessageActions />}
+      {isHover && (
+        <div className={`${isCreator ? "-order-1" : ""}`}>
+          <MessageActions />
+        </div>
+      )}
     </div>
   );
 };

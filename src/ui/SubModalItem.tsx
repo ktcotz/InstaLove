@@ -5,6 +5,7 @@ import { useAddNotification } from "../features/notifications/mutations/useAddNo
 import { useObservation } from "../features/profile/mutations/useObservation";
 import { useGetObserve } from "../features/profile/queries/useGetObserve";
 import { Button } from "./Button";
+import { CustomLink } from "./CustomLink";
 
 type SubModalItemProps = {
   user_id: string;
@@ -55,13 +56,19 @@ export const SubModalItem = ({ user_id }: SubModalItemProps) => {
 
   return (
     <div className="flex items-center gap-3 p-2">
-      <img
-        src={user.avatar_url}
-        alt={user.user_name}
-        width={32}
-        height={32}
-        className="rounded-full w-8 h-8"
-      />
+      <CustomLink
+        modifier="avatar"
+        target="_blank"
+        to={`/dashboard/${user.user_name}`}
+      >
+        <img
+          src={user.avatar_url}
+          alt={user.user_name}
+          width={32}
+          height={32}
+          className="rounded-full w-8 h-8"
+        />
+      </CustomLink>
       <div>
         <h2 className="font-semibold text-sm dark:text-stone-50">
           {user.user_name}
