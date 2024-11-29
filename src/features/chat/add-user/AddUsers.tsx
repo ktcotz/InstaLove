@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Button, Loader, SearchInput } from "../../../ui";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllUsersByQuery } from "../../search/query/useGetAllUsersByQuery";
 import { SearchUsersSkeleton } from "./SearchUsersSkeleton";
 import { ChatAddUser } from "./ChatAddUsers";
@@ -12,9 +12,10 @@ import { useUserByID } from "../../authentication/queries/useUserByID";
 
 type AddUsersProps = {
   clickedUser?: Profile;
+  name: string | null;
 };
 
-export const AddUsers = ({ clickedUser }: AddUsersProps) => {
+export const AddUsers = ({ clickedUser, name }: AddUsersProps) => {
   const { user: current } = useAuth();
   const [query, setQuery] = useState("");
   const { users, isLoading } = useGetAllUsersByQuery(query);
@@ -22,9 +23,16 @@ export const AddUsers = ({ clickedUser }: AddUsersProps) => {
     if (clickedUser) {
       return [clickedUser];
     }
+
     return [];
   });
   const { user } = useUserByID(current?.id);
+
+  useEffect(() => {
+    if (name) {
+      setQuery(name);
+    }
+  }, [name]);
 
   const handleAddUser = (user: Profile) => {
     const isAlreadyInSelected = selectedUsers.find(

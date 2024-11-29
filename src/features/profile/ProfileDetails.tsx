@@ -32,7 +32,7 @@ export const ProfileDetails = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    document.title = `${user?.fullName} (@${user?.user_name})`;
+    document.title = `InstaLove - ${user?.fullName} (@${user?.user_name})`;
 
     return () => {
       document.title = `InstaLove - love ❤️`;
@@ -111,7 +111,10 @@ export const ProfileDetails = () => {
               </p>
               <div className="mr-left flex gap-2">
                 {currentUser?.id === user.user_id ? null : !isObserve ? null : (
-                  <CustomLink modifier="send" to="/dashboard/messages">
+                  <CustomLink
+                    modifier="send"
+                    to={`/dashboard/messages?name=${user.user_name}`}
+                  >
                     <LuSend className="text-stone-50 dark:text-stone-950" />
                     {t("posts.sendMessage")}
                   </CustomLink>
