@@ -2,10 +2,10 @@ import { useParams } from "react-router";
 import { useGetChat } from "./queries/useGetChat";
 import { useTranslation } from "react-i18next";
 import { Button, Modal, SubModalItem } from "../../ui";
-import { ConfirmDelete } from "./ConfirmDelete";
 import { useUser } from "../authentication/queries/useUser";
 import { EditChatName } from "./edit/EditChatName";
-import { ConfirmLeaveGroup } from "./ConfirmLeaveGroup";
+import { ConfirmDelete } from "./utils/ConfirmDelete";
+import { ConfirmLeaveGroup } from "./utils/ConfirmLeaveGroup";
 
 export const ChatSidebar = () => {
   const { id } = useParams();
@@ -13,7 +13,11 @@ export const ChatSidebar = () => {
   const { data } = useGetChat({ chat_id: Number(id) });
   const { t } = useTranslation();
 
+  console.log(data);
+
   const chat = data?.data;
+
+  if (!chat) return null;
 
   return (
     <div
@@ -26,7 +30,7 @@ export const ChatSidebar = () => {
 
       {user?.id === chat?.created_by && (
         <div className="p-4">
-          <EditChatName key={chat.name} name={chat.name} chatId={Number(id)} />
+          <EditChatName key={chat?.name} name={chat.name} chatId={Number(id)} />
         </div>
       )}
 

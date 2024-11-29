@@ -26,7 +26,7 @@ export const ChatBarUserChats = () => {
       {data && (
         <div className="flex flex-wrap md:flex-nowrap flex-row md:flex-col">
           {data.map((chat) => (
-            <Chat chat={chat} key={chat.id} />
+            <Chat chat={chat.chat_id} key={chat.chat_id} />
           ))}
         </div>
       )}

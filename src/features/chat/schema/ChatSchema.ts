@@ -2,19 +2,20 @@ import { z } from "zod";
 import { ProfileSchema } from "../../profile/schema/ProfilesSchema";
 
 export const ChatSchema = z.object({
+  id: z.number(),
   created_by: z.string(),
   type: z.enum(["chat", "group"]),
   name: z.string().nullable().optional(),
 });
 
 export const ChatParticipant = z.object({
-  chat_id: z.string(),
+  chat_id: z.number(),
   user_id: z.string(),
   role: z.string(),
 });
 
 export const ChatSupabaseUser = z.object({
-  chat_id: z.string(),
+  chat_id: z.number(),
   user_id: ProfileSchema,
   role: z.string(),
 });

@@ -5,7 +5,7 @@ import { useChangeChatName } from "../mutations/useChangeChatName";
 
 export type EditChatNameData = {
   chatId: number;
-  name?: string;
+  name?: string | null;
 };
 
 export const EditChatName = ({ name, chatId }: EditChatNameData) => {
@@ -28,7 +28,7 @@ export const EditChatName = ({ name, chatId }: EditChatNameData) => {
           id="name"
           required
           type="text"
-          value={chatName}
+          value={chatName ?? ""}
           onChange={handleChange}
           onBlur={handleBlur}
         />

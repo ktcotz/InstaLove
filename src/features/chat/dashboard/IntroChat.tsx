@@ -1,9 +1,10 @@
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../authentication/context/useAuth";
 import { ChatSchemaType, ChatSupabaseUsersType } from "../schema/ChatSchema";
-import { UsersChatNames } from "./UsersChatNames";
-import { UsersImages } from "./UsersImages";
+
+import { UsersImages } from "../users/UsersImages";
 import { CustomLink } from "../../../ui";
+import { UsersChatNames } from "../users/UsersChatNames";
 
 type IntroChatProps = {
   users: ChatSupabaseUsersType;

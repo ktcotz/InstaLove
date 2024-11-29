@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Button, Loader } from "../../ui";
-import { GlobalRoutes } from "../../typing/routes";
-import { useModal } from "../../ui/modal/ModalContext/useModal";
+
 import { useNavigate } from "react-router";
-import { useLeaveGroup } from "./mutations/useLeaveGroup";
-import { useUser } from "../authentication/queries/useUser";
+import { useUser } from "../../authentication/queries/useUser";
+import { useModal } from "../../../ui/modal/ModalContext/useModal";
+import { useLeaveGroup } from "../mutations/useLeaveGroup";
+import { Button, Loader } from "../../../ui";
+import { GlobalRoutes } from "../../../typing/routes";
 
 export type LeaveGroupData = {
   chatId: number;

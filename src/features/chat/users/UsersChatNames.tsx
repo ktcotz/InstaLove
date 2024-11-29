@@ -1,5 +1,5 @@
 import { ChatSupabaseUsersType } from "../schema/ChatSchema";
-import { User } from "./User";
+import { User } from "../users/User";
 
 type UsersChatNamesProps = {
   usersWithoutCurrent: ChatSupabaseUsersType;

@@ -2,12 +2,17 @@ import { supabase } from "../../../lib/supabase/supabase";
 import { CustomError } from "../../../utils/CustomErrors";
 import { UserID } from "../../authentication/services/types";
 import { Profile } from "../../profile/schema/ProfilesSchema";
-import { LeaveGroupData } from "../ConfirmLeaveGroup";
 import { EditChatNameData } from "../edit/EditChatName";
 import { AddMessageData } from "../mutations/useAddMessage";
 import { GetChatData } from "../queries/useGetChat";
 import { GetMessagesData } from "../queries/useGetMessages";
-import { ChatSchemaType } from "../schema/ChatSchema";
+import {
+  ChatParticipants,
+  ChatSchema,
+  ChatSchemaType,
+  ChatSupabaseUsers,
+} from "../schema/ChatSchema";
+import { LeaveGroupData } from "../utils/ConfirmLeaveGroup";
 
 type SelectedUsers = {
   selectedUsers: Profile[];
@@ -99,11 +104,13 @@ export const createChat = async ({
 };
 
 export const getChat = async ({ chat_id }: GetChatData) => {
-  const { data, error } = await supabase
+  const { data: chat, error } = await supabase
     .from("chats")
     .select("*")
     .eq("id", chat_id)
     .single();
+
+  const data = ChatSchema.parse(chat);
 
   if (error) {
     throw new CustomError({
@@ -111,7 +118,7 @@ export const getChat = async ({ chat_id }: GetChatData) => {
     });
   }
 
-  const { data: users, error: usersError } = await supabase
+  const { data: allUsers, error: usersError } = await supabase
     .from("chat_participants")
     .select("*,user_id(*)")
     .eq("chat_id", chat_id);
@@ -122,14 +129,18 @@ export const getChat = async ({ chat_id }: GetChatData) => {
     });
   }
 
+  const users = ChatSupabaseUsers.parse(allUsers);
+
   return { data, users };
 };
 
 export const getChats = async ({ user_id }: UserID) => {
-  const { data, error } = await supabase
+  const { data: users, error } = await supabase
     .from("chat_participants")
     .select("*")
     .eq("user_id", user_id);
+
+  const parsed = ChatParticipants.parse(users);
 
   if (error) {
     throw new CustomError({
@@ -137,7 +148,7 @@ export const getChats = async ({ user_id }: UserID) => {
     });
   }
 
-  return data;
+  return parsed;
 };
 
 export const deleteChat = async ({ chat_id }: GetChatData) => {

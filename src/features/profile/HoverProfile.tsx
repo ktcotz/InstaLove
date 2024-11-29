@@ -204,7 +204,10 @@ export const HoverProfile = ({
             </Button>
           )}
           {currentUser?.id === user.user_id ? null : !isObserve ? null : (
-            <CustomLink modifier="send" to="/dashboard/messages">
+            <CustomLink
+              modifier="send"
+              to={`/dashboard/messages?name=${user.user_name}`}
+            >
               <LuSend className="text-stone-50 dark:text-stone-950" />
               {t("posts.sendMessage")}
             </CustomLink>

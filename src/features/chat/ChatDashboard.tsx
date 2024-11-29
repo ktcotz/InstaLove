@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from "react-router";
 import { useGetChat } from "./queries/useGetChat";
 import { useEffect, useState } from "react";
-import { Users } from "./dashboard/Users";
 import { ChatSidebar } from "./ChatSidebar";
-import { AddChatMessage } from "./dashboard/AddChatMessage";
+import { AddChatMessage } from "./messages/AddChatMessage";
 import { useGetMessages } from "./queries/useGetMessages";
 import { Message } from "./messages/Message";
 import { IntroChat } from "./dashboard/IntroChat";
+import { Users } from "./users/Users";
 
 export const ChatDashboard = () => {
   const { id } = useParams();
@@ -16,7 +16,7 @@ export const ChatDashboard = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!isLoading && data?.data.length === 0) {
+    if (!isLoading && !data?.data) {
       navigate(-1);
     }
   }, [data, isLoading, navigate]);

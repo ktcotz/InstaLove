@@ -1,10 +1,11 @@
 import { useTranslation } from "react-i18next";
-import { Button, Loader } from "../../ui";
-import { useModal } from "../../ui/modal/ModalContext/useModal";
-import { useDeleteChat } from "./mutations/useDeleteChat";
-import { useUser } from "../authentication/queries/useUser";
+
 import { useNavigate } from "react-router";
-import { GlobalRoutes } from "../../typing/routes";
+import { useUser } from "../../authentication/queries/useUser";
+import { useModal } from "../../../ui/modal/ModalContext/useModal";
+import { useDeleteChat } from "../mutations/useDeleteChat";
+import { Button, Loader } from "../../../ui";
+import { GlobalRoutes } from "../../../typing/routes";
 
 type ConfirmDeleteProps = {
   chat_id: number;

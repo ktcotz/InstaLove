@@ -2,15 +2,16 @@ import { useNavigate, useParams } from "react-router";
 import { Button, CustomLink } from "../../../ui";
 import { useAuth } from "../../authentication/context/useAuth";
 import { ChatSupabaseUsersType } from "../schema/ChatSchema";
-import { UsersImages } from "./UsersImages";
+
 import { useMediaQuery } from "usehooks-ts";
 import { HiArrowLeft, HiOutlineInformationCircle } from "react-icons/hi";
 import { GlobalRoutes } from "../../../typing/routes";
+import { UsersImages } from "./UsersImages";
 import { UsersChatNames } from "./UsersChatNames";
 
 type UsersProps = {
   users: ChatSupabaseUsersType;
-  name?: string;
+  name?: string | null;
   type?: "chat" | "dashboard";
   chat?: number;
   toggleSidebar?: () => void;
