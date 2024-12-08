@@ -226,6 +226,9 @@
     "createGroup": "You created this group",
     "seeProfile": "View profile",
     "reactMessage": "React",
-    "replyMessage": "Reply"
+    "replyMessage": "Reply",
+    "replyUserMessage": "Reply to user",
+    "replied": "Replied",
+    "repliedYourself": "Replied yourself"
   }
 }

@@ -208,7 +208,7 @@ export const leaveGroup = async ({
 export const getMessages = async ({ chatId }: GetMessagesData) => {
   const { data, error } = await supabase
     .from("messages")
-    .select("*,user_id(*),chat_id(*)")
+    .select("*,user_id(*),chat_id(*),reply_user(*)")
     .eq("chat_id", chatId)
     .order("created_at", { ascending: true });
 
@@ -225,10 +225,21 @@ export const addMessage = async ({
   chatId,
   message,
   userId,
+  reply,
 }: AddMessageData) => {
-  const { error } = await supabase
-    .from("messages")
-    .insert([{ chat_id: chatId, user_id: userId, message }]);
+  const messageToInsert = reply
+    ? [
+        {
+          chat_id: chatId,
+          user_id: userId,
+          message,
+          reply_user: reply.user?.user_id,
+          reply_message: reply.message,
+        },
+      ]
+    : [{ chat_id: chatId, user_id: userId, message }];
+
+  const { error } = await supabase.from("messages").insert(messageToInsert);
 
   if (error) {
     throw new CustomError({

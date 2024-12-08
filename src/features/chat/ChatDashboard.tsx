@@ -7,6 +7,7 @@ import { useGetMessages } from "./queries/useGetMessages";
 import { Message } from "./messages/Message";
 import { IntroChat } from "./dashboard/IntroChat";
 import { Users } from "./users/Users";
+import { MessagesContextProvider } from "./messages/context/MessagesContext";
 
 export const ChatDashboard = () => {
   const { id } = useParams();
@@ -26,35 +27,37 @@ export const ChatDashboard = () => {
   };
 
   return (
-    <div className="absolute top-0 left-0 right-0 bottom-0 z-[5] bg-stone-100 md:relative flex-col md:flex-row flex">
-      <div className="grow flex flex-col">
-        {data?.users && (
-          <Users
-            name={data.data.name}
-            users={data.users}
-            toggleSidebar={toggleSidebar}
-          />
-        )}
+    <MessagesContextProvider>
+      <div className="absolute top-0 left-0 right-0 bottom-0 z-[5] bg-stone-100 md:relative flex-col md:flex-row flex">
+        <div className="grow flex flex-col">
+          {data?.users && (
+            <Users
+              name={data.data.name}
+              users={data.users}
+              toggleSidebar={toggleSidebar}
+            />
+          )}
 
-        <div className="relative md:static max-h-screen">
-          <div className="overflow-y-scroll h-[calc(100vh-215px)] md:h-[calc(100vh-175px)] pb-24">
-            {data?.users && <IntroChat users={data.users} chat={data.data} />}
-            <div className="flex flex-col gap-4 px-4">
-              {messages?.map((message) => {
-                return <Message key={message.id} {...message} />;
-              })}
+          <div className="relative md:static max-h-screen">
+            <div className="overflow-y-scroll h-[calc(100vh-215px)] md:h-[calc(100vh-175px)] pb-24">
+              {data?.users && <IntroChat users={data.users} chat={data.data} />}
+              <div className="flex flex-col gap-4 px-4">
+                {messages?.map((message) => {
+                  return <Message key={message.id} {...message} />;
+                })}
+              </div>
             </div>
+            <AddChatMessage chatId={Number(id)} />
           </div>
-          <AddChatMessage chatId={Number(id)} />
+        </div>
+        <div
+          className={`absolute top-0 left-0 right-0 bottom-0  md:static transition-all duration-300 overflow-hidden ${
+            showSidebar ? "w-[250px] sm:w-[400px] md:w-[300px]" : "w-0"
+          }`}
+        >
+          <ChatSidebar />
         </div>
       </div>
-      <div
-        className={`absolute top-0 left-0 right-0 bottom-0  md:static transition-all duration-300 overflow-hidden ${
-          showSidebar ? "w-[250px] sm:w-[400px] md:w-[300px]" : "w-0"
-        }`}
-      >
-        <ChatSidebar />
-      </div>
-    </div>
+    </MessagesContextProvider>
   );
 };

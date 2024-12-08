@@ -226,6 +226,9 @@
     "createGroup": "Ty utworzyłeś(aś) tą grupę",
     "seeProfile": "Zobacz profil",
     "reactMessage": "Zareaguj",
-    "replyMessage": "Odpowiedz"
+    "replyMessage": "Odpowiedz",
+    "replyUserMessage": "Odpowiedz użytkownikowi",
+    "replied": "Odpowiedziałeś(aś)",
+    "repliedYourself": "Odpowiedziałeś(aś) sobie"
   }
 }

@@ -13,8 +13,6 @@ export const ChatSidebar = () => {
   const { data } = useGetChat({ chat_id: Number(id) });
   const { t } = useTranslation();
 
-  console.log(data);
-
   const chat = data?.data;
 
   if (!chat) return null;

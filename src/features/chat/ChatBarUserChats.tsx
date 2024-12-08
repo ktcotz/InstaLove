@@ -24,7 +24,7 @@ export const ChatBarUserChats = () => {
         {t("messages.chats")}
       </h2>
       {data && (
-        <div className="flex flex-wrap md:flex-nowrap flex-row md:flex-col">
+        <div className="h-[420px] overflow-y-scroll flex flex-wrap md:flex-nowrap flex-row md:flex-col">
           {data.map((chat) => (
             <Chat chat={chat.chat_id} key={chat.chat_id} />
           ))}
