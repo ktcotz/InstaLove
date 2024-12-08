@@ -1,7 +1,6 @@
 import { Profile } from "../../profile/schema/ProfilesSchema";
 
 type UserProps = {
-  chat_id: string;
   role: string;
   user_id: Profile;
   isLastElement: boolean;

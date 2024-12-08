@@ -37,7 +37,7 @@ export const ChatBarActiveUser = ({ user }: ChatBarActiveUserProps) => {
         manageClass={`active-user-${user?.observe_id.user_id}`}
         parentClass="w-full mx-auto max-w-2xl px-4"
       >
-        <AddUsers clickedUser={user?.observe_id} />
+        <AddUsers clickedUser={user?.observe_id} name={null} />
       </Modal.Content>
     </>
   );

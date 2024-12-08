@@ -11,7 +11,6 @@ import { GetMessagesReactions } from "../queries/useGetReactions";
 import {
   ChatParticipants,
   ChatSchema,
-  ChatSchemaType,
   ChatSupabaseUsers,
 } from "../schema/ChatSchema";
 import { LeaveGroupData } from "../utils/ConfirmLeaveGroup";
@@ -24,7 +23,7 @@ export const createChat = async ({
   created_by,
   type,
   selectedUsers,
-}: ChatSchemaType & SelectedUsers) => {
+}: { created_by: string; type: "group" | "chat" } & SelectedUsers) => {
   if (selectedUsers.length === 1 && selectedUsers[0].user_id === created_by)
     return;
 
