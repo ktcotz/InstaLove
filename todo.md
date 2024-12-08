@@ -1,6 +1,5 @@
 PROCES : BUDOWA MESSAGES
 
-Now : Odpowiedz na wiadomość użytkownika.
 Next : Zareaguje na wiadomość użytkownika.
 Next next : Typing user functionality.
 

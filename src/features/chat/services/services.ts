@@ -4,8 +4,10 @@ import { UserID } from "../../authentication/services/types";
 import { Profile } from "../../profile/schema/ProfilesSchema";
 import { EditChatNameData } from "../edit/EditChatName";
 import { AddMessageData } from "../mutations/useAddMessage";
+import { AddReactionData } from "../mutations/useAddReaction";
 import { GetChatData } from "../queries/useGetChat";
 import { GetMessagesData } from "../queries/useGetMessages";
+import { GetMessagesReactions } from "../queries/useGetReactions";
 import {
   ChatParticipants,
   ChatSchema,
@@ -246,4 +248,60 @@ export const addMessage = async ({
       message: error.message,
     });
   }
+};
+
+export const addReactionToMessage = async ({
+  message_id,
+  reaction,
+  user_id,
+}: AddReactionData) => {
+  const { data: react } = await supabase
+    .from("messages_reactions")
+    .select("*")
+    .eq("message_id", message_id)
+    .eq("user_id", user_id);
+
+  if (react && react.length > 0) {
+    const { data, error } = await supabase
+      .from("messages_reactions")
+      .update({ reaction })
+      .eq("message_id", message_id)
+      .eq("user_id", user_id)
+      .select();
+
+    if (error) {
+      throw new CustomError({
+        message: error.message,
+      });
+    }
+
+    return data;
+  }
+
+  const { error } = await supabase
+    .from("messages_reactions")
+    .insert([{ message_id, reaction, user_id }]);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+};
+
+export const getMessagesAllReactions = async ({
+  message_id,
+}: GetMessagesReactions) => {
+  const { data, error } = await supabase
+    .from("messages_reactions")
+    .select("*,user_id(*),message_id(*)")
+    .eq("message_id", message_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
+
+  return data;
 };

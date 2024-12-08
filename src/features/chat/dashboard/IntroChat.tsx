@@ -20,8 +20,6 @@ export const IntroChat = ({ users, chat }: IntroChatProps) => {
 
   const isCreator = user?.id === chat?.created_by;
 
-  console.log(usersWithoutCurrent);
-
   return (
     <div className="flex flex-col gap-2 items-center justify-center my-6">
       <div className="h-28 w-28">

@@ -1,11 +1,12 @@
 import { Tooltip } from "react-tooltip";
-import { CustomLink } from "../../../ui";
+import { Button, CustomLink, Modal } from "../../../ui";
 import { Profile } from "../../profile/schema/ProfilesSchema";
 import { ChatSchemaType } from "../schema/ChatSchema";
 import { useHover } from "../../profile/hooks/useHover";
 import { MessageActions } from "./MessageActions";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../authentication/context/useAuth";
+import { useGetReactions } from "../queries/useGetReactions";
 
 type MessageProps = {
   message: string;
@@ -14,9 +15,11 @@ type MessageProps = {
   reply_user: Profile | null;
   reply_message: string;
   created_at: string;
+  id: number;
 };
 
 export const Message = ({
+  id,
   message,
   user_id,
   reply_message,
@@ -26,6 +29,9 @@ export const Message = ({
   const isMyMessage = user_id.user_id === user?.id;
   const { hover, isHover, unhover } = useHover();
   const { t } = useTranslation();
+  const { reactions } = useGetReactions({ message_id: id });
+
+  console.log(reactions);
 
   return (
     <div
@@ -68,9 +74,24 @@ export const Message = ({
             isMyMessage
               ? "bg-blue-600 text-white"
               : "bg-stone-200 text-stone-950"
-          } p-2 rounded-md`}
+          } relative p-2 rounded-md`}
         >
-          {message}
+          <p>{message}</p>
+          {reactions && reactions.length > 0 && (
+            <div className="text-xs absolute bottom-0 right-0 translate-x-1/3 translate-y-3/4 p-1 rounded-full bg-stone-100">
+              <Modal.Open openClass={`message-${id}-reactions`}>
+                <Button modifier="close">
+                  {reactions[reactions.length - 1].reaction}
+                </Button>
+              </Modal.Open>
+              <Modal.Content
+                manageClass={`message-${id}-reactions`}
+                parentClass="mx-auto max-w-lg mt-14"
+              >
+                <h1>ASD</h1>
+              </Modal.Content>
+            </div>
+          )}
         </div>
 
         <div
@@ -80,7 +101,13 @@ export const Message = ({
               : "-right-2 translate-x-full"
           } ${isHover ? "opacity-1" : "opacity-0"}`}
         >
-          <MessageActions user={user_id} message={message} />
+          <MessageActions
+            id={id}
+            user={user_id}
+            message={message}
+            isHover={isHover}
+            isMyMessage={isMyMessage}
+          />
         </div>
       </div>
     </div>
