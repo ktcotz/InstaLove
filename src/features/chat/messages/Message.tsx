@@ -7,6 +7,7 @@ import { MessageActions } from "./MessageActions";
 import { useTranslation } from "react-i18next";
 import { useAuth } from "../../authentication/context/useAuth";
 import { useGetReactions } from "../queries/useGetReactions";
+import { AllReactions } from "./AllReactions";
 
 type MessageProps = {
   message: string;
@@ -30,8 +31,6 @@ export const Message = ({
   const { hover, isHover, unhover } = useHover();
   const { t } = useTranslation();
   const { reactions } = useGetReactions({ message_id: id });
-
-  console.log(reactions);
 
   return (
     <div
@@ -86,9 +85,9 @@ export const Message = ({
               </Modal.Open>
               <Modal.Content
                 manageClass={`message-${id}-reactions`}
-                parentClass="mx-auto max-w-lg mt-14"
+                parentClass="mx-auto max-w-lg mt-14 w-full"
               >
-                <h1>ASD</h1>
+                <AllReactions id={id} />
               </Modal.Content>
             </div>
           )}

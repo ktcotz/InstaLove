@@ -6,10 +6,10 @@ export type GetMessagesReactions = {
 };
 
 export const useGetReactions = ({ message_id }: GetMessagesReactions) => {
-  const { data: reactions } = useQuery({
+  const { data: reactions, isLoading } = useQuery({
     queryKey: ["messages-reactions", message_id],
     queryFn: () => getMessagesAllReactions({ message_id }),
   });
 
-  return { reactions } as const;
+  return { reactions, isLoading } as const;
 };

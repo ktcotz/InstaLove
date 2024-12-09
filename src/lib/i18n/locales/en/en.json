@@ -229,6 +229,7 @@
     "replyMessage": "Reply",
     "replyUserMessage": "Reply to user",
     "replied": "Replied",
-    "repliedYourself": "Replied yourself"
+    "repliedYourself": "Replied yourself",
+    "reactions": "Reactions"
   }
 }

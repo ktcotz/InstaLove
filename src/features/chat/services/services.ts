@@ -5,6 +5,7 @@ import { Profile } from "../../profile/schema/ProfilesSchema";
 import { EditChatNameData } from "../edit/EditChatName";
 import { AddMessageData } from "../mutations/useAddMessage";
 import { AddReactionData } from "../mutations/useAddReaction";
+import { DeleteReactionData } from "../mutations/useDeleteReaction";
 import { GetChatData } from "../queries/useGetChat";
 import { GetMessagesData } from "../queries/useGetMessages";
 import { GetMessagesReactions } from "../queries/useGetReactions";
@@ -275,16 +276,16 @@ export const addReactionToMessage = async ({
     }
 
     return data;
-  }
+  } else {
+    const { error } = await supabase
+      .from("messages_reactions")
+      .insert([{ message_id, reaction, user_id }]);
 
-  const { error } = await supabase
-    .from("messages_reactions")
-    .insert([{ message_id, reaction, user_id }]);
-
-  if (error) {
-    throw new CustomError({
-      message: error.message,
-    });
+    if (error) {
+      throw new CustomError({
+        message: error.message,
+      });
+    }
   }
 };
 
@@ -303,4 +304,21 @@ export const getMessagesAllReactions = async ({
   }
 
   return data;
+};
+
+export const deleteUserReaction = async ({
+  id,
+  message_id,
+}: DeleteReactionData) => {
+  const { error } = await supabase
+    .from("messages_reactions")
+    .delete()
+    .eq("user_id", id)
+    .eq("message_id", message_id);
+
+  if (error) {
+    throw new CustomError({
+      message: error.message,
+    });
+  }
 };
