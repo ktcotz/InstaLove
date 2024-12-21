@@ -16,6 +16,10 @@ export const LoginForm = () => {
     register,
   } = useForm<LoginSchema>({
     resolver: zodResolver(LoginFormSchema),
+    defaultValues: {
+      email: "tester@wp.pl",
+      password: "123456",
+    },
   });
   const { t } = useTranslation();
   const { login, isLogin, loginError } = useLogin();

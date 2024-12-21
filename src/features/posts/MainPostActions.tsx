@@ -26,7 +26,7 @@ type MainPostActionsProps = {
 
 export const MainPostActions = ({ user_id, post }: MainPostActionsProps) => {
   const { t } = useTranslation();
-  const { user: profile } = useUserByID(user_id);
+  const { user: profile } = useUserByID(post.user_id);
   const { user: current } = useUser();
   const { likes, count } = useGetPostLikes({ post_id: post.id, user_id });
   const { like } = useLike({ post_id: post.id, user_id });
@@ -151,7 +151,7 @@ export const MainPostActions = ({ user_id, post }: MainPostActionsProps) => {
           </Modal.Content>
         </div>
       )}
-      <p className="mt-4 text-sm text-stone-600 dark:text-stone-300">
+      <p className="mt-4 flex items-center gap-2 flex-wrap text-sm text-stone-600 dark:text-stone-300">
         <strong className="font-semibold text-stone-950 dark:text-stone-50">
           {profile?.user_name}
         </strong>

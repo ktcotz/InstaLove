@@ -32,6 +32,8 @@ export const Message = ({
   const { t } = useTranslation();
   const { reactions } = useGetReactions({ message_id: id });
 
+  console.log(user_id);
+
   return (
     <div
       className={`flex flex-col gap-2 relative w-fit ${

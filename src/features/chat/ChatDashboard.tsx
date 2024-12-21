@@ -16,6 +16,8 @@ export const ChatDashboard = () => {
   const { data: messages } = useGetMessages({ chatId: Number(id) });
   const navigate = useNavigate();
 
+  console.log(messages);
+
   useEffect(() => {
     if (!isLoading && !data?.data) {
       navigate(-1);

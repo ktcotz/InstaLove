@@ -60,6 +60,7 @@ export const FileDropzone = ({
     },
   });
 
+  console.log(open, file.type, preview);
   return (
     <div
       {...getRootProps({ className: "dropzone" })}
@@ -99,12 +100,11 @@ export const FileDropzone = ({
             </div>
           )}
 
-        {(open && file.type.includes("image") && preview) ||
-          (mark && (
-            <div className="grow">
-              <MarkUsers />
-            </div>
-          ))}
+        {((open && file.type.includes("image") && preview) || mark) && (
+          <div className="grow">
+            <MarkUsers />
+          </div>
+        )}
 
         {!preview && (
           <div className="h-full flex flex-col items-center justify-center gap-6">
