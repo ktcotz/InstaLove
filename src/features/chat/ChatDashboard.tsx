@@ -8,12 +8,15 @@ import { Message } from "./messages/Message";
 import { IntroChat } from "./dashboard/IntroChat";
 import { Users } from "./users/Users";
 import { MessagesContextProvider } from "./messages/context/MessagesContext";
+import { MessagesLoadingSkeleton } from "./messages/MessagesLoadingSkeleton";
 
 export const ChatDashboard = () => {
   const { id } = useParams();
   const [showSidebar, setShowSidebar] = useState(false);
   const { data, isLoading } = useGetChat({ chat_id: Number(id) });
-  const { data: messages } = useGetMessages({ chatId: Number(id) });
+  const { data: messages, isLoading: isMessagesLoading } = useGetMessages({
+    chatId: Number(id),
+  });
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -42,6 +45,7 @@ export const ChatDashboard = () => {
             <div className="overflow-y-scroll h-[calc(100vh-215px)] md:h-[calc(100vh-175px)] pb-24">
               {data?.users && <IntroChat users={data.users} chat={data.data} />}
               <div className="flex flex-col gap-4 px-4">
+                {isMessagesLoading && <MessagesLoadingSkeleton />}
                 {messages?.map((message) => {
                   return <Message key={message.id} {...message} />;
                 })}

@@ -52,12 +52,14 @@ export const Message = ({
     >
       {isMyMessage && reply_message && reply_user && (
         <div className="border border-stone-300 p-4 rounded-md flex flex-col gap-1">
-          <p className="text-sm">
+          <p className="text-sm dark:text-stone-50 text-stone-950">
             {reply_user.user_id === user_id.user_id
               ? t("messages.repliedYourself")
               : `${t("messages.replied")} ${reply_user.user_name}`}
           </p>
-          <p className="text-sm text-stone-600">{reply_message}</p>
+          <p className="text-sm text-stone-600 dark:text-stone-300">
+            {reply_message}
+          </p>
         </div>
       )}
       <div className="relative flex items-center gap-2">
