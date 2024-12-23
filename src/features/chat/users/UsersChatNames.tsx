@@ -9,14 +9,16 @@ export const UsersChatNames = ({
   usersWithoutCurrent,
 }: UsersChatNamesProps) => {
   return (
-    <div className="flex items-center flex-wrap gap-1">
+    <div className="flex items-center flex-wrap gap-1 justify-center md:justify-start">
       {usersWithoutCurrent.map((user, idx) => {
         const isLastElement = idx === usersWithoutCurrent.length - 1;
 
         return (
-          <object key={user.user_id.user_name}>
-            <User {...user} isLastElement={isLastElement} />
-          </object>
+          <User
+            {...user}
+            isLastElement={isLastElement}
+            key={user.user_id.user_name}
+          />
         );
       })}
     </div>

@@ -1,5 +1,5 @@
 import { Tooltip } from "react-tooltip";
-import { Button, CustomLink, Modal } from "../../../ui";
+import { Button, CustomLink, Loader, Modal } from "../../../ui";
 import { Profile } from "../../profile/schema/ProfilesSchema";
 import { ChatSchemaType } from "../schema/ChatSchema";
 import { useHover } from "../../profile/hooks/useHover";
@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useAuth } from "../../authentication/context/useAuth";
 import { useGetReactions } from "../queries/useGetReactions";
 import { AllReactions } from "./AllReactions";
+import { useState } from "react";
 
 type MessageProps = {
   message: string;
@@ -31,8 +32,14 @@ export const Message = ({
   const { hover, isHover, unhover } = useHover();
   const { t } = useTranslation();
   const { reactions } = useGetReactions({ message_id: id });
+  const [isClicked, setIsClicked] = useState(false);
 
-  console.log(user_id);
+  if (!user_id.user_id)
+    return (
+      <div className="p-2 w-full flex items-center justify-center">
+        <Loader />
+      </div>
+    );
 
   return (
     <div
@@ -41,8 +48,7 @@ export const Message = ({
       }`}
       onMouseEnter={hover}
       onMouseLeave={unhover}
-      onTouchStart={hover}
-      onTouchEnd={unhover}
+      onClick={() => setIsClicked((prevClicked) => !prevClicked)}
     >
       {isMyMessage && reply_message && reply_user && (
         <div className="border border-stone-300 p-4 rounded-md flex flex-col gap-1">
@@ -63,7 +69,13 @@ export const Message = ({
               data-tooltip-id={`user-${user_id.user_name}`}
               data-tooltip-place="top"
             >
-              <img src={user_id.avatar_url} alt={user_id.user_name} />
+              <img
+                src={user_id.avatar_url}
+                alt={user_id.user_name}
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-full"
+              />
             </CustomLink>
             <Tooltip id={`user-${user_id.user_name}`}>
               {user_id.user_name}
@@ -74,7 +86,7 @@ export const Message = ({
           className={`${
             isMyMessage
               ? "bg-blue-600 text-white"
-              : "bg-stone-200 text-stone-950"
+              : "bg-stone-200 text-stone-950 dark:bg-stone-900 dark:text-stone-50"
           } relative p-2 rounded-md`}
         >
           <p>{message}</p>
@@ -100,13 +112,13 @@ export const Message = ({
             isMyMessage
               ? "-left-2 -translate-x-full"
               : "-right-2 translate-x-full"
-          } ${isHover ? "opacity-1" : "opacity-0"}`}
+          } ${isHover || isClicked ? "opacity-1" : "opacity-0"}`}
         >
           <MessageActions
             id={id}
             user={user_id}
             message={message}
-            isHover={isHover}
+            isHover={isHover || isClicked}
             isMyMessage={isMyMessage}
           />
         </div>

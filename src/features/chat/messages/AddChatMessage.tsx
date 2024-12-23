@@ -18,7 +18,7 @@ export const AddChatMessage = ({ chatId }: AddChatMessageProps) => {
   const [message, setMessage] = useState("");
   const [showEmotes, setShowEmotes] = useState(false);
   const { isDarkMode } = useTernaryDarkMode();
-  const { mutate } = useAddMessage();
+  const { mutate } = useAddMessage({ chatId });
   const { reply, reset } = useMessages();
   const { t } = useTranslation();
 
@@ -39,7 +39,7 @@ export const AddChatMessage = ({ chatId }: AddChatMessageProps) => {
   };
 
   return (
-    <div className="bg-stone-50 p-4 absolute bottom-0 left-0 w-full h-14  flex flex-col items-center justify-center  z-50">
+    <div className="bg-stone-100 dark:bg-stone-950 p-4 absolute bottom-0 left-0 w-full h-14  flex flex-col items-center justify-center  z-50">
       {reply?.user && (
         <div className="bg-stone-50 absolute top-0 left-0 w-full p-4 border-t border-stone-300 -translate-y-full">
           <div className="flex items-center justify-between gap-2 mb-2">
@@ -85,7 +85,7 @@ export const AddChatMessage = ({ chatId }: AddChatMessageProps) => {
             name="message"
             value={message}
             placeholder="Wyślij wiadomość..."
-            className="w-full py-3 bg-transparent focus:outline-none text-base"
+            className="w-full py-3 bg-transparent focus:outline-none text-base dark:text-stone-50"
             onChange={(ev) => setMessage(ev.target.value)}
           />
           <div className="mx-4 flex items-center justify-center">

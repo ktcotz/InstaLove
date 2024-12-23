@@ -131,9 +131,9 @@ export const ProfileDetails = () => {
                 )}
               </div>
             </div>
-            <div className="flex  justify-center gap-12 sm:gap-3 sm:items-center sm:justify-between sm:w-3/4">
+            <div className=" flex  justify-center gap-12 sm:gap-3 sm:items-center sm:justify-between sm:w-3/4">
               <p className="flex gap-1 flex-col items-center sm:flex-row text-stone-900 dark:text-stone-50">
-                <strong className="font-medium text-stone-950 dark:text-stone-100">
+                <strong className=" text-sm font-medium text-stone-950 dark:text-stone-100">
                   {t("profile.posts")}:
                 </strong>
                 <span className="font-semibold mt-auto sm:mt-0">

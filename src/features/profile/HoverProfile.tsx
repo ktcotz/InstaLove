@@ -114,7 +114,7 @@ export const HoverProfile = ({
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-6 mb-2">
+        <div className="flex items-center justify-center gap-6 mb-2">
           <div className="text-center p-2 2xl:p-4">
             <p className="font-semibold dark:text-stone-50">
               {posts?.count ?? 0}

@@ -16,8 +16,6 @@ export const ChatDashboard = () => {
   const { data: messages } = useGetMessages({ chatId: Number(id) });
   const navigate = useNavigate();
 
-  console.log(messages);
-
   useEffect(() => {
     if (!isLoading && !data?.data) {
       navigate(-1);
@@ -30,7 +28,7 @@ export const ChatDashboard = () => {
 
   return (
     <MessagesContextProvider>
-      <div className="absolute top-0 left-0 right-0 bottom-0 z-[5] bg-stone-100 md:relative flex-col md:flex-row flex">
+      <div className="absolute top-0 left-0 right-0 bottom-0 z-[5] bg-stone-100 md:relative flex-col md:flex-row flex dark:bg-stone-950">
         <div className="grow flex flex-col">
           {data?.users && (
             <Users
