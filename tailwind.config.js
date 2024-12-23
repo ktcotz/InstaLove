@@ -10,7 +10,7 @@ export default {
       },
       animation: {
         "fade-image": "fadeInOut 9s infinite;",
-        "fade-left": "fadeFromLeft 1s ease-in-out",
+        "fade-left": "fadeFromLeft .3s ease-in-out",
         "fade-right": "fadeFromRight 1s ease-in-out",
         "fade-bottom": "fadeFromBottom 1s ease-in-out",
         "play-video": "showPlayVideo 300ms ease-in-out",

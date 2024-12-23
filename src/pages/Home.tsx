@@ -32,7 +32,7 @@ export const Home = () => {
         <Wrapper modifier="home">
           <div className="grid place-items-center lg:grid-cols-2 lg:gap-8">
             {!isTablet && <AnimatedImages />}
-            <div className="animate-fade-bottom lg:animate-fade-right w-full lg:w-4/5">
+            <div className=" w-full lg:w-4/5">
               <Container>
                 <LoginForm />
               </Container>

@@ -14,21 +14,19 @@ export const Login = () => {
       <HomeNavigation />
       <main className="flex items-center justify-center">
         <Wrapper modifier="form">
-          <div className="animate-fade-bottom">
-            <Container>
-              <div className="mb-12">
-                <Logo />
-              </div>
-              <LoginForm />
-            </Container>
-            <div className="p-4 border border-stone-300 text-center mt-4 dark:border-stone-50">
-              <p className="text-stone-600 font-semibold dark:text-stone-50">
-                {t("home.no-account")}{" "}
-                <CustomLink to={GlobalRoutes.Register} modifier="link">
-                  {t("links.register")}
-                </CustomLink>
-              </p>
+          <Container>
+            <div className="mb-12">
+              <Logo />
             </div>
+            <LoginForm />
+          </Container>
+          <div className="p-4 border border-stone-300 text-center mt-4 dark:border-stone-50">
+            <p className="text-stone-600 font-semibold dark:text-stone-50">
+              {t("home.no-account")}{" "}
+              <CustomLink to={GlobalRoutes.Register} modifier="link">
+                {t("links.register")}
+              </CustomLink>
+            </p>
           </div>
         </Wrapper>
       </main>

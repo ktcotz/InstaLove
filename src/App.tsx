@@ -1,10 +1,6 @@
 import { Home } from "./pages/Home";
 import { GlobalRoutes } from "./typing/routes";
-import {
-  createBrowserRouter,
-  Navigate,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { FormContextProvider } from "./ui/form/context/FormContext";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
@@ -109,7 +105,7 @@ export const router = createBrowserRouter([
         children: [
           {
             path: "",
-            element: <Navigate to={GlobalRoutes.ProfilePosts} />,
+            element: <Posts />,
           },
           {
             path: GlobalRoutes.ProfilePosts,

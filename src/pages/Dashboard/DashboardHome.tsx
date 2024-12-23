@@ -57,7 +57,7 @@ export const DashboardHome = () => {
           </CustomLink>
         </div>
       )}
-      <div className="xl:col-start-1 xl:col-end-3 overflow-x-hidden flex flex-col gap-6 pb-60">
+      <div className="xl:col-start-1 xl:col-end-3 overflow-x-hidden flex flex-col gap-6 pb-20">
         <Stories />
         <MainScreenPosts />
       </div>

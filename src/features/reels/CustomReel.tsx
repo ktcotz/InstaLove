@@ -8,7 +8,8 @@ import { ReelActions } from "./ReelActions";
 import { Loader } from "../../ui/Loader";
 import { useTranslation } from "react-i18next";
 import { ReelMutedData } from "./Reels";
-import { FaPlay } from "react-icons/fa";
+import { FaMusic, FaPlay } from "react-icons/fa";
+import { useTernaryDarkMode } from "usehooks-ts";
 
 type CustomReelProps = {
   muted: ReelMutedData;
@@ -27,6 +28,7 @@ export const CustomReel = ({
   const { user, isLoading } = useUserByID(user_id);
   const { t } = useTranslation();
   const [played, setPlayed] = useState(true);
+  const { isDarkMode } = useTernaryDarkMode();
 
   const handleMuted = () => {
     toggleMuted({ id, isMuted: !muted.isMuted });
@@ -63,7 +65,21 @@ export const CustomReel = ({
             <source src={video_url} type="video/mp4" />
             <p>{description}</p>
           </video>
-          <div className="bg-black/20 h-full w-full absolute top-0 left-0 rounded-xl"></div>
+          <div
+            className={`${
+              isDarkMode ? "bg-black/5" : "bg-black/20"
+            } h-full w-full absolute top-0 left-0 rounded-xl`}
+          >
+            {video_url?.includes("mp3") && (
+              <div className="h-full flex items-center justify-center">
+                <FaMusic
+                  className={`${
+                    isDarkMode ? "text-white" : "text-black"
+                  } text-5xl sm:text-white`}
+                />
+              </div>
+            )}
+          </div>
         </div>
         <div className="absolute top-4 right-4">
           <Button

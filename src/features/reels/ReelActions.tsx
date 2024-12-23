@@ -126,7 +126,7 @@ export const ReelActions = ({ user, id }: ReelActionsProps) => {
               <>
                 <Modal.Open openClass={`reel-${id}-likes`}>
                   <Button modifier="close">
-                    <p className="text-xs text-stone-50">
+                    <p className="text-xs text-stone-950 dark:text-stone-50">
                       {new Intl.NumberFormat(i18n.language, {
                         notation: "compact",
                       }).format(count)}

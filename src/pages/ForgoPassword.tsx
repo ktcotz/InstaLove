@@ -10,14 +10,12 @@ export const ForgotPassword = () => {
       <HomeNavigation />
       <main className="flex items-center justify-center">
         <Wrapper modifier="form">
-          <div className="animate-fade-bottom">
-            <Container>
-              <div className="mb-12">
-                <Logo />
-              </div>
-              <ForgotPasswordForm />
-            </Container>
-          </div>
+          <Container>
+            <div className="mb-12">
+              <Logo />
+            </div>
+            <ForgotPasswordForm />
+          </Container>
         </Wrapper>
       </main>
     </div>
