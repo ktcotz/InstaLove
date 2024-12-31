@@ -5,11 +5,10 @@ export type AllNonUserStories = {
   current?: string;
 };
 
-export const useGetAllStories = ({ current }: AllNonUserStories) => {
+export const useGetAllStories = () => {
   const { data: stories, isLoading } = useQuery({
-    queryKey: ["stories", current],
-    queryFn: () => getAllStories({ current }),
-    enabled: !!current,
+    queryKey: ["stories"],
+    queryFn: () => getAllStories(),
   });
 
   return { stories, isLoading } as const;

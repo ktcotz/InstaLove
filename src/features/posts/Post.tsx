@@ -1,9 +1,10 @@
-import { FaComment, FaHeart, FaPlay } from "react-icons/fa";
+import { FaComment, FaHeart, FaMusic, FaPlay } from "react-icons/fa";
 import { useHover } from "../profile/hooks/useHover";
 import { GeneralPost } from "./schema/PostsSchema";
 import { useGetPostLikes } from "./queries/useGetPostLikes";
 import { Loader } from "../../ui/Loader";
 import { useGetAllComments } from "./queries/useGetAllComments";
+import { useTernaryDarkMode } from "usehooks-ts";
 
 type PostProps = {
   maxHeight?: number;
@@ -17,6 +18,7 @@ export const Post = ({
   maxHeight = 350,
 }: GeneralPost & PostProps) => {
   const { hover, unhover, isHover } = useHover();
+  const { isDarkMode } = useTernaryDarkMode();
 
   const { count, isLoading } = useGetPostLikes({ post_id: id });
   const { data } = useGetAllComments(id);
@@ -53,6 +55,26 @@ export const Post = ({
       )}
       {video_url && (
         <>
+          <div className="h-full w-full">
+            <video loop muted autoPlay className="h-full w-full object-cover">
+              <source src={video_url} type="video/mp4" />
+            </video>
+            <div
+              className={`${
+                isDarkMode ? "bg-black/5" : "bg-black/20"
+              } h-full w-full absolute top-0 left-0 rounded-xl`}
+            >
+              {video_url?.includes("mp3") && (
+                <div className="h-full flex items-center justify-center">
+                  <FaMusic
+                    className={`${
+                      isDarkMode ? "text-white" : "text-black"
+                    } text-5xl sm:text-white`}
+                  />
+                </div>
+              )}
+            </div>
+          </div>
           <video loop muted className="h-full w-full object-cover">
             <source src={video_url} type="video/mp4" />
           </video>

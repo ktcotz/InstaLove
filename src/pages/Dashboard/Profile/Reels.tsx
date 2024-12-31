@@ -7,6 +7,7 @@ import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
 import { Button } from "../../../ui/Button";
 import { Modal } from "../../../ui/modal/Modal";
+import { Fragment } from "react/jsx-runtime";
 
 export const Reels = () => {
   const { t } = useTranslation();
@@ -27,7 +28,7 @@ export const Reels = () => {
 
   return reels?.map((reel) => {
     return (
-      <>
+      <Fragment key={reel.id}>
         <Modal.Open openClass={`reel-${reel.id}`}>
           <Button modifier="close">
             <Post {...reel} />
@@ -39,7 +40,7 @@ export const Reels = () => {
         >
           <IndividualModalPost post={reel} />
         </Modal.Content>
-      </>
+      </Fragment>
     );
   });
 };

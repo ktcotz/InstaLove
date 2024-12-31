@@ -136,7 +136,7 @@ export const HoverProfile = ({
             </Modal.Open>
             <Modal.Content
               manageClass={`hover-${user_name}-user-observations`}
-              parentClass="mx-auto max-w-lg mt-14"
+              parentClass="mx-auto max-w-lg mt-14 w-full"
             >
               <ObservesByUser user_id={user.user_id} />
             </Modal.Content>
@@ -153,7 +153,7 @@ export const HoverProfile = ({
               </Button>
             </Modal.Open>
             <Modal.Content
-              parentClass="mx-auto max-w-lg mt-14"
+              parentClass="mx-auto max-w-lg mt-14 w-full"
               manageClass={`hover-${user_name}-observations`}
             >
               <ObservesOnUser user_id={user.user_id} />

@@ -3,10 +3,11 @@ import { FaCamera } from "react-icons/fa6";
 import { useProfile } from "../queries/useProfile";
 import { Modal } from "../../../ui/modal/Modal";
 import { ChangeAvatar } from "./ChangeAvatar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useProfileParams } from "../queries/useProfileParams";
 import { useUser } from "../../authentication/queries/useUser";
 import { useTranslation } from "react-i18next";
+import { useModal } from "../../../ui/modal/ModalContext/useModal";
 
 type AvatarProps = {
   overlay?: boolean;
@@ -23,6 +24,8 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
     profile === undefined ? user!.user_metadata.user_name : profile
   );
 
+  const { close } = useModal();
+
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
       "image/*": [],
@@ -34,6 +37,12 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
       setFile(file);
     },
   });
+
+  useEffect(() => {
+    if (!preview) {
+      close();
+    }
+  }, [preview]);
 
   const avatarSizes: Record<typeof size, string> = {
     48: "w-12 h-12 rounded-full",

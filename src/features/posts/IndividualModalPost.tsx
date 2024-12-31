@@ -7,10 +7,12 @@ import { GeneralPost } from "./schema/PostsSchema";
 import { useGetComments } from "./queries/useGetComments";
 import { useUser } from "../authentication/queries/useUser";
 import { useAddView } from "./mutations/useAddView";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import { PostsContextProvider } from "./context/PostsContext";
 import { StoriesMarks } from "../stories/StoriesMarks";
 import { useTranslation } from "react-i18next";
+import { useTernaryDarkMode } from "usehooks-ts";
+import { FaMusic } from "react-icons/fa";
 
 type IndividualModalPostProps = {
   post: GeneralPost;
@@ -21,6 +23,8 @@ export const MAX_COMMENTS_POST = 12;
 export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
   const { user: currentUser } = useUser();
   const { user } = useUserByID(post.user_id);
+  const { isDarkMode } = useTernaryDarkMode();
+  const videoRef = useRef<HTMLVideoElement>(null);
   const { t } = useTranslation();
   const { addView } = useAddView({
     reel_id: post.id,
@@ -39,6 +43,12 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
       addView();
     }
   }, [addView, post]);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      videoRef.current.volume = 0.15;
+    }
+  }, []);
 
   if (!user || !currentUser) return null;
 
@@ -62,9 +72,31 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
           }  relative bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100`}
         >
           {post.video_url && (
-            <video loop muted autoPlay className="h-full w-full object-cover">
-              <source src={post.video_url} type="video/mp4" />
-            </video>
+            <div className="h-full w-full">
+              <video
+                ref={videoRef}
+                loop
+                autoPlay
+                className="h-full w-full object-cover"
+              >
+                <source src={post.video_url} type="video/mp4" />
+              </video>
+              <div
+                className={`${
+                  isDarkMode ? "bg-black/5" : "bg-black/20"
+                } h-full w-full absolute top-0 left-0 rounded-xl`}
+              >
+                {post.video_url?.includes("mp3") && (
+                  <div className="h-full flex items-center justify-center">
+                    <FaMusic
+                      className={`${
+                        isDarkMode ? "text-white" : "text-black"
+                      } text-5xl sm:text-white`}
+                    />
+                  </div>
+                )}
+              </div>
+            </div>
           )}
           <StoriesMarks post_id={post.id} user_id={currentUser.id} />
         </div>
