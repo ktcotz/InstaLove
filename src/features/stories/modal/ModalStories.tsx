@@ -5,15 +5,13 @@ import { MobileSwiper } from "./MobileSwiper";
 import { useGetAllStories } from "../queries/useGetAllStories";
 import { Loader } from "../../../ui/Loader";
 import { Swiper } from "swiper/types";
-import { useAuth } from "../../authentication/context/useAuth";
 
 type ModalStoriesProps = {
   clickedID: string;
 };
 
 export const ModalStories = ({ clickedID }: ModalStoriesProps) => {
-  const { user } = useAuth();
-  const { stories, isLoading } = useGetAllStories({ current: user?.id });
+  const { stories, isLoading } = useGetAllStories();
   const [swiper, setSwiper] = useState<Swiper | null>(null);
   const [isPlaying, setIsPlaying] = useState(true);
   const [initialSlide, setInitialSlide] = useState(0);

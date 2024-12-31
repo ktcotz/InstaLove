@@ -7,6 +7,7 @@ import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
 import { Button } from "../../../ui/Button";
 import { Modal } from "../../../ui/modal/Modal";
+import { Fragment } from "react/jsx-runtime";
 
 export const Posts = () => {
   const { profile } = useProfileParams();
@@ -31,7 +32,7 @@ export const Posts = () => {
 
   return posts?.data.map((post) => {
     return (
-      <>
+      <Fragment key={post.id}>
         <Modal.Open openClass={`post-${post.id}`}>
           <Button modifier="close">
             <Post {...post} />
@@ -43,7 +44,7 @@ export const Posts = () => {
         >
           <IndividualModalPost post={post} />
         </Modal.Content>
-      </>
+      </Fragment>
     );
   });
 };

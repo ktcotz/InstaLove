@@ -7,6 +7,7 @@ import { useProfile } from "../../../features/profile/queries/useProfile";
 import { useProfileParams } from "../../../features/profile/queries/useProfileParams";
 import { Button } from "../../../ui/Button";
 import { Modal } from "../../../ui/modal/Modal";
+import { Fragment } from "react/jsx-runtime";
 
 export const Bookmarks = () => {
   const { t } = useTranslation();
@@ -34,7 +35,7 @@ export const Bookmarks = () => {
       : bookmark.reel_id;
 
     return (
-      <>
+      <Fragment key={renderBookmark}>
         <Modal.Open openClass={`bookmark-${bookmark.id}`}>
           <Button modifier="close">
             <Post {...renderBookmark} />
@@ -48,7 +49,7 @@ export const Bookmarks = () => {
             post={bookmark.post_id ? bookmark.post_id : bookmark.reel_id}
           />
         </Modal.Content>
-      </>
+      </Fragment>
     );
   });
 };
