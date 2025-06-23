@@ -1,11 +1,19 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useEventListener, useInterval, useMediaQuery } from "usehooks-ts";
-import { DesktopSwiper } from "./DesktopSwiper";
-import { MobileSwiper } from "./MobileSwiper";
+
 import { useGetAllStories } from "../queries/useGetAllStories";
 import { Loader } from "../../../ui/Loader";
 import { Swiper } from "swiper/types";
 
+const DesktopSwiper = React.lazy(() =>
+  import("./DesktopSwiper").then((module) => ({
+    default: module.DesktopSwiper,
+  }))
+);
+
+const MobileSwiper = React.lazy(() =>
+  import("./MobileSwiper").then((module) => ({ default: module.MobileSwiper }))
+);
 type ModalStoriesProps = {
   clickedID: string;
 };
