@@ -75,14 +75,15 @@ export const MainPost = ({ post }: MainPostProps) => {
           )}
           {isHover && <HoverProfile user_name={user.user_name} />}
         </div>
-        <div
-          className="relative max-h-[700px] h-[500px] sm:rounded-md bg-cover bg-center"
-          style={
-            "post_url" in post
-              ? { backgroundImage: `url(${post.post_url})` }
-              : {}
-          }
-        >
+        <div className="relative max-h-[700px] h-[500px] sm:rounded-md overflow-hidden">
+          {"post_url" in post && post.post_url && (
+            <img
+              src={post.post_url}
+              alt={post.description || `Post ${post.id} by ${user.fullName}`}
+              className="object-cover w-full h-full rounded-md"
+              loading="lazy"
+            />
+          )}
           {post.video_url && (
             <video
               loop
