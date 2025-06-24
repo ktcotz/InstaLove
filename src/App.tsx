@@ -289,6 +289,7 @@ export const App = () => (
           textAlign: "center",
           backgroundColor: "#10141E",
           color: "rgb(248,250,252)",
+          zIndex: 9999,
         },
         success: { duration: 3000 },
       }}

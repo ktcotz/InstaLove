@@ -86,40 +86,44 @@ export const DashboardNavigationItem = ({
 
   if (to) {
     return (
-      <CustomLink
-        modifier="navigation"
-        to={
-          to === GlobalRoutes.DashboardProfile
-            ? `${currentUser?.user_name}`
-            : to
-        }
-        activeClass="bg-stone-200 font-semibold dark:text-stone-950"
-        type="active-link"
-        data-tooltip-id={`link-${title}`}
-        data-tooltip-place={mobileMatches ? "top" : "right"}
-      >
-        {to === GlobalRoutes.DashboardProfile && currentUser ? (
-          <img
-            src={currentUser.avatar_url}
-            width={24}
-            height={24}
-            alt={currentUser.fullName}
-            className="rounded-full w-6 h-6"
-          />
-        ) : (
-          <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">
-            {icons[icon]}
-          </span>
-        )}
+      <li>
+        <CustomLink
+          modifier="navigation"
+          to={
+            to === GlobalRoutes.DashboardProfile
+              ? `${currentUser?.user_name}`
+              : to
+          }
+          activeClass="bg-stone-200 font-semibold dark:text-stone-950"
+          type="active-link"
+          data-tooltip-id={`link-${title}`}
+          data-tooltip-place={mobileMatches ? "top" : "right"}
+        >
+          {to === GlobalRoutes.DashboardProfile && currentUser ? (
+            <img
+              src={currentUser.avatar_url}
+              width={24}
+              height={24}
+              alt={currentUser.fullName}
+              className="rounded-full w-6 h-6"
+            />
+          ) : (
+            <span className="text-xl sm:text-2xl group-hover:scale-105 transition-all">
+              {icons[icon]}
+            </span>
+          )}
 
-        {!matches ? (
-          <span className={component === openComponent ? "font-semibold" : ""}>
-            {t(title)}
-          </span>
-        ) : (
-          <Tooltip id={`link-${title}`}>{t(title)}</Tooltip>
-        )}
-      </CustomLink>
+          {!matches ? (
+            <span
+              className={component === openComponent ? "font-semibold" : ""}
+            >
+              {t(title)}
+            </span>
+          ) : (
+            <Tooltip id={`link-${title}`}>{t(title)}</Tooltip>
+          )}
+        </CustomLink>
+      </li>
     );
   }
 

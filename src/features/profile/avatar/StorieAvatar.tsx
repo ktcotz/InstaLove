@@ -22,8 +22,8 @@ export const StorieAvatar = ({ size, profile }: StorieAvatarProps) => {
   const { t } = useTranslation();
 
   const avatarSizes: Record<typeof size, string> = {
-    176: "w-44 h-44 rounded-full",
-    40: "w-10 h-10 rounded-full",
+    176: "w-44 h-44 rounded-full object-cover",
+    40: "w-10 h-10 rounded-full object-cover",
   };
 
   const hasStorie = stories && stories.length > 0;

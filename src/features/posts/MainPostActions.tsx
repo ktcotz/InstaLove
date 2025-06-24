@@ -113,6 +113,7 @@ export const MainPostActions = ({ user_id, post }: MainPostActionsProps) => {
         <CustomLink
           to={`/dashboard/${profile?.user_name}/post/${post.id}`}
           modifier="close"
+          aria-label={t("posts.comment")}
         >
           <FaRegComment className="text-xl text-stone-950 dark:text-stone-50" />
         </CustomLink>

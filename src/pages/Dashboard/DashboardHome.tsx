@@ -10,23 +10,20 @@ import { useEffect } from "react";
 import { supabase } from "../../lib/supabase/supabase";
 import { useAuth } from "../../features/authentication/context/useAuth";
 import { useLoggedOut } from "../../features/authentication/mutations/useLoggedOut";
+import { useTranslation } from "react-i18next";
 
 export const DashboardHome = () => {
   const isLaptop = useMediaQuery("(min-width:1280px)");
   const isMobile = useMediaQuery("(max-width:768px)");
   const { user } = useAuth();
   const { logged } = useLoggedOut();
+  const { t } = useTranslation();
 
   useEffect(() => {
     const activeUsers = supabase.channel("active_users", {
       config: { presence: { key: user?.id } },
     });
     activeUsers
-      .on("presence", { event: "join" }, ({ newPresences }) => {
-        newPresences.forEach((presence) => {
-          console.log("User joined:", presence.user_id);
-        });
-      })
       .on("presence", { event: "leave" }, ({ leftPresences }) => {
         leftPresences.forEach((presence) => {
           logged({ user_id: presence.user_id });
@@ -51,6 +48,7 @@ export const DashboardHome = () => {
           <CustomLink
             modifier="mobile-notification"
             to={"/dashboard/notifications"}
+            aria-label={t("navigation.notifications")}
           >
             <FaRegHeart className="dark:fill-stone-50" />
             <NotificationsCounter />

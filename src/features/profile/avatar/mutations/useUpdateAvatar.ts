@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateAvatar } from "../services/services";
+import toast from "react-hot-toast";
 
 export const useUpdateAvatar = () => {
   const queryClient = useQueryClient();
@@ -14,6 +15,10 @@ export const useUpdateAvatar = () => {
       queryClient.invalidateQueries({
         queryKey: ["user"],
       });
+    },
+
+    onError: (err) => {
+      toast.error(err.message);
     },
   });
 

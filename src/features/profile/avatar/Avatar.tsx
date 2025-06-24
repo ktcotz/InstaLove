@@ -28,8 +28,10 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
 
   const { getRootProps, getInputProps } = useDropzone({
     accept: {
-      "image/*": [],
+      "image/jpeg": [],
+      "image/png": [],
     },
+    maxSize: 2 * 1024 * 1024,
     maxFiles: 1,
     onDrop: (acceptedFiles) => {
       const file = acceptedFiles[0];
@@ -45,9 +47,9 @@ export const Avatar = ({ overlay = false, size }: AvatarProps) => {
   }, [preview]);
 
   const avatarSizes: Record<typeof size, string> = {
-    48: "w-12 h-12 rounded-full",
-    176: "w-44 h-44 rounded-full",
-    64: "w-[64px] h-[64px] rounded-full",
+    48: "w-12 h-12 rounded-full object-cover",
+    176: "w-44 h-44 rounded-full object-cover",
+    64: "w-[64px] h-[64px] rounded-full object-cover",
   };
 
   return (

@@ -30,7 +30,7 @@ export const User = () => {
               alt={currentUser.user_name}
               width={40}
               height={40}
-              className="rounded-full w-10 h-10"
+              className="rounded-full w-10 h-10 object-cover"
             />
           </CustomLink>
         </div>

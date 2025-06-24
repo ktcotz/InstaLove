@@ -1,5 +1,7 @@
-PROCES : BUDOWA MESSAGES
+SPRAWDZONE + PERFORMANCE:
 
-Now : Typing user functionality.
-
-2. Poprawa zalogowanych użytkowników.
+1. HOME PAGE
+2. LOGIN PAGE
+3. REGISTER PAGE
+4. FORGOT PASSWORD PAGE
+5. RESET PASSWORD PAGE

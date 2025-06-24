@@ -197,7 +197,9 @@
     "continue": "Continue",
     "music": "Add music",
     "tag": "Mark user",
-    "noMainPosts": "No posts to display, add more friends or add a post yourself!"
+    "noMainPosts": "No posts to display, add more friends or add a post yourself!",
+    "manage": "Manage post and post photo",
+    "comment": "Comment post"
   },
   "notFound": {
     "title": "Server don't manage this route.",

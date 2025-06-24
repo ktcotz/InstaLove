@@ -19,7 +19,7 @@ type MainPostProps = {
 };
 
 export const MainPost = ({ post }: MainPostProps) => {
-  const { i18n } = useTranslation();
+  const { i18n, t } = useTranslation();
   const { user } = useUserByID(post.user_id);
   const { hover, unhover, isHover } = useHover();
   const { user: current } = useUser();
@@ -61,7 +61,7 @@ export const MainPost = ({ post }: MainPostProps) => {
           {user && (
             <div className="ml-auto flex items-center justify-center text-stone-950 dark:text-stone-50 text-2xl">
               <Modal.Open openClass={`${post.id}-options`}>
-                <Button modifier="close">
+                <Button modifier="close" aria-label={t("posts.manage")}>
                   <IoIosMore />
                 </Button>
               </Modal.Open>

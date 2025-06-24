@@ -197,7 +197,9 @@
     "continue": "Dalej",
     "music": "Dodaj muzykę",
     "tag": "Oznacz użytkownika",
-    "noMainPosts": "Brak postów do wyświetlenia, dodaj więcej znajomych, albo sam dodaj post!"
+    "noMainPosts": "Brak postów do wyświetlenia, dodaj więcej znajomych, albo sam dodaj post!",
+    "manage": "Zarządzaj postem i jego zdjęciem",
+    "comment": "Skomentuj post"
   },
   "notFound": {
     "title": "Nie znaleziono takiej strony",
