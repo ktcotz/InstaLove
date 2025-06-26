@@ -7,10 +7,10 @@ export const HoverProfileSkeleton = () => {
 
   return Array.from({ length: MAX_EXPLORE_POSTS }, (_, i) => {
     return (
-      <div key={i}>
+      <div key={i} className="w-full">
         <Skeleton
           className="w-full h-full"
-          height={125}
+          height={100}
           baseColor={isDarkMode ? "#000" : "#fff"}
           highlightColor={isDarkMode ? "#111" : "#f6f6f6"}
         />

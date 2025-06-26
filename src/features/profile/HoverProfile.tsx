@@ -114,67 +114,73 @@ export const HoverProfile = ({
             </p>
           </div>
         </div>
-        <div className="flex items-center justify-center gap-6 mb-2">
-          <div className="text-center p-2 2xl:p-4">
-            <p className="font-semibold dark:text-stone-50">
-              {posts?.count ?? 0}
-            </p>
-            <h2 className="text-sm text-stone-600 dark:text-stone-200">
-              {t("profile.posts")}
-            </h2>
+        {user.type === "public" && (
+          <div className="flex items-center justify-center gap-6 mb-2">
+            <div className="text-center p-2 2xl:p-4">
+              <p className="font-semibold dark:text-stone-50">
+                {posts?.count ?? 0}
+              </p>
+              <h2 className="text-sm text-stone-600 dark:text-stone-200">
+                {t("profile.posts")}
+              </h2>
+            </div>
+            <div className="text-center p-2 2xl:p-4">
+              <Modal.Open openClass={`hover-${user_name}-user-observations`}>
+                <Button modifier="hover">
+                  <p className="font-semibold dark:text-stone-50">
+                    {userObservations.length ?? 0}
+                  </p>
+                  <h2 className="text-sm text-stone-600 dark:text-stone-200">
+                    {t("profile.observers")}
+                  </h2>
+                </Button>
+              </Modal.Open>
+              <Modal.Content
+                manageClass={`hover-${user_name}-user-observations`}
+                parentClass="mx-auto max-w-lg mt-14 w-full"
+              >
+                <ObservesByUser user_id={user.user_id} />
+              </Modal.Content>
+            </div>
+            <div className="text-center p-2 2xl:p-4">
+              <Modal.Open openClass={`hover-${user_name}-observations`}>
+                <Button modifier="hover">
+                  <p className="font-semibold dark:text-stone-50">
+                    {observations.length ?? 0}
+                  </p>
+                  <h2 className="text-sm text-stone-600 dark:text-stone-200">
+                    {t("profile.byobservers")}
+                  </h2>
+                </Button>
+              </Modal.Open>
+              <Modal.Content
+                parentClass="mx-auto max-w-lg mt-14 w-full"
+                manageClass={`hover-${user_name}-observations`}
+              >
+                <ObservesOnUser user_id={user.user_id} />
+              </Modal.Content>
+            </div>
           </div>
-          <div className="text-center p-2 2xl:p-4">
-            <Modal.Open openClass={`hover-${user_name}-user-observations`}>
-              <Button modifier="hover">
-                <p className="font-semibold dark:text-stone-50">
-                  {userObservations.length ?? 0}
-                </p>
-                <h2 className="text-sm text-stone-600 dark:text-stone-200">
-                  {t("profile.observers")}
-                </h2>
-              </Button>
-            </Modal.Open>
-            <Modal.Content
-              manageClass={`hover-${user_name}-user-observations`}
-              parentClass="mx-auto max-w-lg mt-14 w-full"
-            >
-              <ObservesByUser user_id={user.user_id} />
-            </Modal.Content>
-          </div>
-          <div className="text-center p-2 2xl:p-4">
-            <Modal.Open openClass={`hover-${user_name}-observations`}>
-              <Button modifier="hover">
-                <p className="font-semibold dark:text-stone-50">
-                  {observations.length ?? 0}
-                </p>
-                <h2 className="text-sm text-stone-600 dark:text-stone-200">
-                  {t("profile.byobservers")}
-                </h2>
-              </Button>
-            </Modal.Open>
-            <Modal.Content
-              parentClass="mx-auto max-w-lg mt-14 w-full"
-              manageClass={`hover-${user_name}-observations`}
-            >
-              <ObservesOnUser user_id={user.user_id} />
-            </Modal.Content>
-          </div>
-        </div>
+        )}
         {showPosts ? (
-          <div className="grid grid-cols-3 gap-2 mb-4">
+          <div className="min-h-[100px] grid grid-cols-3 items-center gap-2 mb-4">
             {user.type === "public" || isObserve ? (
               <>
-                {isPostsLoading && <HoverProfileSkeleton />}
+                {isPostsLoading && (
+                  <div className="flex gap-2 col-start-1 -col-end-1">
+                    <HoverProfileSkeleton />
+                  </div>
+                )}
                 {!isPostsLoading &&
                   posts?.data.slice(0, 3).map((post) => {
                     return (
                       <CustomLink
                         to={`/dashboard/${user_name}/post/${post.id}`}
-                        modifier="logo"
+                        modifier="hover-img"
                         key={post.id}
                       >
                         <div
-                          className="w-full aspect-square bg-center bg-cover"
+                          className="h-full bg-center bg-cover"
                           key={post.id}
                           style={{ backgroundImage: `url(${post.post_url})` }}
                         >

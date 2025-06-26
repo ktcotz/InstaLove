@@ -28,7 +28,8 @@ export type CustomLinkModifier =
   | "close"
   | "active"
   | "chat-add"
-  | "chat-users";
+  | "chat-users"
+  | "hover-img";
 
 type CustomLinkProps = {
   children: ReactNode;
@@ -80,6 +81,7 @@ export const CustomLink = ({
     "mobile-notification": "text-2xl relative ",
     search:
       "flex items-center gap-4 p-3 hover:bg-stone-100 transition group dark:text-stone-50 hover:dark:text-stone-50 hover:dark:bg-stone-950",
+    "hover-img": "h-full",
   };
 
   const className = twMerge(base, modifiers[modifier]);

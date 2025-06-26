@@ -13,8 +13,10 @@ export const PrivateProfile = () => {
           />
         </div>
       </div>
-      <h2 className="font-semibold text-lg">{t("profile.privateTitle")}</h2>
-      <p className="text-stone-600 ">{t("profile.privateDescription")}</p>
+      <h2 className="font-semibold text-xs">{t("profile.privateTitle")}</h2>
+      <p className="text-stone-600 text-xs">
+        {t("profile.privateDescription")}
+      </p>
     </div>
   );
 };

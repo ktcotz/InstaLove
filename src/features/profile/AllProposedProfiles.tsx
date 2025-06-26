@@ -2,11 +2,11 @@ import { User } from "@supabase/supabase-js";
 import { Wrapper } from "../../ui/Wrapper";
 import { useUser } from "../authentication/queries/useUser";
 import { useProfiles } from "./queries/useProfiles";
-import { Loader } from "../../ui/Loader";
 import { SubModalItem } from "../../ui/SubModalItem";
 import { usePagination } from "../../hooks/usePagination";
 import { Pagination } from "../../ui/Pagination";
 import { useTranslation } from "react-i18next";
+import { ProposedProfilesSkeleton } from "./ProposedProfilesSkeleton";
 
 export const MAX_PROPOSED_PROFILES = 5;
 
@@ -29,8 +29,8 @@ export const AllProposedProfiles = () => {
         </div>
         <div className="p-1 sm:p-3 w-full flex flex-col gap-3">
           {isLoading && (
-            <div className="flex items-center justify-center p-4">
-              <Loader />
+            <div className="flex flex-col justify-center gap-4 p-2">
+              <ProposedProfilesSkeleton />
             </div>
           )}
           {!isLoading &&

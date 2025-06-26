@@ -81,7 +81,8 @@ export const MainPost = ({ post }: MainPostProps) => {
               src={post.post_url}
               alt={post.description || `Post ${post.id} by ${user.fullName}`}
               className="object-cover w-full h-full rounded-md"
-              fetchPriority="high"
+              //@ts-expect-error fetchPriority is invalid!
+              fetchpriority="high"
             />
           )}
           {post.video_url && (
