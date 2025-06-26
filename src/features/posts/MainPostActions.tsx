@@ -105,9 +105,9 @@ export const MainPostActions = ({ user_id, post }: MainPostActionsProps) => {
           onClick={handleLike}
         >
           {isAlreadyLike && isAlreadyLike > 0 ? (
-            <FaHeart className="text-xl fill-red-600" />
+            <FaHeart className="text-xl fill-red-600" aria-hidden="true" />
           ) : (
-            <FaRegHeart className="text-xl" />
+            <FaRegHeart className="text-xl" aria-hidden="true" />
           )}
         </Button>
         <CustomLink
@@ -115,7 +115,10 @@ export const MainPostActions = ({ user_id, post }: MainPostActionsProps) => {
           modifier="close"
           aria-label={t("posts.comment")}
         >
-          <FaRegComment className="text-xl text-stone-950 dark:text-stone-50" />
+          <FaRegComment
+            aria-hidden="true"
+            className="text-xl text-stone-950 dark:text-stone-50"
+          />
         </CustomLink>
         <div className="ml-auto">
           <Button
@@ -128,9 +131,12 @@ export const MainPostActions = ({ user_id, post }: MainPostActionsProps) => {
             onClick={handleBookmark}
           >
             {bookmarks!.length > 0 ? (
-              <FaBookmark className="text-xl fill-stone-950 dark:fill-stone-50" />
+              <FaBookmark
+                className="text-xl fill-stone-950 dark:fill-stone-50"
+                aria-hidden="true"
+              />
             ) : (
-              <FaRegBookmark className="text-xl" />
+              <FaRegBookmark className="text-xl" aria-hidden="true" />
             )}
           </Button>
         </div>

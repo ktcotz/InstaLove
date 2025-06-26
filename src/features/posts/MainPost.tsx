@@ -62,7 +62,7 @@ export const MainPost = ({ post }: MainPostProps) => {
             <div className="ml-auto flex items-center justify-center text-stone-950 dark:text-stone-50 text-2xl">
               <Modal.Open openClass={`${post.id}-options`}>
                 <Button modifier="close" aria-label={t("posts.manage")}>
-                  <IoIosMore />
+                  <IoIosMore aria-hidden="true" />
                 </Button>
               </Modal.Open>
               <Modal.Content
@@ -81,7 +81,7 @@ export const MainPost = ({ post }: MainPostProps) => {
               src={post.post_url}
               alt={post.description || `Post ${post.id} by ${user.fullName}`}
               className="object-cover w-full h-full rounded-md"
-              loading="lazy"
+              fetchPriority="high"
             />
           )}
           {post.video_url && (

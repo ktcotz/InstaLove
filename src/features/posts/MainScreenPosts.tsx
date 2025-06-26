@@ -9,7 +9,7 @@ export const MainScreenPosts = () => {
 
   if (isLoading)
     return (
-      <div className="max-w-xl mx-auto px-4 w-full">
+      <div className="max-w-xl mx-auto px-4 w-full flex flex-col gap-12">
         <MainScreenPostsSkeleton />
       </div>
     );
