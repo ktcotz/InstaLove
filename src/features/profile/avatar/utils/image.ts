@@ -40,32 +40,72 @@ export const validateImage = async (
 
 export const createThumbnail = async (
   file: File,
-  maxSize = 128
+  maxWidth = 128,
+  maxHeight = 128,
+  fit: "contain" | "fill" = "contain"
 ): Promise<Blob> => {
   return new Promise((resolve, reject) => {
     const img = new Image();
     const url = URL.createObjectURL(file);
+
     img.onload = () => {
+      if (img.width < 600 || img.height < 600) {
+        const canvas = document.createElement("canvas");
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        const ctx = canvas.getContext("2d")!;
+        ctx.drawImage(img, 0, 0, img.width, img.height);
+
+        canvas.toBlob(
+          (blob) => {
+            if (blob) {
+              resolve(blob);
+            } else {
+              reject(new Error("Thumbnail generation failed"));
+            }
+          },
+          "image/webp",
+          0.9
+        );
+        return;
+      }
+
       const canvas = document.createElement("canvas");
       const ctx = canvas.getContext("2d")!;
-      const scale = Math.min(maxSize / img.width, maxSize / img.height);
-      canvas.width = Math.round(img.width * scale);
-      canvas.height = Math.round(img.height * scale);
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      let drawWidth = maxWidth;
+      let drawHeight = maxHeight;
+
+      if (fit === "contain") {
+        const scale = Math.min(maxWidth / img.width, maxHeight / img.height);
+        drawWidth = Math.round(img.width * scale);
+        drawHeight = Math.round(img.height * scale);
+      }
+
+      canvas.width = maxWidth;
+      canvas.height = maxHeight;
+
+      if (fit === "contain") {
+        const offsetX = Math.round((maxWidth - drawWidth) / 2);
+        const offsetY = Math.round((maxHeight - drawHeight) / 2);
+        ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight);
+      } else {
+        ctx.drawImage(img, 0, 0, maxWidth, maxHeight);
+      }
+
       canvas.toBlob(
         (blob) => {
           if (blob) {
             resolve(blob);
           } else {
-            reject(new CustomError({ message: "Thumbnail generation failed" }));
+            reject(new Error("Thumbnail generation failed"));
           }
         },
-        "image/png",
+        "image/webp",
         0.9
       );
     };
-    img.onerror = () =>
-      reject(new CustomError({ message: "Invalid image file." }));
+    img.onerror = () => reject(new Error("Invalid image file"));
     img.src = url;
   });
 };

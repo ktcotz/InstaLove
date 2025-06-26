@@ -355,15 +355,11 @@ export const getAllResources = async () => {
 };
 
 export const deletePost = async ({ id, user_id }: DeletePost) => {
-  console.log(id, user_id);
-
   const { error } = await supabase
     .from("posts")
     .delete()
     .eq("id", id)
     .eq("user_id", user_id);
-
-  console.log(error);
 
   if (error) {
     throw new CustomError({

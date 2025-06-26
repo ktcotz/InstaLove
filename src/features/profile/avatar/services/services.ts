@@ -23,7 +23,7 @@ export const updateAvatar = async ({ file, user_id }: UpdateAvatarData) => {
 
   await validateImage(file, 1024, 1024, 1.5);
 
-  const thumbnail = await createThumbnail(file, 128);
+  const thumbnail = await createThumbnail(file, 128, 128, "contain");
 
   const imageName = `avatar-${user_id}.png`;
 

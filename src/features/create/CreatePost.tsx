@@ -20,6 +20,8 @@ import { getProfile } from "../profile/services/services";
 import { useMediaQuery } from "usehooks-ts";
 import { MobilePostPreview } from "./MobilePostPreview";
 import { MobilePostDescription } from "./MobilePostDescription";
+import { createThumbnail } from "../profile/avatar/utils/image";
+import toast from "react-hot-toast";
 
 export type CreatePostFile = {
   drop: File | null;
@@ -85,6 +87,30 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
       (progressEvent.loaded * 100) / progressEvent.total
     );
     setUploadProgress(percentCompleted);
+  };
+
+  const handleFileChange = async (
+    newFile: File,
+    fileType: PostPossibilityFileType
+  ) => {
+    try {
+      if (fileType.startsWith("image")) {
+        const thumbnail = await createThumbnail(newFile, 1440, 960, "contain");
+        const originalName = newFile.name.replace(/\.[^/.]+$/, "");
+        const uniqueName = `${originalName}_${Math.random()
+          .toString(36)
+          .slice(2, 8)}.webp`;
+
+        const webPFile = new File([thumbnail], uniqueName, {
+          type: "image/webp",
+        });
+        setFile({ drop: webPFile, type: fileType });
+      } else {
+        setFile({ drop: newFile, type: fileType });
+      }
+    } catch (error) {
+      toast.error("Error creating thumbnail");
+    }
   };
 
   const addPost = () => {
@@ -228,7 +254,13 @@ export const CreatePost = ({ type = "normal" }: CreatePostProps) => {
         )}
         <FileDropzone
           showDescription={showDescription}
-          setFile={setFile}
+          setFile={(f) => {
+            if (f.drop && f.type.startsWith("image")) {
+              handleFileChange(f.drop, f.type);
+            } else {
+              setFile(f);
+            }
+          }}
           setPreview={setPreview}
           file={file}
           preview={preview}
