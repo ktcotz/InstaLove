@@ -69,7 +69,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
           }
           className={`${
             "video_url" in post ? "row-start-1 row-end-3" : ""
-          }  relative bg-cover bg-center col-start-1 col-end-4 shadow-lg bg-stone-100`}
+          }  relative bg-cover bg-center col-start-1 col-end-4 bg-stone-100`}
         >
           {post.video_url && (
             <div className="h-full w-full">

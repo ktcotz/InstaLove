@@ -65,12 +65,13 @@ export const Button = forwardRef<
     ["add-user"]:
       "bg-blue-600 text-stone-50 rounded-md p-2 w-full flex items-center justify-center gap-1",
     ["all-profiles"]:
-      "text-stone-900 hover:text-stone-950 text-sm font-bold transition dark:text-stone-100 hover:dark:text-stone-50",
+      "text-stone-900 hover:text-stone-950 font-bold transition dark:text-stone-100 hover:dark:text-stone-50",
     pagination: "text-stone-50 bg-blue-600 p-2 rounded-md",
     reel: "bg-black/40 p-4 rounded-full text-2xl text-stone-50",
     suggestion: "flex items-center gap-3 w-full p-2",
     explore: "row-start-1 -row-end-1 col-start-1 col-end-2",
-    ["explore-back"]: "row-start-1 -row-end-1 col-start-3",
+    ["explore-back"]:
+      "col-start-1 -col-end-1 sm:row-start-1 sm:-row-end-1 sm:col-start-3",
     ["video-play"]:
       "bg-black/80 p-6 rounded-full text-3xl text-stone-50 animate-play-video",
     mark: "text-left p-3",

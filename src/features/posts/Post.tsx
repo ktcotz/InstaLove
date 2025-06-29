@@ -36,7 +36,7 @@ export const Post = ({
 
   return (
     <div
-      className="relative w-full h-full aspect-square  bg-cover bg-center cursor-pointer"
+      className="relative h-full  bg-cover bg-center cursor-pointer"
       style={
         post_url
           ? {
@@ -75,9 +75,6 @@ export const Post = ({
               )}
             </div>
           </div>
-          <video loop muted className="h-full w-full object-cover">
-            <source src={video_url} type="video/mp4" />
-          </video>
           {isHover ? null : (
             <div className="absolute bottom-0 left-0 text-xs md:text-base md:bottom-4 md:left-4 p-4 flex items-center gap-2 text-stone-50 font-semibold">
               <FaPlay /> <span>{formatedViews}</span>

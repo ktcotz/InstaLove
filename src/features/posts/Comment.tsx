@@ -104,7 +104,7 @@ export const Comment = ({
             onMouseEnter={() => hover()}
           />
         </CustomLink>
-        <p className="text-sm mb-3 flex items-center">
+        <p className="text-sm mb-3 flex">
           <CustomLink
             to={`/dashboard/${user.user_name}`}
             modifier="post-user"
@@ -112,18 +112,16 @@ export const Comment = ({
           >
             {user.user_name}
           </CustomLink>
-          <span className="ml-2 flex items-center gap-1">
+          <span className="ml-2 dark:text-stone-300 gap-1">
             {linkProfile && (
               <CustomLink
                 modifier="link"
                 to={`/dashboard/${linkProfile.slice(1)}`}
               >
-                {linkProfile}
+                {linkProfile}{" "}
               </CustomLink>
             )}
-            <span className="dark:text-stone-300">
-              {comment.includes("@") ? rest : comment}
-            </span>
+            {comment.includes("@") ? rest : comment}
           </span>
         </p>
         <div className="col-start-1 -col-end-1 text-xs text-stone-700 dark:text-stone-100 flex items-center gap-3">

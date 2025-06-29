@@ -60,7 +60,7 @@ export const AddComment = ({
 
   return (
     <>
-      <div className="relative flex gap-2 bg-stone-50 dark:bg-stone-950">
+      <div className="relative flex gap-2">
         <Button
           modifier="close"
           onClick={() => setShowEmotes((prev) => !prev)}

@@ -218,27 +218,15 @@ export const router = createBrowserRouter([
           },
           {
             path: GlobalRoutes.ProfilePosts,
-            element: (
-              <Suspense fallback={loader}>
-                <Posts />
-              </Suspense>
-            ),
+            element: <Posts />,
           },
           {
             path: GlobalRoutes.ProfileReels,
-            element: (
-              <Suspense fallback={loader}>
-                <Reels />
-              </Suspense>
-            ),
+            element: <Reels />,
           },
           {
             path: GlobalRoutes.ProfileBookmarks,
-            element: (
-              <Suspense fallback={loader}>
-                <Bookmarks />
-              </Suspense>
-            ),
+            element: <Bookmarks />,
           },
         ],
       },
