@@ -1,5 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { CiSearch } from "react-icons/ci";
+import { useState, useEffect } from "react";
 
 type SearchInputModifier = "with-reset";
 
@@ -22,6 +23,22 @@ export const SearchInput = ({
 }: SearchInputProps) => {
   const { t } = useTranslation();
 
+  const [localQuery, setLocalQuery] = useState(query);
+
+  useEffect(() => {
+    setLocalQuery(query);
+  }, [query]);
+
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      handleQuery(localQuery);
+    }, 300);
+
+    return () => {
+      clearTimeout(handler);
+    };
+  }, [localQuery, handleQuery]);
+
   return (
     <div className="relative">
       <input
@@ -31,8 +48,8 @@ export const SearchInput = ({
         }`}
         id="search"
         required
-        value={query}
-        onChange={(ev) => handleQuery(ev.target.value)}
+        value={localQuery}
+        onChange={(ev) => setLocalQuery(ev.target.value)}
         onClick={upFocus}
       />
       <label

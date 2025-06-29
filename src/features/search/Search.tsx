@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import { useMediaQuery, useOnClickOutside } from "usehooks-ts";
 import { useModal } from "../../ui/modal/ModalContext/useModal";
 import { useAuth } from "../authentication/context/useAuth";
+import { ProposedProfilesSkeleton } from "../profile/ProposedProfilesSkeleton";
 
 const MOBILE_VIEWPORT = "768px";
 
@@ -31,6 +32,8 @@ export const Search = () => {
     if (opened.length > 0) return;
     setIsFocused(false);
   });
+
+  console.log(users);
 
   return (
     <div className="relative">
@@ -72,11 +75,18 @@ export const Search = () => {
             : ""
         }`}
       >
-        <div className="flex flex-col gap-1 divide-y divide-stone-200 dark:divide-stone-50">
-          {users?.map((user) => (
-            <SearchUser key={user.id} {...user} currentID={current?.id} />
-          ))}
-        </div>
+        {isLoading && (
+          <div className="p-2">
+            <ProposedProfilesSkeleton />
+          </div>
+        )}
+        {users && users.length > 0 && (
+          <div className="flex flex-col gap-1 divide-y divide-stone-200 dark:divide-stone-50">
+            {users?.map((user) => (
+              <SearchUser key={user.id} {...user} currentID={current?.id} />
+            ))}
+          </div>
+        )}
 
         {!isLoading && users && users.length === 0 && (
           <p className="text-xl font-medium text-stone-950 dark:text-stone-50 p-4">
