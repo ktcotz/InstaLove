@@ -336,24 +336,33 @@ export const getNestedComments = async ({
   return parsed;
 };
 
-export const getAllResources = async () => {
-  const { data: posts, error } = await supabase.from("posts").select("*");
+export const getAllResources = async (page = 1, pageSize = 5) => {
+  const from = (page - 1) * pageSize;
+  const to = from + pageSize - 1;
+
+  const {
+    data: posts,
+    error,
+    count,
+  } = await supabase
+    .from("posts")
+    .select("*", { count: "exact" })
+    .range(from, to);
 
   if (error) {
-    throw new CustomError({
-      message: error.message,
-    });
+    throw new CustomError({ message: error.message });
   }
 
-  const combined = [...posts];
+  const parsed = GeneralsPostsSchema.parse(posts || []);
 
-  if (combined.length === 0) return [];
+  const totalCount = count ?? 0;
+  const hasMore = to + 1 < totalCount;
 
-  const parsed = GeneralsPostsSchema.parse(combined);
-
-  return parsed.sort(() => Math.random() - 0.5);
+  return {
+    data: parsed,
+    hasMore,
+  };
 };
-
 export const deletePost = async ({ id, user_id }: DeletePost) => {
   const { error } = await supabase
     .from("posts")

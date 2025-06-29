@@ -1,11 +1,16 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery } from "@tanstack/react-query";
 import { getAllResources } from "../services/services";
 
 export const useGetAllResources = () => {
-  const { data, isLoading } = useQuery({
+  return useInfiniteQuery({
     queryKey: ["all-resources"],
-    queryFn: () => getAllResources(),
+    initialPageParam: 1,
+    queryFn: ({ pageParam = 1 }) => getAllResources(pageParam),
+    getNextPageParam: (lastPage, allPages) => {
+      if (lastPage.hasMore) {
+        return allPages.length + 1;
+      }
+      return undefined;
+    },
   });
-
-  return { data, isLoading } as const;
 };
