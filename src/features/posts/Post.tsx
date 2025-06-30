@@ -36,24 +36,18 @@ export const Post = ({
 
   return (
     <div
-      className="relative h-full  bg-cover bg-center cursor-pointer"
-      style={
-        post_url
-          ? {
-              backgroundImage: `url(${post_url})`,
-              maxHeight: `${maxHeight}px`,
-            }
-          : { maxHeight: `${maxHeight}px` }
-      }
+      className="relative w-full h-full aspect-square cursor-pointer overflow-hidden rounded-xl"
+      style={{ maxHeight: `${maxHeight}px` }}
       onMouseEnter={() => hover()}
       onMouseLeave={() => unhover()}
     >
       {isLoading && (
-        <div className="absolute top-1/2 left-1/2 translate-x-1/2 -translate-y-1/2">
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <Loader />
         </div>
       )}
-      {video_url && (
+
+      {video_url ? (
         <>
           <div className="h-full w-full">
             <video loop muted autoPlay className="h-full w-full object-cover">
@@ -69,20 +63,30 @@ export const Post = ({
                   <FaMusic
                     className={`${
                       isDarkMode ? "text-white" : "text-black"
-                    } text-5xl sm:text-white`}
+                    } text-5xl`}
                   />
                 </div>
               )}
             </div>
           </div>
-          {isHover ? null : (
+          {!isHover && (
             <div className="absolute bottom-0 left-0 text-xs md:text-base md:bottom-4 md:left-4 p-4 flex items-center gap-2 text-stone-50 font-semibold">
               <FaPlay /> <span>{formatedViews}</span>
             </div>
           )}
         </>
+      ) : (
+        post_url && (
+          <img
+            src={post_url}
+            alt="Post"
+            className="w-full h-full object-cover"
+            style={{ maxHeight: `${maxHeight}px` }}
+          />
+        )
       )}
-      {isHover ? (
+
+      {isHover && (
         <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center gap-6 bg-stone-950/60">
           <div className="flex gap-2 items-center">
             <FaHeart className="text-xl fill-stone-50" />
@@ -95,7 +99,7 @@ export const Post = ({
             </span>
           </div>
         </div>
-      ) : null}
+      )}
     </div>
   );
 };
