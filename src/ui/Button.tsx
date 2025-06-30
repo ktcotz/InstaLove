@@ -69,9 +69,10 @@ export const Button = forwardRef<
     pagination: "text-stone-50 bg-blue-600 p-2 rounded-md",
     reel: "bg-black/40 p-4 rounded-full text-2xl text-stone-50",
     suggestion: "flex items-center gap-3 w-full p-2",
-    explore: "row-start-1 -row-end-1 col-start-1 col-end-2",
+    explore:
+      "col-start-1 -col-end-1 row-start-3 w-full sm:row-start-1 sm:-row-end-1 sm:col-start-1 sm:col-end-2",
     ["explore-back"]:
-      "col-start-1 -col-end-1 sm:row-start-1 sm:-row-end-1 sm:col-start-3",
+      "col-start-1 -col-end-1 row-start-3 w-full sm:row-start-1 sm:-row-end-1 sm:col-start-3",
     ["video-play"]:
       "bg-black/80 p-6 rounded-full text-3xl text-stone-50 animate-play-video",
     mark: "text-left p-3",

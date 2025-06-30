@@ -11,7 +11,7 @@ type ExploreDataProps = {
 
 export const ExploreData = ({ data, lastElement, idx }: ExploreDataProps) => {
   return (
-    <div className="grid grid-rows-3 grid-cols-2 sm:grid-cols-3 sm:grid-rows-2 gap-3 max-h-[600px]">
+    <div className="grid grid-rows-3 grid-cols-2 sm:grid-cols-3 sm:grid-rows-2 gap-1 max-h-[600px]">
       {data.map((explore) => {
         return (
           <>
@@ -31,7 +31,7 @@ export const ExploreData = ({ data, lastElement, idx }: ExploreDataProps) => {
             </Modal.Open>
             <Modal.Content
               manageClass={`explore-${explore.id}`}
-              parentClass="mx-auto max-w-6xl w-full"
+              parentClass="mx-auto max-w-6xl w-full p-4"
             >
               <IndividualModalPost post={explore} />
             </Modal.Content>

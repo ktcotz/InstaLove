@@ -42,7 +42,7 @@ export const Reels = () => {
   if (isLoading) return <ReelsSkeleton />;
 
   return (
-    <div className="mx-auto max-w-[480px] px-1 sm:px-4">
+    <div className="mx-auto  max-w-[480px] px-1 sm:px-4">
       <Swiper
         direction={"vertical"}
         mousewheel={true}

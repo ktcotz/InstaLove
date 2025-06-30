@@ -69,7 +69,7 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
           }
           className={`${
             "video_url" in post ? "row-start-1 row-end-3" : ""
-          }  relative bg-cover bg-center col-start-1 col-end-4 bg-stone-100`}
+          }  relative bg-cover bg-center col-start-1 col-end-4 bg-stone-100 dark:bg-stone-800`}
         >
           {post.video_url && (
             <div className="h-full w-full">
@@ -83,8 +83,8 @@ export const IndividualModalPost = ({ post }: IndividualModalPostProps) => {
               </video>
               <div
                 className={`${
-                  isDarkMode ? "bg-black/5" : "bg-black/20"
-                } h-full w-full absolute top-0 left-0 rounded-xl`}
+                  isDarkMode ? "bg-white/20" : "bg-black/20"
+                } h-full w-full absolute top-0 left-0`}
               >
                 {post.video_url?.includes("mp3") && (
                   <div className="h-full flex items-center justify-center">

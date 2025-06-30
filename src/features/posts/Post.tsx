@@ -55,7 +55,7 @@ export const Post = ({
             </video>
             <div
               className={`${
-                isDarkMode ? "bg-black/5" : "bg-black/20"
+                isDarkMode ? "bg-white/20" : "bg-black/20"
               } h-full w-full absolute top-0 left-0 rounded-xl`}
             >
               {video_url?.includes("mp3") && (
