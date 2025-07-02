@@ -23,7 +23,9 @@ export const ChatSidebar = () => {
       bg-stone-50 dark:bg-stone-950  border-stone-200 dark:border-stone-50"
     >
       <div className="p-4 border-b border-stone-200">
-        <h2 className="text-xl font-semibold">{t("messages.details")}</h2>
+        <h2 className="text-xl font-semibold dark:text-stone-50">
+          {t("messages.details")}
+        </h2>
       </div>
 
       {user?.id === chat?.created_by && (

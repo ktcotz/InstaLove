@@ -51,6 +51,8 @@ export const Reels = () => {
         slidesPerView="auto"
         className="reel-swiper"
         modules={[Mousewheel]}
+        threshold={5}
+        resistanceRatio={0.85}
       >
         {reels?.map((reel) => (
           <SwiperSlide key={reel.id}>

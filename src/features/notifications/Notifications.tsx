@@ -20,6 +20,8 @@ export const Notifications = () => {
     readNotifications({ notifications: unreadNotifications });
   }, [unreadNotifications, readNotifications]);
 
+
+  
   return (
     <div className="p-4">
       <h2 className="text-3xl font-semibold mb-2 dark:text-stone-50">

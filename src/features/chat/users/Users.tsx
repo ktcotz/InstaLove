@@ -33,7 +33,7 @@ export const Users = ({ users, chat, toggleSidebar, name }: UsersProps) => {
     return (
       <CustomLink
         type={isActualActive ? "active-link" : "link"}
-        activeClass="bg-stone-200 dark:text-stone-950"
+        activeClass="bg-stone-200 dark:bg-stone-700  dark:text-stone-950"
         to={String(chat)}
         modifier="chat-users"
       >
@@ -62,7 +62,9 @@ export const Users = ({ users, chat, toggleSidebar, name }: UsersProps) => {
       </div>
       {name ? (
         <div className="flex items-center gap-1">
-          <p className="font-semibold text-sm truncate ">{name}</p>
+          <p className="font-semibold text-sm truncate dark:text-stone-300">
+            {name}
+          </p>
         </div>
       ) : (
         <UsersChatNames usersWithoutCurrent={usersWithoutCurrent} />

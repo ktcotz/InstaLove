@@ -41,9 +41,9 @@ export const AddChatMessage = ({ chatId }: AddChatMessageProps) => {
   return (
     <div className="bg-stone-100 dark:bg-stone-950 p-4 absolute bottom-0 left-0 w-full h-14  flex flex-col items-center justify-center  z-50">
       {reply?.user && (
-        <div className="bg-stone-50 absolute top-0 left-0 w-full p-4 border-t border-stone-300 -translate-y-full">
+        <div className="bg-stone-50 dark:bg-stone-800 absolute top-0 left-0 w-full p-4 border-t border-stone-300 -translate-y-full">
           <div className="flex items-center justify-between gap-2 mb-2">
-            <p className="text-sm">
+            <p className="text-sm dark:text-stone-300">
               {t("messages.replyUserMessage")}:
               <strong>{reply.user.user_name}</strong>
             </p>
@@ -51,7 +51,9 @@ export const AddChatMessage = ({ chatId }: AddChatMessageProps) => {
               <TfiClose className="text-sm" />
             </Button>
           </div>
-          <p className="text-sm text-stone-700">{reply.message}</p>
+          <p className="text-sm text-stone-700 dark:text-stone-200">
+            {reply.message}
+          </p>
         </div>
       )}
       <div className="flex items-center gap-3 w-full  px-3 border border-stone-300 rounded-full">
