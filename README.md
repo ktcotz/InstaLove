@@ -1,84 +1,106 @@
-![InstaLove](./public/images/design.png)
+# 📸 InstaLove – Full-Featured Social Network App
 
-<h3 align="center"> InstaLove - social network </h3>
+<p align="center">
+  <img src="./public/images/design.png" alt="InstaLove preview" />
+</p>
 
-## Project Overview 🎨
+<h3 align="center">A modern, full-stack social media platform inspired by TikTok & Instagram, built for performance and scalability.</h3>
 
-InstaLove - The only social app that is created for users completely <strong>free of charge without any ads</strong>
+---
 
-Browse your friends' posts, follow them, exchange messages, and follow the latest trends.
+## 🌐 Overview
 
-The project is developing day by day, have your value in it, send us a message with an idea for functionality.
+**InstaLove** is a fully responsive, feature-rich social media application that emulates core features of platforms like Instagram and TikTok, designed **100% ad-free and open to all users**.
 
-## Tech/framework used 🧰
+Built with a modern web stack (React + Vite + Supabase), the platform offers seamless UX, real-time features, and a scalable architecture ready for production.
 
-| Tech                                                                                                                                              | Description |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB&style=flat)                                        | Whole app   |
-| ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white&style=flat)                           | Whole App Styling    |
-| ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white&style=flat)                          | Customization Librares Styling    |
-| ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white&style=flat)                          | Typechecker       |
-| ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white&style=flat)                        | Bundler       |
-| ![Visual Studio Code](https://img.shields.io/badge/Visual%20Studio%20Code-0078d7.svg?style=for-the-badge&logo=visual-studio-code&logoColor=white&style=flat) | IDE         |
-| ![NPM](https://img.shields.io/badge/NPM-%23CB3837.svg?style=for-the-badge&logo=npm&logoColor=white&style=flat) | Package Manager         |
+Users can:
 
-## Librares 🧰
+- Browse and interact with posts & reels
+- Follow and message other users in real-time
+- Create, customize, and manage content
+- Switch between languages (i18n) and themes
+- Enjoy full mobile-first design & experience
 
-| Tech                                                                                                                                              | Description |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white&style=flat)                         | Validation       |
-| ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white&style=flat)                  | Whole styling      |
-| ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white&style=flat)                         | Routing       |
-| ![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white&style=flat)                        | Forms       |
-| ![React Query](https://img.shields.io/badge/-React%20Query-FF4154?style=for-the-badge&logo=react%20query&logoColor=white&style=flat)                      |    Fetching    |
-| ![Context-API](https://img.shields.io/badge/Context--Api-000000?style=for-the-badge&logo=react&style=flat)                       | State manager       |
-| ![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white&style=flat)                        | BaaS       |
-| ![Zod](https://img.shields.io/badge/zod-%233068b7.svg?style=for-the-badge&logo=zod&logoColor=white&style=flat)                         | Validation       |
-| Axios                  | Advanced progress of uploading images      |
-| DateFNS                  | Date manager      |
-| ReactHotToast                  | Toast manager      |
-| ReactTooltip                  | Tooltips      |
-| ReactPlayer                  | Custom Player      |
-| ReactDropzone                  | Dropzone      |
-| i18n                  | Multi-language      |
-| ***                  | ...many more      |
+The app is actively maintained and evolving. New ideas and contributions are always welcome!
 
-## Testing 🧰
+---
 
-| Tech                                                                                                                                              | Description |
-| ------------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
-| ![Vitest](https://img.shields.io/badge/-Vitest-252529?style=for-the-badge&logo=vitest&logoColor=FCC72B&style=flat)                        | Testing       |
+## ⚙️ Tech Stack
 
+| Category        | Tools / Frameworks |
+|----------------|--------------------|
+| **Frontend**   | React, TypeScript, Vite |
+| **Styling**    | Tailwind CSS, Custom CSS |
+| **Forms**      | React Hook Form, Zod |
+| **Routing**    | React Router |
+| **State**      | Context API |
+| **Data Fetching** | React Query, Axios |
+| **Backend-as-a-Service** | Supabase (Auth, DB, Storage, Realtime) |
+| **Testing**    | Vitest, MSW |
+| **Internationalization** | i18n |
+| **Media**      | React Player, React Dropzone |
+| **UI Enhancements** | ReactHotToast, ReactTooltip, DateFns |
 
-## Functionalities
+---
 
-* Advanced Auth System with modern functionalities.
-* Advanced search of users on application with some functionalities.
-* Exploring posts with custom modern UI to enhance UX.
-* Modern reels functionalities like Tiktok.
-* Full functionality of likes/observes/comments/nested-comments of all posts/reels.
-* Notifications system with categorize.
-* CRUD, advanced creating posts/reels with advanced loadings, marking users, adding songs and many more.
-* Own user profile with full customizable like names/bio..
-* Multi-language based on English/Polish, Dark/Light theme.
-* Advanced Storage functionality of individual users avatars/reels/stories.
-* Modern stories functionalities like Instagram have with advanced CRON scheduling to manage reels only by one day.
-* Bookmarking of users posts.
-* Marking users in comments, replying.
-* Advanced chat system with chats/groups, roles based on realtime.
-* Fully testing based on Vitest/MSW.
+## 🧪 Testing & Code Quality
 
-## How to install 🎨
+- **Unit & Integration Testing**: [Vitest](https://vitest.dev/)
+- Modular, typed codebase with scalable folder structure
+- Type-safe form validation with Zod
 
-```npm
-  1. npm install (Install all packages.)
-  2. setup .env in root directory with provided variables.
-  3. check a .env.example file to provide env keys.
-  3a. optional run tests (npm run test).
-  4. npm run dev (Start to compile project and setup localhost)
-  5. Click provided link by localhost.
+---
+
+## 🚀 Key Features
+
+- 🔐 **Modern Auth System** (Sign Up, Login, Reset Password, Forgot Password)
+- 🔍 **User Search** with advanced filtering
+- 🎞️ **Reels (TikTok-style)** vertical swipe UX, custom player
+- 🖼️ **Stories System** (Instagram-style) with CRON-based expiration (Right now it's disabled for testing to HR)
+- 💬 **Real-time Chat** (DMs, groups, roles)
+- 📸 **Create & Manage Posts** (upload images, tag users, add audio)
+- 👍 **Engagement** (likes, comments, nested replies, mentions)
+- 🛎️ **Notification System** (categorized)
+- 🔖 **Bookmarking**
+- 🌐 **i18n** (EN/PL), 💡 **Dark/Light Theme Toggle**
+- 🗄️ **Supabase Storage** (avatars, media, reel uploads) with some image manipulation to save some space.
+- 👤 **Customizable User Profiles** (username, bio, etc.)
+
+---
+
+## 📦 Setup & Installation
+
+```bash
+# 1. Install dependencies
+npm install
+
+# 2. Create .env file
+# See .env.example for required variables (Supabase keys, etc.)
+
+# 3. (Optional) Run tests
+npm run test
+
+# 4. Start the dev server
+npm run dev
+
+# 5. Open provided localhost URL
 ```
 
-## Live 📍
+---
 
-[InstaLove](https://insta-love-fpfr4ietv-ktcotzs-projects.vercel.app/)
+## 🔗 Live Demo
+
+🌍 [InstaLove (Live App)](https://insta-love-fpfr4ietv-ktcotzs-projects.vercel.app/)
+
+---
+
+## 📣 Why This Project?
+
+Developed with the goal of showcasing **full-stack skills**, **UI/UX design**, **real-time features**, and **production-ready architecture**. I'm actively looking for my first professional opportunity as a developer, and this project demonstrates my ability to deliver complex, maintainable applications from start to finish.
+
+---
+
+## 💡 Contributions / Feedback
+
+Have ideas for features or improvements? Feel free to open an issue or send a message. I’m always open to feedback and collaboration!
